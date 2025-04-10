@@ -1,0 +1,395 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\def\magyarOptions{defaults=hu-min}
+\usepackage[magyar]{babel}
+\usepackage{amsthm, amssymb,amsmath,hyperref}
+\usepackage{enumerate, graphicx, xcolor}
+
+\usepackage{chngcntr}
+\counterwithout{figure}{chapter}
+\counterwithout{figure}{section}
+\counterwithout{figure}{subsection}
+%\usepackage{pgf,tikz,float}
+%\usepackage{tikzlings}
+%\usepackage{tikzducks}
+%\usetikzlibrary{arrows}
+\usepackage[nobysame]{amsrefs}
+%\usepackage{amsmath}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={160mm,247mm},
+ left=25mm,
+ top=25mm,
+ }
+
+
+\newtheorem{theo}{tétel}[section]
+\newtheorem{defin}[theo]{definíció}
+\newtheorem{lemma}[theo]{lemma}
+\newtheorem{all}[theo]{állítás}
+\newtheorem{kov}[theo]{következmény}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theo]{definíció}
+
+\theoremstyle{remark}
+\newtheorem{megj}[theo]{megjegyzés}
+
+
+
+
+\date{today}
+
+\linespread{1.3}
+
+
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+ {\Large A dolgozat formai követelményei}   
+\end{center}
+ 
+\vspace{1 cm}
+
+{\bf Ajánlott oldalszám:}
+\begin{itemize}
+\item BSc szakdolgozat: 20-25 oldal, 
+\item MSc diplomamunka: 35-50 oldal
+\item Tanárszakos szakdolgozat: 50000-80000 karakter szóközökkel (lásd. TKK szabályzat)
+\end{itemize}
+
+\vspace{1 cm}
+
+{\bf Másfeles sorköz, sorkizárt, 12-es betű méret (általában Computer Modern), margók: jobb, bal, lent és fent 2,5 cm} (ahogy ez a template van beállítva, az jó).
+
+\vspace{1 cm}
+
+{\bf Kötelező elemei a dolgozatnak}
+\begin{itemize}
+    \item Címlap
+    \item Tartalmi összefoglaló (kivonat)
+    \item Tartalomjegyzék
+    \item \textcolor{red}{Érdemi rész}
+(Szakterület specifikus fejezeteket tartalmaz, kérjük, konzultáljon a témavezetővel, hogy a példában közzétett kísérletes tudományterületeken használt fejezetekből az Ön dolgozatában melyikre van szükség!)
+\item Irodalomjegyzék
+\item Nyilatkozat
+\end{itemize}
+\newpage
+
+
+
+\pagenumbering{roman}
+
+%Elso  oldal 
+\thispagestyle{empty}
+
+\begin{center}
+\vspace*{0.2cm} {\Large\bf Szegedi Tudományegyetem}
+\vspace{0.3cm}
+
+{\Large\bf Természettudományi és Informatikai Kar}
+\vspace{0.3cm}
+
+{\Large\bf XXXXXXX Intézet, XXXXXXXXX Tanszék}
+\vspace{3cm}
+
+
+
+{\Large SZAKDOLGOZAT/DIPLOMAMUNKA}
+% BSc és tanárszak esetén, szakdolg., MSc esetén diplomamunka
+
+\vspace*{1.5cm}
+
+{\LARGE\bf A szakdolgozat címe}
+
+opcionálisan, formázatlanul
+A szakdolgozat angol címe 
+
+
+
+\vspace*{4cm}
+
+{\large
+\begin{tabular}{c@{\hspace{2cm}}c}
+\emph{Készítette:}     &\emph{Témavezető:}\\
+\bf{Végzős Edömér}  &\bf{Dr. Kiváló Kitti}\\
+XXXXXX BSc hallgató    & egyetemi docens\\
+&
+\end{tabular}
+}
+
+\vspace*{1,5cm}
+
+{\Large Szeged\\ \vspace{2mm} 20XX}
+\end{center}
+
+%masodik oldal osszefogalalo
+\begin{abstract}
+A dolgozat tartalmának rövid (max. 1 oldal) összefoglalása. A következő részekből áll: rövid irodalmi összefoglaló, a dolgozat elkészítéséhez használt módszerek, eredmények, konklúzió
+
+{\bf Kulcsszavak:} a dolgozat tartalmára specifikusan jellemző 4-6 szó, egymástól vesszővel elválasztva
+\end{abstract}
+
+
+
+\newpage
+
+
+\pagebreak
+
+\tableofcontents
+\pagebreak
+%\listoffigures
+%\pagebreak
+
+
+
+
+
+
+
+
+\chapter{Bevezetés}
+\pagenumbering{arabic}
+
+(a fejezet új oldalon kezdve)
+
+Tartalmazza a problémafelvetést, a témaválasztás indoklását és a munka célját.
+
+A célkitűzések részletes megfogalmazása külön fejezetben az irodalmi áttekintés után legyen.
+
+
+
+
+\chapter{Irodalmi áttekintés}
+
+(a fejezet új oldalon kezdve) 
+
+
+Alfejezetekre osztható.
+
+\section{Alfejezet}
+\subsection{Al-alfejezet}
+\subsection{Al-alfejezet}
+\section{Alfejezet}
+
+
+
+A dolgozat témájához kapcsolódó korábbi eredmények ismertetése, a rendelkezésre álló szakirodalmi adatok összefoglalása, elemzése. 
+A felhasznált irodalmat a szövegben hivatkozni kell (zárójelben) vagy [kapcsos zárójelben]. A hivatkozás történhet csak számozással \cite{ALE3} vagy az első szerző nevével és a megjelenés évszámával pl. (több szerző esetén:  Gipsz és mtsi 1963 \cite{WSB}; két szerző esetén: Monroe és O’Donell, 2001 \cite{MD}). A hivatkozott irodalmat a dolgozat végén az irodalomjegyzékben össze kell gyűjteni olyan módon, hogy mások számára is fellelhető legyen!
+
+Tartalmazhat szakirodalmi ábrákat. Ezeket középre kell rendezni és hivatkozni kell rájuk a szövegben (lásd \ref{fig:korok}.). A hivatkozások, akár irodalmi, akár ábrahivatkozás, részei a mondatnak!
+
+\begin{figure}
+\centering
+\includegraphics[height=7 cm]{b4918.png}
+\caption{ \label{fig:korok} Az ábra címe (az ábraaláírást mindig az ábra alá kell elhelyezni!)
+Szükség esetén az ábra eredetére vonatkozó hivatkozás.
+}
+\end{figure}
+
+\chapter{Célkitűzések}
+
+Ebből látszik, hogy a korábbi eredményekhez képest mit szeretnének csinálni.
+
+\chapter{Felhasznált anyagok és eszközök}
+
+(a fejezet új oldalon kezdve) 
+
+Szakirodalmi feldolgozás esetén nem releváns!
+
+A következő fejezettel (Alkalmazott módszerek) összevonható.
+
+\chapter{Alkalmazott módszerek}
+
+(a fejezet új oldalon kezdve) 
+
+Szakirodalmi feldolgozás esetén nem releváns!
+
+
+Alfejezetekre osztható. 
+
+Olyan részleteséggel kell megírni, hogy mások számára megismételhetőek legyenek.
+
+\chapter{Eredmények}
+
+(a fejezet új oldalon kezdve) 
+
+Az elért eredmények világos és részletes leírását tartalmazza. 
+
+Egyértelműen különüljön el a hallgató saját munkájának eredménye az irodalmi áttekintéstől, elméleti alapokat tartalmazó részektől.
+
+Alfejezetekre osztható.
+
+\section{Táblázatok, képletek, egyéb értéssegítők}
+
+Tartalmazhat táblázatokat, melyekre hivatkozni kell a szövegben, például \ref{table:2}. táblázat. A táblázatot középre kell rendezni és a szövegben lévő hivatkozás közelében kell elhelyezni.
+
+\begin{table}[h!]
+\centering
+\caption{A táblázat címe a táblázat fölé kerül.}
+\label{table:2}
+\vspace{.2 cm}
+\begin{tabular}{||c c c c||} 
+ \hline
+ Col1 & Col2 & Col2 & Col3 \\ [0.5ex] 
+ \hline\hline
+  4 & 545 & 18744 & 7560 \\
+ 5 & 88 & 788 & 6344 \\ [1ex] 
+ \hline
+\end{tabular}
+\end{table}
+
+
+
+
+Tartalmazhat ábrákat. Ezeket középre kell rendezni és hivatkozni kell rájuk a szövegben (lásd \ref{fig:korokuj}). Ha az Irodalmi áttekintés fejezet tartalmazott ábrá(ka)t, akkor a számozás ebben a fejezetben nem újra kezdődik, hanem folytatódik.
+
+\begin{figure}
+\centering
+\includegraphics[height=7 cm]{b4918.png}
+\caption{ \label{fig:korokuj} Az ábra címe mindig a kép alatt legyen.
+}
+\end{figure}
+
+Egész oldalas ábrák mellékletben legyenek elhelyezve!
+
+Használjuk bátran a \LaTeX  brilliáns egyenletszerkesztő rendszerét!
+
+A szövegközi $x^2$ képletetket nem, de a kiemelt formulákat általában számozzuk:
+
+ \begin{equation}\label{circle-area}
+\mathrm{Var} (A(K_n^r)))\ll n^{-2},
+\end{equation}
+
+kivéve a hosszabb számolásokat
+
+\begin{align}
+E (& F_n(x_{n+1})^2) = \frac 1{A(K)^{n+1}}\int_K\int_{K^n} \left (\sum_I \mathbf I (F_I\in\mathcal F_{n}(x_{n+1}))\right )^2 d X_n d x_{n+1}\nonumber\\
+& = \frac 1{A(K)^{n+1}} \int_K\int_{K^n} \left (\sum_I \mathbb I (F_I\in\mathcal F_{n}(x_{n+1}))\right ) \nonumber \\
+& \quad \quad \times \left (\sum_J \mathbf I (F_J\in\mathcal F_{n}(x_{n+1}))\right ) d X_n d x_{n+1}\nonumber\\
+&\leq \frac 1{A(K)^{n+1}}\sum_I\sum_J \int_K\int_{K^n} \mathbf I (F_I\in\mathcal F_{n}(x_{n+1}))
+\mathbf I (F_J\in\mathcal F_{n}(x_{n+1}))\nonumber\\
+&\quad\quad\times\mathbf I(d_H(K,K_n)\leq\varepsilon_K) d X_n d x_{n+1}
++O((1-c_K)^n)\label{ineq1}
+%\label{Fn-first} & \ll \frac 1{A(K)^{n+1}} \sum_I\sum_J \int_K\cdots \int_K \indi (F_I\in\F_{n}(x_{n+1}))
+%\indi (F_J\in\F_{n}(x_{n+1}))\\ %\notag\\
+%&\quad\quad\times\indi(d_H(K,K_n)\leq\varepsilon_K) \d X_n \d x_{n+1} %\textcolor{red}{\sout{+O((1-c_K)^n)}}
+%\notag
+\end{align}
+A képletben használt mennyiségek legyenek megadva az első használatuknál.
+\chapter{Összefoglalás}
+
+(új oldalon kezdve)
+
+A dolgozat eredményeinek összefoglalása, következtetések levonása.
+
+Az összefoglalásban egyértelműen jelezve legyen a hallgató saját szerepe/eredményei.
+
+
+
+
+
+\newpage
+\begin{bibdiv}
+\begin{biblist}
+ \addcontentsline{toc}{chapter}{Irodalomjegyzék}
+
+
+\bib{ALE3}{article}{
+author={A. L. Edmonds},
+title={The geometry of an equifacetal simplex},
+journal={Indiana University Reprint},
+date={2003},
+}
+
+
+\bib{AC64}{book}{
+author={N. Altshiller-Court},
+title={Modern Pure Solid Geometry},
+publisher={Chelsea Publishing Co., N. Y.},
+date={1964},
+}
+
+
+\bib{WSB}{article}{
+author={J. Gipsz},
+author={M. Kalányos},
+author={Z. Kovács},
+title={The Chasm},
+journal={Doom II.},
+volume={76},
+date={1963},
+pages={661–669}
+}
+
+\bib{MD}{article}{
+author={J. Monroe},
+author={M. O'Donnel},
+title={The kiss},
+journal={Amer. Math. Monthly},
+volume={76},
+date={1969},
+pages={661–663}
+}
+\end{biblist}
+\end{bibdiv}
+
+
+\newpage
+{\Huge \bf Köszönetnyilvánítás}
+
+ \addcontentsline{toc}{chapter}{Köszönetnyilvánítás}
+
+\vspace{2 cm}
+
+(nem kötelező elem), (új oldalon kezdve) 
+
+Ebben a fejezetben lehet köszönetet mondani mindazoknak, akik segítették a dolgozat elkészülését. Itt lehet megemlíteni továbbá a munkát támogató pályázatokat, ösztöndíjakat, stb.
+
+\newpage
+{\Huge \bf Nyilatkozat}
+
+ \addcontentsline{toc}{chapter}{Nyilatkozat}
+
+\vspace{2 cm}
+
+{\it A szöveg kötött, kérjük ezt használni!}
+
+Alulírott, Végzős Edömér, xxxx szakos hallgató, kijelentem, hogy a szakdolgozatban ismertetettek saját munkám eredményei, és minden felhasznált, nem saját munkából származó eredmény esetén hivatkozással jelöltem annak forrását. 
+
+
+\begin{flushleft}
+\vspace*{1cm}
+Szeged, \today
+\end{flushleft}
+
+\begin{flushright}
+ \vspace*{1cm}
+ \makebox[7cm]{\rule{6cm}{.4pt}}\\
+ \makebox[7cm]{\emph{Végzős Edömér}}
+\end{flushright}
+
+\pagebreak
+
+\newpage
+{\Huge \bf Mellékletek}
+
+ \addcontentsline{toc}{chapter}{Mellékletek}
+
+\vspace{2 cm}
+
+(nem kötelező elem, a dolgozat oldalszámaiba nem tartozik bele.), (új oldalon kezdve)
+
+Ebben a fejezetben lehet elhelyezni a nagyobb táblázatokat, ábrákat, adathalmazokat.
+
+
+\end{document}
+
+
+

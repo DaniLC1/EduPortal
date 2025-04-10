@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neptun Hasonmás</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
     <header>
@@ -21,6 +21,6 @@
         <h1 id="welcome-message">Üdvözöljük a Neptun Hasonmás rendszerben!</h1>
         <!-- Tartalom ide -->
     </main>
-    <script src="scripts.js"></script>
+    <script src="Scripts/scripts.js"></script>
 </body>
 </html>
