@@ -1,0 +1,180 @@
+:root {
+    --background-light: #f0f0f0;
+    --background-dark: #1e1e1e;
+    --text-dark: #000000;
+    --text-light: #ffffff;
+    --primary-color: #007bff;
+    --secondary-color: #ffa500;
+    --dropdown-bg: #ffffff;
+    --dropdown-text: #000000;
+}
+
+/* Alap beállítások */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu, .user-menu {
+    flex: 1;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex: 2;
+}
+
+.main-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    transition: background-color 0.3s;
+}
+
+.main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+/* DROPDOWN MENÜ */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: transparent;
+    color: var(--text-light);
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px 16px;
+}
+
+.dropdown-menu {
+    display: none; /* alapból rejtett */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--dropdown-bg);
+    width: 100%;
+    min-width: max-content;
+    z-index: 1;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/* Aktív állapot - JS adja hozzá ezt az osztályt */
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu.left {
+    left: 0;
+    right: auto;
+}
+
+
+.dropdown-menu.right {
+    right: 0;
+    left: auto;
+}
+.user-menu .dropdown {
+    position: relative; /* <<< ez nagyon fontos, hogy a lenyíló ezt vegye alapnak */
+}
+
+.dropdown-menu a {
+    color: var(--dropdown-text);
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* Téma váltó */
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+}
+.theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.theme-toggle {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+/* Ikon stílus */
+.icon {
+    font-size: 20px;
+}
+
+/* Sötét mód */
+body[data-theme="dark"] {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}
+
+body[data-theme="dark"] header {
+    background-color: var(--secondary-color);
+}
+
+body[data-theme="dark"] .main-nav a,
+body[data-theme="dark"] .dropbtn,
+body[data-theme="dark"] .theme-toggle {
+    color: var(--text-light);
+}
+
+body[data-theme="dark"] .dropdown-menu {
+    background-color: #333333;
+}
+
+body[data-theme="dark"] .dropdown-menu a {
+    color: var(--text-light);
+}
+
+body[data-theme="dark"] .dropdown-menu a:hover {
+    background-color: #444;
+}

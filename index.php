@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neptun Hasonmás</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <title>EduPortál</title>
+    <link rel="stylesheet" href="CSS/index_style.css">
 </head>
 <body>
     <header>
@@ -13,13 +13,48 @@
             <button id="en" class="language-btn">EN</button>
             <button id="de" class="language-btn">DE</button>
         </div>
+        <h1 id="welcome-message">Üdvözöljük az EduPortálon!</h1>
         <div class="theme-switcher">
             <button id="theme-toggle" class="theme-btn">🌙</button>
         </div>
     </header>
     <main>
-        <h1 id="welcome-message">Üdvözöljük a Neptun Hasonmás rendszerben!</h1>
-        <!-- Tartalom ide -->
+        <div class="main-container">
+            <!-- BAL OLDAL: Képek -->
+            <div class="image-slider">
+                <img id="slider-image" src="slider_pictures/slide1.png" alt="Slider kép">
+            </div>
+            <!-- KÖZÉP: Bejelentkezés -->
+            <section class="login-box">
+                <h2>Bejelentkezés</h2>
+                <form action="login.php" method="POST">
+                    <label for="email">Email cím:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password">Jelszó:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit" onclick="window.location.href='site1.php'">Belépés</button>
+                    <a href="site1.php">
+                        <button type="button">Tovább a Kezdőlaphoz</button>
+                    </a>
+                </form>
+            </section>
+            <!-- JOBB OLDAL: Hírek -->
+            <div class="news-box">
+                <h2>Hírek</h2>
+                <p>
+                    A jövő héten indul a Neptun rendszer karbantartása, így előfordulhatnak átmeneti leállások.
+                    Kérjük, mindenki mentse el időben az adatokat és figyelje a további közleményeket!A jövő héten indul a Neptun rendszer karbantartása, így előfordulhatnak átmeneti leállások.
+                    Kérjük, mindenki mentse el időben az adatokat és figyelje a további közleményeket!A jövő héten indul a Neptun rendszer karbantartása, így előfordulhatnak átmeneti leállások.
+                    Kérjük, mindenki mentse el időben az adatokat és figyelje a további közleményeket!A jövő héten indul a Neptun rendszer karbantartása, így előfordulhatnak átmeneti leállások.
+                    Kérjük, mindenki mentse el időben az adatokat és figyelje a további közleményeket!A jövő héten indul a Neptun rendszer karbantartása, így előfordulhatnak átmeneti leállások.
+                    Kérjük, mindenki mentse el időben az adatokat és figyelje a további közleményeket!A jövő héten indul a Neptun rendszer karbantartása, így előfordulhatnak átmeneti leállások.
+                    Kérjük, mindenki mentse el időben az adatokat és figyelje a további közleményeket!A jövő héten indul a Neptun rendszer karbantartása, így előfordulhatnak átmeneti leállások.
+                    Kérjük, mindenki mentse el időben az adatokat és figyelje a további közleményeket!
+                </p>
+            </div>
+        </div>
     </main>
     <script src="Scripts/scripts.js"></script>
 </body>

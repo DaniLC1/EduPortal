@@ -1,0 +1,195 @@
+:root {
+    --background-light: #f0f0f0;
+    --background-dark: #1e1e1e;
+    --text-dark: #000000;
+    --text-light: #ffffff;
+    --primary-color: #007bff;
+    --secondary-color: #ffa500;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+/* Header rész */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.language-switcher,
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+}
+
+.language-btn,
+.theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+header h1 {
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+    font-size: 1.2rem;
+}
+/* Header rész vége*/
+
+/* Main rész */
+main {
+    margin-top: 3rem;
+    width: 100%;
+    padding: 1rem;
+}
+
+.login-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    flex: 1;
+}
+
+.login-box h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.login-box label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Dark mode */
+body[data-theme="dark"] {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}
+
+body[data-theme="dark"] .login-box {
+    background-color: #2a2a2a;
+    color: var(--text-light);
+}
+
+body[data-theme="dark"] header {
+    background-color: var(--secondary-color);
+}
+
+body[data-theme="dark"] .language-btn,
+body[data-theme="dark"] .theme-btn {
+    color: var(--text-light);
+}
+
+.main-container {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.image-slider {
+    width: 550px; /
+    height: 300px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-slider img {
+    width: 100%;
+    height: 100%;
+
+}
+
+.news-box {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    max-height: 300px; /* max magasság */
+    overflow-y: auto;
+}
+
+body[data-theme="dark"] .news-box {
+    background-color: #2a2a2a;
+    color: var(--text-light);
+}
+
+.news-box h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.news-box p {
+    line-height: 1.5;
+}
+
+/* Mobil reszponzív */
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-slider {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .image-slider img {
+        width: 100px;
+    }
+}
