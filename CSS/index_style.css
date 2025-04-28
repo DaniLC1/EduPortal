@@ -16,6 +16,7 @@ body {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 /* Header rész */
 header {
@@ -58,6 +59,7 @@ main {
     margin-top: 3rem;
     width: 100%;
     padding: 1rem;
+    box-sizing: border-box;
 }
 
 .login-box {
@@ -136,7 +138,7 @@ body[data-theme="dark"] .theme-btn {
 }
 
 .image-slider {
-    width: 550px; /
+    width: 550px;
     height: 300px;
     overflow: hidden;
     border-radius: 12px;

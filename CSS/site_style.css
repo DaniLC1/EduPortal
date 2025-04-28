@@ -6,7 +6,6 @@
     --primary-color: #007bff;
     --secondary-color: #ffa500;
     --dropdown-bg: #ffffff;
-    --dropdown-text: #000000;
 }
 
 /* Alap beállítások */
@@ -115,7 +114,7 @@ header {
 }
 
 .dropdown-menu a {
-    color: var(--dropdown-text);
+    color: var(--text-dark);
     padding: 10px 16px;
     text-decoration: none;
     display: block;

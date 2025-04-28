@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Téma váltás
+// Téma váltás
     const themeToggleBtn = document.getElementById('theme-toggle') || document.getElementById('themeToggleBtn');
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.body.dataset.theme = savedTheme;
+    updateThemeVariables(savedTheme);
+
     if (themeToggleBtn) {
         themeToggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
@@ -12,7 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.dataset.theme = newTheme;
             localStorage.setItem('theme', newTheme);
             themeToggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            updateThemeVariables(newTheme);
         });
+    }
+
+    // Függvény, ami frissíti a CSS változókat
+    function updateThemeVariables(theme) {
+        if (theme === 'dark') {
+            document.documentElement.style.setProperty('--card-background', 'black');
+        } else {
+            document.documentElement.style.setProperty('--card-background', 'white');
+        }
     }
 
     // Nyelv váltás (csak ha van nyelvváltó gomb)
