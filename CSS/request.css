@@ -1,0 +1,82 @@
+.title-left {
+    text-align: left;
+    margin: 1em 0;
+    font-size: 1.8em;
+}
+
+.search-form {
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+.search-form input[type="text"] {
+    padding: 0.5em;
+    width: 60%;
+    max-width: 400px;
+}
+
+.search-form button {
+    padding: 0.5em 1em;
+    margin-left: 0.5em;
+}
+
+.requests-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+}
+
+.request-card {
+    background-color: #f4f4f4;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.card-actions button {
+    margin-left: 0.5em;
+}
+
+.card-description {
+    margin-top: 1em;
+    border-top: 1px dashed #bbb;
+    padding-top: 1em;
+}
+
+.request-form {
+    margin-top: 1em;
+}
+
+.request-form fieldset {
+    border: none;
+    padding: 0;
+}
+
+.request-form .form-actions {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.request-form button {
+    padding: 0.5em 1em;
+}
+
+.request-form textarea,
+.request-form input {
+    width: 100%;
+    padding: 0.5em;
+    margin-top: 0.25em;
+    box-sizing: border-box;
+}

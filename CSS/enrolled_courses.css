@@ -1,0 +1,118 @@
+/* Szűrők maradnak */
+.filters {
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: transparent;
+    border: none;
+    justify-content: center;
+}
+.course-grid{
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: transparent;
+    border: none;
+}
+
+.filters input,
+.filters select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Kártyarács – fix 2 oszlop desktopon, 1 mobilon */
+#courseList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+/* Kártya stílus */
+.course-card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    padding: 1.5rem;
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-6px);
+}
+
+/* Fejléc – név + kód */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.card-header .code {
+    font-size: 0.85rem;
+    color: #333;
+    background-color: #f0f0f0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+}
+
+/* Kártya test – kulcsinfók blokkosítva */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.card-body p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Stílusosabb státusz színezés */
+.course-card .status {
+    font-weight: 600;
+}
+
+.course-card .status.completed {
+    color: #2e7d32; /* zöld */
+}
+
+.course-card .status.failed {
+    color: #c62828; /* piros */
+}
+
+.course-card .status.enrolled {
+    color: #ef6c00; /* narancs */
+}
+
+body[data-theme="dark"] .filters input,
+body[data-theme="dark"] .filters select {
+    background-color: #222;
+    color: #fff;
+    border-color: #444;
+}

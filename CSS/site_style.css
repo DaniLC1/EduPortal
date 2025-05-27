@@ -6,6 +6,9 @@
     --primary-color: #007bff;
     --secondary-color: #ffa500;
     --dropdown-bg: #ffffff;
+    --dropdown-bg-dark: #333333;
+    --primary-hover: #0056b3;
+    --secondary-hover: #e48a02;
 }
 
 /* Alap beállítások */
@@ -63,6 +66,13 @@ header {
 .main-nav a:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
+}
+
+.main-nav a#active {
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 6px 12px;
+
 }
 
 /* DROPDOWN MENÜ */
@@ -167,7 +177,7 @@ body[data-theme="dark"] .theme-toggle {
 }
 
 body[data-theme="dark"] .dropdown-menu {
-    background-color: #333333;
+    background-color: var(--dropdown-bg-dark);
 }
 
 body[data-theme="dark"] .dropdown-menu a {
@@ -176,4 +186,15 @@ body[data-theme="dark"] .dropdown-menu a {
 
 body[data-theme="dark"] .dropdown-menu a:hover {
     background-color: #444;
+}
+
+.payment-details ul {
+    padding-left: 1.2rem;
+    list-style-type: disc;
+    color: var(--text-dark);
+}
+
+.payment-details li {
+    margin-bottom: 0.4rem;
+    font-size: 0.95em;
 }

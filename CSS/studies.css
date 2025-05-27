@@ -1,0 +1,84 @@
+main {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    align-items: flex-start;
+}
+
+.progress-chart {
+    flex: 1;
+    max-width: 300px;
+    background-color: var(--card-background);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.credit-info {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+.subject-panel {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.subject-heading {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    text-align: left;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.filters input,
+.filters select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.subject-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.subject-card {
+    border: none;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: calc(50% - 0.5rem);
+    box-sizing: border-box;
+    background-color: var(--card-background);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+body[data-theme="dark"] .filters input,
+body[data-theme="dark"] .filters select {
+    background-color: #222;
+    color: #fff;
+    border-color: #444;
+}

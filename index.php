@@ -1,3 +1,17 @@
+<?php if (isset($_GET['error'])): ?>
+    <p class="error">
+        <?php
+        switch ($_GET['error']) {
+            case 'invalid_credentials':
+                echo "Hibás jelszó!";
+                break;
+            case 'user_not_found':
+                echo "Felhasználó nem található!";
+                break;
+        }
+        ?>
+    </p>
+<?php endif; ?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -28,16 +42,13 @@
             <section class="login-box">
                 <h2>Bejelentkezés</h2>
                 <form action="login.php" method="POST">
-                    <label for="email">Email cím:</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="eduportal_id">EduPortál azonosító:</label>
+                    <input type="text" id="eduportal_id" name="eduportal_id" required>
 
                     <label for="password">Jelszó:</label>
                     <input type="password" id="password" name="password" required>
 
-                    <button type="submit" onclick="window.location.href='site1.php'">Belépés</button>
-                    <a href="site1.php">
-                        <button type="button">Tovább a Kezdőlaphoz</button>
-                    </a>
+                    <button type="submit">Belépés</button>
                 </form>
             </section>
             <!-- JOBB OLDAL: Hírek -->

@@ -1,0 +1,131 @@
+.course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.course-card {
+    border: none;
+    padding: 1.2rem;
+    border-radius: 8px;
+    background: var(--card-background);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.course-card.enrolled {
+    border-left: 5px solid green;
+    background: var(--card-background);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+.card-header .credit {
+    font-weight: bold;
+}
+
+.card-header .type {
+    font-style: italic;
+}
+
+.course-card form {
+    margin-top: 1rem;
+}
+
+.course-card form .cancel {
+    background-color: #e80505;
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.course-card form .cancel:hover {
+    background-color: #680303;
+}
+
+.send-btn {
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.send-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+.offering-details {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 5px;
+}
+
+.offering-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.offering-list li {
+    padding: 5px 0;
+}
+
+.filters {
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: transparent;
+    border: none;
+    justify-content: center;
+}
+.filters input,
+.filters select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--dropdown-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.filters button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+body[data-theme="dark"] .filters input,
+body[data-theme="dark"] .filters select {
+    background: var(--dropdown-bg-dark);
+    color: var(--text-light);
+    border-color: #444;
+}
+
+body[data-theme="dark"] button {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+}
+
+body[data-theme="dark"] button:hover {
+    background-color: var(--secondary-hover);
+}
