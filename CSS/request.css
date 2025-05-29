@@ -1,34 +1,58 @@
-.title-left {
+.h1 {
     text-align: left;
     margin: 1em 0;
     font-size: 1.8em;
 }
 
 .search-form {
-    text-align: center;
-    margin-bottom: 1.5em;
+    width: auto;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: transparent;
+    border: none;
+    justify-content: center;
 }
 
 .search-form input[type="text"] {
-    padding: 0.5em;
-    width: 60%;
-    max-width: 400px;
+    min-width: 250px;
+    width: auto;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: var(--dropdown-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
 }
 
 .search-form button {
-    padding: 0.5em 1em;
-    margin-left: 0.5em;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background-color: var(--primary-hover);
 }
 
 .requests-container {
     display: flex;
     flex-direction: column;
     gap: 1.5em;
+    border: none;
+    padding: 1.2rem;
 }
 
 .request-card {
-    background-color: #f4f4f4;
-    padding: 1em;
+    background-color: var(--card-background);
+    padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }
@@ -44,8 +68,18 @@
     font-size: 1.2em;
 }
 
-.card-actions button {
-    margin-left: 0.5em;
+.request-card button{
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.request-card button:hover {
+    background-color: var(--primary-hover);
 }
 
 .card-description {
@@ -69,14 +103,33 @@
     margin-top: 1em;
 }
 
-.request-form button {
-    padding: 0.5em 1em;
-}
-
 .request-form textarea,
 .request-form input {
     width: 100%;
     padding: 0.5em;
     margin-top: 0.25em;
+    min-height: 50px;
+    resize: none;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
     box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+body[data-theme="dark"] .search-form input{
+    background: var(--dropdown-bg-dark);
+    color: var(--text-light);
+    border-color: #444;
+}
+
+body[data-theme="dark"] .search-form button,
+body[data-theme="dark"] .request-card button{
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+}
+
+body[data-theme="dark"] .search-form button:hover,
+body[data-theme="dark"] .request-card button:hover{
+    background-color: var(--secondary-hover);
 }

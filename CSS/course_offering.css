@@ -57,6 +57,11 @@
     cursor: pointer;
 }
 
+.send-btn {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+
 .send-btn:hover {
     background-color: var(--primary-hover);
 }

@@ -116,7 +116,7 @@ while ($row = $fields_result->fetch_assoc()) {
 
 <!-- IDE JÖN A FŐ TARTALOM -->
 <main class="layout">
-    <h1 class="title-left">📄 Kérelmek</h1>
+    <h1>📄 Kérelmek</h1>
 
     <!-- Kereső -->
     <form method="get" action="request.php" class="search-form">
@@ -141,7 +141,7 @@ while ($row = $fields_result->fetch_assoc()) {
                     <div class="card-description" style="display: none;">
                         <p><?= nl2br(htmlspecialchars($template['description'])) ?></p>
 
-                        <form method="post" action="request_post.php" class="request-form" style="display: none;">
+                        <form method="post" action="request_post.php" class="request-form"">
                             <input type="hidden" name="template_id" value="<?= $template['id'] ?>">
 
                             <fieldset disabled>
@@ -150,7 +150,7 @@ while ($row = $fields_result->fetch_assoc()) {
                                         <label>
                                             <?= htmlspecialchars($field['label']) ?><?= $field['is_required'] ? ' *' : '' ?><br>
                                             <?php if ($field['field_type'] === 'textarea'): ?>
-                                                <textarea name="field_<?= $field['id'] ?>" rows="3"></textarea>
+                                                <textarea class="auto-resize-textarea" name="field_<?= $field['id'] ?>" rows="3"></textarea>
                                             <?php else: ?>
                                                 <input
                                                         type="<?= htmlspecialchars($field['field_type']) ?>"

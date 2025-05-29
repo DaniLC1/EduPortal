@@ -17,6 +17,28 @@ if (!isset($_GET['assignment_id'])) {
 $assignment_id = (int) $_GET['assignment_id'];
 global $conn;
 
+
+// Felhasználó adatainak lekérdezése (név és szak)
+$user_sql = "
+SELECT u.name, 
+       p.name AS szak_nev 
+FROM users u
+JOIN programs p ON p.szak_szam = u.course_code 
+WHERE eduportal_id = ?";
+$user_stmt = $conn->prepare($user_sql);
+$user_stmt->bind_param("s", $eduportal_id);
+$user_stmt->execute();
+$user_result = $user_stmt->get_result();
+
+if ($user_result->num_rows === 1) {
+    $user = $user_result->fetch_assoc();
+    $user_name = $user['name'];
+    $user_course = $user['szak_nev'];
+} else {
+    $user_name = "Ismeretlen";
+    $user_course = "N/A";
+}
+
 // Dolgozat adatai
 $sql_assignment = "
 SELECT a.title, a.description, a.due_date, a.available_from, c.name AS course_name
@@ -74,13 +96,40 @@ if ($question_ids) {
     <link rel="stylesheet" href="CSS/assignment.css">
 </head>
 <body>
+<header>
+    <!-- BAL MENÜ -->
+    <div class="menu">
+        <p><strong>Tantárgy:</strong> <?= htmlspecialchars($assignment['course_name']) ?></p>
+        <p><strong>Elérhető:</strong> <?= $assignment['available_from'] ?><br>
+            <strong>Határidő:</strong> <?= $assignment['due_date'] ?></p>
+    </div>
+
+    <!-- NAVIGÁCIÓ -->
+    <nav class="main-nav">
+
+        <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($assignment['description'])) ?></p>
+
+    </nav>
+
+    <!-- JOBB OLDALI MENÜ -->
+    <div class="user-menu">
+        <div class="dropdown">
+            <button id="dropdownToggleR" class="dropbtn">
+                <?php echo htmlspecialchars($user_name); ?> |
+                <?php echo htmlspecialchars($eduportal_id); ?> |
+                <?php echo htmlspecialchars($user_course); ?>
+            </button>
+        </div>
+        <!-- TÉMAVÁLTÓ GOMB -->
+        <div class="theme-switcher">
+            <button id="theme-toggle" class="theme-btn">🌙</button>
+        </div>
+    </div>
+</header>
 <main class="layout">
     <section class="main-content">
         <h1>📝 <?= htmlspecialchars($assignment['title']) ?></h1>
-        <p><strong>Tantárgy:</strong> <?= htmlspecialchars($assignment['course_name']) ?></p>
-        <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($assignment['description'])) ?></p>
-        <p><strong>Elérhető:</strong> <?= $assignment['available_from'] ?><br>
-            <strong>Határidő:</strong> <?= $assignment['due_date'] ?></p>
+
 
         <!-- Dolgozat kérdőív -->
         <form method="POST" action="assignment_post.php">
@@ -121,6 +170,7 @@ if ($question_ids) {
         </form>
     </section>
 </main>
+<script src="Scripts/scripts.js"></script>
 </body>
 </html>
 

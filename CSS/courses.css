@@ -146,7 +146,7 @@
 
 .auto-resize-textarea {
     width: 100%;
-    min-height: 60px;
+    min-height: 50px;
     resize: none;
     padding: 8px;
     font-size: 0.9em;
