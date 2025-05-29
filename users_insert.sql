@@ -1,0 +1,392 @@
+-- Users tábla insert: X
+INSERT INTO users (name, eduportal_id, email, phone, password_hash, postal_code, city, address, birth_date, mothers_name, role, course_code) VALUES
+('Török Ágnes', 'EDU100000', 'henriettakiss@hegedus.info', '+36 86 455-6466', 'Teszt1234', '3913', 'Keresztharaszti', 'Bakonytapolcai utca 110.', '1977-05-30', ' Kovács Mária', 'hallgato', 'KURZUS891'),
+('Balogh Anna', 'EDU100001', 'molnartimea@kovacs.com.hu', '06-6/425 2624', 'Teszt123', '7257', 'Fürdőváros', 'Soproni út 20.', '1970-08-26', ' Szabó Erzsébet', 'hallgato', 'KURZUS168'),
+('Mészáros Mihály', 'EDU100002', 'mariannkollar@varga.org', '+36 1 453 5835', 'Teszt123', '9400', 'Sopron', 'Erzsébet utca 22.', '1998-11-19', 'Szilvia Sipos', 'hallgato', 'KURZUS245'),
+('Török Nikolett', 'EDU100003', 'roberttoth@szabo.com', '+36 76 385 7361', 'Teszt123', '2030', 'Érd', 'Kossuth tér 8.', '1996-02-03', 'Kocsis Judit', 'hallgato', 'KURZUS350'),
+('Tóth Enikő', 'EDU100004', 'liliko@farkas.org', '+36 1 621 3104', 'Teszt123', '1025', 'Budapest', 'Zöldfa utca 33.', '2000-06-12', 'Vass Krisztina', 'hallgato', 'KURZUS591'),
+('Nagy Roland', 'EDU100005', 'zsuzsannaboros@feher.info', '+36 20 529 0924', 'Teszt123', '7632', 'Pécs', 'Petőfi utca 9.', '1997-03-07', 'Major Ildikó', 'hallgato', 'KURZUS007'),
+('Balázs Zoltán', 'EDU100006', 'sandorbo@kiss.org', '+36 1 525 4783', 'Teszt123', '4026', 'Debrecen', 'Szabadság tér 6.', '1995-01-15', 'Németh Boglárka', 'hallgato', 'KURZUS999'),
+('Németh Krisztina', 'EDU100007', 'erzsebetpap@pinter.com', '+36 30 968 0213', 'Teszt123', '7100', 'Szekszárd', 'Arany János utca 44.', '1999-08-21', 'Mónika Tóth', 'hallgato', 'KURZUS303'),
+('Kovács Gábor', 'EDU100008', 'viktoriahorvath@fekete.com', '+36 70 781 5682', 'Teszt123', '8600', 'Siófok', 'Dózsa György út 7.', '1996-09-10', 'Ilona Balla', 'hallgato', 'KURZUS444'),
+('Fekete Dóra', 'EDU100009', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18.', '1998-12-05', 'Katalin Balogh', 'hallgato', 'SZ007'),
+('Kiszel Dániel', 'EDU111111', 'krisztianvarga@szabo.org', '+36 20 283 7838', 'Teszt123', '6763', 'Szatymaz', 'IV. Körzet Tanya 127/c', '1998-12-05', 'Katalin Balogh', 'hallgato', 'SZ001'),
+
+('Fehér Dóra', 'EDU100010', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Balogh Katalin', 'tanar', ''),
+('Zöld Dóra', 'EDU100011', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Kék Dóra', 'EDU100012', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Rózsa Dóra', 'EDU100013', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Narancs Dóra', 'EDU100014', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+
+('Ibolya Dóra', 'EDU100015', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Pál Dóra', 'EDU100016', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Lila Dóra', 'EDU100017', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Keresztes Dóra', 'EDU100018', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Kiss Dóra', 'EDU100019', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', '');
+
+-- courses tábla töltés: X
+INSERT INTO courses (kurzus_kod, name, credit, leiras, tematika) VALUES 
+('PROG101EA', 'Programozás alapjai EA', 3, 'Bevezetés a programozásba.', 'Változók, ciklusok, feltételek'),
+('PROG101GY', 'Programozás alapjai GY', 2, 'Bevezetés a programozásba.', 'Változók, ciklusok, feltételek'),
+('ADAT102EA', 'Adatbázisok 1 EA', 2, 'Bevezetés az adatbzisokba.', 'Változók, ciklusok, feltételek'),
+('ADAT102GY', 'Adatbázisok 1 GY', 2, 'Bevezetés az adatbzisokba.', 'Változók, ciklusok, feltételek'),
+('PROG103EA', 'Programozás 1 EA', 3, 'Java programozás az alapoktól.', 'Változók, ciklusok, feltételek'),
+('PROG103GY', 'Programozás 1 GY', 2, 'Java programozás az alapoktól.', 'Változók, ciklusok, feltételek'),
+('DIMA104EA', 'Diszkrét matematika 1 EA', 2, 'Bevezetés a diszkrét matematika rejtelmeibe.', 'Változók, ciklusok, feltételek'),
+('DIMA104GY', 'Diszkrét matematika 1 GY', 2, 'Bevezetés a diszkrét matematika rejtelmeibe.', 'Változók, ciklusok, feltételek'),
+('KALK105EA', 'Kalkulus 1 EA', 3, 'Deriválás és integrálás valamint határérték számítások.', 'Változók, ciklusok, feltételek'),
+('KALK105GY', 'Kalkulus 1 GY', 1, 'Deriválás és integrálás valamint határérték számítások.', 'Változók, ciklusok, feltételek'),
+('BIO103EA', 'Biológia 1 EA', 3, 'Biológia áttekintés.', 'Változók, ciklusok, feltételek'),
+('BIO103GY', 'Biológia 1 GY', 2, 'Biológia áttekintés.', 'Változók, ciklusok, feltételek'),
+('KEM104EA', 'Kémia 1 EA', 2, 'Szerves- és szervetlen kémia alapok.', 'Változók, ciklusok, feltételek'),
+('KEM104GY', 'Kémia 1 GY', 2, 'Szerves- és szervetlen kémia alapok.', 'Változók, ciklusok, feltételek'),
+('MOLBI105EA', 'Molekuláris biológia 1 EA', 3, 'Bevezetés a Molekuláris biológia rejtelmeibe.', 'Változók, ciklusok, feltételek'),
+('MOLBI105GY', 'Molekuláris biológia 1 GY', 1, 'Bevezetés a Molekuláris biológia rejtelmeibe.', 'Változók, ciklusok, feltételek');
+
+-- semesters tábla töltés: X
+INSERT INTO semesters (label, start_date, end_date) VALUES 
+('2024/25 1. félév', '2024-09-01', '2025-01-31'),
+('2024/25 2. félév', '2025-02-01', '2025-06-30'),
+('2025/26 1. félév', '2025-09-01', '2026-01-31'),
+('2025/26 2. félév', '2026-02-01', '2026-06-30'),
+('2023/24 1. félév', '2023-09-01', '2024-01-31'),
+('2023/24 2. félév', '2024-02-01', '2024-06-30'),
+('2022/23 1. félév', '2022-09-01', '2023-01-31'),
+('2022/23 2. félév', '2023-02-01', '2023-06-30');
+
+-- course_offerings tábla töltés: X
+INSERT INTO course_offerings (kurzus_kod, semester_id, teacher_id, course_type, day_of_week, start_time, end_date, room, max_students) VALUES 
+-- Aktuális félévi tárgyak: ('2024/25 2. félév', '2025-02-01', '2025-06-30')
+('PROG101EA', 2, 'EDU100010', 'eloadas', 'H', '08:00:00', '2025-09-30', 'IB204', 300),
+('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'K', '08:00:00', '2025-09-30', 'IB204', 100),
+('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'K', '08:00:00', '2025-09-30', 'IB204', 100),
+('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'Sz', '08:00:00', '2025-09-30', 'IB204', 100),
+('ADAT102EA', 2, 'EDU100011', 'eloadas', 'H', '10:00:00', '2025-09-30', 'IB204', 300),
+('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'P', '08:00:00', '2025-09-30', 'IB204', 100),
+('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'K', '15:00:00', '2025-09-30', 'IB204', 100),
+('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'Sz', '09:00:00', '2025-09-30', 'IB204', 100),
+('BIO103EA', 2, 'EDU100012', 'eloadas', 'H', '12:00:00', '2025-09-30', 'IB204', 300),
+('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '08:00:00', '2025-09-30', 'IB204', 100),
+('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '09:00:00', '2025-09-30', 'IB204', 100),
+('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '15:00:00', '2025-09-30', 'IB204', 100),
+('KEM104EA', 2, 'EDU100013', 'eloadas', 'H', '14:00:00', '2025-09-30', 'IB204', 300),
+('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'P', '08:00:00', '2025-09-30', 'IB204', 100),
+('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'P', '10:00:00', '2025-09-30', 'IB204', 100),
+('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'Cs', '12:00:00', '2025-09-30', 'IB204', 100),
+('DIMA104EA', 2, 'EDU100010', 'eloadas', 'H', '16:00:00', '2025-09-30', 'IB204', 300),
+('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'H', '08:00:00', '2025-09-30', 'IB204', 100),
+('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'H', '10:00:00', '2025-09-30', 'IB204', 100),
+('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'K', '11:00:00', '2025-09-30', 'IB204', 100),
+-- Korábbi félévek meghirdetett tárgyai:
+('PROG101EA', 1, 'EDU100012', 'gyakorlat', 'Cs', '09:00:00', '2025-09-30', 'IB204', 100),
+('PROG101GY', 1, 'EDU100012', 'gyakorlat', 'Cs', '15:00:00', '2025-09-30', 'IB204', 100),
+('KEM104EA', 1, 'EDU100013', 'eloadas', 'H', '14:00:00', '2025-09-30', 'IB204', 300),
+('KEM104GY', 1, 'EDU100013', 'gyakorlat', 'P', '08:00:00', '2025-09-30', 'IB204', 100),
+('MOLBI105EA', 1, 'EDU100013', 'gyakorlat', 'P', '10:00:00', '2025-09-30', 'IB204', 100),
+('MOLBI105GY', 1, 'EDU100013', 'gyakorlat', 'Cs', '12:00:00', '2025-09-30', 'IB204', 100),
+('DIMA104EA', 1, 'EDU100010', 'eloadas', 'H', '16:00:00', '2025-09-30', 'IB204', 300),
+('DIMA104GY', 1, 'EDU100010', 'gyakorlat', 'H', '08:00:00', '2025-09-30', 'IB204', 100),
+('KALK105EA', 1, 'EDU100010', 'gyakorlat', 'H', '10:00:00', '2025-09-30', 'IB204', 100),
+('KALK105GY', 1, 'EDU100010', 'gyakorlat', 'K', '11:00:00', '2025-09-30', 'IB204', 100);
+
+-- assignments tábla töltés: X
+INSERT INTO assignments (offering_id, title, description, available_from, due_date, max_attempts) VALUES 
+(1, 'Vizsga 1', 'Vizsga az egész éves anyagból', '2025-04-01 08:00:00', '2025-06-20 23:59:00', 100),
+(2, 'ZH 1 – Alapok', 'Első zárthelyi dolgozat: változók, ciklusok, elágazások.', '2025-04-01 08:00:00', '2025-06-20 23:59:00', 100),
+(2, 'ZH 2 – Fejlesztés', 'Második zárthelyi dolgozat: összetett programok fejlesztése.', '2025-04-01 08:00:00', '2025-06-20 23:59:00', 100),
+(2, 'ZH 3 – Tömbök', 'Harmadik zárthelyi dolgozat: 1 és több dimenziós tömbök has7ználata.', '2025-04-01 08:00:00', '2025-06-20 23:59:00', 100),
+(5, 'Vizsga 1', 'Vizsga az egész éves anyagból.', '2025-04-01 08:00:00', '2025-06-20 23:59:00', 100),
+(6, 'ZH1', 'Egyszerű mysql utasítások.', '2025-04-01 08:00:00', '2025-06-20 23:59:00', 100),
+(17, 'Vizsga ', 'Vizsga az egész éves anyagból.', '2025-04-01 08:00:00', '2025-06-20 23:59:00', 100),
+(18, 'ZH 1', 'Számítási ismeretek alapja.', '2025-04-01 08:00:00', '2025-06-20 23:59:00', 100);
+
+-- assignments_questions tábla töltés: X
+INSERT INTO assignment_questions (assignment_id, question_text, question_type, score) VALUES
+(1, 'A for ciklust mindig előre ismert ismétlés-számra használjuk', 'true_false', 1),
+(1, 'Egy változó típusát futásidőben megváltoztathatjuk C nyelvben', 'true_false', 1),
+(1, 'Melyik utasítás felel meg egy feltételes elágazásnak C nyelvben?', 'multiple_choice', 5),
+(2, 'A while ciklus feltételét a ciklus végén értékeljük.', 'true_false', 1),
+(2, 'A do-while ciklus legalább egyszer lefut.', 'true_false', 1),
+(2, 'Melyik sor deklarál egész típusú változót C-ben?', 'multiple_choice', 1),
+(3, 'A break utasítás megszakítja a ciklus végrehajtását.', 'true_false', 1),
+(3, 'Az if szerkezet csak igaz feltétel esetén hajtódik végre.', 'true_false', 1),
+(3, 'Melyik állítás igaz az if-else szerkezetre?', 'multiple_choice', 1),
+(4, 'Egy tömb mérete futásidőben nem módosítható C nyelvben.', 'true_false', 1),
+(4, 'A char name[10]; utasítás egy karakterláncot deklarál.', 'true_false', 1),
+(4, 'Hogyan érjük el egy kétdimenziós tömb elemét?', 'multiple_choice', 1),
+(5, 'Az INNER JOIN visszaad minden rekordot az összes táblából.', 'true_false', 1),
+(5, 'A PRIMARY KEY automatikusan NOT NULL.', 'true_false', 1),
+(5, 'Melyik SQL parancs törli egy tábla összes sorát, de nem a szerkezetét?', 'multiple_choice', 1),
+(6, 'Az UPDATE parancs új rekordokat hoz létre. ', 'true_false', 1),
+(6, 'Az INSERT INTO parancs használható több sor beszúrására is.', 'true_false', 1),
+(6, 'Melyik SQL utasítással hozhatunk létre új táblát?', 'multiple_choice', 5),
+(7, 'Minden gráf irányított. ', 'true_false', 1),
+(7, 'A prímszámok csak 1-gyel és önmagukkal oszthatók.', 'true_false', 1),
+(7, 'Melyik állítás igaz egy teljes gráfra (complete graph)?', 'multiple_choice', 5),
+(8, 'Egy halmaz lehet végtelen sok elemet is tartalmazhat.', 'true_false', 1),
+(8, 'A logikai implikáció akkor hamis, ha az előtag igaz és az utótag hamis.', 'true_false', 1),
+(8, 'Melyik a De Morgan azonosság?', 'multiple_choice', 5);
+
+
+-- question_answers tábla töltés: X
+INSERT INTO question_answers (question_id, answer_text, is_correct) VALUES
+(1, 'Igaz', TRUE),
+(1, 'Hamis', FALSE),
+(2, 'Igaz', FALSE),
+(2, 'Hamis', TRUE),
+(3, 'A. switch', FALSE),
+(3, 'B. if-else', TRUE),
+(3, 'C. while', FALSE),
+(3, 'D. continue', FALSE),
+(4, 'Igaz', FALSE),
+(4, 'Hamis', TRUE),
+(5, 'Igaz', TRUE),
+(5, 'Hamis', FALSE),
+(6, 'A. int x = 0;', TRUE),
+(6, 'B. real x = 0;', FALSE),
+(6, 'C. integer x;', FALSE),
+(6, 'D. number x = 0;', FALSE),
+(7, 'Igaz', TRUE),
+(7, 'Hamis', FALSE),
+(8, 'Igaz', FALSE),
+(8, 'Hamis', TRUE),
+(9, 'A. Csak logikai kifejezésekkel működik.', TRUE),
+(9, 'B. Kizárólag ciklusokon belül használható.', FALSE),
+(9, 'C. Kötelező else ággal rendelkeznie.', FALSE),
+(9, 'D. Helyettesíthető goto utasítással.', FALSE),
+(10, 'Igaz', TRUE),
+(10, 'Hamis', FALSE),
+(11, 'Igaz', TRUE),
+(11, 'Hamis', FALSE),
+(12, 'A. matrix[i][j]', TRUE),
+(12, 'B. matrix(i,j)', FALSE),
+(12, 'C. matrix->i->j', FALSE),
+(12, 'D. matrix.i.j', FALSE),
+(13, 'Igaz', FALSE),
+(13, 'Hamis', TRUE),
+(14, 'Igaz', TRUE),
+(14, 'Hamis', FALSE),
+(15, 'A. DROP TABLE', FALSE),
+(15, 'B. TRUNCATE TABLE', TRUE),
+(15, 'C. DELETE *', FALSE),
+(15, 'D. CLEAR TABLE', FALSE),
+(16, 'Igaz', FALSE),
+(16, 'Hamis', TRUE),
+(17, 'Igaz', TRUE),
+(17, 'Hamis', FALSE),
+(18, 'A. INSERT TABLE', FALSE),
+(18, 'B. CREATE TABLE', TRUE),
+(18, 'C. NEW TABLE', FALSE),
+(18, 'D. BUILD TABLE', FALSE),
+(19, 'Igaz', FALSE),
+(19, 'Hamis', TRUE),
+(20, 'Igaz', TRUE),
+(20, 'Hamis', FALSE),
+(21, 'A. Minden csúcs pontosan egy másikhoz kapcsolódik.', FALSE),
+(21, 'B. Egy csúcs nem lehet hurkot tartalmazó.', FALSE),
+(21, 'C. Minden csúcs minden másikhoz kapcsolódik.', TRUE),
+(21, 'D. Nincsenek élek benne.', FALSE),
+(22, 'Igaz', TRUE),
+(22, 'Hamis', FALSE),
+(23, 'Igaz', TRUE),
+(23, 'Hamis', FALSE),
+(24, 'A. ¬(A ∨ B) = ¬A ∨ ¬B', FALSE),
+(24, 'B. ¬(A ∧ B) = ¬A ∨ ¬B ', TRUE),
+(24, 'C. A → B = ¬A ∨ B, TRUE)', FALSE),
+(24, 'D. A ∧ (B ∨ C) = (A ∧ B) ∨ C', FALSE);
+
+-- assignment_submissions tábla töltés:
+INSERT INTO assignment_submissions (assignment_id, users_eduportal_ID, submitted_at, score, graded_at) VALUES
+(1, 'H12345', '2024-10-05 19:30:00', 3, '2024-10-06 10:00:00');
+
+-- submission_answers tábla töltés:
+-- kérdés: igaz/hamis (id=1), válasz: 'Igaz' (id=1)
+-- kérdés: multiple_choice (id=2), válaszok: 'for' (id=3) és 'while' (id=5)
+INSERT INTO submission_answers (submission_id, question_id, selected_answer_id) VALUES
+(1, 1, 1), -- helyes
+(1, 2, 3), -- helyes (for)
+(1, 2, 5); -- helyes (while)
+
+-- enrollments tábla töltés:  X
+INSERT INTO enrollments (users_eduportal_ID, offering_id, enrolled_at, completed_at, status, grade) VALUES
+  -- Kiszel Dani felvette kurzusai (ahol van jegy az teljesítet):
+  ('EDU111111', 1, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
+  ('EDU111111', 2, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
+  ('EDU111111', 5, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
+  ('EDU111111', 6, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
+  ('EDU111111', 17, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
+  ('EDU111111', 18, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
+  -- Korábbi felvett kurzusok:
+  ('EDU111111', 21, '2024-09-28 10:00:00', NULL, 'enrolled', 'Elégtelen'),
+  ('EDU111111', 22, '2024-09-28 10:00:00', NULL, 'enrolled', 'Elégtelen'),
+  ('EDU111111', 29, '2024-09-28 10:00:00', '2025-01-18 10:00:00', 'enrolled', 'Elégséges'),
+  ('EDU111111', 30, '2024-09-28 10:00:00', '2024-12-10 14:00:00', 'enrolled', 'Kiválló'),
+  
+  -- Fekete Dóra felvett kurzusai (ahol van jegy az teljesítet):
+  ('EDU100009', 13, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
+  ('EDU100009', 14, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
+  ('EDU100009', 10, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
+  ('EDU100009', 11, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
+  -- Korábbi felvett kurzusok:
+  ('EDU100009', 23, '2024-09-18 10:00:00', NULL, 'enrolled', 'Elégtelen'),
+  ('EDU100009', 24, '2024-09-18 10:00:00', NULL, 'enrolled', 'Elégtelen'),
+  ('EDU100009', 25, '2024-09-18 10:00:00', '2025-01-05 12:00:00', 'enrolled', 'Közepes'),
+  ('EDU100009', 26, '2024-09-18 10:00:00', '2025-01-18 12:00:00', 'enrolled', 'Jó');  
+ 
+-- teacher_courses tábla töltés: X
+INSERT INTO teacher_courses (teacher_id, kurzus_kod) VALUES
+  -- Fehér Dóra taníthatja a programozás alapjai tárgyat
+  ('EDU100010', 'PROG101EA'),
+  ('EDU100010', 'PROG101GY'),
+  ('EDU100010', 'ADAT102EA'),
+  ('EDU100010', 'ADAT102GY'),
+  ('EDU100010', 'PROG101EA'),
+  ('EDU100010', 'PROG101GY'), 
+  -- Zöld Dóra taníthatja az adatbázisok 1 tárgyat
+  ('EDU100011', 'ADAT102EA'),
+  ('EDU100011', 'ADAT102GY'),
+  ('EDU100011', 'DIMA104EA'),
+  ('EDU100011', 'DIMA104GY'),
+  ('EDU100011', 'KALK105EA'),
+  ('EDU100011', 'KALK105GY'),
+  -- Kék Dóra taníthatja a bilógia 1 & kémia tárgyat 
+  ('EDU100012', 'BIO103EA'),
+  ('EDU100012', 'BIO103GY'),
+  ('EDU100012', 'KEM104EA'),
+  ('EDU100012', 'KEM104GY'),
+  -- Rózsa Dóra taníthatja a bilógia 1 & molekuláris biológia tárgyat 
+  ('EDU100013', 'BIO103EA'),
+  ('EDU100013', 'BIO103GY'),
+  ('EDU100013', 'MOLBI105EA'),
+  ('EDU100013', 'MOLBI105GY');
+
+-- programs tábla töltés: X
+INSERT INTO programs (szak_szam, name) VALUES
+  ('SZ001', 'Programtervező informatikus BSc'),
+  ('SZ002', 'Gazdaságinformatikus BSc'),
+  ('SZ003', 'Mérnökinformatikus BSc'),
+  ('SZ004', 'Közgazdaságtan BA'),
+  ('SZ005', 'Vegyészmérnök BSc'),
+  ('SZ006', 'Mérnökinformatikus MSc'),
+  ('SZ007', 'Biológia BSc');
+  
+-- program_courses tábla töltés: X
+INSERT INTO program_courses (szak_szam, kurzus_kod, tipus) VALUES
+  ('SZ001', 'PROG101EA', 'kotelezo'),
+  ('SZ001', 'PROG101GY', 'kotelezo'), 
+  ('SZ001', 'ADAT102EA', 'valaszthato'),
+  ('SZ001', 'ADAT102GY', 'valaszthato'),
+  ('SZ001', 'PROG103EA', 'kotelezo'),
+  ('SZ001', 'PROG103GY', 'kotelezo'),
+  ('SZ001', 'DIMA104EA', 'kotelezo'),   
+  ('SZ001', 'DIMA104GY', 'kotelezo'),    
+  ('SZ001', 'KALK105EA', 'valaszthato'),
+  ('SZ001', 'KALK105GY', 'valaszthato'),
+  ('SZ002', 'PROG101EA', 'kotelezo'),
+  ('SZ002', 'PROG101GY', 'kotelezo'), 
+  ('SZ002', 'ADAT102EA', 'valaszthato'),
+  ('SZ002', 'ADAT102GY', 'valaszthato'),
+  ('SZ002', 'PROG103EA', 'valaszthato'),
+  ('SZ002', 'PROG103GY', 'valaszthato'),
+  ('SZ002', 'DIMA104EA', 'kotelezo'),   
+  ('SZ002', 'DIMA104GY', 'kotelezo'),    
+  ('SZ002', 'KALK105EA', 'kotelezo'),
+  ('SZ002', 'KALK105GY', 'kotelezo'),
+  ('SZ006', 'PROG101EA', 'kotelezo'),
+  ('SZ006', 'PROG101GY', 'kotelezo'), 
+  ('SZ006', 'ADAT102EA', 'valaszthato'),
+  ('SZ006', 'ADAT102GY', 'valaszthato'),
+  ('SZ006', 'PROG103EA', 'kotelezo'),
+  ('SZ006', 'PROG103GY', 'kotelezo'),
+  ('SZ006', 'DIMA104EA', 'kotelezo'),   
+  ('SZ006', 'DIMA104GY', 'kotelezo'),    
+  ('SZ006', 'KALK105EA', 'valaszthato'),
+  ('SZ006', 'KALK105GY', 'valaszthato'),
+  ('SZ007', 'BIO103EA', 'kotelezo'),
+  ('SZ007', 'BIO103GY', 'kotelezo'),
+  ('SZ007', 'KEM104EA', 'valaszthato'),
+  ('SZ007', 'KEM104GY', 'valaszthato'),
+  ('SZ007', 'MOLBI105EA', 'kotelezo'),
+  ('SZ007', 'MOLBI105EA', 'kotelezo'),
+  ('SZ005', 'BIO103EA', 'kotelezo'),
+  ('SZ005', 'BIO103GY', 'kotelezo'),
+  ('SZ005', 'KEM104EA', 'kotelezo'),
+  ('SZ005', 'KEM104GY', 'kotelezo'),
+  ('SZ005', 'MOLBI105EA', 'valaszthato'),
+  ('SZ005', 'MOLBI105GY', 'valaszthato');
+
+-- notifications tábla töltés: X
+INSERT INTO notifications (message, course_code, course_offering_id, semester, noti_type, users_eduportal_ID) VALUES
+  ('Kérem, ne felejtsék el a beadandót péntekig leadni!', NULL, 5, '2024/25 2. félév', 'hirdetmény', 'EDU111111'),
+  ('A dolgozat időpontja változott, kérem vegyék figyelembe!', NULL, 10, '2024/25 2. félév', 'hirdetmény', 'EDU100009'),
+  ('Nekem még nincs csapattársam a projekthez.', NULL, 2, '2024/25 2. félév', 'forum', 'EDU111111'),
+  ('Melyik teremben lesz a vizsga?', NULL, 13, '2024/25 2. félév', 'forum', 'EDU100009'),
+  ('Kérdés: az első zh anyaga tartalmazza az SQL JOIN-okat?', NULL, 6, '2024/25 2. félév', 'forum', 'EDU111111');
+
+-- notification_reads tábla töltés: X
+INSERT INTO notification_reads (users_eduportal_ID, notification_id, read_at) VALUES
+  ('EDU111111', 1, NULL),
+  ('EDU111111', 3, NULL),
+  ('EDU111111', 5, NULL),
+  ('EDU100009', 2, NULL),
+  ('EDU100009', 4, NULL);
+
+-- student_financing tábla töltés:
+INSERT INTO student_financing (users_eduportal_ID, semester_id, amount_due, due_date) VALUES
+  ('EDU111111', 1, 100000, '2024-10-01'),
+  ('EDU111111', 1, 100000, '2024-11-01'),
+  ('EDU111111', 1, 100000, '2024-12-01'),
+  ('EDU111111', 2, 100000, '2025-03-01'),
+  ('EDU111111', 2, 100000, '2025-04-01'),
+  ('EDU111111', 2, 100000, '2025-05-01'),
+  ('EDU111111', 3, 100000, '2025-10-01'),
+  ('EDU111111', 3, 100000, '2025-11-01'),
+  ('EDU111111', 3, 100000, '2025-12-01'),
+  
+  ('EDU100009', 1, 0, ''),
+  ('EDU100009', 2, 0, ''),
+  ('EDU100009', 3, 0, '');
+
+-- payment_installments tábla töltés:
+INSERT INTO payment_installments (financing_id, amount_paid, paid_at) VALUES
+  (1, 100000, '2024-09-15'),
+  (2, 50000, '2024-09-30'),
+  (2, 50000, '2024-10-15'),
+  (3, 100000, '2024-11-15'),
+  (4, 100000, '2025-02-11'),
+  (5, 100000, '2025-03-10'),
+  (6, 20000, '2025-03-10'),
+  (6, 80000, '2025-04-15'),
+  (7, 30000, '2025-05-20');
+
+-- request_templates tábla töltés:
+INSERT INTO request_templates (title, description) VALUES
+  ('Passzív félév kérelme', 'Kérelem a félév passzív státuszba helyezéséhez.'),
+  ('Tantárgy törlés kérelem', 'Kérelem egy adott tantárgy törlésére a kurzuslistából.'),
+  ('Vizsgaidőpont módosítás', 'Kérelem a vizsgaidőpont módosítására különleges indok esetén.');
+  
+-- student_requests tábla töltés:
+INSERT INTO student_requests (users_eduportal_ID, template_id, status, reviewed_at, admin_comment) VALUES
+  ('EDU111111', 1, 'beküldve', NULL, NULL),
+  ('EDU111111', 2, 'elutasítva', '2025-04-28 10:00:00', 'Hiányos adatok.'),
+  ('EDU111111', 3, 'elfogadva', '2025-05-01 12:30:00', 'Elfogadva indokolt eset alapján.');
+
+-- request_template_fields tábla töltés:
+INSERT INTO request_template_fields (template_id, label, field_type, is_required) VALUES
+  (1, 'Indoklás', 'textarea', TRUE),
+  (1, 'Kezdő dátum', 'date', TRUE),
+  (2, 'Tantárgy neve', 'text', TRUE),
+  (2, 'Kurzus kód', 'text', TRUE),
+  (3, 'Vizsga eredeti időpontja', 'date', TRUE),
+  (3, 'Javasolt új időpont', 'date', FALSE),
+  (3, 'Indoklás', 'textarea', TRUE);
+
+-- student_request_field_values tábla töltés:
+INSERT INTO student_request_field_values (request_id, field_id, field_value, admin_suggestion) VALUES
+  (1, 1, 'Egészségügyi okok miatt szeretnék passzív félévet.', NULL),
+  (1, 2, '2025-09-01', NULL),
+  (2, 3, 'Bevezetés a menedzsmentbe', NULL),
+  (2, 4, 'C001', 'Kérlek adj meg pontos kurzuskódot.'),
+  (3, 5, '2025-06-10', NULL),
+  (3, 6, '2025-06-17', NULL),
+  (3, 7, 'Időpont ütközés másik tárggyal.', NULL);
