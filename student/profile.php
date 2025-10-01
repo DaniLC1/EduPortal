@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php'; // Adatbáziskapcsolat betöltése
+require_once __DIR__ . '/../connection.php'; // Adatbáziskapcsolat betöltése
 
 if (!isset($_SESSION['eduportal_id'])) {
     header("Location: index.php"); // vagy login.php
@@ -102,8 +102,8 @@ while ($row = $field_values_result->fetch_assoc()) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>EduPortál</title>
-        <link rel="stylesheet" href="CSS/site_style.css">
-        <link rel="stylesheet" href="CSS/profile.css">
+        <link rel="stylesheet" href="../CSS/site_style.css">
+        <link rel="stylesheet" href="../CSS/profile.css">
     </head>
     <body>
         <header>
@@ -136,7 +136,7 @@ while ($row = $field_values_result->fetch_assoc()) {
                     </button>
                     <div id="dropdownMenuR" class="dropdown-menu right">
                         <a id="active" href="#">Beállítások</a>
-                        <a href="./logout.php">Kijelentkezés</a>
+                        <a href="../logout.php">Kijelentkezés</a>
                     </div>
                 </div>
                 <!-- TÉMAVÁLTÓ GOMB -->
@@ -161,7 +161,7 @@ while ($row = $field_values_result->fetch_assoc()) {
 
                 <h3 class="section-title">Adatok</h3>
 
-                <form id="profile-form" class="profile-details" method="post" action="profile_post.php">
+                <form id="profile-form" class="profile-details" method="post" action="../profile_post.php">
                     <?php
                     // Feldolgozás megjelenítéshez
                     $label_map = [
@@ -269,6 +269,6 @@ while ($row = $field_values_result->fetch_assoc()) {
                 <?php endif; ?>
             </div>
         </main>
-        <script src="Scripts/scripts.js"></script>
+        <script src="../Scripts/scripts.js"></script>
     </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php'; // Adatbáziskapcsolat betöltése
+require_once __DIR__ . '/../connection.php'; // Adatbáziskapcsolat betöltése
 
 if (!isset($_SESSION['eduportal_id'])) {
     header("Location: index.php"); // vagy login.php
@@ -100,8 +100,8 @@ if (!empty($results)) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>EduPortál</title>
-        <link rel="stylesheet" href="CSS/site_style.css">
-        <link rel="stylesheet" href="CSS/finances.css">
+        <link rel="stylesheet" href="../CSS/site_style.css">
+        <link rel="stylesheet" href="../CSS/finances.css">
     </head>
     <body>
         <header>
@@ -134,7 +134,7 @@ if (!empty($results)) {
                     </button>
                     <div id="dropdownMenuR" class="dropdown-menu right">
                         <a href="profile.php">Beállítások</a>
-                        <a href="./logout.php">Kijelentkezés</a>
+                        <a href="../logout.php">Kijelentkezés</a>
                     </div>
                 </div>
                 <!-- TÉMAVÁLTÓ GOMB -->
@@ -209,7 +209,7 @@ if (!empty($results)) {
                 <div class="modal-content">
                     <span class="close" onclick="closeModal()">×</span>
                     <h2>Befizetés</h2>
-                    <form action="finances_post.php" method="post">
+                    <form action="../finances_post.php" method="post">
                         <input type="hidden" name="financing_id" id="modalFinancingId">
                         <label for="amount">Összeg (min. 1.000 Ft):</label>
                         <input type="number" name="amount" id="paymentAmount" min="1000" required>
@@ -218,7 +218,7 @@ if (!empty($results)) {
                 </div>
             </div>
         </main>
-        <script src="Scripts/scripts.js"></script>
+        <script src="../Scripts/scripts.js"></script>
     </body>
 </html>
 

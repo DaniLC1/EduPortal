@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php'; // Adatbáziskapcsolat betöltése
+require_once __DIR__ . '/../connection.php'; // Adatbáziskapcsolat betöltése
 
 if (!isset($_SESSION['eduportal_id'])) {
     header("Location: index.php"); // vagy login.php
@@ -188,8 +188,8 @@ foreach ($raw_courses as $row) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>EduPortál</title>
-        <link rel="stylesheet" href="CSS/site_style.css">
-        <link rel="stylesheet" href="CSS/course_offering.css">
+        <link rel="stylesheet" href="../CSS/site_style.css">
+        <link rel="stylesheet" href="../CSS/course_offering.css">
     </head>
     <body>
         <header>
@@ -222,7 +222,7 @@ foreach ($raw_courses as $row) {
                     </button>
                     <div id="dropdownMenuR" class="dropdown-menu right">
                         <a href="profile.php">Beállítások</a>
-                        <a href="./logout.php">Kijelentkezés</a>
+                        <a href="../logout.php">Kijelentkezés</a>
                     </div>
                 </div>
                 <!-- TÉMAVÁLTÓ GOMB -->
@@ -328,13 +328,13 @@ foreach ($raw_courses as $row) {
                                                 Jelentkezettek: <?= $offering['enrolled_count'] ?>
 
                                                 <?php if (!$offering['already_enrolled'] && !$course['already_completed']): ?>
-                                                    <form method="post" action="enrole_post.php" style="display:inline">
+                                                    <form method="post" action="../enrole_post.php" style="display:inline">
                                                         <input type="hidden" name="offering_id" value="<?= $offering['offering_id'] ?>">
                                                         <input type="hidden" name="action" value="enroll">
                                                         <button type="submit" class="send-btn">Jelentkezés</button>
                                                     </form>
                                                 <?php elseif ($offering['already_enrolled']): ?>
-                                                    <form method="post" action="enrole_post.php" style="display:inline">
+                                                    <form method="post" action="../enrole_post.php" style="display:inline">
                                                         <input type="hidden" name="offering_id" value="<?= $offering['offering_id'] ?>">
                                                         <input type="hidden" name="action" value="unenroll">
                                                         <button type="submit" class="cancel">Lejelentkezés</button>
@@ -350,7 +350,7 @@ foreach ($raw_courses as $row) {
                 <?php endforeach; ?>
             </section>
         </main>
-        <script src="Scripts/scripts.js"></script>
+        <script src="../Scripts/scripts.js"></script>
         <?php if (isset($_SESSION['message'])): ?>
             <script>
                 alert("<?= addslashes($_SESSION['message']) ?>");

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php';
+require_once __DIR__ . '/../connection.php';
 
 if (!isset($_SESSION['eduportal_id'])) {
     header("Location: index.php");
@@ -92,8 +92,8 @@ if ($question_ids) {
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($assignment['title']) ?> - Dolgozat</title>
-    <link rel="stylesheet" href="CSS/site_style.css">
-    <link rel="stylesheet" href="CSS/assignment.css">
+    <link rel="stylesheet" href="../CSS/site_style.css">
+    <link rel="stylesheet" href="../CSS/assignment.css">
 </head>
 <body>
 <header>
@@ -132,7 +132,7 @@ if ($question_ids) {
 
 
         <!-- Dolgozat kérdőív -->
-        <form method="POST" action="assignment_post.php">
+        <form method="POST" action="../assignment_post.php">
             <input type="hidden" name="assignment_id" value="<?= $assignment_id ?>">
 
             <?php foreach ($questions as $q): ?>
@@ -170,7 +170,7 @@ if ($question_ids) {
         </form>
     </section>
 </main>
-<script src="Scripts/scripts.js"></script>
+<script src="../Scripts/scripts.js"></script>
 </body>
 </html>
 

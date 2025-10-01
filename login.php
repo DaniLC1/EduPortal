@@ -22,10 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['eduportal_id'] = $user['eduportal_id'];
                 $_SESSION['role'] = $user['role'];
-                $_SESSION['name'] = $user['name']; // vagy 'fullname', attól függően, hogy hívják az oszlopot
+                $_SESSION['name'] = $user['name'];
                 $_SESSION['program'] = $user['course_code'];
 
-                header("Location: courses.php");
+                header("Location: student/courses.php");
                 exit;
             } else {
                 header("Location: index.php?error=invalid_credentials");

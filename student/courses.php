@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php'; // Adatbáziskapcsolat betöltése
+require_once __DIR__. '/../connection.php'; // Adatbáziskapcsolat betöltése
 
 if (!isset($_SESSION['eduportal_id'])) {
     header("Location: index.php"); // vagy login.php
@@ -170,8 +170,8 @@ while ($s = $submission_result->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduPortál</title>
-    <link rel="stylesheet" href="CSS/site_style.css">
-    <link rel="stylesheet" href="CSS/courses.css">
+    <link rel="stylesheet" href="../CSS/site_style.css">
+    <link rel="stylesheet" href="../CSS/courses.css">
 </head>
     <body>
         <header>
@@ -204,7 +204,7 @@ while ($s = $submission_result->fetch_assoc()) {
                     </button>
                     <div id="dropdownMenuR" class="dropdown-menu right">
                         <a href="profile.php">Beállítások</a>
-                        <a href="./logout.php">Kijelentkezés</a>
+                        <a href="../logout.php">Kijelentkezés</a>
                     </div>
                 </div>
                 <!-- TÉMAVÁLTÓ GOMB -->
@@ -220,6 +220,7 @@ while ($s = $submission_result->fetch_assoc()) {
             <aside class="sidebar">
                 <div class="card calendar">
                     <h3>📅 Naptár</h3>
+                    <?php // TODO: naptár  ?>
                     <p>[Naptár ide]</p>
                 </div>
 
@@ -254,7 +255,7 @@ while ($s = $submission_result->fetch_assoc()) {
                                 ?>
                                 <li>
                                     <?= $icon ?> <?= $text ?> <span style="color:gray; font-size: 0.9em;">(<?= $date ?>)</span>
-                                    <form method="post" action="noti_mark_read.php" style="display:inline;">
+                                    <form method="post" action="../noti_mark_read.php" style="display:inline;">
                                         <input type="hidden" name="notification_id" value="<?= $notif['notification_id'] ?>">
                                         <input type="hidden" name="eduportal_id" value="<?= $eduportal_id ?>">
                                         <button type="submit" class="delete-btn" title="Megjelölés olvasottként">❌</button>
@@ -346,7 +347,7 @@ while ($s = $submission_result->fetch_assoc()) {
                                                     Írta: <?= htmlspecialchars($f['user_name']) ?> &middot; <?= date('Y. m. d. H:i', strtotime($f['updated_at'])) ?>
                                                 </div>
                                                 <?php if ($f['users_eduportal_id'] === $eduportal_id): ?>
-                                                    <form method="POST" action="forum_post.php" class="edit-form hidden" onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
+                                                    <form method="POST" action="../forum_post.php" class="edit-form hidden" onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
                                                         <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($f['message']) ?></textarea>
                                                         <input type="hidden" name="edit_message_id" value="<?= $f['id'] ?>">
                                                         <button type="submit" name="submit_edit_message" class="send-btn">💾 Mentés</button>
@@ -365,7 +366,7 @@ while ($s = $submission_result->fetch_assoc()) {
                             <?php endif; ?>
                             <!-- Új hozzászólás -->
                             <div class="forum-reply">
-                                <form method="POST" action="forum_post.php">
+                                <form method="POST" action="../forum_post.php">
                                     <textarea name="new_message" placeholder="Írd be az üzeneted..." class="auto-resize-textarea" required></textarea>
                                     <input type="hidden" name="course_offering_id" value="<?= $row['offering_id'] ?>">
                                     <button type="submit" name="submit_new_message" class="send-btn">💬 Hozzászólás elküldése</button>
@@ -448,6 +449,6 @@ while ($s = $submission_result->fetch_assoc()) {
             </section>
         </main>
 
-        <script src="Scripts/scripts.js"></script>
+        <script src="../Scripts/scripts.js"></script>
     </body>
 </html>

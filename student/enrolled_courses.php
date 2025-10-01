@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php'; // Adatbáziskapcsolat betöltése
+require_once __DIR__ . '/../connection.php'; // Adatbáziskapcsolat betöltése
 
 if (!isset($_SESSION['eduportal_id'])) {
     header("Location: index.php"); // vagy login.php
@@ -75,8 +75,8 @@ $semester_result = $semester_stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduPortál</title>
-    <link rel="stylesheet" href="CSS/site_style.css">
-    <link rel="stylesheet" href="CSS/enrolled_courses.css">
+    <link rel="stylesheet" href="../CSS/site_style.css">
+    <link rel="stylesheet" href="../CSS/enrolled_courses.css">
 </head>
 <body>
     <header>
@@ -109,7 +109,7 @@ $semester_result = $semester_stmt->get_result();
                 </button>
                 <div id="dropdownMenuR" class="dropdown-menu right">
                     <a href="profile.php">Beállítások</a>
-                    <a href="./logout.php">Kijelentkezés</a>
+                    <a href="../logout.php">Kijelentkezés</a>
                 </div>
             </div>
             <!-- TÉMAVÁLTÓ GOMB -->
@@ -192,6 +192,6 @@ $semester_result = $semester_stmt->get_result();
             <?php endforeach; ?>
         </section>
     </main>
-    <script src="Scripts/scripts.js"></script>
+    <script src="../Scripts/scripts.js"></script>
 </body>
 </html>
