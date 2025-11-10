@@ -1,28 +1,28 @@
 -- Users tábla insert: X
 INSERT INTO users (name, eduportal_id, email, phone, password_hash, postal_code, city, address, birth_date, mothers_name, role, course_code) VALUES
-('Török Ágnes', 'EDU100000', 'henriettakiss@hegedus.info', '+36 86 455-6466', 'Teszt1234', '3913', 'Keresztharaszti', 'Bakonytapolcai utca 110.', '1977-05-30', ' Kovács Mária', 'hallgato', 'KURZUS891'),
-('Balogh Anna', 'EDU100001', 'molnartimea@kovacs.com.hu', '06-6/425 2624', 'Teszt123', '7257', 'Fürdőváros', 'Soproni út 20.', '1970-08-26', ' Szabó Erzsébet', 'hallgato', 'KURZUS168'),
-('Mészáros Mihály', 'EDU100002', 'mariannkollar@varga.org', '+36 1 453 5835', 'Teszt123', '9400', 'Sopron', 'Erzsébet utca 22.', '1998-11-19', 'Szilvia Sipos', 'hallgato', 'KURZUS245'),
-('Török Nikolett', 'EDU100003', 'roberttoth@szabo.com', '+36 76 385 7361', 'Teszt123', '2030', 'Érd', 'Kossuth tér 8.', '1996-02-03', 'Kocsis Judit', 'hallgato', 'KURZUS350'),
-('Tóth Enikő', 'EDU100004', 'liliko@farkas.org', '+36 1 621 3104', 'Teszt123', '1025', 'Budapest', 'Zöldfa utca 33.', '2000-06-12', 'Vass Krisztina', 'hallgato', 'KURZUS591'),
-('Nagy Roland', 'EDU100005', 'zsuzsannaboros@feher.info', '+36 20 529 0924', 'Teszt123', '7632', 'Pécs', 'Petőfi utca 9.', '1997-03-07', 'Major Ildikó', 'hallgato', 'KURZUS007'),
-('Balázs Zoltán', 'EDU100006', 'sandorbo@kiss.org', '+36 1 525 4783', 'Teszt123', '4026', 'Debrecen', 'Szabadság tér 6.', '1995-01-15', 'Németh Boglárka', 'hallgato', 'KURZUS999'),
-('Németh Krisztina', 'EDU100007', 'erzsebetpap@pinter.com', '+36 30 968 0213', 'Teszt123', '7100', 'Szekszárd', 'Arany János utca 44.', '1999-08-21', 'Mónika Tóth', 'hallgato', 'KURZUS303'),
-('Kovács Gábor', 'EDU100008', 'viktoriahorvath@fekete.com', '+36 70 781 5682', 'Teszt123', '8600', 'Siófok', 'Dózsa György út 7.', '1996-09-10', 'Ilona Balla', 'hallgato', 'KURZUS444'),
+('Török Ágnes', 'EDU100000', 'henriettakiss@hegedus.info', '+36 86 455-6466', 'Teszt1234', '3913', 'Keresztharaszti', 'Bakonytapolcai utca 110.', '1977-05-30', ' Kovács Mária', 'hallgato', 'SZ001'),
+('Balogh Anna', 'EDU100001', 'molnartimea@kovacs.com.hu', '06-6/425 2624', 'Teszt123', '7257', 'Fürdőváros', 'Soproni út 20.', '1970-08-26', ' Szabó Erzsébet', 'hallgato', 'SZ004'),
+('Mészáros Mihály', 'EDU100002', 'mariannkollar@varga.org', '+36 1 453 5835', 'Teszt123', '9400', 'Sopron', 'Erzsébet utca 22.', '1998-11-19', 'Szilvia Sipos', 'hallgato', 'SZ004'),
+('Török Nikolett', 'EDU100003', 'roberttoth@szabo.com', '+36 76 385 7361', 'Teszt123', '2030', 'Érd', 'Kossuth tér 8.', '1996-02-03', 'Kocsis Judit', 'hallgato', 'SZ003'),
+('Tóth Enikő', 'EDU100004', 'liliko@farkas.org', '+36 1 621 3104', 'Teszt123', '1025', 'Budapest', 'Zöldfa utca 33.', '2000-06-12', 'Vass Krisztina', 'hallgato', 'SZ003'),
+('Nagy Roland', 'EDU100005', 'zsuzsannaboros@feher.info', '+36 20 529 0924', 'Teszt123', '7632', 'Pécs', 'Petőfi utca 9.', '1997-03-07', 'Major Ildikó', 'hallgato', 'SZ002'),
+('Balázs Zoltán', 'EDU100006', 'sandorbo@kiss.org', '+36 1 525 4783', 'Teszt123', '4026', 'Debrecen', 'Szabadság tér 6.', '1995-01-15', 'Németh Boglárka', 'hallgato', 'SZ002'),
+('Németh Krisztina', 'EDU100007', 'erzsebetpap@pinter.com', '+36 30 968 0213', 'Teszt123', '7100', 'Szekszárd', 'Arany János utca 44.', '1999-08-21', 'Mónika Tóth', 'hallgato', 'SZ007'),
+('Kovács Gábor', 'EDU100008', 'viktoriahorvath@fekete.com', '+36 70 781 5682', 'Teszt123', '8600', 'Siófok', 'Dózsa György út 7.', '1996-09-10', 'Ilona Balla', 'hallgato', 'SZ001'),
 ('Fekete Dóra', 'EDU100009', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18.', '1998-12-05', 'Katalin Balogh', 'hallgato', 'SZ007'),
-('Kiszel Dániel', 'EDU111111', 'krisztianvarga@szabo.org', '+36 20 283 7838', 'Teszt123', '6763', 'Szatymaz', 'IV. Körzet Tanya 127/c', '1998-12-05', 'Katalin Balogh', 'hallgato', 'SZ001'),
+('Kiszel Dániel', 'EDU111111', 'kiszel1dani@gmail.com', '+36 20 283 7838', 'Teszt123', '6763', 'Szatymaz', 'IV. Körzet Tanya 127/c', '2001-09-30', 'Zsadány Ilona', 'hallgato', 'SZ001'),
 
-('Fehér Dóra', 'EDU100010', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Balogh Katalin', 'tanar', ''),
-('Zöld Dóra', 'EDU100011', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
-('Kék Dóra', 'EDU100012', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
-('Rózsa Dóra', 'EDU100013', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
-('Narancs Dóra', 'EDU100014', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Fehér Dóra', 'EDU100010', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Balogh Katalin', 'tanar', ''),
+('Zöld Dóra', 'EDU100011', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Kék Dóra', 'EDU100012', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Rózsa Dóra', 'EDU100013', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Narancs Dóra', 'EDU100014', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
 
-('Ibolya Dóra', 'EDU100015', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
-('Pál Dóra', 'EDU100016', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
-('Lila Dóra', 'EDU100017', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
-('Keresztes Dóra', 'EDU100018', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
-('Kiss Dóra', 'EDU100019', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', 'H-9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', '');
+('Ibolya Dóra', 'EDU100015', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Pál Dóra', 'EDU100016', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Lila Dóra', 'EDU100017', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Keresztes Dóra', 'EDU100018', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Kiss Dóra', 'EDU100019', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', '');
 
 -- courses tábla töltés: X
 INSERT INTO courses (kurzus_kod, name, credit, leiras, tematika) VALUES 
@@ -196,16 +196,17 @@ INSERT INTO question_answers (question_id, answer_text, is_correct) VALUES
 (24, 'D. A ∧ (B ∨ C) = (A ∧ B) ∨ C', FALSE);
 
 -- assignment_submissions tábla töltés:
+/*
 INSERT INTO assignment_submissions (assignment_id, users_eduportal_ID, submitted_at, score, graded_at) VALUES
 (1, 'H12345', '2024-10-05 19:30:00', 3, '2024-10-06 10:00:00');
-
+*/
 -- submission_answers tábla töltés:
--- kérdés: igaz/hamis (id=1), válasz: 'Igaz' (id=1)
--- kérdés: multiple_choice (id=2), válaszok: 'for' (id=3) és 'while' (id=5)
+/*
 INSERT INTO submission_answers (submission_id, question_id, selected_answer_id) VALUES
 (1, 1, 1), -- helyes
 (1, 2, 3), -- helyes (for)
 (1, 2, 5); -- helyes (while)
+*/
 
 -- enrollments tábla töltés:  X
 INSERT INTO enrollments (users_eduportal_ID, offering_id, enrolled_at, completed_at, status, grade) VALUES
@@ -217,10 +218,10 @@ INSERT INTO enrollments (users_eduportal_ID, offering_id, enrolled_at, completed
   ('EDU111111', 17, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
   ('EDU111111', 18, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
   -- Korábbi felvett kurzusok:
-  ('EDU111111', 21, '2024-09-28 10:00:00', NULL, 'enrolled', 'Elégtelen'),
-  ('EDU111111', 22, '2024-09-28 10:00:00', NULL, 'enrolled', 'Elégtelen'),
-  ('EDU111111', 29, '2024-09-28 10:00:00', '2025-01-18 10:00:00', 'enrolled', 'Elégséges'),
-  ('EDU111111', 30, '2024-09-28 10:00:00', '2024-12-10 14:00:00', 'enrolled', 'Kiválló'),
+  ('EDU111111', 21, '2024-09-28 10:00:00', NULL, 'failed', 'Elégtelen'),
+  ('EDU111111', 22, '2024-09-28 10:00:00', NULL, 'failed', 'Elégtelen'),
+  ('EDU111111', 29, '2024-09-28 10:00:00', '2025-01-18 10:00:00', 'completed', 'Elégséges'),
+  ('EDU111111', 30, '2024-09-28 10:00:00', '2024-12-10 14:00:00', 'completed', 'Kiválló'),
   
   -- Fekete Dóra felvett kurzusai (ahol van jegy az teljesítet):
   ('EDU100009', 13, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
@@ -228,10 +229,10 @@ INSERT INTO enrollments (users_eduportal_ID, offering_id, enrolled_at, completed
   ('EDU100009', 10, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
   ('EDU100009', 11, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
   -- Korábbi felvett kurzusok:
-  ('EDU100009', 23, '2024-09-18 10:00:00', NULL, 'enrolled', 'Elégtelen'),
-  ('EDU100009', 24, '2024-09-18 10:00:00', NULL, 'enrolled', 'Elégtelen'),
-  ('EDU100009', 25, '2024-09-18 10:00:00', '2025-01-05 12:00:00', 'enrolled', 'Közepes'),
-  ('EDU100009', 26, '2024-09-18 10:00:00', '2025-01-18 12:00:00', 'enrolled', 'Jó');  
+  ('EDU100009', 23, '2024-09-18 10:00:00', NULL, 'failed', 'Elégtelen'),
+  ('EDU100009', 24, '2024-09-18 10:00:00', NULL, 'failed', 'Elégtelen'),
+  ('EDU100009', 25, '2024-09-18 10:00:00', '2025-01-05 12:00:00', 'completed', 'Közepes'),
+  ('EDU100009', 26, '2024-09-18 10:00:00', '2025-01-18 12:00:00', 'completed', 'Jó');  
  
 -- teacher_courses tábla töltés: X
 INSERT INTO teacher_courses (teacher_id, kurzus_kod) VALUES
@@ -259,16 +260,20 @@ INSERT INTO teacher_courses (teacher_id, kurzus_kod) VALUES
   ('EDU100013', 'BIO103GY'),
   ('EDU100013', 'MOLBI105EA'),
   ('EDU100013', 'MOLBI105GY');
+  
+  facultative_credit INT,
+	freely_selectable_credit INT,
+	cost DECIMAL(10,2),
 
 -- programs tábla töltés: X
-INSERT INTO programs (szak_szam, name) VALUES
-  ('SZ001', 'Programtervező informatikus BSc'),
-  ('SZ002', 'Gazdaságinformatikus BSc'),
-  ('SZ003', 'Mérnökinformatikus BSc'),
-  ('SZ004', 'Közgazdaságtan BA'),
-  ('SZ005', 'Vegyészmérnök BSc'),
-  ('SZ006', 'Mérnökinformatikus MSc'),
-  ('SZ007', 'Biológia BSc');
+INSERT INTO programs (szak_szam, name, facultative_credit, freely_selectable_credit, cost) VALUES
+  ('SZ001', 'Programtervező informatikus BSc', 20, 5, 300000.00),
+  ('SZ002', 'Gazdaságinformatikus BSc', 20, 5, 300000.00),
+  ('SZ003', 'Mérnökinformatikus BSc', 20, 5, 400000.00),
+  ('SZ004', 'Közgazdaságtan BA', 20, 5, 300000.00),
+  ('SZ005', 'Vegyészmérnök BSc', 20, 5, 300000.00),
+  ('SZ006', 'Mérnökinformatikus MSc', 20, 5, 300000.00),
+  ('SZ007', 'Biológia BSc', 10, 10, 400000.00);
   
 -- program_courses tábla töltés: X
 INSERT INTO program_courses (szak_szam, kurzus_kod, tipus) VALUES
