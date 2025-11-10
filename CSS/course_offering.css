@@ -119,6 +119,10 @@
     cursor: pointer;
 }
 
+.filters button:hover{
+    background-color: var(--primary-hover);
+}
+
 body[data-theme="dark"] .filters input,
 body[data-theme="dark"] .filters select {
     background: var(--dropdown-bg-dark);
@@ -126,11 +130,110 @@ body[data-theme="dark"] .filters select {
     border-color: #444;
 }
 
-body[data-theme="dark"] button {
-    background-color: var(--secondary-color);
-    color: var(--text-light);
+/********************************
+Csak a teacher/course_offering.php-ban van használva
+*********************************/
+
+.create-offering {
+     padding: 0.3rem;
+     display: flex;
+     gap: 0.1rem;
+     align-items: center;
+     flex-wrap: wrap;
+     background-color: transparent;
+     border: none;
+     justify-content: center;
+ }
+.create-offering input,
+.create-offering textarea,
+.create-offering select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    background-color: var(--dropdown-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
 }
 
-body[data-theme="dark"] button:hover {
-    background-color: var(--secondary-hover);
+.create-offering input:focus,
+.create-offering textarea:focus,
+.create-offering select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.create-offering button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-offering button:hover{
+    background-color: var(--primary-hover);
+}
+
+body[data-theme="dark"] .create-offering input,
+body[data-theme="dark"] .create-offering textarea,
+body[data-theme="dark"] .create-offering select {
+    background: var(--dropdown-bg-dark);
+    color: var(--text-light);
+    border-color: #444;
+}
+
+.offering-details {
+    padding: 0.3rem;
+    display: flex;
+    gap: 0.1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: transparent;
+    border: none;
+    justify-content: center;
+}
+.offering-details input,
+.offering-details textarea,
+.offering-details select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    background-color: var(--dropdown-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.offering-details input:focus,
+.offering-details textarea:focus,
+.offering-details select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.offering-details button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.offering-details button:hover{
+    background-color: var(--primary-hover);
+}
+
+body[data-theme="dark"] .offering-details input,
+body[data-theme="dark"] .offering-details textarea,
+body[data-theme="dark"] .offering-details select {
+    background: var(--dropdown-bg-dark);
+    color: var(--text-light);
+    border-color: #444;
 }

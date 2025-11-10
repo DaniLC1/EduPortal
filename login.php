@@ -18,15 +18,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
 
-            if ($password === $user['password_hash']) { // jelszó hash nélkül
+            // 🔐 Jelszó-ellenőrzés (hash nélkül, ahogy most is van)
+            if ($password === $user['password_hash']) {
+
+                // ✅ Session beállítása
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['eduportal_id'] = $user['eduportal_id'];
                 $_SESSION['role'] = $user['role'];
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['program'] = $user['course_code'];
 
-                header("Location: student/courses.php");
+                // 🎯 Role alapján átirányítás
+                switch ($user['role']) {
+                    case 'hallgato':
+                        header("Location: student/courses.php");
+                        break;
+                    case 'tanar':
+                        header("Location: teacher/courses.php");
+                        break;
+                    case 'admin':
+                        header("Location: admin/dashboard.php");
+                        break;
+                    default:
+                        header("Location: index.php?error=invalid_role");
+                        break;
+                }
                 exit;
+
             } else {
                 header("Location: index.php?error=invalid_credentials");
                 exit;

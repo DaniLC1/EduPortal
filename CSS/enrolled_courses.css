@@ -116,3 +116,22 @@ body[data-theme="dark"] .filters select {
     color: #fff;
     border-color: #444;
 }
+
+/*********************************************
+assignment_result Megnyit gomb:
+**********************************************/
+.fill-btn{
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    color: white;
+    background-color: var(--primary-color);
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.fill-btn:hover{
+    background-color: var(--primary-hover);
+}

@@ -45,7 +45,7 @@ button[type="submit"] {
     background-color: var(--primary-color);
     border: none;
     padding: 12px 24px;
-    color: var(--text-dark);
+    color: var(--text-light);
     font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
@@ -58,18 +58,6 @@ button[type="submit"]:hover {
     background-color: var(--primary-hover);
 }
 
-.error {
-    color: #e74c3c;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.success {
-    color: #27ae60;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
 footer {
     text-align: center;
     margin-top: 40px;
@@ -79,4 +67,206 @@ footer {
 
 body[data-theme="dark"] h1{
     color: var(--text-light);
+}
+
+/* === TANÁRI DOLGOZATKEZELŐ STÍLUS (courses.css mintára) === */
+
+/* Kártyák (mint a kurzusoknál) */
+.assignment-card {
+    width: 95%;
+    margin: 2rem auto;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Űrlapelemek */
+.form-row {
+    margin-bottom: 1rem;
+}
+
+.form-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.form-row input,
+.form-row textarea,
+.form-row select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 0.95em;
+}
+
+/* Kérdéskártyák */
+.question-card {
+    background-color: var(--dropdown-bg);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.question-card h3 {
+    margin-top: 0;
+}
+
+
+#question-card-question {
+    font-family: Calibri;
+    display: block;
+    width: calc(100% - 5rem);
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+    overflow: hidden;
+    white-space: normal;
+}
+
+.remove-question {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Kérdés metaadat (típus + pontszám) */
+.question-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.question-meta label {
+    font-weight: 500;
+}
+
+.question-meta input[type="number"] {
+    width: 80px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.question-meta select{
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* Válaszok */
+.answers {
+    margin-top: 0.75rem;
+    padding-left: 0.5rem;
+}
+
+.answer-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+
+}
+
+.answer-card input[type="text"] {
+    flex: 1;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.remove-answer{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Gombok elrendezése */
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* Gombstílusok egységesen */
+.add-btn,
+.send-btn,
+.cancel-btn,
+.add-answer{
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+/* Színek */
+.add-btn, .add-answer {
+    background-color: var(--primary-color);
+}
+
+.add-btn:hover, .add-answer:hover {
+    background-color: var(--primary-hover);
+}
+
+.cancel-btn {
+    background-color: #dc3545;
+}
+
+.cancel-btn:hover {
+    background-color: #c82333;
+}
+
+/* Szövegek és címek */
+h2 {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.4rem;
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+body[data-theme="dark"] .question-card{
+    background: var(--dropdown-bg-dark);
+    color: var(--text-light);
+    border-color: #444;
+}
+
+/*********************************************
+view_submission Vissza gomb:
+**********************************************/
+.close-btn{
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em;
+    color: white;
+    background-color: var(--primary-color);
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.close-btn:hover{
+    background-color: var(--primary-hover);
 }

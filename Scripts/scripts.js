@@ -27,24 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Nyelv váltás (csak ha van nyelvváltó gomb)
-    const languageBtns = document.querySelectorAll('.language-btn');
-    const welcomeMessage = document.getElementById('welcome-message');
-
-    if (languageBtns.length > 0 && welcomeMessage) {
-        languageBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.id;
-                const messages = {
-                    hu: 'Üdvözöljük az EduPortal-on!',
-                    en: 'Welcome to EduPortal!',
-                    de: 'Willkommen im EduPortal!'
-                };
-                welcomeMessage.textContent = messages[lang] || messages.hu;
-            });
-        });
-    }
-
     // Slider
     const imgElement = document.getElementById("slider-image");
     if (imgElement) {
@@ -64,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+//Oldalsó menü lenyitása
 document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = [
         { toggleId: 'dropdownToggleL', menuId: 'dropdownMenuL' },
@@ -221,23 +204,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const semesterFilter = document.getElementById('semesterFilter');
     const typeFilter = document.getElementById('typeFilter');
+    const courseFilter = document.getElementById('courseFilter');
     const cards = document.querySelectorAll('.course-card');
 
     function filterCourses() {
-        const searchText = searchInput.value.toLowerCase().trim();
-        const selectedSemester = semesterFilter.value;
-        const selectedType = typeFilter.value;
+        const searchText = searchInput?.value.toLowerCase().trim() || '';
+        const selectedSemester = semesterFilter?.value || 'all';
+        const selectedType = typeFilter?.value || 'all';
+        const selectedCourse = courseFilter?.value || 'all';
 
         cards.forEach(card => {
-            const name = card.dataset.name;
-            const semester = card.dataset.semester;
-            const type = card.dataset.type;
+            const name = card.dataset.name || '';
+            const semester = card.dataset.semester || '';
+            const type = card.dataset.type || '';
+            const offering = card.dataset.offering || '';
 
             const matchesName = name.includes(searchText);
             const matchesSemester = (selectedSemester === 'all' || semester === selectedSemester);
             const matchesType = (selectedType === 'all' || type === selectedType);
+            const matchesCourse = (selectedCourse === 'all' || offering === selectedCourse);
 
-            if (matchesName && matchesSemester && matchesType) {
+            if (matchesName && matchesSemester && matchesType && matchesCourse) {
                 card.style.display = '';
             } else {
                 card.style.display = 'none';
@@ -245,10 +232,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Eseményfigyelők
-    searchInput.addEventListener('input', filterCourses);
-    semesterFilter.addEventListener('change', filterCourses);
-    typeFilter.addEventListener('change', filterCourses);
+    // 🔹 Eseményfigyelők – csak ha az adott elem létezik
+    if (searchInput) searchInput.addEventListener('input', filterCourses);
+    if (semesterFilter) semesterFilter.addEventListener('change', filterCourses);
+    if (typeFilter) typeFilter.addEventListener('change', filterCourses);
+    if (courseFilter) courseFilter.addEventListener('change', filterCourses);
 });
 
 //popup működés:
@@ -335,4 +323,97 @@ document.addEventListener('DOMContentLoaded', function () {
             this.textContent = details.style.display === 'block' ? 'Elrejt' : 'Részletek';
         });
     });
+});
+
+// --- Dolgozat kérdéskezelő (assignment.js rész) ---
+document.addEventListener("DOMContentLoaded", () => {
+    const questionContainer = document.getElementById("question-container");
+    const addQuestionBtn = document.querySelector(".add-btn");
+    const cancelBtn = document.querySelector(".cancel-btn");
+
+    // 🔹 Új kérdés hozzáadása
+    if (addQuestionBtn && questionContainer) {
+        addQuestionBtn.addEventListener("click", () => {
+            const qid = "new_" + Date.now();
+            const newQuestion = document.createElement("div");
+            newQuestion.classList.add("question-card");
+            newQuestion.dataset.qid = qid;
+
+            newQuestion.innerHTML = `
+            <button type="button" class="remove-question">❌</button>
+            <textarea id="question-card-question" name="questions[${qid}][text]" placeholder="Kérdés szövege..." rows="1"></textarea>
+
+            <div class="question-meta">
+                <label>Típus:</label>
+                <select name="questions[${qid}][type]">
+                    <option value="multiple_choice">Feleletválasztós</option>
+                    <option value="true_false">Igaz / Hamis</option>
+                </select>
+
+                <label>Pontszám:</label>
+                <input type="number" name="questions[${qid}][score]" value="1" min="1" step="1">
+            </div>
+
+            <div class="answers">
+                <label>Válaszok:</label>
+                <div class="answer-card">
+                    <input type="text" name="questions[${qid}][answers][ans_1][text]" placeholder="Válasz...">
+                    <label><input type="checkbox" name="questions[${qid}][answers][ans_1][is_correct]"> Helyes</label>
+                    <button type="button" class="remove-answer">❌</button>
+                </div>
+                <button type="button" class="add-answer">➕ Válasz hozzáadása</button>
+            </div>
+        `;
+
+            questionContainer.appendChild(newQuestion);
+        });
+    }
+
+    // 🔹 Eseménydelegálás: törlés, válasz hozzáadás, válasz törlés
+    document.addEventListener("click", (e) => {
+        // ❌ Kérdés törlése
+        if (e.target.classList.contains("remove-question")) {
+            e.target.closest(".question-card").remove();
+        }
+
+        // ➕ Új válasz hozzáadása
+        if (e.target.classList.contains("add-answer")) {
+            const questionCard = e.target.closest(".question-card");
+
+            // 🔹 QID lekérése a meglévő input/textarea name-jéből
+            let qid;
+            const firstInput = questionCard.querySelector('textarea[name], input[name], select[name]');
+            if (firstInput && firstInput.name) {
+                const match = firstInput.name.match(/^questions\[([^\]]+)\]\[/);
+                qid = match ? match[1] : "new_" + Date.now();
+            } else {
+                qid = "new_" + Date.now();
+            }
+
+            const uniqueId = "ans_" + Date.now(); // válasz egyedi azonosítója
+
+            const newAnswer = document.createElement("div");
+            newAnswer.classList.add("answer-card");
+            newAnswer.innerHTML = `
+                <input type="text" name="questions[${qid}][answers][${uniqueId}][text]" placeholder="Válasz...">
+                <label><input type="checkbox" name="questions[${qid}][answers][${uniqueId}][is_correct]"> Helyes</label>
+                <button type="button" class="remove-answer">❌</button>
+            `;
+            e.target.before(newAnswer);
+        }
+
+        // ❌ Válasz törlése
+        if (e.target.classList.contains("remove-answer")) {
+            e.target.closest(".answer-card").remove();
+        }
+    });
+
+    // 🚫 Mégse gomb
+    if (cancelBtn) {
+        cancelBtn.addEventListener("click", () => {
+            if (confirm("Biztosan kilépsz mentés nélkül? Minden módosítás elvész.")) {
+                window.location.href = "../teacher/courses.php";
+            }
+        });
+    }
 });

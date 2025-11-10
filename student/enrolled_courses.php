@@ -30,7 +30,7 @@ if ($user_result->num_rows === 1) {
     $user_course = "N/A";
 }
 
-$enrolled_courses_sql = <<<SQL
+$enrolled_courses_sql = "
 SELECT 
     c.kurzus_kod,
     c.name AS subject_name,
@@ -48,8 +48,7 @@ LEFT JOIN programs p ON p.szak_szam = u.course_code
 LEFT JOIN program_courses pc 
     ON pc.kurzus_kod = c.kurzus_kod AND pc.szak_szam = p.szak_szam
 WHERE e.users_eduportal_id = ?
-ORDER BY s.label DESC, c.name ASC
-SQL;
+ORDER BY s.label DESC, c.name ASC";
 
 $enrolled_stmt = $conn->prepare($enrolled_courses_sql);
 $enrolled_stmt->bind_param("s", $eduportal_id);
@@ -57,12 +56,14 @@ $enrolled_stmt->execute();
 $enrolled_result = $enrolled_stmt->get_result();
 $enrolled_subjects = $enrolled_result->fetch_all(MYSQLI_ASSOC);
 
-$semester_sql = "SELECT DISTINCT s.label 
-                             FROM enrollments e
-                             JOIN course_offerings co ON co.id = e.offering_id
-                             JOIN semesters s ON s.id = co.semester_id
-                             WHERE e.users_eduportal_id = ?
-                             ORDER BY s.label DESC";
+$semester_sql = "
+SELECT DISTINCT s.label 
+FROM enrollments e
+JOIN course_offerings co ON co.id = e.offering_id
+JOIN semesters s ON s.id = co.semester_id
+WHERE e.users_eduportal_id = ?
+ORDER BY s.label DESC";
+
 $semester_stmt = $conn->prepare($semester_sql);
 $semester_stmt->bind_param("s", $eduportal_id);
 $semester_stmt->execute();

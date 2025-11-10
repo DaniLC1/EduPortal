@@ -3,7 +3,6 @@ session_start();
 require_once 'connection.php'; // adatbázis kapcsolat
 
 if (!isset($_SESSION['eduportal_id'])) {
-    // Nincs bejelentkezve, vissza a login oldalra
     header('Location: index.php');
     exit;
 }
@@ -13,13 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $eduportal_id = $_SESSION['eduportal_id'];
+$role = $_SESSION['role'] ?? 'diak'; // alapértelmezett szerep
 $template_id = $_POST['template_id'] ?? null;
 
 if (!$template_id) {
     die('Nem lett kiválasztva kérelemsablon.');
 }
 
-// A POST adatból kiszedjük a kitöltött mezőket (melyek neve field_<id>)
+// 🟢 Kitöltött mezők összegyűjtése
 $field_values = [];
 foreach ($_POST as $key => $value) {
     if (strpos($key, 'field_') === 0) {
@@ -34,33 +34,42 @@ if (empty($field_values)) {
 
 global $conn;
 
-// Beszúrjuk az új kérelmet (student_requests)
-$stmt = $conn->prepare("INSERT INTO student_requests (users_eduportal_ID, template_id, status) VALUES (?, ?, 'beküldve')");
-$stmt->bind_param("si", $eduportal_id, $template_id);
+try {
+    $conn->begin_transaction();
 
-if (!$stmt->execute()) {
-    die('Hiba a kérelem mentése során: ' . $stmt->error);
-}
+    // 🔹 Kérelem mentése
+    $stmt = $conn->prepare("
+        INSERT INTO student_requests (users_eduportal_ID, template_id, status)
+        VALUES (?, ?, 'beküldve')
+    ");
+    $stmt->bind_param("si", $eduportal_id, $template_id);
+    $stmt->execute();
+    $request_id = $stmt->insert_id;
+    $stmt->close();
 
-$request_id = $stmt->insert_id;
-$stmt->close();
+    // 🔹 Mezőértékek mentése
+    $stmt2 = $conn->prepare("
+        INSERT INTO student_request_field_values (request_id, field_id, field_value)
+        VALUES (?, ?, ?)
+    ");
 
-// Most beillesztjük a mezőértékeket a student_request_field_values-be
-$stmt2 = $conn->prepare("INSERT INTO student_request_field_values (request_id, field_id, field_value) VALUES (?, ?, ?)");
-
-foreach ($field_values as $field_id => $field_value) {
-    $stmt2->bind_param("iis", $request_id, $field_id, $field_value);
-    if (!$stmt2->execute()) {
-        die('Hiba a mező érték mentése során: ' . $stmt2->error);
+    foreach ($field_values as $field_id => $field_value) {
+        $stmt2->bind_param("iis", $request_id, $field_id, $field_value);
+        $stmt2->execute();
     }
+
+    $stmt2->close();
+    $conn->commit();
+
+} catch (Exception $e) {
+    $conn->rollback();
+    die('Hiba történt: ' . $e->getMessage());
 }
 
-$stmt2->close();
-
-// Sikeres mentés, visszairányítás vagy üzenet megjelenítése
-?>
-
-<script>
-    alert('A kérelem sikeresen beadva!');
-    window.location.href = 'request.php';
-</script>
+// ✅ Sikeres mentés után visszairányítás a szerepnek megfelelő oldalra
+if ($role === 'tanar') {
+    header('Location: teacher/request.php?success=1');
+} else {
+    header('Location: student/request.php?success=1');
+}
+exit;

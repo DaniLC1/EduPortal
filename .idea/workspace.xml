@@ -4,18 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Elkészült Diák oldal 2.0 javítás szépítés és bg keresés">
+    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Diákok rész újra mappázása/ Redirect stuents pages">
+      <change afterPath="$PROJECT_DIR$/complete_post.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/assignment.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/assignment_result.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/course_offering.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/courses.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/profile.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/request.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/student_complete.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teacher/view_submission.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assignment.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/assignment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/course_offering.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/courses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enrolled_courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/enrolled_courses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finances.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/finances.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/assignment.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/assignment.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/course_offering.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/course_offering.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/courses.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/courses.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/enrolled_courses.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/enrolled_courses.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assignment_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/assignment_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enrole_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/enrole_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finances_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/finances_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/forum_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/noti_mark_read.php" beforeDir="false" afterPath="$PROJECT_DIR$/noti_mark_read.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/studies.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/studies.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/profile_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/request_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/request_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/assignment.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/assignment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/enrolled_courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/enrolled_courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/request.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +47,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="PHP File" />
       </list>
     </option>
   </component>
@@ -62,7 +81,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Programok/XAMPP/php/php.exe&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Programok/XAMPP/htdocs/EduPortal/teacher&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -79,6 +98,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Programok\XAMPP\htdocs\EduPortal\teacher" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal\student" />
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal" />
@@ -89,8 +111,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-PS-251.25410.148" />
-        <option value="bundled-php-predefined-a98d8de5180a-c5828cf854d9-com.jetbrains.php.sharedIndexes-PS-251.25410.148" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PS-252.26830.95" />
+        <option value="bundled-php-predefined-a98d8de5180a-9b563d34894c-com.jetbrains.php.sharedIndexes-PS-252.26830.95" />
       </set>
     </attachedChunks>
   </component>
@@ -140,7 +162,12 @@
       <workItem from="1750093810423" duration="595000" />
       <workItem from="1757343280241" duration="785000" />
       <workItem from="1758785342389" duration="153000" />
-      <workItem from="1758789144502" duration="8756000" />
+      <workItem from="1758789144502" duration="13123000" />
+      <workItem from="1759835657599" duration="318000" />
+      <workItem from="1759908837512" duration="28580000" />
+      <workItem from="1760765319009" duration="24000" />
+      <workItem from="1760766045162" duration="807000" />
+      <workItem from="1761027188917" duration="112793000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
@@ -206,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748530545408</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Diákok rész újra mappázása/ Redirect stuents pages">
+      <option name="closed" value="true" />
+      <created>1759303743449</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1759303743450</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,7 +265,8 @@
     <MESSAGE value="Kurzusok oldal szerkesztés finomhangolása és adatbázis kapcsolódás" />
     <MESSAGE value="Elkészült Diák oldal (kis esztétikai javítások még hátra vannak illetve bug keresés)" />
     <MESSAGE value="Elkészült Diák oldal 2.0 javítás szépítés és bg keresés" />
-    <option name="LAST_COMMIT_MESSAGE" value="Elkészült Diák oldal 2.0 javítás szépítés és bg keresés" />
+    <MESSAGE value="Diákok rész újra mappázása/ Redirect stuents pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="Diákok rész újra mappázása/ Redirect stuents pages" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

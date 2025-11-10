@@ -3,12 +3,12 @@ session_start();
 require_once __DIR__. '/../connection.php'; // Adatbáziskapcsolat betöltése
 
 if (!isset($_SESSION['eduportal_id'])) {
-    header("Location: ../index.php"); // vagy login.php
+    header("Location: ../index.php");
     exit;
 }
 
 // 🧑‍🏫 Csak tanárok léphetnek be
-if ($_SESSION['role'] !== 'hallgato') {
+if ($_SESSION['role'] !== 'tanar') {
     header("Location: ../index.php?error=unauthorized");
     exit;
 }
@@ -18,10 +18,8 @@ global $conn; // Globális változó használata
 
 // Felhasználó adatainak lekérdezése (név és szak)
 $user_sql = "
-SELECT u.name, 
-       p.name AS szak_nev 
-FROM users u
-JOIN programs p ON p.szak_szam = u.course_code 
+SELECT name 
+FROM users
 WHERE eduportal_id = ?";
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
@@ -31,12 +29,12 @@ $user_result = $user_stmt->get_result();
 if ($user_result->num_rows === 1) {
     $user = $user_result->fetch_assoc();
     $user_name = $user['name'];
-    $user_course = $user['szak_nev'];
+    $user_course = "Tanár";
 } else {
     $user_name = "Ismeretlen";
     $user_course = "N/A";
 }
-
+//Értesítések lekérdezése
 $notif_sql = "
 SELECT nr.read_at,
        nr.notification_id, 
@@ -57,15 +55,18 @@ $notif_result = $notif_stmt->get_result();
 
 // Összes kurzus
 $courses_sql = "
-SELECT  co.id AS offering_id,
-        c.name AS course_name,
-        c.kurzus_kod,
-        c.leiras AS description
-FROM enrollments e
-JOIN course_offerings co ON e.offering_id = co.id
-JOIN courses c ON co.kurzus_kod = c.kurzus_kod
-WHERE e.users_eduportal_ID = ? AND co.semester_id = 2
-ORDER BY c.name ASC 
+SELECT DISTINCT 
+    co.id AS offering_id,
+    c.name AS course_name,
+    c.kurzus_kod,
+    c.leiras AS description
+FROM teacher_courses tc
+JOIN course_offerings co ON tc.kurzus_kod = co.kurzus_kod
+JOIN courses c ON c.kurzus_kod = co.kurzus_kod
+JOIN users u ON tc.teacher_id = u.eduportal_id
+WHERE tc.teacher_id = ?
+  AND co.semester_id = 2
+ORDER BY c.name
 ";
 
 $courses_stmt = $conn->prepare($courses_sql);
@@ -75,18 +76,24 @@ $courses_result = $courses_stmt->get_result();
 
 //kurzusokhoz tartozó hirdetmények
 $hirdetmeny_sql = "
-SELECT n.message, 
-       n.noti_type,
-       n.created_at,
-       c.name AS course_name,
-       u.name AS user_name
+SELECT 
+    n.id,
+    n.users_eduportal_id,
+    n.message,
+    n.noti_type,
+    n.created_at,
+    c.name AS course_name,
+    u.name AS user_name
 FROM notifications n
 JOIN course_offerings co ON n.course_offering_id = co.id
-JOIN enrollments e ON co.id = e.offering_id
 JOIN courses c ON co.kurzus_kod = c.kurzus_kod
-JOIN users u on n.users_eduportal_id = u.eduportal_id
-WHERE e.users_eduportal_ID = ? AND noti_type = 'hirdetmeny' AND co.semester_id = 2
-ORDER BY created_at DESC 
+JOIN users u ON n.users_eduportal_id = u.eduportal_id
+JOIN teacher_courses tc ON tc.kurzus_kod = co.kurzus_kod
+WHERE tc.teacher_id = ? 
+  AND n.noti_type = 'hirdetmeny'
+  AND n.message NOT LIKE 'Visszavont hirdetmény:%'
+  AND co.semester_id = 2
+ORDER BY n.created_at DESC
 ";
 
 $hirdetmeny_stmt = $conn->prepare($hirdetmeny_sql);
@@ -96,22 +103,26 @@ $hirdetmeny_result = $hirdetmeny_stmt->get_result();
 
 //kurzusokhoz tartozó fórum hozzászólások
 $forum_sql = "
-SELECT n.message,
-       n.noti_type,
-       n.created_at,
-       c.name AS course_name,
-       n.updated_at,
-       u.name AS user_name,
-       n.users_eduportal_id,
-       n.course_offering_id,
-       n.id
+SELECT DISTINCT 
+    n.message,
+    n.noti_type,
+    n.created_at,
+    c.name AS course_name,
+    n.updated_at,
+    u.name AS user_name,
+    n.users_eduportal_id,
+    n.course_offering_id,
+    n.id
 FROM notifications n
 JOIN course_offerings co ON n.course_offering_id = co.id
-JOIN enrollments e ON co.id = e.offering_id
 JOIN courses c ON co.kurzus_kod = c.kurzus_kod
-JOIN users u on n.users_eduportal_id = u.eduportal_id
-WHERE e.users_eduportal_ID = ? AND noti_type = 'forum' AND co.semester_id = 2
-ORDER BY created_at DESC 
+JOIN users u ON n.users_eduportal_id = u.eduportal_id
+JOIN teacher_courses tc ON tc.kurzus_kod = co.kurzus_kod
+WHERE tc.teacher_id = ?
+  AND n.noti_type = 'forum'
+  AND n.message NOT LIKE 'Törölt fórum poszt:%'
+  AND co.semester_id = 2
+ORDER BY n.created_at DESC
 ";
 
 $forum_stmt = $conn->prepare($forum_sql);
@@ -122,20 +133,21 @@ $forum_result = $forum_stmt->get_result();
 //kurzusokhoz tartozó dolgozatok
 $assignment_sql = "
 SELECT 
+    a.id,
     a.title,
     a.due_date,
     a.description,
-    c.name AS course_name,
-    a.id,
     a.max_attempts,
+    c.name AS course_name,
     COALESCE(SUM(aq.score), 0) AS max_score
 FROM assignments a
 JOIN course_offerings co ON a.offering_id = co.id
-JOIN enrollments e ON co.id = e.offering_id
+JOIN teacher_courses tc ON tc.kurzus_kod = co.kurzus_kod
 JOIN courses c ON co.kurzus_kod = c.kurzus_kod
 LEFT JOIN assignment_questions aq ON aq.assignment_id = a.id
-WHERE e.users_eduportal_ID = ? AND co.semester_id = 2
-GROUP BY a.id, a.title, a.due_date, a.description, c.name, a.max_attempts
+WHERE tc.teacher_id = ? 
+  AND co.semester_id = 2
+GROUP BY a.id, a.title, a.due_date, a.description, a.max_attempts, c.name
 ORDER BY a.due_date ASC
 ";
 
@@ -144,32 +156,6 @@ $assignment_stmt->bind_param("s", $eduportal_id);
 $assignment_stmt->execute();
 $assignment_result = $assignment_stmt->get_result();
 
-// Diák korábbi beadásai és próbálkozások száma
-$submission_sql = "
-SELECT 
-    s.assignment_id,
-    s.id AS submission_id,
-    s.submitted_at,
-    s.score,
-    a.max_attempts
-FROM assignment_submissions s
-JOIN assignments a ON a.id = s.assignment_id
-WHERE s.users_eduportal_ID = ?
-ORDER BY s.assignment_id, s.submitted_at ASC
-";
-$submission_stmt = $conn->prepare($submission_sql);
-$submission_stmt->bind_param("s", $eduportal_id);
-$submission_stmt->execute();
-$submission_result = $submission_stmt->get_result();
-
-$submissions_by_assignment = [];
-while ($s = $submission_result->fetch_assoc()) {
-    $aid = $s['assignment_id'];
-    if (!isset($submissions_by_assignment[$aid])) {
-        $submissions_by_assignment[$aid] = [];
-    }
-    $submissions_by_assignment[$aid][] = $s;
-}
 
 ?>
 <!DOCTYPE html>
@@ -188,9 +174,8 @@ while ($s = $submission_result->fetch_assoc()) {
                 <div class="dropdown">
                     <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
                     <div id="dropdownMenuL" class="dropdown-menu left">
-                        <a href="finances.php">Pénzügyek</a>
-                        <a href="enrolled_courses.php">Felvett kurzusok</a>
-                        <a href="studies.php">Tanulmányok</a>
+                        <a href="assignment_result.php">Eredmények</a>
+                        <a href="student_complete.php">Lezárások</a>
                     </div>
                 </div>
             </div>
@@ -279,7 +264,7 @@ while ($s = $submission_result->fetch_assoc()) {
 
             <!-- FŐ TARTALOM -->
             <section class="main-content">
-                <h1>Kurzusok</h1>
+                <h1>Kurzusok(Tanároknak)</h1>
                 <?php while ($row = $courses_result->fetch_assoc()): ?>
                     <div class="course-card">
                         <h3><?= htmlspecialchars($row['course_name']) ?></h3>
@@ -306,31 +291,65 @@ while ($s = $submission_result->fetch_assoc()) {
                             $offering_id = $row['offering_id'];
                             $hirds = [];
                             while ($h = $hirdetmeny_result->fetch_assoc()) {
-                                if ($h['course_name'] === $row['course_name']) {
+                                if ($h['course_name'] === $row['course_name']
+                                        && strpos($h['message'], 'Visszavont hirdetmény:') === false) {
                                     $hirds[] = $h;
                                 }
                             }
                             ?>
+
                             <?php if (!empty($hirds)): ?>
-                                <ul class="collapsible-list">
-                                    <?php foreach ($hirds as $index => $h): ?>
-                                        <li class="<?= $index > 0 ? 'collapsible-item hidden' : '' ?>">
-                                            <div class="forum-message">
-                                                <?= $h['noti_type'] === 'forum' ? '💬' : ($h['noti_type'] === 'szamonkeres' ? '📝' : '📢') ?>
-                                                <?= nl2br(htmlspecialchars($h['message'])) ?>
-                                            </div>
-                                            <div class="forum-meta">
-                                                Közzétette: <?= htmlspecialchars($h['user_name']) ?> &middot; <?= date('Y. m. d. H:i', strtotime($h['created_at'])) ?>
-                                            </div>
-                                        </li>
-                                    <?php endforeach; ?>
-                                </ul>
+                                <div class="forum-preview">
+                                    <ul class="collapsible-list">
+                                        <?php foreach ($hirds as $index => $h): ?>
+                                            <li class="<?= $index > 0 ? 'collapsible-item hidden' : '' ?>">
+                                                <div class="forum-message">
+                                                    📢 <?= nl2br(htmlspecialchars($h['message'])) ?>
+                                                </div>
+                                                <div class="forum-meta">
+                                                    Közzétette: <?= htmlspecialchars($h['user_name']) ?> &middot;
+                                                    <?= date('Y. m. d. H:i', strtotime($h['created_at'])) ?>
+                                                </div>
+                                                <div class="teacher_action-buttons">
+                                                    <?php if (isset($h['users_eduportal_id']) && $h['users_eduportal_id'] === $eduportal_id): ?>
+                                                        <form method="POST" action="../forum_post.php"
+                                                              class="edit-form hidden"
+                                                              onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
+                                                            <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($h['message']) ?></textarea>
+                                                            <input type="hidden" name="edit_message_id" value="<?= $h['id'] ?>">
+                                                            <button type="submit" name="submit_edit_message" class="send-btn">💾 Mentés</button>
+                                                        </form>
+                                                        <button class="edit-btn" onclick="toggleEditForm(this)">✏️ Szerkesztés</button>
+
+                                                        <!-- 🔥 Hirdetmény visszavonása -->
+                                                        <form method="POST" action="../forum_post.php"
+                                                              onsubmit="return confirm('Biztosan visszavonod a hirdetményt?')">
+                                                            <input type="hidden" name="delete_message_id" value="<?= $h['id'] ?>">
+                                                            <input type="hidden" name="noti_type" value="hirdetmeny">
+                                                            <button type="submit" name="submit_delete_message" class="delete-btn">🗑️ Visszavonás</button>
+                                                        </form>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
                                 <?php if (count($hirds) > 1): ?>
                                     <button class="toggle-btn" onclick="toggleList(this)">További hirdetmények</button>
                                 <?php endif; ?>
                             <?php else: ?>
                                 <p>Nincsenek hirdetmények.</p>
                             <?php endif; ?>
+                        </div>
+
+                        <!-- Új hirdetmény hozzáadása -->
+                        <div class="forum-reply">
+                            <form method="POST" action="../forum_post.php">
+                                <textarea name="new_message" placeholder="Új hirdetmény írása..." class="auto-resize-textarea" required></textarea>
+                                <input type="hidden" name="course_offering_id" value="<?= $row['offering_id'] ?>">
+                                <input type="hidden" name="noti_type" value="hirdetmeny">
+                                <button type="submit" name="submit_new_message" class="send-btn">📢 Hirdetmény közzététele</button>
+                            </form>
                         </div>
 
                         <!-- Fórum -->
@@ -340,7 +359,8 @@ while ($s = $submission_result->fetch_assoc()) {
                             mysqli_data_seek($forum_result, 0);
                             $forums = [];
                             while ($f = $forum_result->fetch_assoc()) {
-                                if ($f['course_name'] === $row['course_name']) {
+                                if ($f['course_name'] === $row['course_name']
+                                        && strpos($f['message'], 'Törölt fórum poszt:') === false) {
                                     $forums[] = $f;
                                 }
                             }
@@ -352,16 +372,31 @@ while ($s = $submission_result->fetch_assoc()) {
                                             <li class="<?= $index > 0 ? 'collapsible-item hidden' : '' ?>">
                                                 <div class="forum-message"><?= nl2br(htmlspecialchars($f['message'])) ?></div>
                                                 <div class="forum-meta">
-                                                    Írta: <?= htmlspecialchars($f['user_name']) ?> &middot; <?= date('Y. m. d. H:i', strtotime($f['updated_at'])) ?>
+                                                    Írta: <?= htmlspecialchars($f['user_name']) ?> &middot;
+                                                    <?= date('Y. m. d. H:i', strtotime($f['updated_at'])) ?>
                                                 </div>
-                                                <?php if ($f['users_eduportal_id'] === $eduportal_id): ?>
-                                                    <form method="POST" action="../forum_post.php" class="edit-form hidden" onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
-                                                        <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($f['message']) ?></textarea>
-                                                        <input type="hidden" name="edit_message_id" value="<?= $f['id'] ?>">
-                                                        <button type="submit" name="submit_edit_message" class="send-btn">💾 Mentés</button>
-                                                    </form>
-                                                    <button class="edit-btn" onclick="toggleEditForm(this)">✏️ Szerkesztés</button>
-                                                <?php endif; ?>
+
+                                                <div class="teacher_action-buttons">
+                                                    <?php if ($f['users_eduportal_id'] === $eduportal_id): ?>
+                                                        <form method="POST" action="../forum_post.php" class="edit-form hidden"
+                                                              onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
+                                                            <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($f['message']) ?></textarea>
+                                                            <input type="hidden" name="edit_message_id" value="<?= $f['id'] ?>">
+                                                            <button type="submit" name="submit_edit_message" class="send-btn">💾 Mentés</button>
+                                                        </form>
+                                                        <button class="edit-btn" onclick="toggleEditForm(this)">✏️ Szerkesztés</button>
+                                                    <?php endif; ?>
+
+                                                    <!-- 🔥 Csak tanároknak: hozzászólás törlése -->
+                                                    <?php if ($_SESSION['role'] === 'tanar'): ?>
+                                                        <form method="POST" action="../forum_post.php"
+                                                              onsubmit="return confirm('Biztosan törlöd ezt a hozzászólást?')">
+                                                            <input type="hidden" name="delete_message_id" value="<?= $f['id'] ?>">
+                                                            <input type="hidden" name="noti_type" value="forum">
+                                                            <button type="submit" name="submit_delete_message" class="delete-btn">🗑️ Törlés</button>
+                                                        </form>
+                                                    <?php endif; ?>
+                                                </div>
                                             </li>
                                         <?php endforeach; ?>
                                     </ul>
@@ -372,6 +407,7 @@ while ($s = $submission_result->fetch_assoc()) {
                             <?php else: ?>
                                 <p>Nincs még fórumhozzászólás.</p>
                             <?php endif; ?>
+
                             <!-- Új hozzászólás -->
                             <div class="forum-reply">
                                 <form method="POST" action="../forum_post.php">
@@ -385,6 +421,15 @@ while ($s = $submission_result->fetch_assoc()) {
                         <!-- Dolgozatok -->
                         <div class="section">
                             <h4>📝 Dolgozatok</h4>
+
+                            <!-- Új dolgozat létrehozása -->
+                            <div class="new-assignment-btn">
+                                <form method="GET" action="assignment.php">
+                                    <input type="hidden" name="offering_id" value="<?= $row['offering_id'] ?>">
+                                    <button type="submit" class="create-btn">➕ Új dolgozat létrehozása</button>
+                                </form>
+                            </div>
+
                             <ul>
                                 <?php
                                 mysqli_data_seek($assignment_result, 0);
@@ -395,19 +440,11 @@ while ($s = $submission_result->fetch_assoc()) {
                                     }
                                 }
                                 ?>
+
                                 <?php if (!empty($assignments)): ?>
                                     <?php foreach ($assignments as $a): ?>
                                         <?php
                                         $assignment_id = $a['id'];
-                                        $student_attempts = $submissions_by_assignment[$assignment_id] ?? [];
-                                        $attempt_count = count($student_attempts);
-                                        $max_attempts = $student_attempts[0]['max_attempts'] ?? $a['max_attempts'] ?? '∞';
-                                        $best_score = 0;
-                                        foreach ($student_attempts as $sub) {
-                                            if ($sub['score'] !== null && $sub['score'] > $best_score) {
-                                                $best_score = $sub['score'];
-                                            }
-                                        }
                                         $max_score = isset($a['max_score']) ? (int)$a['max_score'] : 0;
                                         $description = htmlspecialchars($a['description']);
                                         ?>
@@ -417,46 +454,27 @@ while ($s = $submission_result->fetch_assoc()) {
                                                 <summary class="assignment-summary">
                                                     <div class="assignment-header">
                                                         <div class="assignment-title">
-                                                            <strong><?= htmlspecialchars($a['title']) ?></strong><br>
-                                                            <span class="date-range">Indítható: <?= date('Y.m.d', strtotime('-3 days', strtotime($a['due_date']))) ?> – <?= date('Y.m.d', strtotime($a['due_date'])) ?></span>
-                                                        </div>
-                                                        <div class="assignment-stats">
-                                                            Próbálkozás: <?= $attempt_count ?> / <?= $max_attempts ?> |
-                                                            Eredmény: <?= $best_score ?> / <?= $max_score ?> pont
+                                                            <strong><?= htmlspecialchars($a['title']) ?></strong>
+                                                            <span class="date-range">Határidő: <?= date('Y.m.d', strtotime($a['due_date'])) ?></span>
                                                         </div>
                                                         <div class="assignment-action">
-                                                            <?php if ($attempt_count < $max_attempts || $max_attempts === '∞'): ?>
-                                                                <form method="GET" action="assignment.php">
-                                                                    <input type="hidden" name="assignment_id" value="<?= $assignment_id ?>">
-                                                                    <button type="submit" class="fill-btn">✍️ Kitöltés</button>
-                                                                </form>
-                                                            <?php else: ?>
-                                                                <em>Maximális próbálkozások száma elérve</em>
-                                                            <?php endif; ?>
+                                                            <form method="GET" action="assignment.php">
+                                                                <input type="hidden" name="assignment_id" value="<?= $assignment_id ?>">
+                                                                <input type="hidden" name="offering_id" value="<?= $row['offering_id'] ?>">
+                                                                <button type="submit" class="fill-btn">✏️ Szerkesztés</button>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </summary>
 
                                                 <div class="assignment-details">
                                                     <p class="assignment-description"><?= nl2br($description) ?></p>
-                                                    <?php if (!empty($student_attempts)): ?>
-                                                        <ul class="attempt-list">
-                                                            <?php foreach ($student_attempts as $index => $sub): ?>
-                                                                <li>
-                                                                    <?= $index + 1 ?>. próbálkozás – <?= date('Y.m.d H:i', strtotime($sub['submitted_at'])) ?>:
-                                                                    <?= $sub['score'] ?? 0 ?> / <?= $max_score ?> pont
-                                                                </li>
-                                                            <?php endforeach; ?>
-                                                        </ul>
-                                                    <?php else: ?>
-                                                        <p>Még nincs próbálkozás.</p>
-                                                    <?php endif; ?>
                                                 </div>
                                             </details>
                                         </li>
                                     <?php endforeach; ?>
                                 <?php else: ?>
-                                    <li>Nincs beadandó dolgozat.</li>
+                                    <li>Nincs még létrehozott dolgozat.</li>
                                 <?php endif; ?>
                             </ul>
                         </div>

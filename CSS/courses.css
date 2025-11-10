@@ -92,6 +92,10 @@
     margin-left: 10px;
 }
 
+.delete-btn:hover{
+    text-decoration: underline;
+}
+
 
 .toggle-btn {
     margin-top: 5px;
@@ -134,9 +138,9 @@
 .edit-btn {
     background-color: transparent;
     border: none;
+    font-weight: bold;
     color: #28a745;
     cursor: pointer;
-    font-size: 0.8em;
     padding: 0;
 }
 
@@ -173,13 +177,6 @@
 .edit-form.hidden {
     display: none;
 }
-.announcement-message {
-    background-color: #f9f9f9;
-    border-left: 4px solid #007bff;
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 6px;
-}
 
 .forum-preview {
     max-height: 150px;
@@ -189,6 +186,94 @@
 }
 
 .forum-preview.expanded {
-    max-height: none; /* vagy: none */
+    max-height: none;
+}
+
+/* Dolgozatok új elrendezése */
+.assignment-item {
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    padding: 0.05rem 0.5rem;
+}
+
+.assignment-summary {
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+    display: flex;
+
+}
+
+.assignment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.assignment-title {
+    flex: 1;
+    min-width: 200px;
+}
+
+.date-range {
+    font-size: 0.75em;
+}
+
+.assignment-stats {
+    text-align: center;
+    flex: 1;
+    font-size: 0.9em;
+}
+
+.assignment-action {
+    text-align: right;
+    flex: 1;
+}
+
+.fill-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 3px;
+}
+
+.fill-btn:hover {
+    background-color: #0056b3;
+}
+
+.teacher_action-buttons{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.teacher_action-buttons form {
+    display: inline;
+}
+
+.new-assignment-btn {
+    text-align: right;
+}
+
+.create-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95em;
+}
+
+.create-btn:hover {
+    background-color: #218838;
 }
 

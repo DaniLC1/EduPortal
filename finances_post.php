@@ -2,12 +2,6 @@
 session_start();
 require_once 'connection.php';
 
-if (!isset($_SESSION['eduportal_id'])) {
-    $_SESSION['message'] = "Nem vagy bejelentkezve.";
-    header("Location: " . $_SERVER['HTTP_REFERER']);
-    exit;
-}
-
 $eduportal_id = $_SESSION['eduportal_id'];
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['financing_id']) || !isset($_POST['amount'])) {

@@ -41,7 +41,11 @@ if ($user_result->num_rows === 1) {
 
 // Dolgozat adatai
 $sql_assignment = "
-SELECT a.title, a.description, a.due_date, a.available_from, c.name AS course_name
+SELECT a.title,
+       a.description,
+       a.due_date,
+       a.available_from,
+       c.name AS course_name
 FROM assignments a
 JOIN course_offerings co ON a.offering_id = co.id
 JOIN courses c ON co.kurzus_kod = c.kurzus_kod
@@ -59,7 +63,10 @@ $assignment = $result->fetch_assoc();
 
 // Kérdések és válaszok lekérdezése
 $sql_questions = "
-SELECT q.id AS question_id, q.question_text, q.question_type, q.score
+SELECT q.id AS question_id,
+       q.question_text,
+       q.question_type,
+       q.score
 FROM assignment_questions q
 WHERE q.assignment_id = ?
 ORDER BY q.id

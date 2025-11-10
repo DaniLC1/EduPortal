@@ -6,18 +6,21 @@ if (!isset($_SESSION['eduportal_id'])) {
     header("Location: index.php");
     exit;
 }
+
+// 🧑‍🏫 Csak tanárok léphetnek be
+if ($_SESSION['role'] !== 'tanar') {
+    header("Location: ../index.php?error=unauthorized");
+    exit;
+}
+
 $eduportal_id = $_SESSION['eduportal_id'];
 global $conn; // Globális változó használata
 
 // Felhasználó adatainak lekérdezése (név és szak)
 $user_sql = "
-SELECT u.name, 
-       p.name AS szak_nev,
-       u.financing_type
-FROM users u
-JOIN programs p ON p.szak_szam = u.course_code 
+SELECT name 
+FROM users
 WHERE eduportal_id = ?";
-
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
 $user_stmt->execute();
@@ -26,12 +29,10 @@ $user_result = $user_stmt->get_result();
 if ($user_result->num_rows === 1) {
     $user = $user_result->fetch_assoc();
     $user_name = $user['name'];
-    $user_course = $user['szak_nev'];
-    $user_financing_type = $user['financing_type'];
+    $user_course = "Tanár";
 } else {
     $user_name = "Ismeretlen";
     $user_course = "N/A";
-    $user_financing_type = "N/A";
 }
 
 $profile_sql = "
@@ -44,7 +45,6 @@ SELECT u.name,
        u.city,
        u.address
 FROM users u
-JOIN programs p ON p.szak_szam = u.course_code 
 WHERE eduportal_id = ?";
 
 $profile_stmt = $conn->prepare($profile_sql);
@@ -84,7 +84,10 @@ while ($row = $submitted_result->fetch_assoc()) {
 
 // Mezők és értékek lekérdezése (minden beküldött kéréshez)
 $field_values_sql = "
-    SELECT fv.request_id, tf.label, fv.field_value, fv.admin_suggestion
+    SELECT fv.request_id,
+           tf.label,
+           fv.field_value,
+           fv.admin_suggestion
     FROM student_request_field_values fv
     JOIN request_template_fields tf ON tf.id = fv.field_id
     WHERE fv.request_id IN (" . implode(',', array_keys($submitted_requests) ?: [0]) . ")
@@ -112,9 +115,8 @@ while ($row = $field_values_result->fetch_assoc()) {
                 <div class="dropdown">
                     <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
                     <div id="dropdownMenuL" class="dropdown-menu left">
-                        <a href="finances.php">Pénzügyek</a>
-                        <a href="enrolled_courses.php">Felvett kurzusok</a>
-                        <a href="studies.php">Tanulmányok</a>
+                        <a href="assignment_result.php">Eredmények</a>
+                        <a href="student_complete.php">Lezárások</a>
                     </div>
                 </div>
             </div>
@@ -153,7 +155,6 @@ while ($row = $field_values_result->fetch_assoc()) {
                         <h2><?= htmlspecialchars($user_name) ?></h2>
                         <p class="edu-id"><?= htmlspecialchars($eduportal_id) ?></p>
                         <p class="edu-id"><?= htmlspecialchars($user_course) ?></p>
-                        <p class="edu-id"><?= htmlspecialchars($user_financing_type) ?></p>
                     </div>
                 </div>
 

@@ -3,18 +3,23 @@ session_start();
 require_once __DIR__ . '/../connection.php'; // Adatbáziskapcsolat betöltése
 
 if (!isset($_SESSION['eduportal_id'])) {
-    header("Location: index.php"); // vagy login.php
+    header("Location: index.php");
     exit;
 }
+
+// 🧑‍🏫 Csak tanárok léphetnek be
+if ($_SESSION['role'] !== 'tanar') {
+    header("Location: ../index.php?error=unauthorized");
+    exit;
+}
+
 $eduportal_id = $_SESSION['eduportal_id'];
 global $conn; // Globális változó használata
 
 // Felhasználó adatainak lekérdezése (név és szak)
 $user_sql = "
-SELECT u.name,
-       p.name AS szak_nev
-FROM users u
-JOIN programs p ON p.szak_szam = u.course_code 
+SELECT name 
+FROM users
 WHERE eduportal_id = ?";
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
@@ -24,7 +29,7 @@ $user_result = $user_stmt->get_result();
 if ($user_result->num_rows === 1) {
     $user = $user_result->fetch_assoc();
     $user_name = $user['name'];
-    $user_course = $user['szak_nev'];
+    $user_course = "Tanár";
 } else {
     $user_name = "Ismeretlen";
     $user_course = "N/A";
@@ -37,11 +42,12 @@ $search = $_GET['search'] ?? '';
 $request_sql = "
     SELECT rt.id,
            rt.title,
-           rt.description
+           rt.description,
+           rt.to_who
     FROM request_templates rt
     WHERE ( rt.title LIKE CONCAT('%', ?, '%')
-    OR rt.description LIKE CONCAT('%', ?, '%'))
-    AND rt.to_who = 'hallgato'
+    OR rt.description LIKE CONCAT('%', ?, '%') )
+    AND rt.to_who = 'tanar'
     ORDER BY rt.created_at DESC
 ";
 $request_stmt = $conn->prepare($request_sql);
@@ -56,7 +62,11 @@ while ($row = $request_result->fetch_assoc()) {
 
 // Mezők lekérdezése az összes sablonhoz
 $fields_sql = "
-    SELECT f.id, f.template_id, f.label, f.field_type, f.is_required
+    SELECT f.id,
+           f.template_id,
+           f.label,
+           f.field_type,
+           f.is_required
     FROM request_template_fields f
     ORDER BY f.template_id, f.id
 ";
@@ -83,9 +93,8 @@ while ($row = $fields_result->fetch_assoc()) {
         <div class="dropdown">
             <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
             <div id="dropdownMenuL" class="dropdown-menu left">
-                <a href="finances.php">Pénzügyek</a>
-                <a href="enrolled_courses.php">Felvett kurzusok</a>
-                <a href="studies.php">Tanulmányok</a>
+                <a href="assignment_result.php">Eredmények</a>
+                <a href="student_complete.php">Lezárások</a>
             </div>
         </div>
     </div>

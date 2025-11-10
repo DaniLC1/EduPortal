@@ -22,11 +22,6 @@
 </head>
 <body>
     <header>
-        <div class="language-switcher">
-            <button id="hu" class="language-btn">HU</button>
-            <button id="en" class="language-btn">EN</button>
-            <button id="de" class="language-btn">DE</button>
-        </div>
         <h1 id="welcome-message">Üdvözöljük az EduPortálon!</h1>
         <div class="theme-switcher">
             <button id="theme-toggle" class="theme-btn">🌙</button>
