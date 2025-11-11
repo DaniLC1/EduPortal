@@ -325,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// --- Dolgozat kérdéskezelő (assignment.js rész) ---
+// --- Dolgozat kérdéskezelő (teacher/assignment.php rész) ---
 document.addEventListener("DOMContentLoaded", () => {
     const questionContainer = document.getElementById("question-container");
     const addQuestionBtn = document.querySelector(".add-btn");
@@ -417,3 +417,114 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// --- admin/request.php interaktív logika ---
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('requests-container');
+    const newBtn = document.getElementById('new-request-btn');
+    if (!container || !newBtn) return;
+
+    // 🔹 Új kérelem létrehozása
+    newBtn.addEventListener('click', () => {
+        const id = 'new_' + Date.now();
+        const card = document.createElement('div');
+        card.classList.add('request-card');
+        card.dataset.new = "true"; // ⚙️ megjelöljük, hogy ez új (nincs mentve)
+        card.innerHTML = `
+            <div class="card-header">
+                <h2>Új kérelem</h2>
+                <div class="card-actions">
+                    <button class="edit-btn">✏️ Szerkesztés</button>
+                    <button class="delete-btn">🗑️ Törlés</button>
+                </div>
+            </div>
+            <div class="card-body" style="display:block;">
+                <form class="request-edit-form">
+                    <label>Cím:</label>
+                    <input type="text" name="title" placeholder="Kérelem címe..." required>
+
+                    <label>Leírás:</label>
+                    <textarea name="description" rows="2"></textarea>
+
+                    <label>Címzett:</label>
+                    <select name="to_who">
+                        <option value="hallgato">Hallgató</option>
+                        <option value="tanar">Tanár</option>
+                    </select>
+
+                    <hr>
+                    <h3>Mezők</h3>
+                    <div class="fields-container"></div>
+                    <button type="button" class="add-field-btn">➕ Mező hozzáadása</button>
+
+                    <div class="form-actions">
+                        <button type="submit" class="fill-btn">💾 Mentés</button>
+                        <button type="button" class="cancel-btn">🚫 Mégse</button>
+                    </div>
+                </form>
+            </div>
+        `;
+        container.prepend(card);
+    });
+
+    // 🔹 Eseménykezelés delegálva a containerre
+    container.addEventListener('click', (e) => {
+        const card = e.target.closest('.request-card');
+        if (!card) return;
+
+        // ✏️ Szerkesztés lenyitás / becsukás
+        if (e.target.classList.contains('edit-btn')) {
+            const body = card.querySelector('.card-body');
+            body.style.display = body.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // 🗑️ Törlés
+        if (e.target.classList.contains('delete-btn')) {
+            if (confirm('Biztosan törölni szeretnéd ezt a kérelmet?')) {
+                card.remove(); // majd backendben DELETE
+            }
+        }
+
+        // ➕ Mező hozzáadása
+        if (e.target.classList.contains('add-field-btn')) {
+            const fieldsContainer = card.querySelector('.fields-container');
+            const fid = 'new_' + Date.now();
+            const field = document.createElement('div');
+            field.classList.add('field-card');
+            field.innerHTML = `
+                <input type="text" name="fields[${fid}][label]" placeholder="Címke">
+                <select name="fields[${fid}][field_type]">
+                    <option value="text">Szöveg</option>
+                    <option value="number">Szám</option>
+                    <option value="date">Dátum</option>
+                    <option value="textarea">Többsoros</option>
+                </select>
+                <label>
+                    <input type="checkbox" name="fields[${fid}][is_required]" value="1">
+                    Kötelező
+                </label>
+                <button type="button" class="remove-field">❌</button>
+            `;
+            fieldsContainer.appendChild(field);
+        }
+
+        // ❌ Mező törlése
+        if (e.target.classList.contains('remove-field')) {
+            e.target.closest('.field-card').remove();
+        }
+
+        // 🚫 Mégse
+        if (e.target.classList.contains('cancel-btn')) {
+            // Ha ez egy új, még nem mentett kérelem ➜ teljesen töröljük
+            if (card.dataset.new === "true") {
+                card.remove();
+            } else {
+                // Egyébként csak bezárjuk a szerkesztőt
+                const body = card.querySelector('.card-body');
+                if (body) body.style.display = 'none';
+            }
+        }
+    });
+});
+
+

@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         header("Location: teacher/courses.php");
                         break;
                     case 'admin':
-                        header("Location: admin/dashboard.php");
+                        header("Location: admin/database.php");
                         break;
                     default:
                         header("Location: index.php?error=invalid_role");
