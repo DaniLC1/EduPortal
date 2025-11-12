@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . '/../connection.php'; // Adatbáziskapcsolat betöltése
 
 if (!isset($_SESSION['eduportal_id'])) {
-    header("Location: index.php"); // vagy login.php
+    header("Location: ../index.php");
     exit;
 }
 $eduportal_id = $_SESSION['eduportal_id'];

@@ -426,10 +426,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 🔹 Új kérelem létrehozása
     newBtn.addEventListener('click', () => {
-        const id = 'new_' + Date.now();
+        const id = 'new_' + Date.now(); // egyedi azonosító generálása
         const card = document.createElement('div');
         card.classList.add('request-card');
-        card.dataset.new = "true"; // ⚙️ megjelöljük, hogy ez új (nincs mentve)
+        card.dataset.new = "true"; // ⚙️ megjelöljük, hogy ez új (még nincs mentve az adatbázisban)
+
+        // 🔸 Új kérelem űrlap HTML tartalma
         card.innerHTML = `
             <div class="card-header">
                 <h2>Új kérelem</h2>
@@ -439,7 +441,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
             <div class="card-body" style="display:block;">
-                <form class="request-edit-form">
+                <!-- 🧾 Az űrlap most már POST kérést küld a request_post.php felé -->
+                <form method="POST" action="../request_post.php" class="request-edit-form">
+                    <!-- A forrás megjelölése a backend számára -->
+                    <input type="hidden" name="source" value="admin_request">
+
                     <label>Cím:</label>
                     <input type="text" name="title" placeholder="Kérelem címe..." required>
 
@@ -459,15 +465,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     <div class="form-actions">
                         <button type="submit" class="fill-btn">💾 Mentés</button>
-                        <button type="button" class="cancel-btn">🚫 Mégse</button>
+                        <button type="button" class="ar-cancel-btn">🚫 Mégse</button>
                     </div>
                 </form>
             </div>
         `;
+        // Az új kérelemkártyát az oldal tetejére helyezzük
         container.prepend(card);
     });
 
-    // 🔹 Eseménykezelés delegálva a containerre
+    // 🔹 Eseménykezelés delegálva a containerre (így a dinamikusan létrehozott elemek is működnek)
     container.addEventListener('click', (e) => {
         const card = e.target.closest('.request-card');
         if (!card) return;
@@ -480,17 +487,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 🗑️ Törlés
         if (e.target.classList.contains('delete-btn')) {
-            if (confirm('Biztosan törölni szeretnéd ezt a kérelmet?')) {
-                card.remove(); // majd backendben DELETE
-            }
+            return confirm('Biztosan törölni szeretnéd ezt a kérelmet?'); // true = submit, false = megállítja
         }
 
         // ➕ Mező hozzáadása
         if (e.target.classList.contains('add-field-btn')) {
             const fieldsContainer = card.querySelector('.fields-container');
-            const fid = 'new_' + Date.now();
+            const fid = 'new_' + Date.now(); // egyedi azonosító a mezőnek
             const field = document.createElement('div');
             field.classList.add('field-card');
+
+            // 🧩 Új mező HTML tartalma
             field.innerHTML = `
                 <input type="text" name="fields[${fid}][label]" placeholder="Címke">
                 <select name="fields[${fid}][field_type]">
@@ -508,23 +515,24 @@ document.addEventListener('DOMContentLoaded', () => {
             fieldsContainer.appendChild(field);
         }
 
-        // ❌ Mező törlése
+        // ❌ Egy adott mező törlése
         if (e.target.classList.contains('remove-field')) {
             e.target.closest('.field-card').remove();
         }
 
-        // 🚫 Mégse
-        if (e.target.classList.contains('cancel-btn')) {
-            // Ha ez egy új, még nem mentett kérelem ➜ teljesen töröljük
+        // 🚫 Mégse gomb: új kérelem esetén töröljük a kártyát, meglévőnél csak bezárjuk
+        if (e.target.classList.contains('ar-cancel-btn')) {
             if (card.dataset.new === "true") {
+                // ❌ Még nem mentett új kérelem → teljesen eltávolítjuk a DOM-ból
                 card.remove();
             } else {
-                // Egyébként csak bezárjuk a szerkesztőt
+                // 🔒 Meglévő kérelem → csak a részleteket csukjuk össze
                 const body = card.querySelector('.card-body');
                 if (body) body.style.display = 'none';
             }
         }
     });
 });
+
 
 

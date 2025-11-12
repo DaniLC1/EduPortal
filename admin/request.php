@@ -2,14 +2,8 @@
 session_start();
 require_once __DIR__ . '/../connection.php';
 
-if (!isset($_SESSION['eduportal_id'])) {
-    header("Location: index.php");
-    exit;
-}
-
-// 🧑‍🏫 Csak adminok léphetnek be
-if ($_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php?error=unauthorized");
+if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../index.php");
     exit;
 }
 
@@ -17,11 +11,7 @@ $eduportal_id = $_SESSION['eduportal_id'];
 global $conn;
 
 // 🔹 Admin adatainak lekérése
-$user_sql = "
-SELECT 
-    name 
-FROM users 
-WHERE eduportal_id = ?";
+$user_sql = "SELECT name FROM users WHERE eduportal_id = ?";
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
 $user_stmt->execute();
@@ -31,9 +21,6 @@ $user = $user_result->fetch_assoc();
 $user_name = $user['name'] ?? 'Ismeretlen';
 $user_course = "Admin";
 
-/// Keresés lekérdezés
-$search = $_GET['search'] ?? '';
-
 // --- Kérelemsablonok lekérése ---
 $request_sql = "
     SELECT id, title, description, to_who
@@ -41,7 +28,6 @@ $request_sql = "
     ORDER BY id DESC
 ";
 $request_result = $conn->query($request_sql);
-
 $templates = [];
 while ($row = $request_result->fetch_assoc()) {
     $templates[] = $row;
@@ -69,15 +55,14 @@ while ($f = $fields_result->fetch_assoc()) {
     <!-- BAL MENÜ -->
     <div class="menu">
         <div class="dropdown">
-            <div id="dropdownMenuL" class="dropdown-menu left" hidden="hidden">
-            </div>
+            <div id="dropdownMenuL" class="dropdown-menu left" hidden="hidden"></div>
         </div>
     </div>
 
     <!-- NAVIGÁCIÓ -->
     <nav class="main-nav">
-        <a href="database.php" ><span class="icon">📘</span> Adatbázis</a>
-        <a href="submitted_request.php" ><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
+        <a href="database.php"><span class="icon">📘</span> Adatbázis</a>
+        <a href="submitted_request.php"><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
         <a id="active" href="#"><span class="icon">📄</span> Kérelmek szerkesztése</a>
     </nav>
 
@@ -85,9 +70,9 @@ while ($f = $fields_result->fetch_assoc()) {
     <div class="user-menu">
         <div class="dropdown">
             <button id="dropdownToggleR" class="dropbtn">
-                <?php echo htmlspecialchars($user_name); ?> |
-                <?php echo htmlspecialchars($eduportal_id); ?> |
-                <?php echo htmlspecialchars($user_course); ?>
+                <?= htmlspecialchars($user_name) ?> |
+                <?= htmlspecialchars($eduportal_id) ?> |
+                <?= htmlspecialchars($user_course) ?>
             </button>
             <div id="dropdownMenuR" class="dropdown-menu right">
                 <a href="profile.php">Beállítások</a>
@@ -101,11 +86,18 @@ while ($f = $fields_result->fetch_assoc()) {
     </div>
 </header>
 
-<!-- IDE JÖN A FŐ TARTALOM -->
 <main class="layout">
     <h1>📄 Kérelmek kezelése</h1>
-
-    <!-- Új kérelem létrehozása -->
+    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+        <div class="success-message">
+            ✅ A kérelem sikeresen mentve!
+        </div>
+    <?php endif; ?>
+    <?php if (isset($_GET['error'])): ?>
+        <div class="error-message">
+            ⚠️ <?= htmlspecialchars($_GET['error']) ?>
+        </div>
+    <?php endif; ?>
     <button id="new-request-btn" class="fill-btn">➕ Új kérelem</button>
 
     <div class="requests-container" id="requests-container">
@@ -118,26 +110,32 @@ while ($f = $fields_result->fetch_assoc()) {
                         <h2><?= htmlspecialchars($t['title']) ?></h2>
                         <div class="card-actions">
                             <button class="edit-btn">✏️ Szerkesztés</button>
-                            <button class="delete-btn">🗑️ Törlés</button>
+                            <form method="POST" action="../request_post.php" class="inline-form">
+                                <input type="hidden" name="source" value="admin_request">
+                                <input type="hidden" name="template_id" value="<?= $t['id'] ?>">
+                                <button type="submit" name="delete" class="delete-btn">🗑️ Törlés</button>
+                            </form>
                         </div>
                     </div>
 
                     <div class="card-body" style="display:none;">
-                        <form class="request-edit-form">
+                        <form method="POST" action="../request_post.php" class="request-edit-form">
+                            <input type="hidden" name="source" value="admin_request">
+                            <input type="hidden" name="template_id" value="<?= $t['id'] ?>">
+
                             <label>Cím:</label>
                             <input type="text" name="title" value="<?= htmlspecialchars($t['title']) ?>" required>
 
                             <label>Leírás:</label>
                             <textarea name="description" rows="2"><?= htmlspecialchars($t['description']) ?></textarea>
 
-                            <label>Címzett (to_who):</label>
+                            <label>Címzett:</label>
                             <select name="to_who" required>
                                 <option value="hallgato" <?= $t['to_who'] === 'hallgato' ? 'selected' : '' ?>>Hallgató</option>
                                 <option value="tanar" <?= $t['to_who'] === 'tanar' ? 'selected' : '' ?>>Tanár</option>
                             </select>
 
                             <hr>
-
                             <h3>Mezők</h3>
                             <div class="fields-container">
                                 <?php if (!empty($template_fields[$t['id']])): ?>
@@ -150,19 +148,20 @@ while ($f = $fields_result->fetch_assoc()) {
                                                 <option value="date" <?= $f['field_type']=='date'?'selected':'' ?>>Dátum</option>
                                                 <option value="textarea" <?= $f['field_type']=='textarea'?'selected':'' ?>>Többsoros</option>
                                             </select>
-                                            <label><input type="checkbox" name="fields[<?= $f['id'] ?>][is_required]" value="1" <?= $f['is_required']?'checked':'' ?>> Kötelező</label>
+                                            <label>
+                                                <input type="checkbox" name="fields[<?= $f['id'] ?>][is_required]" value="1" <?= $f['is_required']?'checked':'' ?>>
+                                                Kötelező
+                                            </label>
                                             <button type="button" class="remove-field">❌</button>
                                         </div>
                                     <?php endforeach; ?>
-                                <?php else: ?>
-                                    <p class="no-fields">Nincsenek mezők.</p>
                                 <?php endif; ?>
                             </div>
-                            <button type="button" class="add-field-btn">➕ Mező hozzáadása</button>
 
+                            <button type="button" class="add-field-btn">➕ Mező hozzáadása</button>
                             <div class="form-actions">
                                 <button type="submit" class="fill-btn">💾 Mentés</button>
-                                <button type="button" class="cancel-btn">🚫 Mégse</button>
+                                <button type="button" class="ar-cancel-btn">🚫 Mégse</button>
                             </div>
                         </form>
                     </div>
@@ -171,6 +170,7 @@ while ($f = $fields_result->fetch_assoc()) {
         <?php endif; ?>
     </div>
 </main>
+
 
 <script src="../Scripts/scripts.js"></script>
 </body>

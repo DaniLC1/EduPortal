@@ -117,7 +117,8 @@ while ($row = $field_values_result->fetch_assoc()) {
         <!-- NAVIGÁCIÓ -->
         <nav class="main-nav">
             <a href="database.php" ><span class="icon">📘</span> Adatbázis</a>
-            <a href="request.php"><span class="icon">📄</span> Kérelmek</a>
+            <a href="submitted_request.php" ><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
+            <a href="request.php"><span class="icon">📄</span> Kérelmek szerkesztése</a>
         </nav>
 
         <!-- JOBB OLDALI MENÜ -->
