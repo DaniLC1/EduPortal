@@ -77,7 +77,8 @@ SELECT
 FROM course_offerings co
 JOIN courses c ON c.kurzus_kod = co.kurzus_kod
 JOIN semesters s ON s.id = co.semester_id
-WHERE co.teacher_id = ?
+JOIN teacher_courses tc ON c.kurzus_kod = tc.kurzus_kod
+WHERE tc.teacher_id = ?
 ";
 
 $params = [$eduportal_id];
@@ -208,7 +209,7 @@ $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             <input type="text" name="room" required>
 
             <label>Jelentkezési idő vége:</label>
-            <input type="datetime-local" name="end_date">
+            <input type="datetime-local" name="end_date" value="0000-00-00 00:00:00">
 
             <label>Max létszám:</label>
             <input type="number" name="max_students" min="0" required>

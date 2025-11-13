@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Admin oldal kész 1.0/ Admin side finished 1.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/creats_&amp;_alters.sql" beforeDir="false" afterPath="$PROJECT_DIR$/creats_&amp;_alters.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enrole_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/enrole_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/course_offering.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users_insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/users_insert.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +150,7 @@
       <workItem from="1759908837512" duration="28580000" />
       <workItem from="1760765319009" duration="24000" />
       <workItem from="1760766045162" duration="807000" />
-      <workItem from="1761027188917" duration="146499000" />
+      <workItem from="1761027188917" duration="155805000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
@@ -242,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762973775602</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Admin oldal kész 1.0/ Admin side finished 1.0">
+      <option name="closed" value="true" />
+      <created>1763023648708</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1763023648708</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

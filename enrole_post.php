@@ -28,7 +28,7 @@ if ($role === 'tanar' && isset($_POST['kurzus_kod'])) {
     $room = trim($_POST['room'] ?? '');
     $max_students = intval($_POST['max_students'] ?? 0);
     $end_date = $_POST['end_date'] ?? null;
-    $course_description = trim($_POST['course_description'] ?? ''); // ✨ új mező
+    $course_description = trim($_POST['course_description'] ?? '');
 
     if (empty($kurzus_kod) || empty($semester_id) || empty($day_of_week) || empty($start_time)) {
         $error_message = urlencode("Hiányzó adatok az új kurzusóra létrehozásához.");
@@ -57,7 +57,7 @@ if ($role === 'tanar' && isset($_POST['kurzus_kod'])) {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         ";
         $stmt = $conn->prepare($insert_sql);
-        $stmt->bind_param("sisssssii",
+        $stmt->bind_param("sissssssi",
             $kurzus_kod,
             $semester_id,
             $eduportal_id,
@@ -185,11 +185,13 @@ else {
     $semester_id = $offering['semester_id'];
     $end_date = $offering['end_date'];
 
+    /*
     if ($now > $end_date) {
         $_SESSION['message'] = "Lejárt a jelentkezési határidő.";
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit;
     }
+    */
 
     try {
         $conn->begin_transaction();

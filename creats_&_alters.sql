@@ -127,6 +127,8 @@ CREATE TABLE enrollments (
     completed_at TIMESTAMP NULL,
     status VARCHAR(20) CHECK (status IN ('enrolled', 'completed', 'failed')),
     grade VARCHAR(10),                          -- lehet A, B, C, vagy % vagy 5-ös skála
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (users_eduportal_ID, offering_id),
     FOREIGN KEY (users_eduportal_ID) REFERENCES users(eduportal_id) ON DELETE CASCADE,
     FOREIGN KEY (offering_id) REFERENCES course_offerings(id) ON DELETE CASCADE
@@ -163,6 +165,7 @@ CREATE TABLE assignment_questions (
     question_type VARCHAR(20) NOT NULL CHECK (question_type IN ('true_false', 'multiple_choice')),
     score INTEGER NOT NULL DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (assignment_id) REFERENCES assignments(id) ON DELETE CASCADE
 );
 
@@ -172,6 +175,8 @@ CREATE TABLE question_answers (
     question_id INTEGER NOT NULL,
     answer_text TEXT NOT NULL,
     is_correct BOOLEAN NOT NULL DEFAULT FALSE,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (question_id) REFERENCES assignment_questions(id) ON DELETE CASCADE
 );
 
@@ -219,6 +224,8 @@ CREATE TABLE payment_installments (
     financing_id INT NOT NULL,
     amount_paid DECIMAL(10,2) NOT NULL,
     paid_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (financing_id) REFERENCES student_financing(id)
 );
 
@@ -227,7 +234,9 @@ CREATE TABLE request_templates (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+	to_who TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Beadott kérelmek:
@@ -239,6 +248,8 @@ CREATE TABLE student_requests (
     status ENUM('beküldve', 'elfogadva', 'elutasítva', 'módosításra visszaküldve') DEFAULT 'beküldve',
     reviewed_at DATETIME,
     admin_comment TEXT,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     FOREIGN KEY (users_eduportal_ID) REFERENCES users(eduportal_id),
     FOREIGN KEY (template_id) REFERENCES request_templates(id)
@@ -251,6 +262,8 @@ CREATE TABLE request_template_fields (
     label VARCHAR(255) NOT NULL,
     field_type ENUM('text', 'textarea', 'date', 'number') NOT NULL,
     is_required BOOLEAN DEFAULT TRUE,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     
     FOREIGN KEY (template_id) REFERENCES request_templates(id)
 );
@@ -261,7 +274,9 @@ CREATE TABLE student_request_field_values (
     request_id INT NOT NULL,
     field_id INT NOT NULL,
     field_value TEXT,
-    admin_suggestion TEXT, -- ha az admin visszaküldi módosításra
+    admin_suggestion TEXT,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     
     FOREIGN KEY (request_id) REFERENCES student_requests(id),
     FOREIGN KEY (field_id) REFERENCES request_template_fields(id)

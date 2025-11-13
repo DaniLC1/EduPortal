@@ -55,39 +55,60 @@ INSERT INTO semesters (label, start_date, end_date) VALUES
 ('2022/23 2. félév', '2023-02-01', '2023-06-30');
 
 -- course_offerings tábla töltés: X
-INSERT INTO course_offerings (kurzus_kod, semester_id, teacher_id, course_type, day_of_week, start_time, end_date, room, max_students) VALUES 
--- Aktuális félévi tárgyak: ('2024/25 2. félév', '2025-02-01', '2025-06-30')
-('PROG101EA', 2, 'EDU100010', 'eloadas', 'H', '08:00:00', '2025-09-30', 'IB204', 300),
-('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'K', '08:00:00', '2025-09-30', 'IB204', 100),
-('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'K', '08:00:00', '2025-09-30', 'IB204', 100),
-('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'Sz', '08:00:00', '2025-09-30', 'IB204', 100),
-('ADAT102EA', 2, 'EDU100011', 'eloadas', 'H', '10:00:00', '2025-09-30', 'IB204', 300),
-('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'P', '08:00:00', '2025-09-30', 'IB204', 100),
-('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'K', '15:00:00', '2025-09-30', 'IB204', 100),
-('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'Sz', '09:00:00', '2025-09-30', 'IB204', 100),
-('BIO103EA', 2, 'EDU100012', 'eloadas', 'H', '12:00:00', '2025-09-30', 'IB204', 300),
-('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '08:00:00', '2025-09-30', 'IB204', 100),
-('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '09:00:00', '2025-09-30', 'IB204', 100),
-('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '15:00:00', '2025-09-30', 'IB204', 100),
-('KEM104EA', 2, 'EDU100013', 'eloadas', 'H', '14:00:00', '2025-09-30', 'IB204', 300),
-('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'P', '08:00:00', '2025-09-30', 'IB204', 100),
-('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'P', '10:00:00', '2025-09-30', 'IB204', 100),
-('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'Cs', '12:00:00', '2025-09-30', 'IB204', 100),
-('DIMA104EA', 2, 'EDU100010', 'eloadas', 'H', '16:00:00', '2025-09-30', 'IB204', 300),
-('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'H', '08:00:00', '2025-09-30', 'IB204', 100),
-('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'H', '10:00:00', '2025-09-30', 'IB204', 100),
-('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'K', '11:00:00', '2025-09-30', 'IB204', 100),
--- Korábbi félévek meghirdetett tárgyai:
-('PROG101EA', 1, 'EDU100012', 'gyakorlat', 'Cs', '09:00:00', '2025-09-30', 'IB204', 100),
-('PROG101GY', 1, 'EDU100012', 'gyakorlat', 'Cs', '15:00:00', '2025-09-30', 'IB204', 100),
-('KEM104EA', 1, 'EDU100013', 'eloadas', 'H', '14:00:00', '2025-09-30', 'IB204', 300),
-('KEM104GY', 1, 'EDU100013', 'gyakorlat', 'P', '08:00:00', '2025-09-30', 'IB204', 100),
-('MOLBI105EA', 1, 'EDU100013', 'gyakorlat', 'P', '10:00:00', '2025-09-30', 'IB204', 100),
-('MOLBI105GY', 1, 'EDU100013', 'gyakorlat', 'Cs', '12:00:00', '2025-09-30', 'IB204', 100),
-('DIMA104EA', 1, 'EDU100010', 'eloadas', 'H', '16:00:00', '2025-09-30', 'IB204', 300),
-('DIMA104GY', 1, 'EDU100010', 'gyakorlat', 'H', '08:00:00', '2025-09-30', 'IB204', 100),
-('KALK105EA', 1, 'EDU100010', 'gyakorlat', 'H', '10:00:00', '2025-09-30', 'IB204', 100),
-('KALK105GY', 1, 'EDU100010', 'gyakorlat', 'K', '11:00:00', '2025-09-30', 'IB204', 100);
+INSERT INTO course_offerings (kurzus_kod, semester_id, teacher_id, course_type, day_of_week, start_time, room, end_date, max_students) VALUES 
+('PROG101EA', 2, 'EDU100010', 'eloadas', 'H', '08:00:00', 'IB204', '2025-09-30 00:00:00', 300),
+('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'K', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'K', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'Sz', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('ADAT102EA', 2, 'EDU100011', 'eloadas', 'H', '10:00:00', 'IB204', '2025-09-30 00:00:00', 300),
+('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'P', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'K', '15:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('ADAT102GY', 2, 'EDU100011', 'gyakorlat', 'Sz', '09:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('BIO103EA', 2, 'EDU100012', 'eloadas', 'H', '12:00:00', 'IB204', '2025-09-30 00:00:00', 300),
+('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '09:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('BIO103GY', 2, 'EDU100012', 'gyakorlat', 'Cs', '15:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('KEM104EA', 2, 'EDU100013', 'eloadas', 'H', '14:00:00', 'IB204', '2025-09-30 00:00:00', 300),
+('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'P', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'P', '10:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('KEM104GY', 2, 'EDU100013', 'gyakorlat', 'Cs', '12:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('DIMA104EA', 2, 'EDU100010', 'eloadas', 'H', '16:00:00', 'IB204', '2025-09-30 00:00:00', 300),
+('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'H', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'H', '10:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('DIMA104GY', 2, 'EDU100010', 'gyakorlat', 'K', '11:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('PROG101EA', 1, 'EDU100012', 'eloadas', 'Cs', '09:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('PROG101GY', 1, 'EDU100012', 'gyakorlat', 'Cs', '15:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('KEM104EA', 1, 'EDU100013', 'eloadas', 'H', '14:00:00', 'IB204', '2025-09-30 00:00:00', 300),
+('KEM104GY', 1, 'EDU100013', 'gyakorlat', 'P', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('MOLBI105EA', 1, 'EDU100013', 'eloadas', 'P', '10:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('MOLBI105GY', 1, 'EDU100013', 'gyakorlat', 'Cs', '12:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('DIMA104EA', 1, 'EDU100010', 'eloadas', 'H', '16:00:00', 'IB204', '2025-09-30 00:00:00', 300),
+('DIMA104GY', 1, 'EDU100010', 'gyakorlat', 'H', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('KALK105EA', 1, 'EDU100010', 'eloadas', 'H', '10:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('KALK105GY', 1, 'EDU100010', 'gyakorlat', 'K', '11:00:00', 'IB204', '2025-09-30 00:00:00', 100),
+('PROG101GY', 3, 'EDU100010', 'gyakorlat', 'Sz', '15:00:00', 'IB211', '2026-09-30 23:59:00', 25),
+('PROG101GY', 3, 'EDU100010', 'gyakorlat', 'K', '10:00:00', 'IB210', '2025-09-30 23:59:00', 25),
+('PROG101EA', 3, 'EDU100010', 'eloadas', 'H', '08:00:00', 'IB210', '2025-09-30 23:59:00', 300),
+('PROG101GY', 3, 'EDU100010', 'gyakorlat', 'H', '12:00:00', 'IB211', '2025-09-30 23:59:00', 25),
+('ADAT102EA', 3, 'EDU100010', 'eloadas', 'K', '10:00:00', 'IB205', '2025-09-30 23:59:00', 250),
+('ADAT102GY', 3, 'EDU100010', 'gyakorlat', 'P', '08:00:00', 'IB204', '2025-09-30 23:59:00', 30),
+('PROG101GY', 3, 'EDU100010', 'gyakorlat', 'P', '13:00:00', 'IB211', '2025-09-30 23:59:00', 25),
+('ADAT102GY', 3, 'EDU100010', 'gyakorlat', 'Cs', '11:00:00', 'IB220', '2025-09-30 23:59:00', 30),
+('PROG101EA', 4, 'EDU100010', 'eloadas', 'H', '08:00:00', 'IB210', '2026-02-28 23:59:00', 300),
+('PROG101GY', 4, 'EDU100010', 'gyakorlat', 'K', '10:00:00', 'IB211', '2026-02-28 23:59:00', 25),
+('PROG101GY', 4, 'EDU100010', 'gyakorlat', 'Sz', '15:00:00', 'IB204', '2026-02-28 23:59:00', 25),
+('PROG101GY', 4, 'EDU100010', 'gyakorlat', 'Sz', '16:00:00', 'IB204', '2026-02-28 23:59:00', 25),
+('ADAT102EA', 4, 'EDU100010', 'eloadas', 'H', '10:00:00', 'IB210', '2026-02-28 23:59:00', 250),
+('ADAT102GY', 4, 'EDU100010', 'gyakorlat', 'K', '12:00:00', 'IB205', '2026-02-28 23:59:00', 30),
+('ADAT102GY', 4, 'EDU100010', 'gyakorlat', 'P', '14:00:00', 'IB204', '2026-02-28 23:59:00', 30),
+('DIMA104GY', 3, 'EDU100011', 'gyakorlat', 'Cs', '12:00:00', 'IB310', '2025-09-30 23:59:00', 20),
+('DIMA104GY', 3, 'EDU100011', 'gyakorlat', 'P', '13:00:00', 'IB305', '2025-09-30 23:59:00', 25),
+('DIMA104EA', 3, 'EDU100011', 'eloadas', 'K', '08:00:00', 'IB301', '2025-09-30 23:59:00', 300),
+('DIMA104GY', 4, 'EDU100011', 'gyakorlat', 'Cs', '15:00:00', 'IB320', '2026-02-28 23:59:00'),
+('DIMA104EA', 4, 'EDU100011', 'eloadas', 'H', '08:00:00', 'IB301', '2026-02-28 23:59:00', 300),
+('KALK105EA', 4, 'EDU100011', 'eloadas', 'H', '14:00:00', 'IB250', '2026-02-28 23:59:00', 350),
+('KALK105GY', 4, 'EDU100011', 'gyakorlat', 'P', '12:00:00', 'IB205', '2026-02-28 23:59:00', 35),
+('DIMA104GY', 4, 'EDU100011', 'gyakorlat', 'P', '14:00:00', 'IB205', '2026-02-28 23:59:00', 35);
 
 -- assignments tábla töltés: X
 INSERT INTO assignments (offering_id, title, description, available_from, due_date, max_attempts) VALUES 
@@ -241,8 +262,6 @@ INSERT INTO teacher_courses (teacher_id, kurzus_kod) VALUES
   ('EDU100010', 'PROG101GY'),
   ('EDU100010', 'ADAT102EA'),
   ('EDU100010', 'ADAT102GY'),
-  ('EDU100010', 'PROG101EA'),
-  ('EDU100010', 'PROG101GY'), 
   -- Zöld Dóra taníthatja az adatbázisok 1 tárgyat
   ('EDU100011', 'ADAT102EA'),
   ('EDU100011', 'ADAT102GY'),
@@ -261,9 +280,6 @@ INSERT INTO teacher_courses (teacher_id, kurzus_kod) VALUES
   ('EDU100013', 'MOLBI105EA'),
   ('EDU100013', 'MOLBI105GY');
   
-  facultative_credit INT,
-	freely_selectable_credit INT,
-	cost DECIMAL(10,2),
 
 -- programs tábla töltés: X
 INSERT INTO programs (szak_szam, name, facultative_credit, freely_selectable_credit, cost) VALUES
@@ -365,26 +381,37 @@ INSERT INTO payment_installments (financing_id, amount_paid, paid_at) VALUES
   (7, 30000, '2025-05-20');
 
 -- request_templates tábla töltés:
-INSERT INTO request_templates (title, description) VALUES
-  ('Passzív félév kérelme', 'Kérelem a félév passzív státuszba helyezéséhez.'),
-  ('Tantárgy törlés kérelem', 'Kérelem egy adott tantárgy törlésére a kurzuslistából.'),
-  ('Vizsgaidőpont módosítás', 'Kérelem a vizsgaidőpont módosítására különleges indok esetén.');
+INSERT INTO request_templates (title, description, to_who) VALUES
+  ('Passzív félév kérelme', 'Kérelem a félév passzív státuszba helyezéséhez.', 'hallgato'),
+  ('Tantárgy törlés kérelem', 'Kérelem egy adott tantárgy törlésére a kurzuslistából.', 'hallgato'),
+  ('Vizsgaidőpont módosítás', 'Kérelem a vizsgaidőpont módosítására különleges indok esetén.', 'hallgato'),
+  ('Szabadság kérelem', 'Kérelem, hogy mely napokon szeretne szadabságra menni, vagy már kivett szabadság utólagos igazolása.', 'tanar'),
+  ('Egyéb kérelem', 'Egyéb kérelem, minden olyan falyta igényhez, amihez nem talált megfelelő kérelmet.', 'tanar');
+
   
 -- student_requests tábla töltés:
 INSERT INTO student_requests (users_eduportal_ID, template_id, status, reviewed_at, admin_comment) VALUES
-  ('EDU111111', 1, 'beküldve', NULL, NULL),
-  ('EDU111111', 2, 'elutasítva', '2025-04-28 10:00:00', 'Hiányos adatok.'),
-  ('EDU111111', 3, 'elfogadva', '2025-05-01 12:30:00', 'Elfogadva indokolt eset alapján.');
+  ('EDU111111', 1, '2025-10-30 17:58:12', 'beküldve', NULL, NULL),
+  ('EDU111111', 2, '2025-10-30 17:58:12', 'elutasítva', '2025-04-28 10:00:00', 'Hiányos adatok.'),
+  ('EDU111111', 3, '2025-10-30 17:58:12', 'elfogadva', '2025-05-01 12:30:00', 'Elfogadva indokolt eset alapján.'),
+  ('EDU100010', 4, '2025-11-05 12:39:07', 'beküldve', NULL, NULL),
+  ('EDU100010', 4, '2025-11-05 12:40:21', 'beküldve', NULL, NULL),
+  ('EDU100010', 5, '2025-11-05 12:58:43', 'beküldve', NULL, NULL),
+  ('EDU100010', 5, '2025-11-05 13:26:04', 'beküldve', NULL, NULL),
+  ('EDU111111', 1, '2025-11-05 13:54:45', 'beküldve', '2025-11-12 19:55:10', NULL);
 
 -- request_template_fields tábla töltés:
 INSERT INTO request_template_fields (template_id, label, field_type, is_required) VALUES
-  (1, 'Indoklás', 'textarea', TRUE),
-  (1, 'Kezdő dátum', 'date', TRUE),
-  (2, 'Tantárgy neve', 'text', TRUE),
-  (2, 'Kurzus kód', 'text', TRUE),
-  (3, 'Vizsga eredeti időpontja', 'date', TRUE),
-  (3, 'Javasolt új időpont', 'date', FALSE),
-  (3, 'Indoklás', 'textarea', TRUE);
+  (1, 'Indoklás', 'textarea', 1),
+  (1, 'Kezdő dátum', 'date', 1),
+  (2, 'Tantárgy neve', 'text', 1),
+  (2, 'Kurzus kód', 'text', 1),
+  (3, 'Vizsga eredeti időpontja', 'date', 1),
+  (3, 'Javasolt új időpont', 'date', 0),
+  (3, 'Indoklás', 'textarea', 1),
+  (4, 'Szabadság kezdeténekm dátuma:', 'date', 1),
+  (4, 'Szabadság végének dátuma:', 'date', 1),
+  (5, 'Kérem írja le, hogy milyen ügyben szeretne kréelmet beadni és ennek az indoklását:', 'textarea', 1);
 
 -- student_request_field_values tábla töltés:
 INSERT INTO student_request_field_values (request_id, field_id, field_value, admin_suggestion) VALUES
@@ -394,4 +421,12 @@ INSERT INTO student_request_field_values (request_id, field_id, field_value, adm
   (2, 4, 'C001', 'Kérlek adj meg pontos kurzuskódot.'),
   (3, 5, '2025-06-10', NULL),
   (3, 6, '2025-06-17', NULL),
-  (3, 7, 'Időpont ütközés másik tárggyal.', NULL);
+  (3, 7, 'Időpont ütközés másik tárggyal.', NULL),
+  (4, 8, '2025-12-25', NULL),
+  (4, 9, '2025-11-26', NULL),
+  (5, 8, '2025-12-25', NULL),
+  (5, 9, '2025-12-26', NULL),
+  (6, 10, 'Valami valami', NULL),
+  (7, 10, 'Ez meg az', NULL),
+  (8, 1, 'Csak', 'Nem megfelelő indok.'),
+  (8, 2, '2025-11-05', NULL);

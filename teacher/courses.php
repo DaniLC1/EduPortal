@@ -34,6 +34,36 @@ if ($user_result->num_rows === 1) {
     $user_name = "Ismeretlen";
     $user_course = "N/A";
 }
+
+// 🔹 Aktuális dátum (ma)
+$today = date('Y-m-d');
+
+// 🔹 Félévek lekérdezése
+$semesters_sql = "SELECT id, label, start_date, end_date FROM semesters ORDER BY start_date DESC";
+$semesters_result = $conn->query($semesters_sql);
+$semesters = [];
+while ($row = $semesters_result->fetch_assoc()) {
+    $semesters[] = $row;
+}
+
+// 🔹 GET paraméterből kiválasztott félév (ha van)
+$selected_semester_id = isset($_GET['semester_id']) ? intval($_GET['semester_id']) : 0;
+
+// 🔹 Ha nincs GET-ben, válasszuk az aktuális dátumhoz tartozó félévet
+if ($selected_semester_id === 0) {
+    foreach ($semesters as $s) {
+        if ($today >= $s['start_date'] && $today <= $s['end_date']) {
+            $selected_semester_id = $s['id'];
+            break;
+        }
+    }
+}
+
+// 🔹 Ha valamiért nem találtunk (pl. jövőbeli dátum), akkor a legfrissebb félévet használjuk
+if ($selected_semester_id === 0 && !empty($semesters)) {
+    $selected_semester_id = $semesters[0]['id'];
+}
+
 //Értesítések lekérdezése
 $notif_sql = "
 SELECT nr.read_at,
@@ -65,12 +95,12 @@ JOIN course_offerings co ON tc.kurzus_kod = co.kurzus_kod
 JOIN courses c ON c.kurzus_kod = co.kurzus_kod
 JOIN users u ON tc.teacher_id = u.eduportal_id
 WHERE tc.teacher_id = ?
-  AND co.semester_id = 2
+  AND co.semester_id = ?
 ORDER BY c.name
 ";
 
 $courses_stmt = $conn->prepare($courses_sql);
-$courses_stmt->bind_param("s", $eduportal_id);
+$courses_stmt->bind_param("si", $eduportal_id, $selected_semester_id);
 $courses_stmt->execute();
 $courses_result = $courses_stmt->get_result();
 
@@ -92,12 +122,12 @@ JOIN teacher_courses tc ON tc.kurzus_kod = co.kurzus_kod
 WHERE tc.teacher_id = ? 
   AND n.noti_type = 'hirdetmeny'
   AND n.message NOT LIKE 'Visszavont hirdetmény:%'
-  AND co.semester_id = 2
+  AND co.semester_id = ?
 ORDER BY n.created_at DESC
 ";
 
 $hirdetmeny_stmt = $conn->prepare($hirdetmeny_sql);
-$hirdetmeny_stmt->bind_param("s", $eduportal_id);
+$hirdetmeny_stmt->bind_param("si", $eduportal_id, $selected_semester_id);
 $hirdetmeny_stmt->execute();
 $hirdetmeny_result = $hirdetmeny_stmt->get_result();
 
@@ -121,12 +151,12 @@ JOIN teacher_courses tc ON tc.kurzus_kod = co.kurzus_kod
 WHERE tc.teacher_id = ?
   AND n.noti_type = 'forum'
   AND n.message NOT LIKE 'Törölt fórum poszt:%'
-  AND co.semester_id = 2
+  AND co.semester_id = ?
 ORDER BY n.created_at DESC
 ";
 
 $forum_stmt = $conn->prepare($forum_sql);
-$forum_stmt->bind_param("s", $eduportal_id);
+$forum_stmt->bind_param("si", $eduportal_id, $selected_semester_id);
 $forum_stmt->execute();
 $forum_result = $forum_stmt->get_result();
 
@@ -146,13 +176,13 @@ JOIN teacher_courses tc ON tc.kurzus_kod = co.kurzus_kod
 JOIN courses c ON co.kurzus_kod = c.kurzus_kod
 LEFT JOIN assignment_questions aq ON aq.assignment_id = a.id
 WHERE tc.teacher_id = ? 
-  AND co.semester_id = 2
+  AND co.semester_id = ?
 GROUP BY a.id, a.title, a.due_date, a.description, a.max_attempts, c.name
 ORDER BY a.due_date ASC
 ";
 
 $assignment_stmt = $conn->prepare($assignment_sql);
-$assignment_stmt->bind_param("s", $eduportal_id);
+$assignment_stmt->bind_param("si", $eduportal_id, $selected_semester_id);
 $assignment_stmt->execute();
 $assignment_result = $assignment_stmt->get_result();
 
@@ -265,6 +295,19 @@ $assignment_result = $assignment_stmt->get_result();
             <!-- FŐ TARTALOM -->
             <section class="main-content">
                 <h1>Kurzusok(Tanároknak)</h1>
+                <!-- 🔹 Szűrők -->
+                <form method="get" class="filters">
+                    <label for="semester_id">Félév:</label>
+                    <select name="semester_id" id="semester_id" onchange="this.form.submit()">
+                        <?php foreach ($semesters as $s): ?>
+                            <option value="<?= $s['id'] ?>" <?= $s['id'] == $selected_semester_id ? 'selected' : '' ?>>
+                                <?= htmlspecialchars($s['label']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <noscript><button type="submit">Szűrés</button></noscript>
+                </form>
+                <hr>
                 <?php while ($row = $courses_result->fetch_assoc()): ?>
                     <div class="course-card">
                         <h3><?= htmlspecialchars($row['course_name']) ?></h3>
