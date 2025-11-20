@@ -1,0 +1,73 @@
+courses.php -TODO naptár
+profile.php -TODO: Egységes (hiba) üzenetek
+
+css-ek átnézése, hogy egységes parancsokat használjak
+---------------------
+hiba és egyéb figyelmeztető üzenetek egységesítése. -> jó ötlet a request_post.php megvalósítása olyan kéne hogy legyen a következő ötletekkel:
+                                                    -> ÖTLET: A _post-ban van megvalósítva a hibaüzenet/sikeresség üzenet és az alap oldalakon csak az üzenetet hívom meg(hogy lehetne megvalósítani)
+A request_post.php:
+// ✅ Sikeres mentés után visszairányítás a szerepnek megfelelő oldalra
+if ($role === 'tanar') {
+    header('Location: teacher/request.php?success=1');
+} else {
+    header('Location: student/request.php?success=1');
+}
+
+Ebben ez a fontos:  ?success=1
+--------------------
+Az előző alapján pedig az alap oldalon a main-en belül kell egy ilyen (Ez pl benne van a request.php-ban):
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <div class="success-message">
+        ✅ A kérelem sikeresen beadva!
+    </div>
+<?php endif; ?>
+---------------------
+Illetve még egy ötlet hogy 5 mp-en belül eltűnjön a figyelmeztetés( újra frissíti az oldalt):
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <meta http-equiv="refresh" content="5;url=request.php">
+<?php endif; ?>
+
+Ezt is az alap oldalon kell elhelyezni; Ezt a <head> szekcióban helyezd el, a <title> után.
+---------------------
+JS fájl egyszerűsítése
+---------------------
+Minden POST fájl  (és amúgy a többi php fájl is) egyszerűsítése (nincs-e benne felesleges kód)
+---------------------
+HA valahol nem lenne egységes a lenyíló elem megvalósítása akkor a következő a megoldás (persze ahol ezt lehet csinálni, pl az új dolgozat létrehozásánál nem lehetséges szerintem):
+-Eleve be kell tölteni mindent az oldalon és van egy ilyen HTLM-es cucc:
+<details>
+  <summary>Kattints ide a részletekért</summary>
+  <p>Ez a tartalom csak lenyitva látszik.</p>
+</details>
+----------------------
+A gombokat átnevezni egyedi class-úra!!! Jó példa admin/request.php és ide tartozó js fájl:
+cancel-btn átnevezve -> ar-cancel-btn mert névütközés volt!!! a=admin r=request.php
+Ezt mindenhol meg kell csinálni!!!
+
+
+/************************************************
+Tanári (Dr.Tóth László) javaslatok
+************************************************/
+Az oldalak Select-jei legyenek külön fájlokba és csak a fájlok legyenek meghívva
+
+---------------------
+Unyt tesztet csinálni!!!
+Statikus elemzés (pl Sonar Cook)
+
+---------------------
+Jelszó hash legyen!!!
+
+---------------------
+HTTPS-t megnézni mennyire bonyolult hogy így legyen, HA bonyolult akkor doksiba meginokolni!
+
+---------------------
+A tantárgyak leírásai, ahol nem így van, ott külön <div>ben legyenek
+course_offeringekben ne középen legyenek az órák hanem balra igazítva.
+
+---------------------
+Üzenetküldés megvalósítása!!
+Userek rögzítése legyen lehetséges adminnál!
+
+---------------------
+Legyen több dolgozat típus(ha belefér az időbe)
+

@@ -442,7 +442,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="card-body" style="display:block;">
                 <!-- 🧾 Az űrlap most már POST kérést küld a request_post.php felé -->
-                <form method="POST" action="../request_post.php" class="request-edit-form">
+                <form method="POST" action="../POST/request_post.php" class="request-edit-form">
                     <!-- A forrás megjelölése a backend számára -->
                     <input type="hidden" name="source" value="admin_request">
 

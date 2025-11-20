@@ -229,7 +229,7 @@ $semester_result = $semester_stmt->get_result();
                             <?= $st['current_grade'] !== null ? htmlspecialchars($st['current_grade']) : '<em>-</em>' ?>
                         </p>
 
-                        <form method="post" action="../complete_post.php" class="grade-form">
+                        <form method="post" action="../POST/complete_post.php" class="grade-form">
                             <input type="hidden" name="student_id" value="<?= htmlspecialchars($st['student_id']) ?>">
                             <input type="hidden" name="offering_id" value="<?= htmlspecialchars($st['offering_id']) ?>">
 

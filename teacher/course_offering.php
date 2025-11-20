@@ -171,7 +171,7 @@ $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <!-- 🔹 Új offering létrehozása -->
     <section class="create-offering">
         <h2>Új kurzus meghirdetése</h2>
-        <form method="post" action="../enrole_post.php" class="create-form">
+        <form method="post" action="../POST/enrole_post.php" class="create-form">
             <label>Tárgy:</label>
             <select name="kurzus_kod" required>
                 <option value="">Válassz tárgyat...</option>
@@ -282,7 +282,7 @@ $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                                     <li><strong>Max létszám:</strong> <?= htmlspecialchars($off['max_students']) ?></li>
                                 </ul>
 
-                                <form method="post" action="../enrole_post.php">
+                                <form method="post" action="../POST/enrole_post.php">
                                     <input type="hidden" name="offering_id" value="<?= $off['offering_id'] ?>">
 
                                     <label>Leírás:</label>

@@ -209,7 +209,7 @@ if (!empty($results)) {
                 <div class="modal-content">
                     <span class="close" onclick="closeModal()">×</span>
                     <h2>Befizetés</h2>
-                    <form action="../finances_post.php" method="post">
+                    <form action="../POST/finances_post.php" method="post">
                         <input type="hidden" name="financing_id" id="modalFinancingId">
                         <label for="amount">Összeg (min. 1.000 Ft):</label>
                         <input type="number" name="amount" id="paymentAmount" min="1000" required>

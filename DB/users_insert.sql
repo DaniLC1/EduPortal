@@ -104,7 +104,7 @@ INSERT INTO course_offerings (kurzus_kod, semester_id, teacher_id, course_type, 
 ('DIMA104GY', 3, 'EDU100011', 'gyakorlat', 'Cs', '12:00:00', 'IB310', '2025-09-30 23:59:00', 20),
 ('DIMA104GY', 3, 'EDU100011', 'gyakorlat', 'P', '13:00:00', 'IB305', '2025-09-30 23:59:00', 25),
 ('DIMA104EA', 3, 'EDU100011', 'eloadas', 'K', '08:00:00', 'IB301', '2025-09-30 23:59:00', 300),
-('DIMA104GY', 4, 'EDU100011', 'gyakorlat', 'Cs', '15:00:00', 'IB320', '2026-02-28 23:59:00'),
+('DIMA104GY', 4, 'EDU100011', 'gyakorlat', 'Cs', '15:00:00', 'IB320', '2026-02-28 23:59:00', 35),
 ('DIMA104EA', 4, 'EDU100011', 'eloadas', 'H', '08:00:00', 'IB301', '2026-02-28 23:59:00', 300),
 ('KALK105EA', 4, 'EDU100011', 'eloadas', 'H', '14:00:00', 'IB250', '2026-02-28 23:59:00', 350),
 ('KALK105GY', 4, 'EDU100011', 'gyakorlat', 'P', '12:00:00', 'IB205', '2026-02-28 23:59:00', 35),
@@ -390,7 +390,7 @@ INSERT INTO request_templates (title, description, to_who) VALUES
 
   
 -- student_requests tábla töltés:
-INSERT INTO student_requests (users_eduportal_ID, template_id, status, reviewed_at, admin_comment) VALUES
+INSERT INTO student_requests (users_eduportal_ID, template_id, submitted_at, status, reviewed_at, admin_comment) VALUES
   ('EDU111111', 1, '2025-10-30 17:58:12', 'beküldve', NULL, NULL),
   ('EDU111111', 2, '2025-10-30 17:58:12', 'elutasítva', '2025-04-28 10:00:00', 'Hiányos adatok.'),
   ('EDU111111', 3, '2025-10-30 17:58:12', 'elfogadva', '2025-05-01 12:30:00', 'Elfogadva indokolt eset alapján.'),

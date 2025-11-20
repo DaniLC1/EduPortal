@@ -161,7 +161,7 @@ while ($row = $field_values_result->fetch_assoc()) {
 
                 <h3 class="section-title">Adatok</h3>
 
-                <form id="profile-form" class="profile-details" method="post" action="../profile_post.php">
+                <form id="profile-form" class="profile-details" method="post" action="../POST/profile_post.php">
                     <?php
                     // Feldolgozás megjelenítéshez
                     $label_map = [

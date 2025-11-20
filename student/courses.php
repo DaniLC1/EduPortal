@@ -290,7 +290,7 @@ while ($s = $submission_result->fetch_assoc()) {
                                 ?>
                                 <li>
                                     <?= $icon ?> <?= $text ?> <span style="color:gray; font-size: 0.9em;">(<?= $date ?>)</span>
-                                    <form method="post" action="../noti_mark_read.php" style="display:inline;">
+                                    <form method="post" action="../POST/noti_mark_read.php" style="display:inline;">
                                         <input type="hidden" name="notification_id" value="<?= $notif['notification_id'] ?>">
                                         <input type="hidden" name="eduportal_id" value="<?= $eduportal_id ?>">
                                         <button type="submit" class="delete-btn" title="Megjelölés olvasottként">❌</button>
@@ -395,7 +395,7 @@ while ($s = $submission_result->fetch_assoc()) {
                                                     Írta: <?= htmlspecialchars($f['user_name']) ?> &middot; <?= date('Y. m. d. H:i', strtotime($f['updated_at'])) ?>
                                                 </div>
                                                 <?php if ($f['users_eduportal_id'] === $eduportal_id): ?>
-                                                    <form method="POST" action="../forum_post.php" class="edit-form hidden" onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
+                                                    <form method="POST" action="../POST/forum_post.php" class="edit-form hidden" onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
                                                         <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($f['message']) ?></textarea>
                                                         <input type="hidden" name="edit_message_id" value="<?= $f['id'] ?>">
                                                         <button type="submit" name="submit_edit_message" class="send-btn">💾 Mentés</button>
@@ -414,7 +414,7 @@ while ($s = $submission_result->fetch_assoc()) {
                             <?php endif; ?>
                             <!-- Új hozzászólás -->
                             <div class="forum-reply">
-                                <form method="POST" action="../forum_post.php">
+                                <form method="POST" action="../POST/forum_post.php">
                                     <textarea name="new_message" placeholder="Írd be az üzeneted..." class="auto-resize-textarea" required></textarea>
                                     <input type="hidden" name="course_offering_id" value="<?= $row['offering_id'] ?>">
                                     <button type="submit" name="submit_new_message" class="send-btn">💬 Hozzászólás elküldése</button>

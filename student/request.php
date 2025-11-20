@@ -149,7 +149,7 @@ while ($row = $fields_result->fetch_assoc()) {
                     <div class="card-description" style="display: none;">
                         <p><?= nl2br(htmlspecialchars($template['description'])) ?></p>
 
-                        <form method="post" action="../request_post.php" class="request-form"">
+                        <form method="post" action="../POST/request_post.php" class="request-form"">
                             <input type="hidden" name="template_id" value="<?= $template['id'] ?>">
 
                             <fieldset disabled>

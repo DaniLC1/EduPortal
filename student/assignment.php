@@ -139,7 +139,7 @@ if ($question_ids) {
 
 
         <!-- Dolgozat kérdőív -->
-        <form method="POST" action="../assignment_post.php">
+        <form method="POST" action="../POST/assignment_post.php">
             <input type="hidden" name="assignment_id" value="<?= $assignment_id ?>">
 
             <?php foreach ($questions as $q): ?>

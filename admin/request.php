@@ -110,7 +110,7 @@ while ($f = $fields_result->fetch_assoc()) {
                         <h2><?= htmlspecialchars($t['title']) ?></h2>
                         <div class="card-actions">
                             <button class="edit-btn">✏️ Szerkesztés</button>
-                            <form method="POST" action="../request_post.php" class="inline-form">
+                            <form method="POST" action="../POST/request_post.php" class="inline-form">
                                 <input type="hidden" name="source" value="admin_request">
                                 <input type="hidden" name="template_id" value="<?= $t['id'] ?>">
                                 <button type="submit" name="delete" class="delete-btn">🗑️ Törlés</button>
@@ -119,7 +119,7 @@ while ($f = $fields_result->fetch_assoc()) {
                     </div>
 
                     <div class="card-body" style="display:none;">
-                        <form method="POST" action="../request_post.php" class="request-edit-form">
+                        <form method="POST" action="../POST/request_post.php" class="request-edit-form">
                             <input type="hidden" name="source" value="admin_request">
                             <input type="hidden" name="template_id" value="<?= $t['id'] ?>">
 

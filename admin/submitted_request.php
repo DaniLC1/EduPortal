@@ -152,7 +152,7 @@ while ($row = $fields_result->fetch_assoc()) {
                         <summary>Kattints a részletekért</summary>
 
                         <!-- Admin komment és státusz -->
-                        <form method="post" action="../request_post.php" class="request-edit-form">
+                        <form method="post" action="../POST/request_post.php" class="request-edit-form">
                             <input type="hidden" name="source" value="admin_submitted">
                             <input type="hidden" name="request_id" value="<?= $req['request_id'] ?>">
 

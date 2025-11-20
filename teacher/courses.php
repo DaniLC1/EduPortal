@@ -278,7 +278,7 @@ $assignment_result = $assignment_stmt->get_result();
                                 ?>
                                 <li>
                                     <?= $icon ?> <?= $text ?> <span style="color:gray; font-size: 0.9em;">(<?= $date ?>)</span>
-                                    <form method="post" action="../noti_mark_read.php" style="display:inline;">
+                                    <form method="post" action="../POST/noti_mark_read.php" style="display:inline;">
                                         <input type="hidden" name="notification_id" value="<?= $notif['notification_id'] ?>">
                                         <input type="hidden" name="eduportal_id" value="<?= $eduportal_id ?>">
                                         <button type="submit" class="delete-btn" title="Megjelölés olvasottként">❌</button>
@@ -355,7 +355,7 @@ $assignment_result = $assignment_stmt->get_result();
                                                 </div>
                                                 <div class="teacher_action-buttons">
                                                     <?php if (isset($h['users_eduportal_id']) && $h['users_eduportal_id'] === $eduportal_id): ?>
-                                                        <form method="POST" action="../forum_post.php"
+                                                        <form method="POST" action="../POST/forum_post.php"
                                                               class="edit-form hidden"
                                                               onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
                                                             <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($h['message']) ?></textarea>
@@ -365,7 +365,7 @@ $assignment_result = $assignment_stmt->get_result();
                                                         <button class="edit-btn" onclick="toggleEditForm(this)">✏️ Szerkesztés</button>
 
                                                         <!-- 🔥 Hirdetmény visszavonása -->
-                                                        <form method="POST" action="../forum_post.php"
+                                                        <form method="POST" action="../POST/forum_post.php"
                                                               onsubmit="return confirm('Biztosan visszavonod a hirdetményt?')">
                                                             <input type="hidden" name="delete_message_id" value="<?= $h['id'] ?>">
                                                             <input type="hidden" name="noti_type" value="hirdetmeny">
@@ -387,7 +387,7 @@ $assignment_result = $assignment_stmt->get_result();
 
                         <!-- Új hirdetmény hozzáadása -->
                         <div class="forum-reply">
-                            <form method="POST" action="../forum_post.php">
+                            <form method="POST" action="../POST/forum_post.php">
                                 <textarea name="new_message" placeholder="Új hirdetmény írása..." class="auto-resize-textarea" required></textarea>
                                 <input type="hidden" name="course_offering_id" value="<?= $row['offering_id'] ?>">
                                 <input type="hidden" name="noti_type" value="hirdetmeny">
@@ -421,7 +421,7 @@ $assignment_result = $assignment_stmt->get_result();
 
                                                 <div class="teacher_action-buttons">
                                                     <?php if ($f['users_eduportal_id'] === $eduportal_id): ?>
-                                                        <form method="POST" action="../forum_post.php" class="edit-form hidden"
+                                                        <form method="POST" action="../POST/forum_post.php" class="edit-form hidden"
                                                               onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
                                                             <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($f['message']) ?></textarea>
                                                             <input type="hidden" name="edit_message_id" value="<?= $f['id'] ?>">
@@ -432,7 +432,7 @@ $assignment_result = $assignment_stmt->get_result();
 
                                                     <!-- 🔥 Csak tanároknak: hozzászólás törlése -->
                                                     <?php if ($_SESSION['role'] === 'tanar'): ?>
-                                                        <form method="POST" action="../forum_post.php"
+                                                        <form method="POST" action="../POST/forum_post.php"
                                                               onsubmit="return confirm('Biztosan törlöd ezt a hozzászólást?')">
                                                             <input type="hidden" name="delete_message_id" value="<?= $f['id'] ?>">
                                                             <input type="hidden" name="noti_type" value="forum">
@@ -453,7 +453,7 @@ $assignment_result = $assignment_stmt->get_result();
 
                             <!-- Új hozzászólás -->
                             <div class="forum-reply">
-                                <form method="POST" action="../forum_post.php">
+                                <form method="POST" action="../POST/forum_post.php">
                                     <textarea name="new_message" placeholder="Írd be az üzeneted..." class="auto-resize-textarea" required></textarea>
                                     <input type="hidden" name="course_offering_id" value="<?= $row['offering_id'] ?>">
                                     <button type="submit" name="submit_new_message" class="send-btn">💬 Hozzászólás elküldése</button>

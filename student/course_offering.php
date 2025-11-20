@@ -328,13 +328,13 @@ foreach ($raw_courses as $row) {
                                                 Jelentkezettek: <?= $offering['enrolled_count'] ?>
 
                                                 <?php if (!$offering['already_enrolled'] && !$course['already_completed']): ?>
-                                                    <form method="post" action="../enrole_post.php" style="display:inline">
+                                                    <form method="post" action="../POST/enrole_post.php" style="display:inline">
                                                         <input type="hidden" name="offering_id" value="<?= $offering['offering_id'] ?>">
                                                         <input type="hidden" name="action" value="enroll">
                                                         <button type="submit" class="send-btn">Jelentkezés</button>
                                                     </form>
                                                 <?php elseif ($offering['already_enrolled']): ?>
-                                                    <form method="post" action="../enrole_post.php" style="display:inline">
+                                                    <form method="post" action="../POST/enrole_post.php" style="display:inline">
                                                         <input type="hidden" name="offering_id" value="<?= $offering['offering_id'] ?>">
                                                         <input type="hidden" name="action" value="unenroll">
                                                         <button type="submit" class="cancel">Lejelentkezés</button>

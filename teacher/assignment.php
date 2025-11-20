@@ -144,7 +144,7 @@ if ($is_edit) {
 
         <!-- 🧾 Dolgozat alapadatok -->
         <div class="assignment-card">
-            <form method="POST" action="../assignment_post.php">
+            <form method="POST" action="../POST/assignment_post.php">
                 <input type="hidden" name="offering_id" value="<?= $offering_id ?>">
                 <?php if ($is_edit): ?>
                     <input type="hidden" name="assignment_id" value="<?= $assignment_id ?>">

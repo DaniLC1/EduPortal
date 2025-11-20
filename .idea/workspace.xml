@@ -5,13 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Admin oldal kész 1.0/ Admin side finished 1.0">
+      <change afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/creats_&amp;_alters.sql" beforeDir="false" afterPath="$PROJECT_DIR$/creats_&amp;_alters.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/enrole_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/enrole_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/submitted_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/submitted_request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assignment_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/assignment_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complete_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/complete_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/creats_&amp;_alters.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB/creats_&amp;_alters.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/enrole_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/enrole_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finances_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/finances_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/forum_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/noti_mark_read.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/noti_mark_read.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/profile_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/request_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/request_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/assignment.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/assignment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/course_offering.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/finances.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/finances.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/assignment.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/assignment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/course_offering.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/courses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users_insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/users_insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/student_complete.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/student_complete.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users_insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB/users_insert.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,38 +78,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "PHP Script.index.php.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "E:/Programok/XAMPP/htdocs/EduPortal/admin",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;PHP Script.index.php.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Programok/XAMPP/htdocs/EduPortal/admin&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.webide.settings.project.settings.php&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
-      "directory"
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
+      &quot;directory&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal\admin" />
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal\teacher" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Programok\XAMPP\htdocs\EduPortal\POST" />
+      <recent name="E:\Programok\XAMPP\htdocs\EduPortal\DB" />
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal\student" />
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal" />
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal\Scripts" />
-      <recent name="E:\Programok\XAMPP\htdocs\EduPortal\CSS" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -151,6 +173,7 @@
       <workItem from="1760765319009" duration="24000" />
       <workItem from="1760766045162" duration="807000" />
       <workItem from="1761027188917" duration="155805000" />
+      <workItem from="1763639730689" duration="486000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
