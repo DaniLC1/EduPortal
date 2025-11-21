@@ -2,38 +2,28 @@
 session_start();
 require_once __DIR__. '/../connection.php'; // Adatbáziskapcsolat betöltése
 
-if (!isset($_SESSION['eduportal_id'])) {
+if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
     header("Location: ../index.php");
     exit;
 }
 
-// 🧑‍🏫 Csak tanárok léphetnek be
-if ($_SESSION['role'] !== 'tanar') {
-    header("Location: ../index.php?error=unauthorized");
-    exit;
-}
-
 $eduportal_id = $_SESSION['eduportal_id'];
-global $conn; // Globális változó használata
+global $conn;
 
 // Felhasználó adatainak lekérdezése (név és szak)
 $user_sql = "
 SELECT name 
 FROM users
 WHERE eduportal_id = ?";
+
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
 $user_stmt->execute();
 $user_result = $user_stmt->get_result();
+$user = $user_result->fetch_assoc();
 
-if ($user_result->num_rows === 1) {
-    $user = $user_result->fetch_assoc();
-    $user_name = $user['name'];
-    $user_course = "Tanár";
-} else {
-    $user_name = "Ismeretlen";
-    $user_course = "N/A";
-}
+$user_name = $user['name'] ?? 'Ismeretlen';
+$user_course = "Tanár";
 
 // 🔹 Aktuális dátum (ma)
 $today = date('Y-m-d');

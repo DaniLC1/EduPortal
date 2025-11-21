@@ -20,8 +20,8 @@ global $conn;
 
 // Felhasználó adatainak lekérdezése (név és szak)
 $user_sql = "
-SELECT u.name, 
-       p.name AS szak_nev 
+SELECT u.name,
+       p.name AS szak_nev
 FROM users u
 JOIN programs p ON p.szak_szam = u.course_code 
 WHERE eduportal_id = ?";

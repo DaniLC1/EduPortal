@@ -315,16 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.toggle-fields-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            const details = this.closest('.submitted-request-card').querySelector('.submitted-details');
-            details.style.display = (details.style.display === 'none' || !details.style.display) ? 'block' : 'none';
-            this.textContent = details.style.display === 'block' ? 'Elrejt' : 'Részletek';
-        });
-    });
-});
-
 // --- Dolgozat kérdéskezelő (teacher/assignment.php rész) ---
 document.addEventListener("DOMContentLoaded", () => {
     const questionContainer = document.getElementById("question-container");

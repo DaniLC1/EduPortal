@@ -2,14 +2,8 @@
 session_start();
 require_once __DIR__ . '/../connection.php';
 
-if (!isset($_SESSION['eduportal_id'])) {
-    header("Location: index.php");
-    exit;
-}
-
-// 🧑‍🏫 Csak adminok léphetnek be
-if ($_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php?error=unauthorized");
+if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../index.php");
     exit;
 }
 

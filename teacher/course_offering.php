@@ -2,14 +2,8 @@
 session_start();
 require_once __DIR__ . '/../connection.php';
 
-if (!isset($_SESSION['eduportal_id'])) {
+if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
     header("Location: ../index.php");
-    exit;
-}
-
-// Csak tanárok léphetnek be
-if ($_SESSION['role'] !== 'tanar') {
-    header("Location: ../index.php?error=unauthorized");
     exit;
 }
 
@@ -22,6 +16,7 @@ SELECT
     name 
 FROM users 
 WHERE eduportal_id = ?";
+
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
 $user_stmt->execute();

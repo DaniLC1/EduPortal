@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php';
+require_once __DIR__ . '/../connection.php';
 global $conn;
 
 if (!isset($_SESSION['eduportal_id'])) {
@@ -8,12 +8,8 @@ if (!isset($_SESSION['eduportal_id'])) {
     exit;
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die('Érvénytelen kérés.');
-}
-
 $eduportal_id = $_SESSION['eduportal_id'];
-$role = $_SESSION['role'] ?? 'diak';
+$role = $_SESSION['role'];
 $source = $_POST['source'] ?? ''; // 🔹 Ebből tudjuk, honnan jött a POST (pl. "admin_request", "admin_submitted", "user_request")
 
 try {

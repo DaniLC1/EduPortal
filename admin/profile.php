@@ -1,99 +1,5 @@
 <?php
-session_start();
-require_once __DIR__ . '/../connection.php';
-
-if (!isset($_SESSION['eduportal_id'])) {
-    header("Location: index.php");
-    exit;
-}
-
-// 🧑‍🏫 Csak adminok léphetnek be
-if ($_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php?error=unauthorized");
-    exit;
-}
-
-$eduportal_id = $_SESSION['eduportal_id'];
-global $conn;
-
-// 🔹 Admin adatainak lekérése
-$user_sql = "
-SELECT 
-    name 
-FROM users 
-WHERE eduportal_id = ?";
-$user_stmt = $conn->prepare($user_sql);
-$user_stmt->bind_param("s", $eduportal_id);
-$user_stmt->execute();
-$user_result = $user_stmt->get_result();
-$user = $user_result->fetch_assoc();
-
-$user_name = $user['name'] ?? 'Ismeretlen';
-$user_course = "Admin";
-
-$profile_sql = "
-SELECT u.name,
-       u.birth_date,
-       u.mothers_name,
-       u.email,
-       u.phone,
-       u.postal_code,
-       u.city,
-       u.address
-FROM users u
-WHERE eduportal_id = ?";
-
-$profile_stmt = $conn->prepare($profile_sql);
-$profile_stmt->bind_param("s", $eduportal_id);
-$profile_stmt->execute();
-$profile_result = $profile_stmt->get_result();
-
-$field_types = [];
-$type_query = $conn->query("SHOW COLUMNS FROM users");
-while ($col = $type_query->fetch_assoc()) {
-    $field_types[$col['Field']] = $col['Type'];
-}
-
-// Beadott kérelmek lekérdezése
-$submitted_sql = "
-    SELECT sr.id AS request_id,
-           sr.submitted_at,
-           sr.status,
-           sr.admin_comment,
-           rt.title,
-           rt.description
-    FROM student_requests sr
-    JOIN request_templates rt ON rt.id = sr.template_id
-    WHERE sr.users_eduportal_ID = ?
-    ORDER BY sr.submitted_at DESC
-";
-
-$submitted_stmt = $conn->prepare($submitted_sql);
-$submitted_stmt->bind_param("s", $eduportal_id);
-$submitted_stmt->execute();
-$submitted_result = $submitted_stmt->get_result();
-
-$submitted_requests = [];
-while ($row = $submitted_result->fetch_assoc()) {
-    $submitted_requests[$row['request_id']] = $row;
-}
-
-// Mezők és értékek lekérdezése (minden beküldött kéréshez)
-$field_values_sql = "
-    SELECT fv.request_id,
-           tf.label,
-           fv.field_value,
-           fv.admin_suggestion
-    FROM student_request_field_values fv
-    JOIN request_template_fields tf ON tf.id = fv.field_id
-    WHERE fv.request_id IN (" . implode(',', array_keys($submitted_requests) ?: [0]) . ")
-    ORDER BY fv.request_id, tf.id
-";
-
-$field_values_result = $conn->query($field_values_sql);
-while ($row = $field_values_result->fetch_assoc()) {
-    $submitted_requests[$row['request_id']]['fields'][] = $row;
-}
+require_once __DIR__ . '/../PHP_Header/a_profile.php';
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -153,6 +59,19 @@ while ($row = $field_values_result->fetch_assoc()) {
 
             <hr class="double-line">
 
+            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+                <div class="success-message">
+                    ✅ A(z) adat(ok) sikeresen mentve/módosítva!
+                </div>
+                <hr>
+            <?php endif; ?>
+            <?php if (isset($_GET['error'])): ?>
+                <div class="error-message">
+                    ⚠️ <?= htmlspecialchars($_GET['error']) ?>
+                </div>
+                <hr>
+            <?php endif; ?>
+
             <h3 class="section-title">Adatok</h3>
 
             <form id="profile-form" class="profile-details" method="post" action="../POST/profile_post.php">
@@ -169,7 +88,6 @@ while ($row = $field_values_result->fetch_assoc()) {
                     'postal_code' => 'Irányítószám',
                     'city' =>'Város',
                     'address' => 'Cím',
-                    'financing_type' => 'Képzés típúsa'
                 ];
 
                 $user_data = $profile_result->fetch_assoc();
@@ -200,17 +118,6 @@ while ($row = $field_values_result->fetch_assoc()) {
                 }
                 ?>
                 <button type="submit" name="profile_save_data" class="save-btn">Mentés</button>
-                <?php // TODO: Egységes (hiba) üzenetek  ?>
-                <?php
-                if (!empty($_SESSION['success'])) {
-                    echo "<p class='success-message'>{$_SESSION['success']}</p>";
-                    unset($_SESSION['success']);
-                }
-                if (!empty($_SESSION['error'])) {
-                    echo "<p class='error-message'>{$_SESSION['error']}</p>";
-                    unset($_SESSION['error']);
-                }
-                ?>
             </form>
         </div>
     </main>

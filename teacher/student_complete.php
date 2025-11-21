@@ -2,19 +2,13 @@
 session_start();
 require_once __DIR__. '/../connection.php'; // Adatbáziskapcsolat betöltése
 
-if (!isset($_SESSION['eduportal_id'])) {
+if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
     header("Location: ../index.php");
     exit;
 }
 
-// 🧑‍🏫 Csak tanárok léphetnek be
-if ($_SESSION['role'] !== 'tanar') {
-    header("Location: ../index.php?error=unauthorized");
-    exit;
-}
-
 $eduportal_id = $_SESSION['eduportal_id'];
-global $conn; // Globális változó használata
+global $conn;
 
 // 🔹 Tanár adatai
 $user_sql = "
@@ -30,8 +24,6 @@ $user = $user_result->fetch_assoc();
 
 $user_name = $user['name'] ?? 'Ismeretlen';
 $user_course = "Tanár";
-
-
 
 // === 1️⃣ DIÁKOK ÉS JEGYEK LEKÉRDEZÉSE ===
 $students_sql = "
