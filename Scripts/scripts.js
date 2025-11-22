@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const imgElement = document.getElementById("slider-image");
     if (imgElement) {
         const sliderImages = [
-            "slider_pictures/slide1.png",
-            "slider_pictures/slider2.jpg",
-            "slider_pictures/slider3.jpg",
-            "slider_pictures/slider4.jpg",
-            "slider_pictures/slider5.jpg"
+            "slider_pictures/no_copyright1.png",
+            "slider_pictures/no_copyright2.jpg",
+            "slider_pictures/no_copyright3.jpg",
+            "slider_pictures/no_copyright4.jpeg",
+            "slider_pictures/no_copyright5.jpg"
         ];
 
         let currentIndex = 0;

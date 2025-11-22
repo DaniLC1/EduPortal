@@ -31,7 +31,7 @@
         <div class="main-container">
             <!-- BAL OLDAL: Képek -->
             <div class="image-slider">
-                <img id="slider-image" src="slider_pictures/slide1.png" alt="Slider kép">
+                <img id="slider-image" src="slider_pictures/no_copyright1.png" alt="Slider kép">
             </div>
             <!-- KÖZÉP: Bejelentkezés -->
             <section class="login-box">
