@@ -1,17 +1,3 @@
-<?php if (isset($_GET['error'])): ?>
-    <p class="error">
-        <?php
-        switch ($_GET['error']) {
-            case 'invalid_credentials':
-                echo "Hibás jelszó!";
-                break;
-            case 'user_not_found':
-                echo "Felhasználó nem található!";
-                break;
-        }
-        ?>
-    </p>
-<?php endif; ?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -28,6 +14,12 @@
         </div>
     </header>
     <main>
+        <?php if (isset($_GET['error'])): ?>
+            <div class="error-message">
+                ⚠️ <?= htmlspecialchars($_GET['error']) ?>
+            </div>
+            <hr>
+        <?php endif; ?>
         <div class="main-container">
             <!-- BAL OLDAL: Képek -->
             <div class="image-slider">
@@ -42,6 +34,14 @@
 
                     <label for="password">Jelszó:</label>
                     <input type="password" id="password" name="password" required>
+
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="accept_terms" name="accept_terms" required>
+                        <label for="accept_terms"> Elolvastam az </label>
+                        <a href="ASZF/adatvedelem.md" target="_blank"> ÁSZF-et</a>
+
+                    </div>
+
 
                     <button type="submit">Belépés</button>
                 </form>

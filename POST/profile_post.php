@@ -85,3 +85,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['profile_save_data']))
 ============================================================ */
 header("Location: " . ($_SERVER['HTTP_REFERER'] ?? 'index.php'));
 exit;
+?>
