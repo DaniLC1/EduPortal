@@ -264,8 +264,9 @@ $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                     </div>
 
                     <div class="card-body">
-                        <p><strong>Leírás:</strong> <?= htmlspecialchars($course['leiras']) ?></p>
-
+                        <div>
+                            <p><strong>Leírás:</strong> <?= htmlspecialchars($course['leiras']) ?></p>
+                        </div>
                         <?php foreach ($course['offerings'] as $off): ?>
                             <details class="offering-details">
                                 <summary><?= ucfirst($off['course_type'] ?? 'Kurzus') ?> szerkesztése (<?= htmlspecialchars($off['day_of_week']) ?> <?= substr($off['start_time'], 0, 5) ?>)</summary>

@@ -1,28 +1,28 @@
 -- Users tábla insert: X
 INSERT INTO users (name, eduportal_id, email, phone, password_hash, postal_code, city, address, birth_date, mothers_name, role, course_code) VALUES
-('Török Ágnes', 'EDU100000', 'henriettakiss@hegedus.info', '+36 86 455-6466', 'Teszt1234', '3913', 'Keresztharaszti', 'Bakonytapolcai utca 110.', '1977-05-30', ' Kovács Mária', 'hallgato', 'SZ001'),
-('Balogh Anna', 'EDU100001', 'molnartimea@kovacs.com.hu', '06-6/425 2624', 'Teszt123', '7257', 'Fürdőváros', 'Soproni út 20.', '1970-08-26', ' Szabó Erzsébet', 'hallgato', 'SZ004'),
-('Mészáros Mihály', 'EDU100002', 'mariannkollar@varga.org', '+36 1 453 5835', 'Teszt123', '9400', 'Sopron', 'Erzsébet utca 22.', '1998-11-19', 'Szilvia Sipos', 'hallgato', 'SZ004'),
-('Török Nikolett', 'EDU100003', 'roberttoth@szabo.com', '+36 76 385 7361', 'Teszt123', '2030', 'Érd', 'Kossuth tér 8.', '1996-02-03', 'Kocsis Judit', 'hallgato', 'SZ003'),
-('Tóth Enikő', 'EDU100004', 'liliko@farkas.org', '+36 1 621 3104', 'Teszt123', '1025', 'Budapest', 'Zöldfa utca 33.', '2000-06-12', 'Vass Krisztina', 'hallgato', 'SZ003'),
-('Nagy Roland', 'EDU100005', 'zsuzsannaboros@feher.info', '+36 20 529 0924', 'Teszt123', '7632', 'Pécs', 'Petőfi utca 9.', '1997-03-07', 'Major Ildikó', 'hallgato', 'SZ002'),
-('Balázs Zoltán', 'EDU100006', 'sandorbo@kiss.org', '+36 1 525 4783', 'Teszt123', '4026', 'Debrecen', 'Szabadság tér 6.', '1995-01-15', 'Németh Boglárka', 'hallgato', 'SZ002'),
-('Németh Krisztina', 'EDU100007', 'erzsebetpap@pinter.com', '+36 30 968 0213', 'Teszt123', '7100', 'Szekszárd', 'Arany János utca 44.', '1999-08-21', 'Mónika Tóth', 'hallgato', 'SZ007'),
-('Kovács Gábor', 'EDU100008', 'viktoriahorvath@fekete.com', '+36 70 781 5682', 'Teszt123', '8600', 'Siófok', 'Dózsa György út 7.', '1996-09-10', 'Ilona Balla', 'hallgato', 'SZ001'),
-('Fekete Dóra', 'EDU100009', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18.', '1998-12-05', 'Katalin Balogh', 'hallgato', 'SZ007'),
-('Kiszel Dániel', 'EDU111111', 'kiszel1dani@gmail.com', '+36 20 283 7838', 'Teszt123', '6763', 'Szatymaz', 'IV. Körzet Tanya 127/c', '2001-09-30', 'Zsadány Ilona', 'hallgato', 'SZ001'),
+('Török Ágnes', 'EDU100000', 'henriettakiss@hegedus.info', '+36 86 455-6466', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '3913', 'Keresztharaszti', 'Bakonytapolcai utca 110.', '1977-05-30', ' Kovács Mária', 'hallgato', 'SZ001'),
+('Balogh Anna', 'EDU100001', 'molnartimea@kovacs.com.hu', '06-6/425 2624', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '7257', 'Fürdőváros', 'Soproni út 20.', '1970-08-26', ' Szabó Erzsébet', 'hallgato', 'SZ004'),
+('Mészáros Mihály', 'EDU100002', 'mariannkollar@varga.org', '+36 1 453 5835', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9400', 'Sopron', 'Erzsébet utca 22.', '1998-11-19', 'Szilvia Sipos', 'hallgato', 'SZ004'),
+('Török Nikolett', 'EDU100003', 'roberttoth@szabo.com', '+36 76 385 7361', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '2030', 'Érd', 'Kossuth tér 8.', '1996-02-03', 'Kocsis Judit', 'hallgato', 'SZ003'),
+('Tóth Enikő', 'EDU100004', 'liliko@farkas.org', '+36 1 621 3104', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '1025', 'Budapest', 'Zöldfa utca 33.', '2000-06-12', 'Vass Krisztina', 'hallgato', 'SZ003'),
+('Nagy Roland', 'EDU100005', 'zsuzsannaboros@feher.info', '+36 20 529 0924', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '7632', 'Pécs', 'Petőfi utca 9.', '1997-03-07', 'Major Ildikó', 'hallgato', 'SZ002'),
+('Balázs Zoltán', 'EDU100006', 'sandorbo@kiss.org', '+36 1 525 4783', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '4026', 'Debrecen', 'Szabadság tér 6.', '1995-01-15', 'Németh Boglárka', 'hallgato', 'SZ002'),
+('Németh Krisztina', 'EDU100007', 'erzsebetpap@pinter.com', '+36 30 968 0213', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '7100', 'Szekszárd', 'Arany János utca 44.', '1999-08-21', 'Mónika Tóth', 'hallgato', 'SZ007'),
+('Kovács Gábor', 'EDU100008', 'viktoriahorvath@fekete.com', '+36 70 781 5682', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '8600', 'Siófok', 'Dózsa György út 7.', '1996-09-10', 'Ilona Balla', 'hallgato', 'SZ001'),
+('Fekete Dóra', 'EDU100009', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18.', '1998-12-05', 'Katalin Balogh', 'hallgato', 'SZ007'),
+('Kiszel Dániel', 'EDU111111', 'kiszel1dani@gmail.com', '+36 20 283 7838', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '6763', 'Szatymaz', 'IV. Körzet Tanya 127/c', '2001-09-30', 'Zsadány Ilona', 'hallgato', 'SZ001'),
 
-('Fehér Dóra', 'EDU100010', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Balogh Katalin', 'tanar', ''),
-('Zöld Dóra', 'EDU100011', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
-('Kék Dóra', 'EDU100012', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
-('Rózsa Dóra', 'EDU100013', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
-('Narancs Dóra', 'EDU100014', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Fehér Dóra', 'EDU100010', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Balogh Katalin', 'tanar', ''),
+('Zöld Dóra', 'EDU100011', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Kék Dóra', 'EDU100012', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Rózsa Dóra', 'EDU100013', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
+('Narancs Dóra', 'EDU100014', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'tanar', ''),
 
-('Ibolya Dóra', 'EDU100015', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
-('Pál Dóra', 'EDU100016', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
-('Lila Dóra', 'EDU100017', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
-('Keresztes Dóra', 'EDU100018', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
-('Kiss Dóra', 'EDU100019', 'krisztianvarga@szabo.org', '+36 30 648 5836', 'Teszt123', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', '');
+('Ibolya Dóra', 'EDU100015', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Pál Dóra', 'EDU100016', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Lila Dóra', 'EDU100017', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Keresztes Dóra', 'EDU100018', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
+('Kiss Dóra', 'EDU100019', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', '');
 
 -- courses tábla töltés: X
 INSERT INTO courses (kurzus_kod, name, credit, leiras, tematika) VALUES 

@@ -194,7 +194,6 @@ body[data-theme="dark"] .create-offering select {
     flex-wrap: wrap;
     background-color: transparent;
     border: none;
-    justify-content: center;
 }
 .offering-details input,
 .offering-details textarea,
