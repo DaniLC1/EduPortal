@@ -166,12 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/*
 //Tanulmányok szűrő
 document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("searchInput");
-    const statusFilter = document.getElementById("statusFilter");
-    const typeFilter = document.getElementById("typeFilter");
-    const subjectCards = document.querySelectorAll(".subject-card");
+    const searchInput = document.getElementById("ss_searchInput");
+    const statusFilter = document.getElementById("ss_statusFilter");
+    const typeFilter = document.getElementById("ss_typeFilter");
+    const subjectCards = document.querySelectorAll(".ss_subject-card");
 
     function filterCourses() {
         const searchTerm = searchInput.value.toLowerCase();
@@ -201,11 +202,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('searchInput');
-    const semesterFilter = document.getElementById('semesterFilter');
-    const typeFilter = document.getElementById('typeFilter');
-    const courseFilter = document.getElementById('courseFilter');
-    const cards = document.querySelectorAll('.course-card');
+    const searchInput = document.getElementById('sec_searchInput');
+    const semesterFilter = document.getElementById('sec_semesterFilter');
+    const typeFilter = document.getElementById('sec_typeFilter');
+    const courseFilter = document.getElementById('tar_courseFilter');
+    const cards = document.querySelectorAll('.sec_course-card');
 
     function filterCourses() {
         const searchText = searchInput?.value.toLowerCase().trim() || '';
@@ -238,6 +239,113 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeFilter) typeFilter.addEventListener('change', filterCourses);
     if (courseFilter) courseFilter.addEventListener('change', filterCourses);
 });
+*/
+
+//Új ötlet: Az összes filter 1 helyen kezelve a js-ben.
+function safeGet(id) {
+    return document.getElementById(id) || null;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ==========================================
+    // SAFE ELEMENT GETTER
+    // ==========================================
+    const searchInput =
+        safeGet('sec_searchInput') ||
+        safeGet('tar_searchInput') ||
+        safeGet('ss_searchInput') ||
+        safeGet('sr_searchInput') ||
+        safeGet('tr_searchInput');
+
+    const semesterFilter =
+        safeGet('sec_semesterFilter') ||
+        safeGet('tar_semesterFilter') ||
+        safeGet('ss_semesterFilter');
+
+    const typeFilter =
+        safeGet('sec_typeFilter') ||
+        safeGet('tar_typeFilter') ||
+        safeGet('ss_typeFilter');
+
+    const courseFilter =
+        safeGet('sec_courseFilter') ||
+        safeGet('tar_courseFilter');
+
+    const statusFilter =
+        safeGet('ss_statusFilter');
+
+    // ==========================================
+    // KÁRTYÁK KIVÁLASZTÁSA – oldaltól függően
+    // ==========================================
+    let cards = [];
+
+    if (document.querySelectorAll('.sec_course-card').length) {
+        cards = document.querySelectorAll('.sec_course-card');
+
+    } else if (document.querySelectorAll('.tar_course-card').length) {
+        cards = document.querySelectorAll('.tar_course-card');
+
+    } else if (document.querySelectorAll('.ss_subject-card').length) {
+        cards = document.querySelectorAll('.ss_subject-card');
+
+    } else if (document.querySelectorAll('.sr_request-card').length) {
+        cards = document.querySelectorAll('.sr_request-card');
+
+    } else if (document.querySelectorAll('.tr_request-card').length) {
+        cards = document.querySelectorAll('.tr_request-card');
+    }
+
+    // Ha nincs kártya → nincs mit szűrni
+    if (!cards.length) return;
+
+
+    // ==========================================
+    // FILTER LOGIKA
+    // ==========================================
+    function filterCourses() {
+        const searchText = searchInput?.value.toLowerCase().trim() || '';
+        const selectedSemester = semesterFilter?.value || 'all';
+        const selectedType = typeFilter?.value || 'all';
+        const selectedCourse = courseFilter?.value || 'all';
+        const selectedStatus = statusFilter?.value || 'all';
+
+        cards.forEach(card => {
+            const name = card.dataset.name || '';
+            const semester = card.dataset.semester || '';
+            const type = card.dataset.type || '';
+            const offering = card.dataset.offering || '';
+            const status = card.dataset.status || '';
+            // --- ÚJ: REQUEST OLDAL MEZŐI ---
+            const title = card.dataset.title || '';
+            const description = card.dataset.description || '';
+
+            const matchesRequest = (title && title.includes(searchText)) || (description && description.includes(searchText));
+            const matchesName = name.includes(searchText);
+            const matchesSemester = (selectedSemester === 'all' || semester === selectedSemester);
+            const matchesType = (selectedType === 'all' || type === selectedType);
+            const matchesCourse = (selectedCourse === 'all' || offering === selectedCourse);
+            const matchesStatus = (selectedStatus === 'all' || selectedStatus === status);
+
+            if (matchesName && matchesSemester && matchesType && matchesCourse && matchesStatus || matchesRequest) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+
+    // ==========================================
+    // ESEMÉNYFIGYELŐK — CSAK AMI LÉTEZIK
+    // ==========================================
+    if (searchInput) searchInput.addEventListener('input', filterCourses);
+    if (semesterFilter) semesterFilter.addEventListener('change', filterCourses);
+    if (typeFilter) typeFilter.addEventListener('change', filterCourses);
+    if (courseFilter) courseFilter.addEventListener('change', filterCourses);
+    if (statusFilter) statusFilter.addEventListener('change', filterCourses);
+});
+
 
 //popup működés:
 function openPaymentModal(financingId, maxAmount) {
@@ -259,61 +367,6 @@ function toggleDetails(id) {
         element.style.display = 'none';
     }
 }
-
-//kérelmek beküldés + stb gomb működése:
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.toggle-desc-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const card = btn.closest('.request-card');
-            const desc = card.querySelector('.card-description');
-            desc.style.display = desc.style.display === 'none' ? 'block' : 'none';
-        });
-    });
-
-    document.querySelectorAll('.fill-request-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Csukjon be minden más formot
-            document.querySelectorAll('.request-form').forEach(f => {
-                f.style.display = 'none';
-                f.querySelector('fieldset').disabled = true;
-                f.querySelector('.form-actions').style.display = 'none';
-            });
-            const card = btn.closest('.request-card');
-            const form = card.querySelector('.request-form');
-            const fieldset = form.querySelector('fieldset');
-            const actions = form.querySelector('.form-actions');
-
-            // Ne csinálj semmit, ha már nyitva van!
-            if (form.style.display === 'block') return;
-
-            form.style.display = 'block';
-            fieldset.disabled = false;
-            actions.style.display = 'flex';
-        });
-    });
-
-    document.querySelectorAll('.cancel-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const form = btn.closest('.request-form');
-            const fieldset = form.querySelector('fieldset');
-            const actions = form.querySelector('.form-actions');
-
-            form.reset();
-            fieldset.disabled = true;
-            actions.style.display = 'none';
-        });
-    });
-
-    // Engedélyezzük a fieldsetet submit előtt, hogy elküldje az adatokat
-    document.querySelectorAll('.request-form').forEach(form => {
-        form.addEventListener('submit', (e) => {
-            const fieldset = form.querySelector('fieldset');
-            if (fieldset.disabled) {
-                fieldset.disabled = false;
-            }
-        });
-    });
-});
 
 // --- Dolgozat kérdéskezelő (teacher/assignment.php rész) ---
 document.addEventListener("DOMContentLoaded", () => {

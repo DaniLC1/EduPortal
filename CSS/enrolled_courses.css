@@ -46,7 +46,8 @@
 }
 
 /* Kártya stílus */
-.course-card {
+.sec_course-card,
+.tar_course-card {
     background-color: var(--card-background);
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
@@ -55,7 +56,8 @@
     transition: transform 0.2s ease;
 }
 
-.course-card:hover {
+.sec_course-card:hover,
+.tar_course-card:hover {
     transform: translateY(-6px);
 }
 
@@ -94,19 +96,23 @@
 }
 
 /* Stílusosabb státusz színezés */
-.course-card .status {
+.sec_course-card .status,
+.tar_course-card .status {
     font-weight: 600;
 }
 
-.course-card .status.completed {
+.sec_course-card .status.completed,
+.tar_course-card .status.completed {
     color: #2e7d32; /* zöld */
 }
 
-.course-card .status.failed {
+.sec_course-card .status.failed,
+.tar_course-card .status.failed {
     color: #c62828; /* piros */
 }
 
-.course-card .status.enrolled {
+.sec_course-card .status.enrolled,
+.tar_course-card .status.enrolled {
     color: #ef6c00; /* narancs */
 }
 

@@ -1,79 +1,4 @@
-<?php
-// Globális session és connection
-session_start();
-require_once __DIR__ . '/../connection.php';
 
-// Jogosultság ellenőrzés
-if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'hallgato') {
-    header("Location: ../index.php");
-    exit;
-}
-
-$eduportal_id = $_SESSION['eduportal_id'];
-global $conn;
-
-/* ============================================================
-   🔹 Felhasználó alapadatok lekérése
-============================================================ */
-$user_sql = "
-SELECT
-    u.name,
-    p.name AS szak_nev
-FROM users u
-LEFT JOIN programs p ON p.szak_szam = u.course_code
-WHERE u.eduportal_id = ?
-";
-
-$user_stmt = $conn->prepare($user_sql);
-$user_stmt->bind_param("s", $eduportal_id);
-$user_stmt->execute();
-$user_result = $user_stmt->get_result();
-$user = $user_result->fetch_assoc();
-
-$user_name = $user['name'] ?? "Ismeretlen";
-$user_course = $user['szak_nev'] ?? "N/A";
-
-/// Keresés lekérdezés
-$search = $_GET['search'] ?? '';
-
-// Kérelemsablonok lekérdezése (címre vagy leírásra)
-$request_sql = "
-    SELECT rt.id,
-           rt.title,
-           rt.description
-    FROM request_templates rt
-    WHERE ( rt.title LIKE CONCAT('%', ?, '%')
-    OR rt.description LIKE CONCAT('%', ?, '%'))
-    AND rt.to_who = 'hallgato'
-    ORDER BY rt.created_at DESC
-";
-$request_stmt = $conn->prepare($request_sql);
-$request_stmt->bind_param("ss", $search, $search);
-$request_stmt->execute();
-$request_result = $request_stmt->get_result();
-
-$templates = [];
-while ($row = $request_result->fetch_assoc()) {
-    $templates[] = $row;
-}
-
-// Mezők lekérdezése az összes sablonhoz
-$fields_sql = "
-    SELECT f.id,
-           f.template_id,
-           f.label,
-           f.field_type,
-           f.is_required
-    FROM request_template_fields f
-    ORDER BY f.template_id, f.id
-";
-$fields_result = $conn->query($fields_sql);
-
-$template_fields = [];
-while ($row = $fields_result->fetch_assoc()) {
-    $template_fields[$row['template_id']][] = $row;
-}
-?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -134,10 +59,9 @@ while ($row = $fields_result->fetch_assoc()) {
     <?php endif; ?>
 
     <!-- Kereső -->
-    <form method="get" action="request.php" class="search-form">
-        <input type="text" name="search" placeholder="Keresés címre vagy leírásra..." value="<?= htmlspecialchars($search) ?>">
-        <button type="submit">Keresés</button>
-    </form>
+    <div class="search-form">
+        <input type="text" id="sr_searchInput" placeholder="Keresés címre vagy leírásra...">
+    </div>
 
     <!-- Kérelmek listája -->
     <div class="requests-container">
@@ -145,48 +69,53 @@ while ($row = $fields_result->fetch_assoc()) {
             <p>Nincs találat a megadott keresésre.</p>
         <?php else: ?>
             <?php foreach ($templates as $template): ?>
-                <div class="request-card" data-template-id="<?= $template['id'] ?>">
-                    <div class="card-header">
-                        <h2><?= htmlspecialchars($template['title']) ?></h2>
-                        <div class="card-actions">
-                            <button class="toggle-desc-btn">Több</button>
-                            <button class="fill-request-btn">Kitöltés</button>
-                        </div>
-                    </div>
-                    <div class="card-description" style="display: none;">
-                        <p><?= nl2br(htmlspecialchars($template['description'])) ?></p>
 
-                        <form method="post" action="../POST/request_post.php" class="request-form"">
+                <details class="sr_request-card"
+                          data-title="<?= strtolower(htmlspecialchars($template['title'])) ?>"
+                          data-description="<?= strtolower(htmlspecialchars($template['description'])) ?>">
+
+                    <summary class="card-summary">
+                        <span class="title"><?= htmlspecialchars($template['title']) ?></span>
+                    </summary>
+
+                    <div class="card-content">
+                        <p class="description"><?= nl2br(htmlspecialchars($template['description'])) ?></p>
+
+                        <form method="post" action="../POST/request_post.php" class="request-form">
                             <input type="hidden" name="template_id" value="<?= $template['id'] ?>">
 
-                            <fieldset disabled>
-                                <?php if (!empty($template_fields[$template['id']])): ?>
-                                    <?php foreach ($template_fields[$template['id']] as $field): ?>
-                                        <label>
-                                            <?= htmlspecialchars($field['label']) ?><?= $field['is_required'] ? ' *' : '' ?><br>
-                                            <?php if ($field['field_type'] === 'textarea'): ?>
-                                                <textarea class="auto-resize-textarea" name="field_<?= $field['id'] ?>" rows="3"></textarea>
-                                            <?php else: ?>
-                                                <input
-                                                        type="<?= htmlspecialchars($field['field_type']) ?>"
-                                                        name="field_<?= $field['id'] ?>"
-                                                >
-                                            <?php endif; ?>
-                                        </label>
-                                        <br><br>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <p>Nincsenek kitölthető mezők ehhez a kérelemhez.</p>
-                                <?php endif; ?>
-                            </fieldset>
+                            <?php if (!empty($template_fields[$template['id']])): ?>
+                                <?php foreach ($template_fields[$template['id']] as $field): ?>
+                                    <label class="field-label">
+                                        <?= htmlspecialchars($field['label']) ?>
+                                        <?= $field['is_required'] ? ' *' : '' ?>
+                                    </label>
 
-                            <div class="form-actions" style="display: none;">
-                                <button type="button" class="cancel-btn">Mégse</button>
-                                <button type="submit" class="submit-btn">Kérelem beküldése</button>
-                            </div>
+                                    <?php if ($field['field_type'] === 'textarea'): ?>
+                                        <textarea
+                                                class="auto-resize-textarea"
+                                                name="field_<?= $field['id'] ?>"
+                                                rows="3"
+                                        <?= $field['is_required'] ? 'required' : '' ?>
+                                    ></textarea>
+                                    <?php else: ?>
+                                        <input
+                                                type="<?= htmlspecialchars($field['field_type']) ?>"
+                                                name="field_<?= $field['id'] ?>"
+                                                <?= $field['is_required'] ? 'required' : '' ?>
+                                        >
+                                    <?php endif; ?>
+                                    <br><br>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <p>Nincsenek kitölthető mezők ehhez a kérelemhez.</p>
+                            <?php endif; ?>
+
+                            <button type="submit" class="submit-btn">Kérelem beküldése</button>
                         </form>
                     </div>
-                </div>
+                </details>
+
             <?php endforeach; ?>
         <?php endif; ?>
     </div>

@@ -50,7 +50,8 @@
     padding: 1.2rem;
 }
 
-.request-card {
+.sr_request-card,
+.tr_request-card{
     background-color: var(--card-background);
     padding: 1rem;
     border-radius: 8px;
@@ -66,20 +67,6 @@
 .card-header h2 {
     margin: 0;
     font-size: 1.2em;
-}
-
-.request-card button{
-    background-color: var(--primary-color);
-    color: var(--text-light);
-    border: none;
-    padding: 6px 12px;
-    font-size: 0.9em;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.request-card button:hover {
-    background-color: var(--primary-hover);
 }
 
 .card-description {
@@ -123,13 +110,11 @@ body[data-theme="dark"] .search-form input{
     border-color: #444;
 }
 
-body[data-theme="dark"] .search-form button,
-body[data-theme="dark"] .request-card button{
+body[data-theme="dark"] .search-form button{
     background-color: var(--secondary-color);
     color: var(--text-light);
 }
 
-body[data-theme="dark"] .search-form button:hover,
-body[data-theme="dark"] .request-card button:hover{
+body[data-theme="dark"] .search-form button:hover{
     background-color: var(--secondary-hover);
 }
