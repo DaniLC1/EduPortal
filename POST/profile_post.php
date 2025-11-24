@@ -1,4 +1,5 @@
 <?php
+// Globális session és connection
 require_once __DIR__ . '/../connection.php';
 session_start();
 global $conn;

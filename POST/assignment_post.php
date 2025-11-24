@@ -118,8 +118,6 @@ if (isset($_POST['answers'])) {
 =========================== */
 elseif (isset($_POST['title']) && isset($_POST['questions'])) {
 
-    /*echo '<pre>'; print_r($_POST['questions']); echo '</pre>'; exit;*/
-
     $assignment_id = $_POST['assignment_id'] ?? null;
     $title = trim($_POST['title']);
     $description = trim($_POST['description'] ?? '');

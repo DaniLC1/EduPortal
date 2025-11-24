@@ -3,6 +3,9 @@ session_start();
 require_once __DIR__ . '/../connection.php';
 global $conn;
 
+/* ============================================================
+   🔹 Jogosultság ellenőrzés
+============================================================ */
 if (!isset($_SESSION['eduportal_id'])) {
     header('Location: index.php');
     exit;

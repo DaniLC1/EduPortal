@@ -236,6 +236,24 @@ foreach ($raw_courses as $row) {
         </header>
         <main>
             <h1>Elérhető kurzusok</h1>
+            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+                <div class="success-message">
+                    ✅ Sikeresen leadott kurzus.
+                </div>
+                <hr>
+            <?php endif; ?>
+            <?php if (isset($_GET['success']) && $_GET['success'] == 2): ?>
+                <div class="success-message">
+                    ✅ Sikeresen felvett kurzus.
+                </div>
+                <hr>
+            <?php endif; ?>
+            <?php if (isset($_GET['error'])): ?>
+                <div class="error-message">
+                    ⚠️ <?= htmlspecialchars($_GET['error']) ?>
+                </div>
+                <hr>
+            <?php endif; ?>
             <form method="get" class="filters">
                 <label for="semester_id">Félév:</label>
                 <select name="semester_id" id="semester_id">

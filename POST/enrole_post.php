@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php';
+require_once __DIR__ . '/../connection.php';
 global $conn;
 
 if (!isset($_SESSION['eduportal_id'])) {
@@ -27,7 +27,7 @@ if ($role === 'tanar' && isset($_POST['kurzus_kod'])) {
 
     if (empty($kurzus_kod) || empty($semester_id) || empty($day_of_week) || empty($start_time)) {
         $error_message = urlencode("Hiányzó adatok az új kurzusóra létrehozásához.");
-        header("Location: teacher/courses.php?error={$error_message}");
+        header("Location: /EduPortal/teacher/courses.php?error={$error_message}");
         exit;
     }
 
@@ -77,7 +77,7 @@ if ($role === 'tanar' && isset($_POST['kurzus_kod'])) {
     } catch (Exception $e) {
         $conn->rollback();
         $error_message = urlencode("Hiba történt: " . $e->getMessage());
-        header("Location: teacher/courses.php?error={$error_message}");
+        header("Location: /EduPortal/teacher/courses.php?error={$error_message}");
         exit;
     }
 }
@@ -128,13 +128,13 @@ if ($role === 'tanar' && isset($_POST['offering_id'])) {
         }
 
         $conn->commit();
-        header("Location: teacher/course_offering.php?success=1");
+        header("Location: /EduPortal/teacher/course_offering.php?success=1");
         exit;
 
     } catch (Exception $e) {
         $conn->rollback();
         $error_message = urlencode("Hiba történt: " . $e->getMessage());
-        header("Location: teacher/course_offering.php?error={$error_message}");
+        header("Location: /EduPortal/teacher/course_offering.php?error={$error_message}");
         exit;
     }
 }
@@ -192,6 +192,10 @@ if ($role === 'hallgato' && isset($_POST['offering_id'])) {
             $delete_stmt->execute();
             $delete_stmt->close();
 
+            $conn->commit();
+            header("Location: /EduPortal/student/course_offering.php?success=1");
+            exit;
+
         } else {
             // Jelentkezés ellenőrzése
             $check_sql = "
@@ -216,16 +220,16 @@ if ($role === 'hallgato' && isset($_POST['offering_id'])) {
             $insert_stmt->bind_param("sis", $eduportal_id, $offering_id, $status);
             $insert_stmt->execute();
             $insert_stmt->close();
-        }
 
-        $conn->commit();
-        header("Location: student/course_offering.php?success=1");
-        exit;
+            $conn->commit();
+            header("Location: /EduPortal/student/course_offering.php?success=2");
+            exit;
+        }
 
     } catch (Exception $e) {
         $conn->rollback();
         $error_message = urlencode("Hiba történt: " . $e->getMessage());
-        header("Location: student/course_offering.php?error={$error_message}");
+        header("Location: /EduPortal/student/course_offering.php?error={$error_message}");
         exit;
     }
 }

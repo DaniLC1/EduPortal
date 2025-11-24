@@ -1,41 +1,37 @@
 <?php
+// Globális session és connection
 session_start();
-require_once __DIR__. '/../connection.php'; // Adatbáziskapcsolat betöltése
+require_once __DIR__ . '/../connection.php';
 
-if (!isset($_SESSION['eduportal_id'])) {
-    header("Location: ../index.php"); // vagy login.php
-    exit;
-}
-
-// 🧑‍🏫 Csak tanárok léphetnek be
-if ($_SESSION['role'] !== 'hallgato') {
-    header("Location: ../index.php?error=unauthorized");
+// Jogosultság ellenőrzés
+if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'hallgato') {
+    header("Location: ../index.php");
     exit;
 }
 
 $eduportal_id = $_SESSION['eduportal_id'];
-global $conn; // Globális változó használata
+global $conn;
 
-// Felhasználó adatainak lekérdezése (név és szak)
+/* ============================================================
+   🔹 Felhasználó alapadatok lekérése
+============================================================ */
 $user_sql = "
-SELECT u.name, 
-       p.name AS szak_nev 
+SELECT
+    u.name,
+    p.name AS szak_nev
 FROM users u
-JOIN programs p ON p.szak_szam = u.course_code 
-WHERE eduportal_id = ?";
+LEFT JOIN programs p ON p.szak_szam = u.course_code
+WHERE u.eduportal_id = ?
+";
+
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
 $user_stmt->execute();
 $user_result = $user_stmt->get_result();
+$user = $user_result->fetch_assoc();
 
-if ($user_result->num_rows === 1) {
-    $user = $user_result->fetch_assoc();
-    $user_name = $user['name'];
-    $user_course = $user['szak_nev'];
-} else {
-    $user_name = "Ismeretlen";
-    $user_course = "N/A";
-}
+$user_name = $user['name'] ?? "Ismeretlen";
+$user_course = $user['szak_nev'] ?? "N/A";
 
 // 🔹 Félévek lekérdezése és aktuális kiválasztása
 $today = date('Y-m-d');

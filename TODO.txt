@@ -46,6 +46,10 @@ Ezt mindenhol meg kell csinálni!!!
 ----------------------
 teacher/course_offering.php módosítás ->a kurzus típusa(előadás/gyakorlat) nem lehet kiválasztani szerkesztés/létrehozásánál
 
+----------------------
+Kell még kereső mezőt / szűrést megvalósítani VAGY javítani:
+-
+
 /************************************************
 Tanári (Dr.Tóth László) javaslatok
 ************************************************/
