@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php';
+require_once __DIR__ . '/../connection.php';
 global $conn;
 
 $eduportal_id = $_SESSION['eduportal_id'];

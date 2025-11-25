@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php';
+require_once __DIR__ . '/../connection.php';
 global $conn;
 
 if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
@@ -54,14 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
 
         // ✅ Siker esetén visszairányítás
-        header("Location: teacher/student_complete.php?success=1");
+        header("Location: /EduPortal/teacher/student_complete.php?success=1");
         exit;
 
     } catch (Exception $e) {
         $conn->rollback();
         // ⚠️ Hiba esetén visszairányítás, a hibaüzenetet GET paraméterben továbbítva
         $error_message = urlencode("Hiba történt: " . $e->getMessage());
-        header("Location: teacher/student_complete.php?error={$error_message}");
+        header("Location: /EduPortal/teacher/student_complete.php?error={$error_message}");
         exit;
     }
 } else {

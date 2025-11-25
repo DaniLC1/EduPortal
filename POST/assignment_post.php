@@ -1,7 +1,7 @@
 <?php
-global $conn;
-include 'connection.php';
+require_once __DIR__ . '/../connection.php';
 session_start();
+global $conn;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
