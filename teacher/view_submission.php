@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__. '/../connection.php'; // Adatbáziskapcsolat betöltése
+require_once __DIR__. '/../connection.php';
 
 if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
     header("Location: ../index.php");

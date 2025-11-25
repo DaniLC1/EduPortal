@@ -7,7 +7,7 @@ global $conn;
    🔹 Jogosultság ellenőrzés
 ============================================================ */
 if (!isset($_SESSION['eduportal_id'])) {
-    header('Location: index.php');
+    header('Location: index.php?error=Nincs jogosultságod az oldal megtekintéséhez.');
     exit;
 }
 

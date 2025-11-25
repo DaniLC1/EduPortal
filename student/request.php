@@ -1,4 +1,6 @@
-
+<?php
+require_once __DIR__ . '/../PHP_Header/s_request.php';
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>

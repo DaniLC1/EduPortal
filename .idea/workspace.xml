@@ -4,22 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Apró javíttások. / Litle updates.">
-      <change afterPath="$PROJECT_DIR$/PHP_Header/s_enrolled_courses.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PHP_Header/s_request.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PHP_Header/s_studies.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PHP_Header/t_assignment_result.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PHP_Header/t_request.php" afterDir="false" />
+    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Szűrők egységesítése és PHP header fájlok szétszedése. / Unifying filters and taking apart PHP header files.">
+      <change afterPath="$PROJECT_DIR$/PHP_Header/t_sutdent_cpmplete.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSS/enrolled_courses.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/enrolled_courses.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSS/request.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/request.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSS/studies.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/studies.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/a_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/a_profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/s_enrolled_courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_enrolled_courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/s_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/s_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/s_studies.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_studies.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/t_assignment_result.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/t_assignment_result.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/t_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/t_profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/t_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/t_request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/complete_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/complete_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/enrole_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/enrole_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/forum_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/forum_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/profile_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/profile_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/request_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/request_post.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Scripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/enrolled_courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/enrolled_courses.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/studies.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/studies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/assignment_result.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/assignment_result.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/student_complete.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/student_complete.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/view_submission.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/view_submission.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +168,7 @@
       <workItem from="1761027188917" duration="155805000" />
       <workItem from="1763639730689" duration="13285000" />
       <workItem from="1763718237733" duration="7602000" />
-      <workItem from="1763741615046" duration="42584000" />
+      <workItem from="1763741615046" duration="48449000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
@@ -316,7 +322,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763980559756</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Szűrők egységesítése és PHP header fájlok szétszedése. / Unifying filters and taking apart PHP header files.">
+      <option name="closed" value="true" />
+      <created>1764010845220</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1764010845220</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +364,8 @@
     <MESSAGE value="Index oldal aktualizálása. / Updating index page." />
     <MESSAGE value="Tárgy leírások külön div-ben és course_offeringek balra igazítva. / Course descriptions in a separate div and course_offerings aligned to the left." />
     <MESSAGE value="Apró javíttások. / Litle updates." />
-    <option name="LAST_COMMIT_MESSAGE" value="Apró javíttások. / Litle updates." />
+    <MESSAGE value="Szűrők egységesítése és PHP header fájlok szétszedése. / Unifying filters and taking apart PHP header files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Szűrők egységesítése és PHP header fájlok szétszedése. / Unifying filters and taking apart PHP header files." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

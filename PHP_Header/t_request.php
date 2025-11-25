@@ -4,7 +4,7 @@ session_start();
 require_once __DIR__ . '/../connection.php';
 
 // Jogosultság ellenőrzés
-if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'hallgato') {
+if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
     header("Location: ../index.php");
     exit;
 }

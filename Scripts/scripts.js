@@ -166,81 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/*
-//Tanulmányok szűrő
-document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("ss_searchInput");
-    const statusFilter = document.getElementById("ss_statusFilter");
-    const typeFilter = document.getElementById("ss_typeFilter");
-    const subjectCards = document.querySelectorAll(".ss_subject-card");
-
-    function filterCourses() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const status = statusFilter.value;
-        const type = typeFilter.value;
-
-        subjectCards.forEach(card => {
-            const name = card.dataset.name;
-            const cardStatus = card.dataset.status;
-            const cardType = card.dataset.type;
-
-            const matchesSearch = name.includes(searchTerm);
-            const matchesStatus = (status === "all" || status === cardStatus);
-            const matchesType = (type === "all" || type === cardType);
-
-            if (matchesSearch && matchesStatus && matchesType) {
-                card.style.display = "block";
-            } else {
-                card.style.display = "none";
-            }
-        });
-    }
-
-    searchInput.addEventListener("input", filterCourses);
-    statusFilter.addEventListener("change", filterCourses);
-    typeFilter.addEventListener("change", filterCourses);
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const searchInput = document.getElementById('sec_searchInput');
-    const semesterFilter = document.getElementById('sec_semesterFilter');
-    const typeFilter = document.getElementById('sec_typeFilter');
-    const courseFilter = document.getElementById('tar_courseFilter');
-    const cards = document.querySelectorAll('.sec_course-card');
-
-    function filterCourses() {
-        const searchText = searchInput?.value.toLowerCase().trim() || '';
-        const selectedSemester = semesterFilter?.value || 'all';
-        const selectedType = typeFilter?.value || 'all';
-        const selectedCourse = courseFilter?.value || 'all';
-
-        cards.forEach(card => {
-            const name = card.dataset.name || '';
-            const semester = card.dataset.semester || '';
-            const type = card.dataset.type || '';
-            const offering = card.dataset.offering || '';
-
-            const matchesName = name.includes(searchText);
-            const matchesSemester = (selectedSemester === 'all' || semester === selectedSemester);
-            const matchesType = (selectedType === 'all' || type === selectedType);
-            const matchesCourse = (selectedCourse === 'all' || offering === selectedCourse);
-
-            if (matchesName && matchesSemester && matchesType && matchesCourse) {
-                card.style.display = '';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-
-    // 🔹 Eseményfigyelők – csak ha az adott elem létezik
-    if (searchInput) searchInput.addEventListener('input', filterCourses);
-    if (semesterFilter) semesterFilter.addEventListener('change', filterCourses);
-    if (typeFilter) typeFilter.addEventListener('change', filterCourses);
-    if (courseFilter) courseFilter.addEventListener('change', filterCourses);
-});
-*/
-
 //Új ötlet: Az összes filter 1 helyen kezelve a js-ben.
 function safeGet(id) {
     return document.getElementById(id) || null;
@@ -256,11 +181,13 @@ document.addEventListener('DOMContentLoaded', () => {
         safeGet('tar_searchInput') ||
         safeGet('ss_searchInput') ||
         safeGet('sr_searchInput') ||
-        safeGet('tr_searchInput');
+        safeGet('tr_searchInput') ||
+        safeGet('tsc_searchInput');
 
     const semesterFilter =
         safeGet('sec_semesterFilter') ||
         safeGet('tar_semesterFilter') ||
+        safeGet('tsc_semesterFilter') ||
         safeGet('ss_semesterFilter');
 
     const typeFilter =
@@ -270,7 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const courseFilter =
         safeGet('sec_courseFilter') ||
-        safeGet('tar_courseFilter');
+        safeGet('tar_courseFilter') ||
+        safeGet('tsc_courseFilter');
 
     const statusFilter =
         safeGet('ss_statusFilter');
@@ -288,6 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } else if (document.querySelectorAll('.ss_subject-card').length) {
         cards = document.querySelectorAll('.ss_subject-card');
+
+    }else if (document.querySelectorAll('.tsc_course-card').length) {
+        cards = document.querySelectorAll('.tsc_course-card');
 
     } else if (document.querySelectorAll('.sr_request-card').length) {
         cards = document.querySelectorAll('.sr_request-card');

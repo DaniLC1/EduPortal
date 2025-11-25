@@ -47,7 +47,8 @@
 
 /* Kártya stílus */
 .sec_course-card,
-.tar_course-card {
+.tar_course-card,
+.tsc_course-card {
     background-color: var(--card-background);
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
@@ -102,17 +103,20 @@
 }
 
 .sec_course-card .status.completed,
-.tar_course-card .status.completed {
+.tar_course-card .status.completed,
+.tsc_course-card .status.completed {
     color: #2e7d32; /* zöld */
 }
 
 .sec_course-card .status.failed,
-.tar_course-card .status.failed {
+.tar_course-card .status.failed,
+.tsc_course-card .status.failed {
     color: #c62828; /* piros */
 }
 
 .sec_course-card .status.enrolled,
-.tar_course-card .status.enrolled {
+.tar_course-card .status.enrolled,
+.tsc_course-card .status.enrolled {
     color: #ef6c00; /* narancs */
 }
 

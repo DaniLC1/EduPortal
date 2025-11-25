@@ -1,4 +1,6 @@
-
+<?php
+require_once __DIR__ . '/../PHP_Header/t_request.php';
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>

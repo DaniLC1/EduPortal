@@ -4,7 +4,7 @@ require_once 'connection.php';
 global $conn;
 
 if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
-    header("Location: ../index.php?error=unauthorized");
+    header("Location: ../index.php?error=Nincs jogosultságod az oldal megtekintéséhez.");
     exit;
 }
 

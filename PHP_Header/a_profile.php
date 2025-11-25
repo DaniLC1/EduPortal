@@ -5,7 +5,7 @@ require_once __DIR__ . '/../connection.php';
 
 // Jogosultság ellenőrzés
 if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php");
+    header("Location: ../index.php?error=Nincs jogosultságod az oldal megtekintéséhez.");
     exit;
 }
 
