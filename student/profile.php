@@ -98,7 +98,6 @@ require_once __DIR__ . '/../PHP_Header/s_profile.php';
                     $user_data = $profile_result->fetch_assoc();
                     foreach ($user_data as $key => $value) {
                         $label = $label_map[$key] ?? ucfirst(str_replace('_', ' ', $key));
-                        $readonly = $key === 'eduportal_id' ? 'readonly' : '';
 
                         $input_type = 'text'; // alapértelmezett
                         if (isset($field_types[$key])) {
@@ -117,7 +116,7 @@ require_once __DIR__ . '/../PHP_Header/s_profile.php';
                         echo "
                             <div class='detail-row'>
                                 <label for='{$key}' class='label'>{$label}:</label>
-                                <input type='{$input_type}' id='{$key}' name='{$key}' class='value' value='" . htmlspecialchars($value) . "' {$readonly}>
+                                <input type='{$input_type}' id='{$key}' name='{$key}' class='value' value='". htmlspecialchars($value) . "'>
                             </div>
                             ";
                     }

@@ -1,43 +1,58 @@
 <?php
+// Globális session és connection
 session_start();
 require_once __DIR__ . '/../connection.php';
 global $conn;
 
-if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
+/* ============================================================
+   🔹 Jogosultság ellenőrzés
+============================================================ */
+if (!isset($_SESSION['eduportal_id'])) {
     header("Location: ../index.php?error=Nincs jogosultságod az oldal megtekintéséhez.");
     exit;
 }
 
 $eduportal_id = $_SESSION['eduportal_id'];
 
-// Csak POST kérés esetén működjön
+/* ============================================================
+   🔹 Csak POST esetén fusson
+============================================================ */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    // Beérkező adatok
-    $student_id = $_POST['student_id'] ?? null;
-    $offering_id = $_POST['offering_id'] ?? null;
-    $grade = trim($_POST['grade'] ?? '');
-
-    if (empty($student_id) || empty($offering_id)) {
-        die("Hiba: hiányzó paraméterek!");
-    }
-
-    // Logikai feltétel: jegy alapján státusz meghatározás
-    if ($grade === '') {
-        $status = 'enrolled';
-        $grade_value = null;
-    } elseif ($grade === 'Elégtelen') {
-        $status = 'failed';
-        $grade_value = 'Elégtelen';
-    } else {
-        $status = 'completed';
-        $grade_value = $grade;
-    }
 
     try {
         $conn->begin_transaction();
 
-        // UPDATE lekérdezés az enrollments táblába
+        /* ============================================================
+        🔹 Adatok inicializálása
+        ============================================================ */
+        $student_id = $_POST['student_id'] ?? null;
+        $offering_id = $_POST['offering_id'] ?? null;
+        $grade = trim($_POST['grade'] ?? '');
+
+        // Logikai feltétel: jegy alapján státusz meghatározás
+        if ($grade === '') {
+            $status = 'enrolled';
+            $grade_value = null;
+        } elseif ($grade === 'Elégtelen') {
+            $status = 'failed';
+            $grade_value = 'Elégtelen';
+        } elseif ($grade === 'Elégséges') {
+            $status = 'completed';
+            $grade_value = $grade;
+        } elseif ($grade === 'Közepes') {
+            $status = 'completed';
+            $grade_value = $grade;
+        } elseif ($grade === 'Jó') {
+            $status = 'completed';
+            $grade_value = $grade;
+        } elseif ($grade === 'Kiválló') {
+            $status = 'completed';
+            $grade_value = $grade;
+        } else{
+            throw new Exception("Ismeretlen osztályzat.");
+        }
+
+
         $update_sql = "
             UPDATE enrollments
             SET grade = ?, status = ?, completed_at = NOW()
@@ -53,19 +68,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->commit();
         $stmt->close();
 
-        // ✅ Siker esetén visszairányítás
-        header("Location: /EduPortal/teacher/student_complete.php?success=1");
+        /* ============================================================
+        🔹 Visszairányítás szerepkör alapján
+        ============================================================ */
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'tanar') {
+            header("Location: ../teacher/student_complete.php?success=1");
+        } else {
+            throw new Exception("Nem lehet visszairányítani.");
+        }
         exit;
 
+    /* ============================================================
+    🔹 Hibakezelés
+    ============================================================ */
     } catch (Exception $e) {
         $conn->rollback();
-        // ⚠️ Hiba esetén visszairányítás, a hibaüzenetet GET paraméterben továbbítva
+
         $error_message = urlencode("Hiba történt: " . $e->getMessage());
-        header("Location: /EduPortal/teacher/student_complete.php?error={$error_message}");
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'tanar') {
+            header("Location: ../teacher/student_complete.php?error={$error_message}");
+        } else {
+            header("Location: ../index.php?error={$error_message}");
+        }
         exit;
     }
 } else {
-    header("Location: ../index.php?error=invalid_request");
+    /* ============================================================
+       🔹 Fallback (ha nem POST) -> kell ha valaki az direktbe akarja megnyitni a _post.php fájlt
+    ============================================================ */
+    header("Location: ../index.php?error=Fallback");
     exit;
 }
-?>

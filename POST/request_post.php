@@ -256,4 +256,3 @@ try {
     $conn->rollback();
     die('Hiba történt: ' . $e->getMessage());
 }
-?>

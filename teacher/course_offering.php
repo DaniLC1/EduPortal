@@ -167,6 +167,8 @@ $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <section class="create-offering">
         <h2>Új kurzus meghirdetése</h2>
         <form method="post" action="../POST/enrole_post.php" class="create-form">
+            <input type="hidden" name="create_offering" ">
+
             <label>Tárgy:</label>
             <select name="kurzus_kod" required>
                 <option value="">Válassz tárgyat...</option>
@@ -187,6 +189,12 @@ $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             <label>Leírás:</label>
             <textarea name="course_description" rows="2" required></textarea>
 
+            <label>Kurzus jellege:</label>
+            <select name="course_type" required>
+                <option value="eloadas">Előadás</option>
+                <option value="gyakorlat">Gyakorlat</option>
+            </select>
+
             <label>Nap:</label>
             <select name="day_of_week" required>
                 <option value="H">Hétfő</option>
@@ -204,7 +212,7 @@ $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             <input type="text" name="room" required>
 
             <label>Jelentkezési idő vége:</label>
-            <input type="datetime-local" name="end_date" value="0000-00-00 00:00:00">
+            <input type="datetime-local" name="end_date" value="0000-00-00 00:00:00" required>
 
             <label>Max létszám:</label>
             <input type="number" name="max_students" min="0" required>
@@ -279,10 +287,18 @@ $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                                 </ul>
 
                                 <form method="post" action="../POST/enrole_post.php">
+                                    <input type="hidden" name="edit_offering">
+                                    <input type="hidden" name="kurzus_kod" value="<?= $off['kurzus_kod'] ?>" >
                                     <input type="hidden" name="offering_id" value="<?= $off['offering_id'] ?>">
 
                                     <label>Leírás:</label>
                                     <textarea name="course_description" rows="2"><?= htmlspecialchars($off['leiras']) ?></textarea>
+
+                                    <label>Kurzus jellege:</label>
+                                    <select name="course_type" required>
+                                        <option value="eloadas" <?= $off['course_type'] == 'eloadas' ? 'selected' : '' ?>>Előadás</option>
+                                        <option value="gyakorlat" <?= $off['course_type'] == 'gyakorlat' ? 'selected' : '' ?>>Gyakorlat</option>
+                                    </select>
 
                                     <label>Nap:</label>
                                     <select name="day_of_week">

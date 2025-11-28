@@ -36,7 +36,15 @@ $user_course = $user['szak_nev'] ?? "N/A";
 // 🔹 Félévek lekérdezése és aktuális kiválasztása
 $today = date('Y-m-d');
 
-$semesters_sql = "SELECT id, label, start_date, end_date FROM semesters ORDER BY start_date DESC";
+$semesters_sql = "
+SELECT 
+    id,
+    label,
+    start_date,
+    end_date 
+FROM semesters 
+ORDER BY start_date DESC";
+
 $semesters_result = $conn->query($semesters_sql);
 $semesters = [];
 while ($row = $semesters_result->fetch_assoc()) {
@@ -288,7 +296,6 @@ while ($s = $submission_result->fetch_assoc()) {
                                     <?= $icon ?> <?= $text ?> <span style="color:gray; font-size: 0.9em;">(<?= $date ?>)</span>
                                     <form method="post" action="../POST/noti_mark_read.php" style="display:inline;">
                                         <input type="hidden" name="notification_id" value="<?= $notif['notification_id'] ?>">
-                                        <input type="hidden" name="eduportal_id" value="<?= $eduportal_id ?>">
                                         <button type="submit" class="delete-btn" title="Megjelölés olvasottként">❌</button>
                                     </form>
                                 </li>

@@ -53,7 +53,7 @@ require_once __DIR__ . '/../PHP_Header/t_sutdent_cpmplete.php';
     <h1>Diákok jegyeinek lezárása</h1>
     <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">
-            ✅ A jegy sikeresen mentve!
+            ✅ A jegy sikeresen módosítva!
         </div>
         <hr>
     <?php endif; ?>

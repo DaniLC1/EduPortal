@@ -5,4 +5,3 @@ session_destroy();      // Session lezárása
 
 header("Location: index.php"); // Visszairányítás a főoldalra
 exit();                 // Megállítja a script futását
-?>

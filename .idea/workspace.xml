@@ -4,13 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="PHP header fájlok szétszedése és egységes SESSION ellenőrzés. / Disassembling PHP header files and unified SESSION checking.">
+    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Connection beállítása. / Connection setup.">
+      <change afterPath="$PROJECT_DIR$/PHP_Header/s_course_offering.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/POST/assignment_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/assignment_post.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/POST/complete_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/complete_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/finances_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/finances_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/enrole_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/enrole_post.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/POST/forum_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/forum_post.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/POST/noti_mark_read.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/noti_mark_read.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/profile_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/profile_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/request_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/request_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Scripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/connection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/logout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/course_offering.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/course_offering.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/student_complete.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/student_complete.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +166,7 @@
       <workItem from="1761027188917" duration="155805000" />
       <workItem from="1763639730689" duration="13285000" />
       <workItem from="1763718237733" duration="7602000" />
-      <workItem from="1763741615046" duration="48994000" />
+      <workItem from="1763741615046" duration="101722000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
@@ -323,7 +336,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764071098006</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Connection beállítása. / Connection setup.">
+      <option name="closed" value="true" />
+      <created>1764071648314</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1764071648314</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,7 +380,8 @@
     <MESSAGE value="Apró javíttások. / Litle updates." />
     <MESSAGE value="Szűrők egységesítése és PHP header fájlok szétszedése. / Unifying filters and taking apart PHP header files." />
     <MESSAGE value="PHP header fájlok szétszedése és egységes SESSION ellenőrzés. / Disassembling PHP header files and unified SESSION checking." />
-    <option name="LAST_COMMIT_MESSAGE" value="PHP header fájlok szétszedése és egységes SESSION ellenőrzés. / Disassembling PHP header files and unified SESSION checking." />
+    <MESSAGE value="Connection beállítása. / Connection setup." />
+    <option name="LAST_COMMIT_MESSAGE" value="Connection beállítása. / Connection setup." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

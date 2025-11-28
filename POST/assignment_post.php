@@ -104,7 +104,7 @@ if (isset($_POST['answers'])) {
 
         $conn->commit();
 
-        header("Location: student/courses.php");
+        header("Location: /EduPortal/student/courses.php");
         exit();
 
     } catch (Exception $e) {
@@ -222,7 +222,7 @@ elseif (isset($_POST['title']) && isset($_POST['questions'])) {
 
         $conn->commit();
 
-        header("Location: teacher/courses.php");
+        header("Location: /EduPortal/teacher/courses.php");
         exit();
 
     } catch (Exception $e) {
@@ -237,4 +237,4 @@ elseif (isset($_POST['title']) && isset($_POST['questions'])) {
 else {
     die("Ismeretlen POST kérés.");
 }
-?>
+

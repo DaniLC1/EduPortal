@@ -3,7 +3,13 @@ session_start();
 require_once __DIR__ . '/../connection.php';
 global $conn;
 
-$eduportal_id = $_SESSION['eduportal_id'];
+/* ============================================================
+   🔹 Jogosultság ellenőrzés
+============================================================ */
+if (!isset($_SESSION['eduportal_id'])) {
+    header("Location: ../index.php?error=Nincs jogosultságod az oldal megtekintéséhez.");
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

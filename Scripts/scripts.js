@@ -182,7 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
         safeGet('ss_searchInput') ||
         safeGet('sr_searchInput') ||
         safeGet('tr_searchInput') ||
-        safeGet('tsc_searchInput');
+        safeGet('tsc_searchInput') ||
+        safeGet('sco_searchInput');
 
     const semesterFilter =
         safeGet('sec_semesterFilter') ||
@@ -193,7 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const typeFilter =
         safeGet('sec_typeFilter') ||
         safeGet('tar_typeFilter') ||
-        safeGet('ss_typeFilter');
+        safeGet('ss_typeFilter') ||
+        safeGet('sco_typeFilter');
 
     const courseFilter =
         safeGet('sec_courseFilter') ||
@@ -201,7 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
         safeGet('tsc_courseFilter');
 
     const statusFilter =
-        safeGet('ss_statusFilter');
+        safeGet('ss_statusFilter') ||
+        safeGet('sco_statusFilter');
 
     // ==========================================
     // KÁRTYÁK KIVÁLASZTÁSA – oldaltól függően
@@ -225,6 +228,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } else if (document.querySelectorAll('.tr_request-card').length) {
         cards = document.querySelectorAll('.tr_request-card');
+
+    } else if (document.querySelectorAll('.sco_course-card').length) {
+        cards = document.querySelectorAll('.sco_course-card');
     }
 
     // Ha nincs kártya → nincs mit szűrni
@@ -242,23 +248,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedStatus = statusFilter?.value || 'all';
 
         cards.forEach(card => {
-            const name = card.dataset.name || '';
-            const semester = card.dataset.semester || '';
-            const type = card.dataset.type || '';
-            const offering = card.dataset.offering || '';
-            const status = card.dataset.status || '';
-            // --- ÚJ: REQUEST OLDAL MEZŐI ---
-            const title = card.dataset.title || '';
-            const description = card.dataset.description || '';
+            // -------- ÚJ TÁRGYFELVÉTEL OLDAL DATA ATTRIBÚTUMAI --------
+            const name= (card.dataset.name || '').toLowerCase();
+            const code= (card.dataset.code || '').toLowerCase();
+            const teacher= (card.dataset.teacher || '').toLowerCase();
+            const semester= card.dataset.semester || '';
+            const type= card.dataset.type || '';
+            const completed= card.dataset.completed || '0';
 
-            const matchesRequest = (title && title.includes(searchText)) || (description && description.includes(searchText));
-            const matchesName = name.includes(searchText);
+
+            // Régi request oldalakhoz még mindig kell
+            const title       = (card.dataset.title || '').toLowerCase();
+            const description = (card.dataset.description || '').toLowerCase();
+
+            // ---------- MATCH LOGIKA ----------
+            const matchesSearch =
+                name.includes(searchText) ||
+                code.includes(searchText) ||
+                teacher.includes(searchText) ||
+                title.includes(searchText) ||
+                description.includes(searchText);
+
             const matchesSemester = (selectedSemester === 'all' || semester === selectedSemester);
-            const matchesType = (selectedType === 'all' || type === selectedType);
-            const matchesCourse = (selectedCourse === 'all' || offering === selectedCourse);
-            const matchesStatus = (selectedStatus === 'all' || selectedStatus === status);
+            const matchesType     = (selectedType === 'all' || type === selectedType);
+            const matchesStatus   = (selectedStatus === 'all' || completed === selectedStatus);
+            const matchesCourse   = (selectedCourse === 'all'); // ezen az oldalon nincs offering-szűrés
 
-            if (matchesName && matchesSemester && matchesType && matchesCourse && matchesStatus || matchesRequest) {
+            // VÉGEREDMÉNY
+            if (matchesSearch && matchesSemester && matchesType && matchesStatus && matchesCourse) {
                 card.style.display = '';
             } else {
                 card.style.display = 'none';
