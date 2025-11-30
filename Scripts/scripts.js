@@ -183,7 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
         safeGet('sr_searchInput') ||
         safeGet('tr_searchInput') ||
         safeGet('tsc_searchInput') ||
-        safeGet('sco_searchInput');
+        safeGet('sco_searchInput') ||
+        safeGet('tco_searchInput') ||
+        safeGet('ar_searchInput') ||
+        safeGet('asr_searchInput');
 
     const semesterFilter =
         safeGet('sec_semesterFilter') ||
@@ -200,7 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const courseFilter =
         safeGet('sec_courseFilter') ||
         safeGet('tar_courseFilter') ||
-        safeGet('tsc_courseFilter');
+        safeGet('tsc_courseFilter') ||
+        safeGet('tco_courseFilter');
 
     const statusFilter =
         safeGet('ss_statusFilter') ||
@@ -231,6 +235,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } else if (document.querySelectorAll('.sco_course-card').length) {
         cards = document.querySelectorAll('.sco_course-card');
+
+    } else if (document.querySelectorAll('.tco_course-card').length) {
+        cards = document.querySelectorAll('.tco_course-card');
+
+    } else if (document.querySelectorAll('.ar_request-card').length) {
+        cards = document.querySelectorAll('.ar_request-card');
+
+    } else if (document.querySelectorAll('.asr_request-card').length) {
+        cards = document.querySelectorAll('.asr_request-card');
+
     }
 
     // Ha nincs kártya → nincs mit szűrni
@@ -272,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const matchesSemester = (selectedSemester === 'all' || semester === selectedSemester);
             const matchesType     = (selectedType === 'all' || type === selectedType);
             const matchesStatus   = (selectedStatus === 'all' || completed === selectedStatus);
-            const matchesCourse   = (selectedCourse === 'all'); // ezen az oldalon nincs offering-szűrés
+            const matchesCourse   = (selectedCourse === 'all' || code === selectedCourse);
 
             // VÉGEREDMÉNY
             if (matchesSearch && matchesSemester && matchesType && matchesStatus && matchesCourse) {
@@ -293,19 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (courseFilter) courseFilter.addEventListener('change', filterCourses);
     if (statusFilter) statusFilter.addEventListener('change', filterCourses);
 });
-
-
-//popup működés:
-function openPaymentModal(financingId, maxAmount) {
-    document.getElementById('modalFinancingId').value = financingId;
-    document.getElementById('paymentAmount').value = maxAmount;
-    document.getElementById('paymentAmount').max = maxAmount;
-    document.getElementById('paymentModal').style.display = 'block';
-}
-
-function closeModal() {
-    document.getElementById('paymentModal').style.display = 'none';
-}
 
 function toggleDetails(id) {
     const element = document.getElementById('details-' + id);
@@ -419,23 +420,19 @@ document.addEventListener('DOMContentLoaded', () => {
     newBtn.addEventListener('click', () => {
         const id = 'new_' + Date.now(); // egyedi azonosító generálása
         const card = document.createElement('div');
-        card.classList.add('request-card');
+        card.classList.add('ar_request-card');
         card.dataset.new = "true"; // ⚙️ megjelöljük, hogy ez új (még nincs mentve az adatbázisban)
 
         // 🔸 Új kérelem űrlap HTML tartalma
         card.innerHTML = `
             <div class="card-header">
                 <h2>Új kérelem</h2>
-                <div class="card-actions">
-                    <button class="edit-btn">✏️ Szerkesztés</button>
-                    <button class="delete-btn">🗑️ Törlés</button>
-                </div>
             </div>
             <div class="card-body" style="display:block;">
                 <!-- 🧾 Az űrlap most már POST kérést küld a request_post.php felé -->
                 <form method="POST" action="../POST/request_post.php" class="request-edit-form">
                     <!-- A forrás megjelölése a backend számára -->
-                    <input type="hidden" name="source" value="admin_request">
+                    <input type="hidden" name="admin_request">
 
                     <label>Cím:</label>
                     <input type="text" name="title" placeholder="Kérelem címe..." required>
@@ -452,11 +449,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <hr>
                     <h3>Mezők</h3>
                     <div class="fields-container"></div>
-                    <button type="button" class="add-field-btn">➕ Mező hozzáadása</button>
+                    <button type="button" class="ar_add-field-btn">➕ Mező hozzáadása</button>
 
                     <div class="form-actions">
-                        <button type="submit" class="fill-btn">💾 Mentés</button>
-                        <button type="button" class="ar-cancel-btn">🚫 Mégse</button>
+                        <button type="submit" class="ar_fill-btn">💾 Mentés</button>
+                        <button type="button" class="ar_cancel-btn">🚫 Mégse</button>
                     </div>
                 </form>
             </div>
@@ -467,22 +464,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 🔹 Eseménykezelés delegálva a containerre (így a dinamikusan létrehozott elemek is működnek)
     container.addEventListener('click', (e) => {
-        const card = e.target.closest('.request-card');
+        const card = e.target.closest('.ar_request-card');
         if (!card) return;
 
         // ✏️ Szerkesztés lenyitás / becsukás
-        if (e.target.classList.contains('edit-btn')) {
+        if (e.target.classList.contains('ar_edit-btn')) {
             const body = card.querySelector('.card-body');
             body.style.display = body.style.display === 'none' ? 'block' : 'none';
         }
 
-        // 🗑️ Törlés
-        if (e.target.classList.contains('delete-btn')) {
-            return confirm('Biztosan törölni szeretnéd ezt a kérelmet?'); // true = submit, false = megállítja
-        }
-
         // ➕ Mező hozzáadása
-        if (e.target.classList.contains('add-field-btn')) {
+        if (e.target.classList.contains('ar_add-field-btn')) {
             const fieldsContainer = card.querySelector('.fields-container');
             const fid = 'new_' + Date.now(); // egyedi azonosító a mezőnek
             const field = document.createElement('div');
@@ -501,18 +493,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     <input type="checkbox" name="fields[${fid}][is_required]" value="1">
                     Kötelező
                 </label>
-                <button type="button" class="remove-field">❌</button>
+                <button type="button" class="ar_remove-field-btn">❌</button>
             `;
             fieldsContainer.appendChild(field);
         }
 
         // ❌ Egy adott mező törlése
-        if (e.target.classList.contains('remove-field')) {
+        if (e.target.classList.contains('ar_remove-field-btn')) {
             e.target.closest('.field-card').remove();
         }
 
         // 🚫 Mégse gomb: új kérelem esetén töröljük a kártyát, meglévőnél csak bezárjuk
-        if (e.target.classList.contains('ar-cancel-btn')) {
+        if (e.target.classList.contains('ar_cancel-btn')) {
             if (card.dataset.new === "true") {
                 // ❌ Még nem mentett új kérelem → teljesen eltávolítjuk a DOM-ból
                 card.remove();

@@ -57,5 +57,3 @@ $type_query = $conn->query("SHOW COLUMNS FROM users");
 while ($col = $type_query->fetch_assoc()) {
     $field_types[$col['Field']] = $col['Type'];
 }
-
-?>

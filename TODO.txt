@@ -21,13 +21,7 @@ Az előző alapján pedig az alap oldalon a main-en belül kell egy ilyen (Ez pl
         ✅ A kérelem sikeresen beadva!
     </div>
 <?php endif; ?>
----------------------
-Illetve még egy ötlet hogy 5 mp-en belül eltűnjön a figyelmeztetés( újra frissíti az oldalt):
-<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-    <meta http-equiv="refresh" content="5;url=request.php">
-<?php endif; ?>
 
-Ezt is az alap oldalon kell elhelyezni; Ezt a <head> szekcióban helyezd el, a <title> után.
 ---------------------
 JS fájl egyszerűsítése
 ---------------------

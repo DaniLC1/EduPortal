@@ -1,89 +1,5 @@
 <?php
-session_start();
-require_once __DIR__ . '/../connection.php';
-
-if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php");
-    exit;
-}
-
-$eduportal_id = $_SESSION['eduportal_id'];
-global $conn;
-
-// 🔹 Admin adatainak lekérése
-$user_sql = "
-SELECT 
-    name 
-FROM users 
-WHERE eduportal_id = ?";
-$user_stmt = $conn->prepare($user_sql);
-$user_stmt->bind_param("s", $eduportal_id);
-$user_stmt->execute();
-$user_result = $user_stmt->get_result();
-$user = $user_result->fetch_assoc();
-
-$user_name = $user['name'] ?? 'Ismeretlen';
-$user_course = "Admin";
-
-/// Keresés lekérdezés
-$search = $_GET['search'] ?? '';
-
-// 🔹 Kitöltött kérelmek lekérdezése
-$request_sql = "
-    SELECT sr.id AS request_id,
-           sr.template_id,
-           rt.title,
-           rt.description,
-           rt.to_who,
-           u.name AS student_name,
-           sr.submitted_at,
-           sr.status,
-           sr.admin_comment
-    FROM student_requests sr
-    JOIN request_templates rt ON sr.template_id = rt.id
-    JOIN users u ON sr.users_eduportal_ID = u.eduportal_id
-    WHERE rt.title LIKE CONCAT('%', ?, '%')
-       OR rt.description LIKE CONCAT('%', ?, '%')
-    ORDER BY sr.submitted_at DESC
-";
-$request_stmt = $conn->prepare($request_sql);
-$request_stmt->bind_param("ss", $search, $search);
-$request_stmt->execute();
-$request_result = $request_stmt->get_result();
-
-$requests = [];
-$request_ids = [];
-while ($row = $request_result->fetch_assoc()) {
-    $requests[$row['request_id']] = $row;
-    $request_ids[] = $row['request_id'];
-}
-
-// 🔹 Mezők lekérdezése minden sablonhoz és kitöltött értékekkel
-$fields_sql = "
-    SELECT f.id AS field_id,
-           f.template_id,
-           f.label,
-           f.field_type,
-           f.is_required,
-           v.field_value,
-           v.admin_suggestion,
-           v.request_id
-    FROM request_template_fields f
-    LEFT JOIN student_request_field_values v
-      ON f.id = v.field_id
-";
-$fields_result = $conn->query($fields_sql);
-
-$request_fields = [];
-while ($row = $fields_result->fetch_assoc()) {
-    if ($row['request_id']) {
-        // már kitöltött kérelemhez
-        $request_fields[$row['request_id']][] = $row;
-    } else {
-        // még nem kitöltött sablonmezők template_id alapján
-        $request_fields['template_'.$row['template_id']][] = $row;
-    }
-}
+require __DIR__. '/../PHP_Header/a_submitted_request.php'
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -136,24 +52,27 @@ while ($row = $fields_result->fetch_assoc()) {
     <?php endif; ?>
 
     <!-- Kereső -->
-    <form method="get" action="submitted_request.php" class="search-form">
-        <input type="text" name="search" placeholder="Keresés címre vagy leírásra..." value="<?= htmlspecialchars($search) ?>">
-        <button type="submit">Keresés</button>
-    </form>
+    <div class="search-form">
+        <input type="text" id="asr_searchInput" placeholder="Keresés címre vagy leírásra...">
+    </div>
 
     <div class="requests-container">
         <?php if (empty($requests)): ?>
             <p>Nincs találat.</p>
         <?php else: ?>
             <?php foreach ($requests as $req): ?>
-                <div class="request-card" data-request-id="<?= $req['request_id'] ?>">
+                <div class="asr_request-card"
+                     data-title="<?= strtolower(htmlspecialchars($req['title'])) ?>"
+                     data-name="<?= strtolower(htmlspecialchars($req['student_name'])) ?>"
+                     data-description="<?= strtolower(htmlspecialchars($req['description'])) ?>">
+
                     <h2><?= htmlspecialchars($req['title']) ?> - <?= htmlspecialchars($req['student_name']) ?></h2>
                     <details>
                         <summary>Kattints a részletekért</summary>
 
                         <!-- Admin komment és státusz -->
                         <form method="post" action="../POST/request_post.php" class="request-edit-form">
-                            <input type="hidden" name="source" value="admin_submitted">
+                            <input type="hidden" name="admin_submitted">
                             <input type="hidden" name="request_id" value="<?= $req['request_id'] ?>">
 
                             <!-- Kérelem leírása -->
@@ -185,7 +104,6 @@ while ($row = $fields_result->fetch_assoc()) {
                             <?php endif; ?>
 
                             <hr>
-
 
                             <label>
                                 Állapot:<br>

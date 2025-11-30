@@ -28,17 +28,22 @@
     transition: all 0.2s ease;
 }
 
-.search-form button {
+.ar_fill-btn,
+.requests-container button,
+.submit-btn {
     background-color: var(--primary-color);
     color: var(--text-light);
     border: none;
     padding: 6px 12px;
+    margin: 0.1rem;
     font-size: 0.9em;
     border-radius: 4px;
     cursor: pointer;
 }
 
-.search-form button:hover {
+.ar_fill-btn:hover,
+.requests-container button:hover,
+.submit-btn:hover {
     background-color: var(--primary-hover);
 }
 
@@ -50,6 +55,8 @@
     padding: 1.2rem;
 }
 
+.asr_request-card,
+.ar_request-card,
 .sr_request-card,
 .tr_request-card{
     background-color: var(--card-background);
@@ -98,23 +105,60 @@
     min-height: 50px;
     resize: none;
     font-size: 0.9em;
+    color: var(--text-dark);
+    background-color: var(--dropdown-bg);
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
     margin-bottom: 8px;
 }
 
-body[data-theme="dark"] .search-form input{
+body[data-theme="dark"] .search-form input,
+body[data-theme="dark"] .request-form input,
+body[data-theme="dark"] .request-form textarea{
     background: var(--dropdown-bg-dark);
     color: var(--text-light);
     border-color: #444;
 }
 
-body[data-theme="dark"] .search-form button{
-    background-color: var(--secondary-color);
-    color: var(--text-light);
+/*
+Csak admin oldalon használt CSS
+*/
+.request-edit-form input[type=text],
+.request-edit-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    min-height: 40px;
+    color: var(--text-dark);
+    background-color: var(--dropdown-bg);
+    resize: none;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
 }
 
-body[data-theme="dark"] .search-form button:hover{
-    background-color: var(--secondary-hover);
+.request-edit-form select{
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    min-height: fit-content;
+    color: var(--text-dark);
+    background-color: var(--dropdown-bg);
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+body[data-theme="dark"] .request-edit-form input[type=text],
+body[data-theme="dark"] .request-edit-form textarea,
+body[data-theme="dark"]  .request-edit-form select
+{
+    background: var(--dropdown-bg-dark);
+    color: var(--text-light);
+    border-color: #444;
+    border-color: #444;
 }

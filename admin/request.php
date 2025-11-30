@@ -1,45 +1,5 @@
 <?php
-session_start();
-require_once __DIR__ . '/../connection.php';
-
-if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php");
-    exit;
-}
-
-$eduportal_id = $_SESSION['eduportal_id'];
-global $conn;
-
-// 🔹 Admin adatainak lekérése
-$user_sql = "SELECT name FROM users WHERE eduportal_id = ?";
-$user_stmt = $conn->prepare($user_sql);
-$user_stmt->bind_param("s", $eduportal_id);
-$user_stmt->execute();
-$user_result = $user_stmt->get_result();
-$user = $user_result->fetch_assoc();
-
-$user_name = $user['name'] ?? 'Ismeretlen';
-$user_course = "Admin";
-
-// --- Kérelemsablonok lekérése ---
-$request_sql = "
-    SELECT id, title, description, to_who
-    FROM request_templates
-    ORDER BY id DESC
-";
-$request_result = $conn->query($request_sql);
-$templates = [];
-while ($row = $request_result->fetch_assoc()) {
-    $templates[] = $row;
-}
-
-// --- Mezők lekérése ---
-$fields_sql = "SELECT * FROM request_template_fields ORDER BY template_id, id";
-$fields_result = $conn->query($fields_sql);
-$template_fields = [];
-while ($f = $fields_result->fetch_assoc()) {
-    $template_fields[$f['template_id']][] = $f;
-}
+require __DIR__. '/../PHP_Header/a_request.php'
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -98,29 +58,37 @@ while ($f = $fields_result->fetch_assoc()) {
             ⚠️ <?= htmlspecialchars($_GET['error']) ?>
         </div>
     <?php endif; ?>
-    <button id="new-request-btn" class="fill-btn">➕ Új kérelem</button>
+    <button id="new-request-btn" class="ar_fill-btn">➕ Új kérelem</button>
+
+    <!-- Kereső -->
+    <div class="search-form">
+        <input type="text" id="ar_searchInput" placeholder="Keresés címre vagy leírásra...">
+    </div>
 
     <div class="requests-container" id="requests-container">
         <?php if (empty($templates)): ?>
             <p>Nincs létrehozott kérelemsablon.</p>
         <?php else: ?>
             <?php foreach ($templates as $t): ?>
-                <div class="request-card" data-template-id="<?= $t['id'] ?>">
+                <div class="ar_request-card"
+                    data-title="<?= strtolower(htmlspecialchars($t['title'])) ?>"
+                    data-description="<?= strtolower(htmlspecialchars($t['description'])) ?>">
+
                     <div class="card-header">
                         <h2><?= htmlspecialchars($t['title']) ?></h2>
                         <div class="card-actions">
-                            <button class="edit-btn">✏️ Szerkesztés</button>
+                            <button class="ar_edit-btn">✏️ Szerkesztés</button>
                             <form method="POST" action="../POST/request_post.php" class="inline-form">
-                                <input type="hidden" name="source" value="admin_request">
+                                <input type="hidden" name="admin_request">
                                 <input type="hidden" name="template_id" value="<?= $t['id'] ?>">
-                                <button type="submit" name="delete" class="delete-btn">🗑️ Törlés</button>
+                                <button type="submit" name="delete" class="ar_delete-btn">🗑️ Törlés</button>
                             </form>
                         </div>
                     </div>
 
                     <div class="card-body" style="display:none;">
                         <form method="POST" action="../POST/request_post.php" class="request-edit-form">
-                            <input type="hidden" name="source" value="admin_request">
+                            <input type="hidden" name="admin_request">
                             <input type="hidden" name="template_id" value="<?= $t['id'] ?>">
 
                             <label>Cím:</label>
@@ -152,16 +120,16 @@ while ($f = $fields_result->fetch_assoc()) {
                                                 <input type="checkbox" name="fields[<?= $f['id'] ?>][is_required]" value="1" <?= $f['is_required']?'checked':'' ?>>
                                                 Kötelező
                                             </label>
-                                            <button type="button" class="remove-field">❌</button>
+                                            <button type="button" class="ar_remove-field-btn">❌</button>
                                         </div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
 
-                            <button type="button" class="add-field-btn">➕ Mező hozzáadása</button>
+                            <button type="button" class="ar_add-field-btn">➕ Mező hozzáadása</button>
                             <div class="form-actions">
-                                <button type="submit" class="fill-btn">💾 Mentés</button>
-                                <button type="button" class="ar-cancel-btn">🚫 Mégse</button>
+                                <button type="submit" class="ar_fill-btn">💾 Mentés</button>
+                                <button type="button" class="ar_cancel-btn">🚫 Mégse</button>
                             </div>
                         </form>
                     </div>

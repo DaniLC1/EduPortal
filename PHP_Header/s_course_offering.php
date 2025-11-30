@@ -5,7 +5,7 @@ require_once __DIR__ . '/../connection.php';
 
 // Jogosultság ellenőrzés
 if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'hallgato') {
-    header("Location: ../index.php");
+    header("Location: ../index.php?error=Nincs jogosultságod az oldal megtekintéséhez.");
     exit;
 }
 
@@ -33,8 +33,12 @@ $user = $user_result->fetch_assoc();
 $user_name = $user['name'] ?? "Ismeretlen";
 $user_course = $user['szak_nev'] ?? "N/A";
 
+//Aktuális dátum (mai nap)
 $today = date('Y-m-d');
 
+/* ============================================================
+   🔹 Félév szűréséhez létrehozott lekérdezé
+============================================================ */
 // Aktuális félév lekérdezése
 $semester_sql = "
 SELECT id, 
@@ -60,7 +64,9 @@ ORDER BY start_date DESC";
 
 $semesters = $conn->query($semesters_sql)->fetch_all(MYSQLI_ASSOC);
 
-// Kurzusok lekérdezése (NINCS search, type, completed szűrés)
+/* ============================================================
+   🔹 Meghirdetett kurzusok lekérdezése
+============================================================ */
 $course_offering_sql = "
 SELECT 
     co.id AS offering_id,
@@ -123,7 +129,9 @@ $course_stmt->bind_param("ssss", $eduportal_id, $eduportal_id, $eduportal_id, $s
 $course_stmt->execute();
 $raw_courses = $course_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-// ======= OFFERINGEK CSOPORTOSÍTÁSA KURZUS SZINTRE =======
+/* ============================================================
+   🔹 OFFERINGEK CSOPORTOSÍTÁSA KURZUS SZINTRE
+============================================================ */
 $courses = [];
 
 foreach ($raw_courses as $row) {

@@ -95,14 +95,14 @@ require_once __DIR__ . '/../PHP_Header/t_request.php';
                                     <?php if ($field['field_type'] === 'textarea'): ?>
                                         <textarea
                                                 class="auto-resize-textarea"
-                                                name="field_<?= $field['id'] ?>"
+                                                name="<?= $field['id'] ?>"
                                                 rows="3"
                                         <?= $field['is_required'] ? 'required' : '' ?>
                                     ></textarea>
                                     <?php else: ?>
                                         <input
                                                 type="<?= htmlspecialchars($field['field_type']) ?>"
-                                                name="field_<?= $field['id'] ?>"
+                                                name="<?= $field['id'] ?>"
                                                 <?= $field['is_required'] ? 'required' : '' ?>
                                         >
                                     <?php endif; ?>

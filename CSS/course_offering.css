@@ -55,9 +55,6 @@
     font-size: 0.9em;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.send-btn {
     background-color: var(--primary-color);
     color: var(--text-light);
 }
@@ -135,15 +132,24 @@ Csak a teacher/course_offering.php-ban van használva
 *********************************/
 
 .create-offering {
-     padding: 0.3rem;
+     padding: 1.2rem;
      display: flex;
-     gap: 0.1rem;
      align-items: center;
      flex-wrap: wrap;
      background-color: transparent;
      border: none;
      justify-content: center;
  }
+
+.create-offering details{
+    width: 100%;
+    border: none;
+    padding: 1.2rem;
+    border-radius: 8px;
+    background: var(--card-background);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
 .create-offering input,
 .create-offering textarea,
 .create-offering select {

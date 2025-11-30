@@ -4,8 +4,8 @@ session_start();
 require_once __DIR__ . '/../connection.php';
 
 // Jogosultság ellenőrzés
-if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
-    header("Location: ../index.php");
+if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'admin') {
+    header("Location: ../index.php?error=Nincs jogosultságod az oldal megtekintéséhez.");
     exit;
 }
 
@@ -13,13 +13,13 @@ $eduportal_id = $_SESSION['eduportal_id'];
 global $conn;
 
 /* ============================================================
-   🔹 Felhasználó alapadatok lekérése
+   🔹 Admin alapadatok lekérése (név)
 ============================================================ */
 $user_sql = "
-SELECT name 
-FROM users
+SELECT 
+    name 
+FROM users 
 WHERE eduportal_id = ?";
-
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
 $user_stmt->execute();
@@ -27,18 +27,18 @@ $user_result = $user_stmt->get_result();
 $user = $user_result->fetch_assoc();
 
 $user_name = $user['name'] ?? 'Ismeretlen';
-$user_course = "Tanár";
+$user_course = "Admin";
 
 /* ============================================================
    🔹 Kérlemek adatainak és szűréshez szükséges lekérdezés
 ============================================================ */
 $request_sql = "
-    SELECT rt.id,
-           rt.title,
-           rt.description
-    FROM request_templates rt
-    WHERE rt.to_who = 'tanar'
-    ORDER BY rt.created_at DESC
+SELECT rt.id,
+       rt.title,
+       rt.description,
+       rt.to_who
+FROM request_templates rt
+ORDER BY rt.created_at DESC
 ";
 
 $request_result = $conn->query($request_sql);

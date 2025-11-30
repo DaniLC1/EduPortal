@@ -136,8 +136,6 @@ body[data-theme="dark"] .detail-row .value {
 .hidden {
     display: none;
 }
-.success-message { color: green; }
-.error-message { color: red; }
 
 
 .submitted-requests {

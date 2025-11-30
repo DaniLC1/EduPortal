@@ -102,4 +102,3 @@ $field_values_result = $conn->query($field_values_sql);
 while ($row = $field_values_result->fetch_assoc()) {
     $submitted_requests[$row['request_id']]['fields'][] = $row;
 }
-?>

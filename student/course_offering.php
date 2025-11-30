@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../PHP_Header/s_course_offering.php';
+//require_once __DIR__ . '/../PHP_Header/s_course_offering.php';
+require_once __DIR__ . '/../PHP_Header/s_course_offering2.php';
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -113,6 +114,7 @@ require_once __DIR__ . '/../PHP_Header/s_course_offering.php';
                          data-type="<?= htmlspecialchars($course['course_required_type']); ?>"
                          data-teacher="<?= strtolower($course['teachers']); ?>"
                          data-completed="<?= $course['already_completed'] ? 'completed' : 'not-completed' ?>" >
+
                     <div class="course-card<?= array_reduce($course['offerings'], fn($c, $v) => $c || array_filter($v, fn($o) => $o['already_enrolled']), false) ? ' enrolled' : '' ?>">
                         <div class="card-header">
                             <h2><?= htmlspecialchars($course['course_name']) ?> (<?= htmlspecialchars($course['kurzus_kod']) ?>)</h2>
@@ -129,8 +131,10 @@ require_once __DIR__ . '/../PHP_Header/s_course_offering.php';
                                     echo 'Kötelezően választható';
                                 } elseif ($course['course_required_type'] === 'kotelezo') {
                                     echo 'Kötelező';
-                                } else {
+                                } elseif ($course['course_required_type'] === null) {
                                     echo 'Szabadon választható';
+                                } else {
+                                    echo 'Ismeretlen típus';
                                 }
                                 ?>
                             </p>

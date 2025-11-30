@@ -70,4 +70,3 @@ $template_fields = [];
 while ($row = $fields_result->fetch_assoc()) {
     $template_fields[$row['template_id']][] = $row;
 }
-?>

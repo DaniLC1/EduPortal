@@ -163,4 +163,3 @@ foreach ($subjects as $subject) {
     }
 }
 $missing_credits = $total_credits - $completed_credits;
-?>

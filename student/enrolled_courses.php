@@ -52,6 +52,8 @@ require_once __DIR__ . '/../PHP_Header/s_enrolled_courses.php';
     </header>
     <main>
         <h1>Felvett kurzusok</h1>
+
+        <!--Szűrők -->
         <section class="filters">
             <label for="sec_semesterFilter">Félév:</label>
             <select id="sec_semesterFilter">

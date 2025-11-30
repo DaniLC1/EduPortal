@@ -102,5 +102,3 @@ $semester_stmt = $conn->prepare($semester_sql);
 $semester_stmt->bind_param("s", $eduportal_id);
 $semester_stmt->execute();
 $semester_result = $semester_stmt->get_result();
-
-?>

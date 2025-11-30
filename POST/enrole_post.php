@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conn->begin_transaction();
 
             /* ============================================================
-            🔹 Adatok inicializálása (ugyanúgy, mint a tanárnál)
+            🔹 Adatok inicializálása
             ============================================================ */
             $offering_id  = intval($_POST['offering_id']);
             $kurzus_kod   = trim($_POST['kurzus_kod'] ?? '');
