@@ -72,44 +72,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Tartalom lenyitása/összecsukása animációval (kurzus leírásnál)
-function toggleContent(button) {
-    const wrapper = button.closest('.description-container');
-    const shortDesc = wrapper.querySelector('.short-description');
-    const fullDesc = wrapper.querySelector('.full-description');
-    const isExpanded = fullDesc.classList.contains('show');
+//Kurzus leírás kinyitás és összecsukás
+function toggleDescription(button) {
+    const container = button.closest('.collapsible-container');
+    const shortText = container.querySelector('.short-description');
+    const fullContent = container.querySelector('.collapsible-content');
 
-    if (!isExpanded) {
-        shortDesc.classList.add('hidden');
-        fullDesc.classList.add('show');
+    const isOpen = container.classList.toggle('open');
 
-        // Dinamikus magasság beállítása
-        fullDesc.style.maxHeight = fullDesc.scrollHeight + 'px';
-        fullDesc.style.opacity = '1';
-
-        // Gomb mozgatás
-        button.textContent = 'Kevesebb';
+    if (isOpen) {
+        shortText.classList.add('hidden');
+        fullContent.style.maxHeight = fullContent.scrollHeight + "px";
+        fullContent.style.opacity = "1";
+        button.textContent = button.dataset.lessText || "Kevesebb";
     } else {
-        shortDesc.classList.remove('hidden');
-
-        // Összecsukás animáció
-        fullDesc.style.maxHeight = '0';
-        fullDesc.style.opacity = '0';
-
-        fullDesc.classList.remove('show');
-        button.textContent = 'Bővebben';
+        shortText.classList.remove('hidden');
+        fullContent.style.maxHeight = "0";
+        fullContent.style.opacity = "0";
+        button.textContent = button.dataset.moreText || "Bővebben";
     }
-}
-
-// Lista lenyitása/összecsukása (pl. hirdetmények, fórum)
-function toggleList(button) {
-    const list = button.previousElementSibling;
-    const hiddenItems = list.querySelectorAll('.collapsible-item');
-    const isHidden = hiddenItems[0].classList.contains('hidden');
-    hiddenItems.forEach(item => item.classList.toggle('hidden'));
-    button.textContent = isHidden ? 'Kevesebb' : 'További hozásólás';
-    const preview = button.previousElementSibling;
-    preview.classList.toggle('expanded');
 }
 
 document.addEventListener('input', function (e) {
@@ -119,7 +100,7 @@ document.addEventListener('input', function (e) {
     }
 });
 
-// Szerkesztés űrlap megjelenítése
+// Szerkesztés űrlap megjelenítése (hirdetmény és fórum hozzászólásnál)
 function toggleEditForm(button) {
     const li = button.closest('li');
     const form = li.querySelector('.edit-form');

@@ -42,13 +42,15 @@ require __DIR__. '/../PHP_Header/a_submitted_request.php'
     <h1>📄 Beadott kérelmek</h1>
     <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">
-            ✅ A kérelem sikeresen mentve!
+            ✅ Hozzászólás/javaslat sikeresen mentve!
         </div>
+        <hr>
     <?php endif; ?>
     <?php if (isset($_GET['error'])): ?>
         <div class="error-message">
             ⚠️ <?= htmlspecialchars($_GET['error']) ?>
         </div>
+        <hr>
     <?php endif; ?>
 
     <!-- Kereső -->

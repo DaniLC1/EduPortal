@@ -4,37 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="POST és hozzás tartozó oldalak egységesítése. / Unification of POST and related pages.">
-      <change afterPath="$PROJECT_DIR$/PHP_Header/a_request.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PHP_Header/a_submitted_request.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PHP_Header/s_course_offering2.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PHP_Header/t_course_offering.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/message.php" afterDir="false" />
+    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Kérelem és Órára jelentkezés oldal véglegesítése. / Finalization of the Application and Class Registration page.">
+      <change afterPath="$PROJECT_DIR$/PHP_Header/s_courses.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PHP_Header/t_courses.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSS/course_offering.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/course_offering.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSS/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/profile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/courses.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/courses.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/enrolled_courses.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/enrolled_courses.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CSS/request.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/request.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/a_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/a_profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/s_course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_course_offering.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/s_enrolled_courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_enrolled_courses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/s_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/s_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/s_studies.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_studies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/t_assignment_result.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/t_assignment_result.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/t_profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/t_profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/t_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/t_request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/t_sutdent_cpmplete.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/t_sutdent_cpmplete.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/enrole_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/enrole_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/request_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/request_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CSS/studies.css" beforeDir="false" afterPath="$PROJECT_DIR$/CSS/studies.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/t_course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/t_course_offering.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/forum_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/forum_post.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Scripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/submitted_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/submitted_request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/student/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/course_offering.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/enrolled_courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/enrolled_courses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/courses.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/teacher/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/course_offering.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/courses.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +35,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="PHP File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -177,7 +164,7 @@
       <workItem from="1761027188917" duration="155805000" />
       <workItem from="1763639730689" duration="13285000" />
       <workItem from="1763718237733" duration="7602000" />
-      <workItem from="1763741615046" duration="139133000" />
+      <workItem from="1763741615046" duration="190105000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
@@ -363,7 +350,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764354513127</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Kérelem és Órára jelentkezés oldal véglegesítése. / Finalization of the Application and Class Registration page.">
+      <option name="closed" value="true" />
+      <created>1764536649111</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1764536649111</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +396,8 @@
     <MESSAGE value="PHP header fájlok szétszedése és egységes SESSION ellenőrzés. / Disassembling PHP header files and unified SESSION checking." />
     <MESSAGE value="Connection beállítása. / Connection setup." />
     <MESSAGE value="POST és hozzás tartozó oldalak egységesítése. / Unification of POST and related pages." />
-    <option name="LAST_COMMIT_MESSAGE" value="POST és hozzás tartozó oldalak egységesítése. / Unification of POST and related pages." />
+    <MESSAGE value="Kérelem és Órára jelentkezés oldal véglegesítése. / Finalization of the Application and Class Registration page." />
+    <option name="LAST_COMMIT_MESSAGE" value="Kérelem és Órára jelentkezés oldal véglegesítése. / Finalization of the Application and Class Registration page." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -57,14 +57,13 @@ ORDER BY start_date DESC";
 
 $semesters = $conn->query($semesters_sql)->fetch_all(MYSQLI_ASSOC);
 
-// 🔹 Tanárhoz rendelt kurzusok (legördülőhöz)
+// 🔹 Tanárhoz rendelt kurzusok
 $teacher_courses_sql = "
 SELECT c.kurzus_kod,
        c.name 
 FROM teacher_courses tc
 JOIN courses c ON c.kurzus_kod = tc.kurzus_kod
-WHERE tc.teacher_id = ?
-";
+WHERE tc.teacher_id = ?";
 
 $tc_stmt = $conn->prepare($teacher_courses_sql);
 $tc_stmt->bind_param("s", $eduportal_id);
@@ -90,21 +89,10 @@ FROM course_offerings co
 JOIN courses c ON c.kurzus_kod = co.kurzus_kod
 JOIN semesters s ON s.id = co.semester_id
 JOIN teacher_courses tc ON c.kurzus_kod = tc.kurzus_kod
-WHERE tc.teacher_id = ?
-";
-
-$params = [$eduportal_id];
-$types = "s";
-
-if (!empty($selected_semester_id)) {
-    $offering_sql .= " AND co.semester_id = ?";
-    $params[] = $selected_semester_id;
-    $types .= "i";
-}
-
-$offering_sql .= " ORDER BY s.label DESC, c.name ASC";
+WHERE tc.teacher_id = ? AND co.semester_id = ?
+ORDER BY s.label DESC, c.name ASC";
 
 $offering_stmt = $conn->prepare($offering_sql);
-$offering_stmt->bind_param($types, ...$params);
+$offering_stmt->bind_param('si', $eduportal_id, $selected_semester_id);
 $offering_stmt->execute();
 $offerings = $offering_stmt->get_result()->fetch_all(MYSQLI_ASSOC);

@@ -25,7 +25,7 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
-    background-color: #fff;
+    background-color: var(--dropdown-bg);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
 }
@@ -58,8 +58,19 @@
 }
 
 .sec_course-card:hover,
-.tar_course-card:hover {
+.tar_course-card:hover,
+.tsc_course-card:hover {
     transform: translateY(-6px);
+}
+
+.card-body form select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    background-color: var(--dropdown-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
 }
 
 /* Fejléc – név + kód */
@@ -121,9 +132,10 @@
 }
 
 body[data-theme="dark"] .filters input,
-body[data-theme="dark"] .filters select {
-    background-color: #222;
-    color: #fff;
+body[data-theme="dark"] .filters select,
+body[data-theme="dark"] .card-body form select {
+    background-color: var(--dropdown-bg-dark);
+    color: var(--text-light);
     border-color: #444;
 }
 

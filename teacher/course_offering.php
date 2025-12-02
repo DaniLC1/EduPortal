@@ -189,8 +189,23 @@ require_once __DIR__ . '/../PHP_Header/t_course_offering.php';
                     </div>
 
                     <div class="card-body">
-                        <div>
-                            <p><strong>Leírás:</strong> <?= htmlspecialchars($course['leiras']) ?></p>
+                        <?php
+                        $description = htmlspecialchars($course['leiras']);
+                        $shortDesc = mb_strimwidth($description, 0, 150, '...');
+                        ?>
+                        <div class="collapsible-container">
+                            <p class="short-description"><strong>Leírás:</strong> <?= $shortDesc ?></p>
+                            <div class="collapsible-content">
+                                <p><strong>Leírás:</strong> <?= $description ?></p>
+                            </div>
+                            <?php if (strlen($description) > 150): ?>
+                                <button class="toggle-btn"
+                                        data-more-text="Bővebben"
+                                        data-less-text="Kevesebb"
+                                        onclick="toggleDescription(this)">
+                                    Bővebben
+                                </button>
+                            <?php endif; ?>
                         </div>
                         <?php foreach ($course['offerings'] as $off): ?>
                             <details class="offering-details">

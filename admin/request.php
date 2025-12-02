@@ -50,14 +50,23 @@ require __DIR__. '/../PHP_Header/a_request.php'
     <h1>📄 Kérelmek kezelése</h1>
     <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">
-            ✅ A kérelem sikeresen mentve!
+            ✅ A kérelem sikeresen mentve/módosítva!
         </div>
+        <hr>
+    <?php endif; ?>
+    <?php if (isset($_GET['success']) && $_GET['success'] == 'deleted'): ?>
+        <div class="success-message">
+            ✅ A kérelem sikeresen törölve!
+        </div>
+        <hr>
     <?php endif; ?>
     <?php if (isset($_GET['error'])): ?>
         <div class="error-message">
             ⚠️ <?= htmlspecialchars($_GET['error']) ?>
         </div>
+        <hr>
     <?php endif; ?>
+
     <button id="new-request-btn" class="ar_fill-btn">➕ Új kérelem</button>
 
     <!-- Kereső -->
@@ -78,10 +87,10 @@ require __DIR__. '/../PHP_Header/a_request.php'
                         <h2><?= htmlspecialchars($t['title']) ?></h2>
                         <div class="card-actions">
                             <button class="ar_edit-btn">✏️ Szerkesztés</button>
-                            <form method="POST" action="../POST/request_post.php" class="inline-form">
+                            <form method="POST" action="../POST/request_post.php" class="inline-form" onsubmit="return confirm('Biztosan törlöd ezt a hozzászólást?')">
                                 <input type="hidden" name="admin_request">
                                 <input type="hidden" name="template_id" value="<?= $t['id'] ?>">
-                                <button type="submit" name="delete" class="ar_delete-btn">🗑️ Törlés</button>
+                                <button type="submit" name="delete" class="ar_delete-btn" >🗑️ Törlés</button>
                             </form>
                         </div>
                     </div>

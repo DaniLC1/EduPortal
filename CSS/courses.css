@@ -83,6 +83,15 @@
     border-bottom: 1px solid #eee;
 }
 
+.notifications li span{
+    color:gray;
+    font-size: 0.9em;
+}
+
+.notifications li form{
+    display: inline;
+}
+
 .delete-btn {
     background: none;
     border: none;
@@ -112,7 +121,7 @@
 }
 
 /* Kurzus leírás animáció */
-.description-container .full-description {
+.collapsible-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease, opacity 0.3s ease;
@@ -120,11 +129,11 @@
 }
 
 /* Rövid szöveg eltűntetése */
-.description-container .short-description.hidden {
+.short-description.hidden {
     display: none;
 }
 
-.forum-message {
+.forum-message{
     font-size: 1em;
     margin-bottom: 4px;
 }
@@ -176,17 +185,6 @@
 
 .edit-form.hidden {
     display: none;
-}
-
-.forum-preview {
-    max-height: 150px;
-    overflow: hidden;
-    position: relative;
-    transition: max-height 0.5s ease;
-}
-
-.forum-preview.expanded {
-    max-height: none;
 }
 
 /* Dolgozatok új elrendezése */
@@ -301,7 +299,8 @@
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
-body[data-theme="dark"] .filters select {
+body[data-theme="dark"] .filters select,
+body[data-theme="dark"] .auto-resize-textarea{
     background: var(--dropdown-bg-dark);
     color: var(--text-light);
     border-color: #444;

@@ -33,6 +33,29 @@
     font-style: italic;
 }
 
+/* Kurzus leírás animáció */
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+/* Rövid szöveg eltűntetése */
+.short-description.hidden {
+    display: none;
+}
+
+.toggle-btn {
+    margin-top: 5px;
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 0;
+    font-size: 0.9em;
+}
+
 .course-card form {
     margin-top: 1rem;
 }

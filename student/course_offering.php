@@ -121,8 +121,23 @@ require_once __DIR__ . '/../PHP_Header/s_course_offering2.php';
                             <span class="credit"><?= $course['credit'] ?> kredit</span>
                         </div>
                         <div class="card-body">
-                            <div>
-                                <p><strong>Leírás:</strong> <?= nl2br(htmlspecialchars($course['leiras'])) ?></p>
+                            <?php
+                            $description = htmlspecialchars($course['leiras']);
+                            $shortDesc = mb_strimwidth($description, 0, 150, '...');
+                            ?>
+                            <div class="collapsible-container">
+                                <p class="short-description"><strong>Leírás:</strong> <?= $shortDesc ?></p>
+                                <div class="collapsible-content">
+                                    <p><strong>Leírás:</strong> <?= $description ?></p>
+                                </div>
+                                <?php if (strlen($description) > 150): ?>
+                                    <button class="toggle-btn"
+                                            data-more-text="Bővebben"
+                                            data-less-text="Kevesebb"
+                                            onclick="toggleDescription(this)">
+                                        Bővebben
+                                    </button>
+                                <?php endif; ?>
                             </div>
                             <p><strong>Tanárok:</strong> <?= htmlspecialchars($course['teachers']) ?: 'Nincs megadva' ?></p>
                             <p><strong>Típus:</strong>
@@ -181,7 +196,7 @@ require_once __DIR__ . '/../PHP_Header/s_course_offering2.php';
                                                 Terem: <?= htmlspecialchars($offering['room']) ?> |
                                                 Max létszám: <?= $offering['max_students'] ?> |
                                                 Jelentkezettek: <?= $offering['enrolled_count'] ?> |
-                                                <strong>Jelentkezési határidő: <?= $offering['end_date'] ?? null ?> </strong>
+                                                <strong>Jelentkezési határidő: <?= $offering['end_date'] ?> </strong>
 
                                                 <?php if (!$offering['already_enrolled'] && !$course['already_completed']): ?><form method="post" action="../POST/enrole_post.php" style="display:inline">
                                                     <input type="hidden" name="offering_id" value="<?= $offering['offering_id'] ?>">

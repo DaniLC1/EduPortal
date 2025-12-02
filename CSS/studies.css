@@ -48,7 +48,7 @@ main {
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
-    background-color: #fff;
+    background-color: var(--dropdown-bg);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
 }
@@ -74,11 +74,16 @@ main {
     box-sizing: border-box;
     background-color: var(--card-background);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.ss_subject-card:hover {
+    transform: translateY(-6px);
 }
 
 body[data-theme="dark"] .filters input,
 body[data-theme="dark"] .filters select {
-    background-color: #222;
-    color: #fff;
+    background-color: var(--dropdown-bg-dark);
+    color: var(--text-light);
     border-color: #444;
 }
