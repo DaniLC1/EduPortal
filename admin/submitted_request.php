@@ -18,7 +18,7 @@ require __DIR__. '/../PHP_Header/a_submitted_request.php'
         </div>
     </div>
     <nav class="main-nav">
-        <a href="database.php"><span class="icon">📘</span> Adatbázis</a>
+        <a href="register.php"><span class="icon">📘</span> Adatbázis</a>
         <a id="active" href="#"><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
         <a href="request.php"><span class="icon">📄</span> Kérelmek szerkesztése</a>
     </nav>
@@ -117,7 +117,7 @@ require __DIR__. '/../PHP_Header/a_submitted_request.php'
                             </label><br><br>
 
                             <label>
-                                Megjegyzés:<textarea name="admin_comment" rows="1"><?= htmlspecialchars($req['admin_comment'] ?? '') ?></textarea>
+                                Megjegyzés:<textarea class="auto-resize-textarea" name="admin_comment" ><?= htmlspecialchars($req['admin_comment'] ?? '') ?></textarea>
                             </label><br><br>
 
                             <div class="form-actions">

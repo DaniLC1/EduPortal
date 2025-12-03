@@ -22,7 +22,7 @@ require_once __DIR__ . '/../PHP_Header/a_profile.php';
 
         <!-- NAVIGÁCIÓ -->
         <nav class="main-nav">
-            <a href="database.php" ><span class="icon">📘</span> Adatbázis</a>
+            <a href="register.php" ><span class="icon">📘</span> Adatbázis</a>
             <a href="submitted_request.php" ><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
             <a href="request.php"><span class="icon">📄</span> Kérelmek szerkesztése</a>
         </nav>

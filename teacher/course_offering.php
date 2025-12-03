@@ -87,7 +87,7 @@ require_once __DIR__ . '/../PHP_Header/t_course_offering.php';
                     <br>
 
                     <label>Leírás:</label>
-                    <textarea name="course_description" rows="2" required></textarea>
+                    <textarea class="auto-resize-textarea" name="course_description" required></textarea>
 
                     <br>
 
@@ -224,7 +224,7 @@ require_once __DIR__ . '/../PHP_Header/t_course_offering.php';
                                     <input type="hidden" name="offering_id" value="<?= $off['offering_id'] ?>">
 
                                     <label>Leírás:</label>
-                                    <textarea name="course_description" rows="2"><?= htmlspecialchars($off['leiras']) ?></textarea>
+                                    <textarea class="auto-resize-textarea" name="course_description" ><?= htmlspecialchars($off['leiras']) ?></textarea>
 
                                     <label>Kurzus jellege:</label>
                                     <select name="course_type" required>

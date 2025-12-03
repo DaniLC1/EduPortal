@@ -21,7 +21,7 @@ require __DIR__. '/../PHP_Header/a_request.php'
 
     <!-- NAVIGÁCIÓ -->
     <nav class="main-nav">
-        <a href="database.php"><span class="icon">📘</span> Adatbázis</a>
+        <a href="register.php"><span class="icon">📘</span> Adatbázis</a>
         <a href="submitted_request.php"><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
         <a id="active" href="#"><span class="icon">📄</span> Kérelmek szerkesztése</a>
     </nav>
@@ -104,7 +104,7 @@ require __DIR__. '/../PHP_Header/a_request.php'
                             <input type="text" name="title" value="<?= htmlspecialchars($t['title']) ?>" required>
 
                             <label>Leírás:</label>
-                            <textarea name="description" rows="2"><?= htmlspecialchars($t['description']) ?></textarea>
+                            <textarea class="auto-resize-textarea" name="description" ><?= htmlspecialchars($t['description']) ?></textarea>
 
                             <label>Címzett:</label>
                             <select name="to_who" required>

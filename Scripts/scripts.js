@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             newQuestion.innerHTML = `
             <button type="button" class="remove-question">❌</button>
-            <textarea id="question-card-question" name="questions[${qid}][text]" placeholder="Kérdés szövege..." rows="1"></textarea>
+            <textarea class="auto-resize-textarea" id="question-card-question" name="questions[${qid}][text]" placeholder="Kérdés szövege..." rows="1"></textarea>
 
             <div class="question-meta">
                 <label>Típus:</label>
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <input type="text" name="title" placeholder="Kérelem címe..." required>
 
                     <label>Leírás:</label>
-                    <textarea name="description" rows="2"></textarea>
+                    <textarea class="auto-resize-textarea" name="description"></textarea>
 
                     <label>Címzett:</label>
                     <select name="to_who">

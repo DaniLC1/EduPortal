@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: teacher/courses.php");
                 break;
             case 'admin':
-                header("Location: admin/database.php");
+                header("Location: admin/register.php");
                 break;
             default:
                 throw new Exception("Ismeretlen szerepkör: {$user['role']}");

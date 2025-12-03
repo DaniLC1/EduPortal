@@ -1,0 +1,77 @@
+/* ================================
+   KÁRTYA & KONTAINER
+================================ */
+.user-card {
+    border: none;
+    padding: 1.2rem;
+    border-radius: 8px;
+    background: var(--card-background);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Az egész regisztrációs blokk */
+.create-user {
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: transparent;
+    border: none;
+    justify-content: space-between;
+}
+
+/* ================================
+   INPUTOK / SELECTEK / TEXTAREA
+================================ */
+.create-user input,
+.create-user select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    margin-bottom: 8px;
+    min-height: fit-content;
+    color: var(--text-dark);
+    background-color: var(--dropdown-bg);
+    resize: none;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* Fókusz állapot */
+.create-user input:focus,
+.create-user select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* ================================
+   GOMB
+================================ */
+.create-user button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.95em;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.create-user button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ================================
+   DARK MODE
+================================ */
+body[data-theme="dark"] .create-user input,
+body[data-theme="dark"] .create-user select {
+    background: var(--dropdown-bg-dark);
+    color: var(--text-light);
+    border-color: #444;
+}

@@ -102,7 +102,7 @@
     width: 100%;
     padding: 0.5em;
     margin-top: 0.25em;
-    min-height: 50px;
+    min-height: fit-content;
     resize: none;
     font-size: 0.9em;
     color: var(--text-dark);
@@ -129,7 +129,7 @@ Csak admin oldalon használt CSS
     width: 100%;
     padding: 0.5rem;
     margin-top: 0.25rem;
-    min-height: 40px;
+    min-height: fit-content;
     color: var(--text-dark);
     background-color: var(--dropdown-bg);
     resize: none;
