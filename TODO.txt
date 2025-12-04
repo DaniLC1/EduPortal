@@ -21,8 +21,6 @@ Ezt mindenhol meg kell csinálni!!!
 JS kód átnézése
 
 ---------------------
-teacher/assignment_result.php-> csak a legutolsó dolgozat bejelölt válaszait mutatja
-
 studies.php lekérdezés logikát hozzá igazítani a tárgyfelvételhez
 
 /************************************************
