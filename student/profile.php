@@ -17,7 +17,7 @@ require_once __DIR__ . '/../PHP_Header/s_profile.php';
                 <div class="dropdown">
                     <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
                     <div id="dropdownMenuL" class="dropdown-menu left">
-                        <a href="finances.php">Pénzügyek</a>
+                        <a href="message.php" >Üzenetek</a>
                         <a href="enrolled_courses.php">Felvett kurzusok</a>
                         <a href="studies.php">Tanulmányok</a>
                     </div>

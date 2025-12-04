@@ -1,0 +1,175 @@
+/* ====== KONTAINER ====== */
+.message-container {
+    display: flex;
+    gap: 1rem;
+    height: calc(100vh - 11rem); /* teljes képernyő - header */
+}
+
+/* ====== BAL OLDALI CÍMZETT LISTA ====== */
+.user-list-container {
+    width: fit-content;
+    padding: 1rem;
+    background-color: var(--card-background-light);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.25rem rgba(0,0,0,0.1);
+}
+
+.user-selector summary {
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#sm_searchInput,
+#am_searchInput,
+#tm_searchInput {
+    width: 100%;
+    padding: 0.4rem;
+    margin-right: 1.6rem;
+    border-radius: 0.4rem;
+    border: none;
+    box-sizing: border-box;
+    background: var(--background-light);
+}
+
+#userList {
+    list-style: none;
+    max-height: calc(100vh - 17rem);
+    overflow-y: auto;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#userList li {
+    margin-bottom: 0.6rem;
+}
+
+#userList a {
+    text-decoration: none;
+    color: var(--text-dark);
+}
+body[data-theme="dark"] #userList a{
+    color: var(--text-light);
+}
+
+#userList a.active {
+    font-weight: bold;
+    color: var(--primary-hover);
+}
+
+/* ====== CHAT JOBB OLDAL ====== */
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* A CHAT ÜZENETEK DOBOZA */
+.chat-box {
+    flex: 1;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    overflow-y: auto;
+    background-color: var(--card-background-light);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+}
+
+/* ÜZENETEK */
+.chat-message {
+    margin-bottom: 0.2rem;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    max-width: 70%;
+}
+
+.chat-message.me {
+    background: #40f48d;
+    margin-left: auto;
+}
+
+.chat-message.other {
+    background: #8eb6ff;
+    margin-right: auto;
+}
+
+.chat-author {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+.chat-text {
+    margin-bottom: 0.2rem;
+}
+
+.chat-time {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* ====== AZ ÜZENETKÜLDŐ FORM ====== */
+.chat-form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    background: var(--card-background-light);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin-top: 0.1rem;
+    margin-right: 0.9rem;
+}
+
+.auto-resize-textarea {
+    flex: 1;
+    height: fit-content;
+    padding: 0.1rem;
+    font-size: 0.9rem;
+    border-radius: 0.4rem;
+    resize: none;
+    border: none;
+    background: var(--background-light);
+}
+
+.chat-form button {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.chat-form button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* ====== Sötét mód ====== */
+body[data-theme="dark"] #am_searchInput,
+body[data-theme="dark"] #sm_searchInput,
+body[data-theme="dark"] #tm_searchInput,
+body[data-theme="dark"] .auto-resize-textarea{
+    background: var(--dropdown-bg-dark);
+    color: var(--text-light);
+    border-color: #444;
+}
+
+body[data-theme="dark"] .chat-form,
+body[data-theme="dark"] .chat-box,
+body[data-theme="dark"] .user-list-container {
+    background: var(--card-background-dark);
+}
+
+body[data-theme="dark"] .chat-message.me {
+    background: #28a745;
+}
+
+body[data-theme="dark"] .chat-message.other {
+    background: #4c61af;
+}

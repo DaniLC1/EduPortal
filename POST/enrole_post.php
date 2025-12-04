@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conn->rollback();
 
             $error_message = urlencode("Hiba történt: " . $e->getMessage());
-            header("Location: ../teacher/courses.php?error={$error_message}");
+            header("Location: ../teacher/course_offering.php?error={$error_message}");
             exit;
         }
     }

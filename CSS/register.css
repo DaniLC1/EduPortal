@@ -5,7 +5,7 @@
     border: none;
     padding: 1.2rem;
     border-radius: 8px;
-    background: var(--card-background);
+    background: var(--card-background-light);
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
@@ -74,4 +74,8 @@ body[data-theme="dark"] .create-user select {
     background: var(--dropdown-bg-dark);
     color: var(--text-light);
     border-color: #444;
+}
+
+body[data-theme="dark"] .user-card {
+    background: var(--card-background-dark);
 }

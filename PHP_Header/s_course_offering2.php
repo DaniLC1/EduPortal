@@ -22,8 +22,7 @@ SELECT
     p.name AS szak_nev
 FROM users u
 LEFT JOIN programs p ON p.szak_szam = u.course_code
-WHERE u.eduportal_id = ?
-";
+WHERE u.eduportal_id = ?";
 
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
@@ -86,8 +85,7 @@ WHERE c.kurzus_kod IN (
     WHERE co.semester_id = ?
 )
 GROUP BY c.kurzus_kod
-ORDER BY c.name ASC;
-";
+ORDER BY c.name ASC;";
 
 $kurzus_stmt = $conn->prepare($kurzusok_sql);
 $kurzus_stmt->bind_param("si", $user['course_code'], $selected_semester_id);
@@ -111,8 +109,7 @@ SELECT
     (SELECT COUNT(*) FROM enrollments e WHERE e.offering_id = co.id AND co.semester_id = ?) AS enrolled_count
 FROM course_offerings co
 WHERE co.semester_id = ?
-ORDER BY co.kurzus_kod, co.course_type
-";
+ORDER BY co.kurzus_kod, co.course_type";
 
 $offerings_stmt = $conn->prepare($offerings_sql);
 $offerings_stmt->bind_param("ii", $selected_semester_id,$selected_semester_id);
@@ -125,8 +122,8 @@ $offerings_raw = $offerings_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $enrolled_sql = "
 SELECT offering_id
 FROM enrollments 
-WHERE users_eduportal_ID = ?
-";
+WHERE users_eduportal_ID = ?";
+
 $enrolled_stmt = $conn->prepare($enrolled_sql);
 $enrolled_stmt->bind_param("s", $eduportal_id);
 $enrolled_stmt->execute();
@@ -137,8 +134,8 @@ $completed_sql = "
 SELECT co.kurzus_kod
 FROM enrollments e
 JOIN course_offerings co ON e.offering_id = co.id
-WHERE e.users_eduportal_ID = ? AND e.status = 'completed'
-";
+WHERE e.users_eduportal_ID = ? AND e.status = 'completed'";
+
 $completed_stmt = $conn->prepare($completed_sql);
 $completed_stmt->bind_param("s", $eduportal_id);
 $completed_stmt->execute();
@@ -152,8 +149,8 @@ $completed_courses = array_column($completed_courses, 'kurzus_kod');
 $other_pc_sql = "
 SELECT kurzus_kod
 FROM program_courses 
-WHERE tipus = 'valaszthato' AND szak_szam != ?
-";
+WHERE tipus = 'valaszthato' AND szak_szam != ?";
+
 $other_pc_stmt = $conn->prepare($other_pc_sql);
 $other_pc_stmt->bind_param("s", $user['course_code']);
 $other_pc_stmt->execute();
@@ -169,8 +166,9 @@ foreach ($kurzusok_raw as $row) {
     $kurzus_kod = $row['kurzus_kod'];
 
     // Szabadon választható logika
-    if ($row['course_required_type'] === null && !in_array($kurzus_kod, $other_valaszthato)) {
-        $row['course_required_type'] = 'szabadon_valaszthato';
+    $type = $row['course_required_type'];
+    if (empty($type)) {
+        $type = 'szv';
     }
 
     $courses[$kurzus_kod] = [
@@ -179,7 +177,7 @@ foreach ($kurzusok_raw as $row) {
         'leiras' => $row['leiras'],
         'credit' => $row['credit'],
         'teachers' => $row['teachers'],
-        'course_required_type' => $row['course_required_type'],
+        'course_required_type' => $type,
         'already_completed' => in_array($kurzus_kod, $completed_courses),
         'offerings' => []
     ];

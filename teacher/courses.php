@@ -17,6 +17,7 @@ require_once __DIR__ . '/../PHP_Header/t_courses.php';
                 <div class="dropdown">
                     <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
                     <div id="dropdownMenuL" class="dropdown-menu left">
+                        <a href="message.php" >Üzenetek</a>
                         <a href="assignment_result.php">Eredmények</a>
                         <a href="student_complete.php">Lezárások</a>
                     </div>
@@ -107,6 +108,19 @@ require_once __DIR__ . '/../PHP_Header/t_courses.php';
             <!-- FŐ TARTALOM -->
             <section class="main-content">
                 <h1>Kurzusok(Tanároknak)</h1>
+                <?php if (isset($_GET['success']) && $_GET['success'] == 10): ?>
+                    <div class="success-message">
+                        ✅ Dolgozat beadása sikeres!
+                    </div>
+                    <hr>
+                <?php endif; ?>
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="error-message">
+                        ⚠️ <?= htmlspecialchars($_GET['error']) ?>
+                    </div>
+                    <hr>
+                <?php endif; ?>
+
                 <!-- 🔹 Szűrők -->
                 <form method="get" class="filters">
                     <label for="semester_id">Félév:</label>

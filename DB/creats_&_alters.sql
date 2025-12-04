@@ -234,9 +234,19 @@ CREATE TABLE request_templates (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-	to_who TEXT,
+    to_who TEXT,
+
+    version INT NOT NULL DEFAULT 1,
+    previous_version_id INT NULL,
+	is_active TINYINT(1) NOT NULL DEFAULT 1,
+
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_prev_version
+        FOREIGN KEY (previous_version_id)
+        REFERENCES request_templates(id)
+        ON DELETE SET NULL
 );
 
 -- Beadott kérelmek:
@@ -282,3 +292,15 @@ CREATE TABLE student_request_field_values (
     FOREIGN KEY (field_id) REFERENCES request_template_fields(id)
 );
 
+CREATE TABLE messages (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    from_eduportal_id VARCHAR(20) NOT NULL, 
+	to_eduportal_id VARCHAR(20) NOT NULL,
+	message TEXT,
+	is_read BOOLEAN NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	
+	FOREIGN KEY (from_eduportal_id) REFERENCES users(eduportal_id),
+	FOREIGN KEY (to_eduportal_id) REFERENCES users(eduportal_id)
+);

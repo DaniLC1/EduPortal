@@ -15,13 +15,16 @@ require __DIR__. '/../PHP_Header/a_request.php'
     <!-- BAL MENÜ -->
     <div class="menu">
         <div class="dropdown">
-            <div id="dropdownMenuL" class="dropdown-menu left" hidden="hidden"></div>
+            <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
+            <div id="dropdownMenuL" class="dropdown-menu left">
+                <a href="message.php" >Üzenetek</a>
+            </div>
         </div>
     </div>
 
     <!-- NAVIGÁCIÓ -->
     <nav class="main-nav">
-        <a href="register.php"><span class="icon">📘</span> Adatbázis</a>
+        <a href="register.php"><span class="icon">📘</span> Regisztrálás</a>
         <a href="submitted_request.php"><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
         <a id="active" href="#"><span class="icon">📄</span> Kérelmek szerkesztése</a>
     </nav>
@@ -87,9 +90,10 @@ require __DIR__. '/../PHP_Header/a_request.php'
                         <h2><?= htmlspecialchars($t['title']) ?></h2>
                         <div class="card-actions">
                             <button class="ar_edit-btn">✏️ Szerkesztés</button>
-                            <form method="POST" action="../POST/request_post.php" class="inline-form" onsubmit="return confirm('Biztosan törlöd ezt a hozzászólást?')">
+                            <form method="POST" action="../POST/request_post.php" class="inline-form">
                                 <input type="hidden" name="admin_request">
                                 <input type="hidden" name="template_id" value="<?= $t['id'] ?>">
+                                <input type="hidden" name="title" value="<?= $t['title'] ?>">
                                 <button type="submit" name="delete" class="ar_delete-btn" >🗑️ Törlés</button>
                             </form>
                         </div>

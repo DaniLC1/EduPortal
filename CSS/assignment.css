@@ -17,7 +17,7 @@ h1 {
     padding: 20px;
     margin-bottom: 25px;
     border-radius: 8px;
-    background-color: var(--card-background);
+    background-color: var(--card-background-light);
 }
 
 .question-text {
@@ -69,13 +69,17 @@ body[data-theme="dark"] h1{
     color: var(--text-light);
 }
 
-/* === TANÁRI DOLGOZATKEZELŐ STÍLUS (courses.css mintára) === */
+body[data-theme="dark"] .question-block{
+    background-color: var(--card-background-dark);
+}
+
+    /* === TANÁRI DOLGOZATKEZELŐ STÍLUS (courses.css mintára) === */
 
 /* Kártyák (mint a kurzusoknál) */
 .assignment-card {
     width: 95%;
     margin: 2rem auto;
-    background-color: var(--card-background);
+    background-color: var(--card-background-light);
     border-radius: 12px;
     padding: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -106,7 +110,7 @@ body[data-theme="dark"] h1{
 
 /* Kérdéskártyák */
 .question-card {
-    background-color: var(--dropdown-bg);
+    background-color: var(--background-light);
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 1rem;
@@ -246,10 +250,14 @@ h1 {
     margin-bottom: 1.5rem;
 }
 
-body[data-theme="dark"] .question-card{
+body[data-theme="dark"] .question-card {
     background: var(--dropdown-bg-dark);
     color: var(--text-light);
     border-color: #444;
+}
+
+body[data-theme="dark"] .assignment-card {
+    background-color: var(--card-background-dark);
 }
 
 /*********************************************

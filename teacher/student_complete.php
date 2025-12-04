@@ -16,6 +16,7 @@ require_once __DIR__ . '/../PHP_Header/t_sutdent_cpmplete.php';
         <div class="dropdown">
             <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
             <div id="dropdownMenuL" class="dropdown-menu left">
+                <a href="message.php" >Üzenetek</a>
                 <a href="assignment_result.php">Eredmények</a>
                 <a href="#" id="active">Lezárások</a>
             </div>
@@ -96,7 +97,7 @@ require_once __DIR__ . '/../PHP_Header/t_sutdent_cpmplete.php';
             <?php foreach ($students as $st): ?>
                 <div class="tsc_course-card"
                      data-semester="<?= htmlspecialchars($st['semester_label']) ?>"
-                     data-offering="<?= htmlspecialchars($st['offering_id']) ?>"
+                     data-code="<?= htmlspecialchars($st['offering_id']) ?>"
                      data-name="<?= strtolower(htmlspecialchars($st['student_name'])) ?>">
 
                     <div class="card-header">

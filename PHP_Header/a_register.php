@@ -20,6 +20,7 @@ SELECT
     name 
 FROM users 
 WHERE eduportal_id = ?";
+
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
 $user_stmt->execute();

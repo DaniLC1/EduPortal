@@ -167,7 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
         safeGet('sco_searchInput') ||
         safeGet('tco_searchInput') ||
         safeGet('ar_searchInput') ||
-        safeGet('asr_searchInput');
+        safeGet('asr_searchInput') ||
+        safeGet('am_searchInput') ||
+        safeGet('tm_searchInput') ||
+        safeGet('sm_searchInput');
 
     const semesterFilter =
         safeGet('sec_semesterFilter') ||
@@ -226,6 +229,15 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (document.querySelectorAll('.asr_request-card').length) {
         cards = document.querySelectorAll('.asr_request-card');
 
+    } else if (document.querySelectorAll('.sm_user-item').length) {
+        cards = document.querySelectorAll('.sm_user-item');
+
+    } else if (document.querySelectorAll('.tm_user-item').length) {
+        cards = document.querySelectorAll('.tm_user-item');
+
+    } else if (document.querySelectorAll('.am_user-item').length) {
+        cards = document.querySelectorAll('.am_user-item');
+
     }
 
     // Ha nincs kártya → nincs mit szűrni
@@ -250,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const semester= card.dataset.semester || '';
             const type= card.dataset.type || '';
             const completed= card.dataset.completed || '0';
+            const eduid = (card.dataset.eduid || '').toLowerCase()
 
 
             // Régi request oldalakhoz még mindig kell
@@ -262,7 +275,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 code.includes(searchText) ||
                 teacher.includes(searchText) ||
                 title.includes(searchText) ||
-                description.includes(searchText);
+                description.includes(searchText)||
+                eduid.includes(searchText);
 
             const matchesSemester = (selectedSemester === 'all' || semester === selectedSemester);
             const matchesType     = (selectedType === 'all' || type === selectedType);
@@ -498,5 +512,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
+//messages-nél ha sok az üzenet autómatikusan legörget a legfrissebbhez
+document.addEventListener("DOMContentLoaded", function () {
+    const chatBox = document.getElementById("chat-box");
+    if (chatBox) {
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+});
 

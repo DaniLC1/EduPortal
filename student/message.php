@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../PHP_Header/a_message.php';
+require_once __DIR__ . '/../PHP_Header/s_message.php';
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -17,16 +17,18 @@ require_once __DIR__ . '/../PHP_Header/a_message.php';
         <div class="dropdown">
             <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
             <div id="dropdownMenuL" class="dropdown-menu left">
-                <a href="#" id="active">Üzenetek</a>
+                <a href="message.php" >Üzenetek</a>
+                <a href="enrolled_courses.php">Felvett kurzusok</a>
+                <a href="studies.php">Tanulmányok</a>
             </div>
         </div>
     </div>
 
     <!-- NAVIGÁCIÓ -->
     <nav class="main-nav">
-        <a href="#" id="active" ><span class="icon">📘</span> Regisztrálás </a>
-        <a href="submitted_request.php" ><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
-        <a href="request.php"><span class="icon">📄</span> Kérelmek szerkesztése</a>
+        <a href="course_offering.php"><span class="icon">📘</span> Tárgyfelvétel</a>
+        <a href="courses.php"><span class="icon">🧑‍🏫</span> Kurzusok</a>
+        <a href="request.php"><span class="icon">📄</span> Kérelmek</a>
     </nav>
 
     <!-- JOBB OLDALI MENÜ -->
@@ -59,10 +61,10 @@ require_once __DIR__ . '/../PHP_Header/a_message.php';
         <div class="user-list-container">
             <details class="user-selector">
                 <summary>Címzett kiválasztása</summary>
-                <input type="text" id="am_searchInput" placeholder="Keresés név vagy ID alapján...">
+                <input type="text" id="sm_searchInput" placeholder="Keresés név vagy ID alapján...">
                 <ul id="userList" >
                     <?php while ($u = $users_result->fetch_assoc()): ?>
-                        <li class="am_user-item"
+                        <li class="sm_user-item"
                             data-name="<?= strtolower($u['name']) ?>"
                             data-eduid="<?= strtolower($u['eduportal_id']) ?>">
 

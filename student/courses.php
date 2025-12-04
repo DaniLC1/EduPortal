@@ -17,7 +17,7 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
                 <div class="dropdown">
                     <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
                     <div id="dropdownMenuL" class="dropdown-menu left">
-                        <a href="finances.php">Pénzügyek</a>
+                        <a href="message.php" >Üzenetek</a>
                         <a href="enrolled_courses.php">Felvett kurzusok</a>
                         <a href="studies.php">Tanulmányok</a>
                     </div>
@@ -108,6 +108,19 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
             <!-- FŐ TARTALOM -->
             <section class="main-content">
                 <h1>Kurzusok</h1>
+                <?php if (isset($_GET['success']) && $_GET['success'] == 10): ?>
+                    <div class="success-message">
+                        ✅ Dolgozat beadása sikeres!
+                    </div>
+                    <hr>
+                <?php endif; ?>
+                <?php if (isset($_GET['error'])): ?>
+                    <div class="error-message">
+                        ⚠️ <?= htmlspecialchars($_GET['error']) ?>
+                    </div>
+                    <hr>
+                <?php endif; ?>
+
                 <!-- 🔹 Félévválasztó -->
                 <form method="get" class="filters">
                     <label for="semester_id">Félév:</label>
@@ -253,27 +266,35 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
                                         $max_score = isset($a['max_score']) ? (int)$a['max_score'] : 0;
                                         $description = htmlspecialchars($a['description']);
                                         ?>
-
+                                        <?php
+                                        $today = date('Y-m-d H:i');
+                                        $due_date = date('Y-m-d H:i', strtotime($a['due_date']));
+                                        $can_attempt = ($attempt_count < $max_attempts || $max_attempts === '∞') && ($today <= $due_date);
+                                        ?>
                                         <li class="assignment-item">
                                             <details>
                                                 <summary class="assignment-summary">
                                                     <div class="assignment-header">
                                                         <div class="assignment-title">
                                                             <strong><?= htmlspecialchars($a['title']) ?></strong><br>
-                                                            <span class="date-range">Indítható: <?= date('Y.m.d', strtotime('-3 days', strtotime($a['due_date']))) ?> – <?= date('Y.m.d', strtotime($a['due_date'])) ?></span>
+                                                            <span class="date-range">Indítható: <?= date('Y.m.d H:i', strtotime('-3 days', strtotime($a['due_date']))) ?> – <?= date('Y.m.d H:i', strtotime($a['due_date'])) ?></span>
                                                         </div>
                                                         <div class="assignment-stats">
                                                             Próbálkozás: <?= $attempt_count ?> / <?= $max_attempts ?> |
                                                             Eredmény: <?= $best_score ?> / <?= $max_score ?> pont
                                                         </div>
                                                         <div class="assignment-action">
-                                                            <?php if ($attempt_count < $max_attempts || $max_attempts === '∞'): ?>
+                                                            <?php if ($can_attempt): ?>
                                                                 <form method="GET" action="assignment.php">
                                                                     <input type="hidden" name="assignment_id" value="<?= $assignment_id ?>">
                                                                     <button type="submit" class="fill-btn">✍️ Kitöltés</button>
                                                                 </form>
                                                             <?php else: ?>
-                                                                <em>Maximális próbálkozások száma elérve</em>
+                                                                <?php if ($today > $due_date): ?>
+                                                                    <em>Határidő lejárt</em>
+                                                                <?php else: ?>
+                                                                    <em>Maximális próbálkozások száma elérve</em>
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                         </div>
                                                     </div>

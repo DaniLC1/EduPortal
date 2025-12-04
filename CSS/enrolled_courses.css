@@ -49,7 +49,7 @@
 .sec_course-card,
 .tar_course-card,
 .tsc_course-card {
-    background-color: var(--card-background);
+    background-color: var(--card-background-light);
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06);
     padding: 1.5rem;
@@ -137,6 +137,12 @@ body[data-theme="dark"] .card-body form select {
     background-color: var(--dropdown-bg-dark);
     color: var(--text-light);
     border-color: #444;
+}
+
+body[data-theme="dark"] .sec_course-card,
+body[data-theme="dark"] .tar_course-card,
+body[data-theme="dark"] .tsc_course-card {
+    background-color: var(--card-background-dark);
 }
 
 /*********************************************

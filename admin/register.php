@@ -15,7 +15,9 @@ require __DIR__. '/../PHP_Header/a_register.php'
     <!-- BAL MENÜ -->
     <div class="menu">
         <div class="dropdown">
-            <div id="dropdownMenuL" class="dropdown-menu left" hidden="hidden">
+            <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
+            <div id="dropdownMenuL" class="dropdown-menu left">
+                <a href="message.php" >Üzenetek</a>
             </div>
         </div>
     </div>

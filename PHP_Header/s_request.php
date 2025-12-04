@@ -21,8 +21,7 @@ SELECT
     p.name AS szak_nev
 FROM users u
 LEFT JOIN programs p ON p.szak_szam = u.course_code
-WHERE u.eduportal_id = ?
-";
+WHERE u.eduportal_id = ?";
 
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
@@ -37,13 +36,15 @@ $user_course = $user['szak_nev'] ?? "N/A";
    🔹 Kérlemek adatainak és szűréshez szükséges lekérdezés
 ============================================================ */
 $request_sql = "
-    SELECT rt.id,
-           rt.title,
-           rt.description
-    FROM request_templates rt
-    WHERE rt.to_who = 'hallgato'
-    ORDER BY rt.created_at DESC
-";
+SELECT rt.id,
+       rt.title,
+       rt.description
+FROM request_templates rt
+LEFT JOIN request_templates rt2 ON rt2.previous_version_id = rt.id
+WHERE rt.to_who = 'hallgato'
+    AND rt2.id IS NULL
+    AND rt.is_active = 1
+ORDER BY rt.created_at DESC";
 
 $request_result = $conn->query($request_sql);
 
@@ -56,14 +57,14 @@ while ($row = $request_result->fetch_assoc()) {
    🔹 Kérlemek mezőihez szükséges lekérdezés
 ============================================================ */
 $fields_sql = "
-    SELECT f.id,
-           f.template_id,
-           f.label,
-           f.field_type,
-           f.is_required
-    FROM request_template_fields f
-    ORDER BY f.template_id, f.id
-";
+SELECT f.id,
+       f.template_id,
+       f.label,
+       f.field_type,
+       f.is_required
+FROM request_template_fields f
+ORDER BY f.template_id, f.id";
+
 $fields_result = $conn->query($fields_sql);
 
 $template_fields = [];

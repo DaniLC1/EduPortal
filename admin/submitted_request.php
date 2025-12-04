@@ -12,16 +12,24 @@ require __DIR__. '/../PHP_Header/a_submitted_request.php'
 </head>
 <body>
 <header>
+    <!-- BAL MENÜ -->
     <div class="menu">
         <div class="dropdown">
-            <div id="dropdownMenuL" class="dropdown-menu left" hidden="hidden"></div>
+            <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
+            <div id="dropdownMenuL" class="dropdown-menu left">
+                <a href="message.php" >Üzenetek</a>
+            </div>
         </div>
     </div>
+
+    <!-- NAVIGÁCIÓ -->
     <nav class="main-nav">
-        <a href="register.php"><span class="icon">📘</span> Adatbázis</a>
+        <a href="register.php"><span class="icon">📘</span> Regisztrálás </a>
         <a id="active" href="#"><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
         <a href="request.php"><span class="icon">📄</span> Kérelmek szerkesztése</a>
     </nav>
+
+    <!-- JOBB OLDALI MENÜ -->
     <div class="user-menu">
         <div class="dropdown">
             <button id="dropdownToggleR" class="dropbtn">
@@ -32,6 +40,8 @@ require __DIR__. '/../PHP_Header/a_submitted_request.php'
                 <a href="../logout.php">Kijelentkezés</a>
             </div>
         </div>
+
+        <!-- TÉMAVÁLTÓ GOMB -->
         <div class="theme-switcher">
             <button id="theme-toggle" class="theme-btn">🌙</button>
         </div>

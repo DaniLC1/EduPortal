@@ -8,7 +8,7 @@ main {
 .progress-chart {
     flex: 1;
     max-width: 300px;
-    background-color: var(--card-background);
+    background-color: var(--card-background-light);
     padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
@@ -72,7 +72,7 @@ main {
     border-radius: 1rem;
     width: calc(50% - 0.5rem);
     box-sizing: border-box;
-    background-color: var(--card-background);
+    background-color: var(--dropdown-bg);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
 }
@@ -82,8 +82,15 @@ main {
 }
 
 body[data-theme="dark"] .filters input,
+body[data-theme="dark"] .filters input,
+body[data-theme="dark"] .filters input,
 body[data-theme="dark"] .filters select {
     background-color: var(--dropdown-bg-dark);
     color: var(--text-light);
     border-color: #444;
+}
+
+body[data-theme="dark"] .progress-chart,
+body[data-theme="dark"] .ss_subject-card{
+    background: var(--card-background-dark);
 }

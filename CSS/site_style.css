@@ -8,7 +8,8 @@
     --dropdown-bg: #ffffff;
     --dropdown-bg-dark: #333333;
     --primary-hover: #0056b3;
-    --secondary-hover: #e48a02;
+    --card-background-light: white;
+    --card-background-dark: black;
 }
 
 /* Alap beállítások */

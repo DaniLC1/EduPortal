@@ -17,6 +17,7 @@ require_once __DIR__ . '/../PHP_Header/t_request.php';
         <div class="dropdown">
             <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
             <div id="dropdownMenuL" class="dropdown-menu left">
+                <a href="message.php" >Üzenetek</a>
                 <a href="assignment_result.php">Eredmények</a>
                 <a href="student_complete.php">Lezárások</a>
             </div>
@@ -57,6 +58,13 @@ require_once __DIR__ . '/../PHP_Header/t_request.php';
         <div class="success-message">
             ✅ A kérelem sikeresen beadva!
         </div>
+        <hr>
+    <?php endif; ?>
+    <?php if (isset($_GET['error'])): ?>
+        <div class="error-message">
+            ⚠️ <?= htmlspecialchars($_GET['error']) ?>
+        </div>
+        <hr>
     <?php endif; ?>
 
     <!-- Kereső -->

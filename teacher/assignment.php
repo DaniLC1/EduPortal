@@ -1,97 +1,5 @@
 <?php
-session_start();
-require_once __DIR__ . '/../connection.php';
-
-if (!isset($_SESSION['eduportal_id']) || $_SESSION['role'] !== 'tanar') {
-    header("Location: ../index.php");
-    exit;
-}
-
-$eduportal_id = $_SESSION['eduportal_id'];
-global $conn;
-
-// Tanár adatok lekérdezése
-$user_sql = "
-SELECT name 
-FROM users
-WHERE eduportal_id = ?";
-
-$user_stmt = $conn->prepare($user_sql);
-$user_stmt->bind_param("s", $eduportal_id);
-$user_stmt->execute();
-$user_result = $user_stmt->get_result();
-$user = $user_result->fetch_assoc();
-
-$user_name = $user['name'] ?? 'Ismeretlen';
-$user_course = "Tanár";
-
-//Kurzus offering_id eltárolása
-$offering_id = $_GET['offering_id'] ?? null;
-
-// Dolgozat adatainak lekérdezése, ha van assignment_id
-$is_edit = isset($_GET['assignment_id']);
-$assignment = [
-        'title' => '',
-        'description' => '',
-        'available_from' => '',
-        'due_date' => '',
-        'max_attempts' => '',
-        'course_name' => ''
-];
-
-if ($is_edit) {
-    $assignment_id = (int) $_GET['assignment_id'];
-    $sql_assignment = "
-        SELECT a.title,
-               a.description,
-               a.due_date,
-               a.available_from,
-               a.max_attempts,
-               c.name AS course_name
-        FROM assignments a
-        JOIN course_offerings co ON a.offering_id = co.id
-        JOIN courses c ON co.kurzus_kod = c.kurzus_kod
-        WHERE a.id = ?
-    ";
-    $stmt = $conn->prepare($sql_assignment);
-    $stmt->bind_param("i", $assignment_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows) {
-        $assignment = $result->fetch_assoc();
-    }
-
-    // Kérdések + válaszok
-    $sql_questions = "
-        SELECT q.id AS question_id, q.question_text, q.question_type, q.score
-        FROM assignment_questions q
-        WHERE q.assignment_id = ?
-        ORDER BY q.id
-    ";
-    $stmt = $conn->prepare($sql_questions);
-    $stmt->bind_param("i", $assignment_id);
-    $stmt->execute();
-    $questions_result = $stmt->get_result();
-
-    $questions = [];
-    while ($row = $questions_result->fetch_assoc()) {
-        $questions[$row['question_id']] = $row;
-        $questions[$row['question_id']]['answers'] = [];
-    }
-
-    if ($questions) {
-        $question_ids = implode(",", array_keys($questions));
-        $sql_answers = "SELECT * FROM question_answers WHERE question_id IN ($question_ids)";
-        $answers_result = $conn->query($sql_answers);
-        while ($answer = $answers_result->fetch_assoc()) {
-            $qid = $answer['question_id'];
-            $questions[$qid]['answers'][] = $answer;
-        }
-    }
-} else {
-    $questions = []; // új dolgozat esetén nincs kérdés
-}
+require_once __DIR__ . '/../PHP_Header/t_assignment.php';
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -142,6 +50,8 @@ if ($is_edit) {
         <div class="assignment-card">
             <form method="POST" action="../POST/assignment_post.php">
                 <input type="hidden" name="offering_id" value="<?= $offering_id ?>">
+                <input type="hidden" name="action" value="teacher_save_assignment">
+
                 <?php if ($is_edit): ?>
                     <input type="hidden" name="assignment_id" value="<?= $assignment_id ?>">
                 <?php endif; ?>
@@ -193,7 +103,7 @@ if ($is_edit) {
                                     </select>
 
                                     <label>Pontszám:</label>
-                                    <input type="number" name="questions[<?= $q['question_id'] ?>][score]" value="<?= (int)$q['score'] ?>" min="1" step="1">
+                                    <input type="number" name="questions[<?= $q['question_id'] ?>][score]" value="<?= (int)$q['score'] ?>" min="1">
                                 </div>
 
                                 <?php foreach ($q['answers'] as $a): ?>

@@ -9,13 +9,13 @@
     border: none;
     padding: 1.2rem;
     border-radius: 8px;
-    background: var(--card-background);
+    background: var(--card-background-light);
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
 .course-card.enrolled {
     border-left: 5px solid green;
-    background: var(--card-background);
+    background: var(--card-background-light);
 }
 
 .card-header {
@@ -50,7 +50,7 @@
     margin-top: 5px;
     background-color: transparent;
     border: none;
-    color: #007bff;
+    color: var(--primary-color);
     cursor: pointer;
     padding: 0;
     font-size: 0.9em;
@@ -150,6 +150,12 @@ body[data-theme="dark"] .filters select {
     border-color: #444;
 }
 
+body[data-theme="dark"] .course-card,
+body[data-theme="dark"] .course-card.enrolled {
+    background: var(--card-background-dark);
+}
+
+
 /********************************
 Csak a teacher/course_offering.php-ban van használva
 *********************************/
@@ -169,7 +175,7 @@ Csak a teacher/course_offering.php-ban van használva
     border: none;
     padding: 1.2rem;
     border-radius: 8px;
-    background: var(--card-background);
+    background: var(--card-background-light);
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
@@ -179,18 +185,17 @@ Csak a teacher/course_offering.php-ban van használva
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 0.8rem;
-    background-color: var(--dropdown-bg);
+    background-color: var(--background-light);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
 }
-.create-offering textarea,
-.offering-details textarea {
+.create-offering textarea {
     width: 100%;
     padding: 0.5rem;
     margin-top: 0.25rem;
     min-height: 40px;
     color: var(--text-dark);
-    background-color: var(--dropdown-bg);
+    background-color: var(--background-light);
     resize: none;
     font-size: 0.9em;
     border: 1px solid #ccc;
@@ -229,6 +234,10 @@ body[data-theme="dark"] .create-offering select {
     border-color: #444;
 }
 
+body[data-theme="dark"] .create-offering details{
+    background: var(--card-background-dark);
+}
+
 .offering-details {
     padding: 0.3rem;
     display: flex;
@@ -245,7 +254,7 @@ body[data-theme="dark"] .create-offering select {
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 0.8rem;
-    background-color: var(--dropdown-bg);
+    background-color: var(--background-light);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     transition: all 0.2s ease;
 }

@@ -48,7 +48,7 @@ $semester_stmt->execute();
 $current_semester = $semester_stmt->get_result()->fetch_assoc();
 $current_semester_id = $current_semester['id'] ?? null;
 
-// Kiválasztott félév
+// 🔹 Kiválasztott félév
 $selected_semester_id = $_GET['semester_id'] ?? $current_semester_id;
 
 // 🔹 Összes félév lekérdezése

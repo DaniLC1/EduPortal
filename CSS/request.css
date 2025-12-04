@@ -50,7 +50,7 @@
 .requests-container {
     display: flex;
     flex-direction: column;
-    gap: 1.5em;
+    gap: 1.5rem;
     border: none;
     padding: 1.2rem;
 }
@@ -59,7 +59,7 @@
 .ar_request-card,
 .sr_request-card,
 .tr_request-card{
-    background-color: var(--card-background);
+    background-color: var(--card-background-light);
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
@@ -106,7 +106,7 @@
     resize: none;
     font-size: 0.9em;
     color: var(--text-dark);
-    background-color: var(--dropdown-bg);
+    background-color: var(--background-light);
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
@@ -119,6 +119,13 @@ body[data-theme="dark"] .request-form textarea{
     background: var(--dropdown-bg-dark);
     color: var(--text-light);
     border-color: #444;
+}
+
+body[data-theme="dark"] .asr_request-card,
+body[data-theme="dark"] .ar_request-card,
+body[data-theme="dark"] .sr_request-card,
+body[data-theme="dark"] .tr_request-card{
+    background-color: var(--card-background-dark);
 }
 
 /*
@@ -155,8 +162,7 @@ Csak admin oldalon használt CSS
 
 body[data-theme="dark"] .request-edit-form input[type=text],
 body[data-theme="dark"] .request-edit-form textarea,
-body[data-theme="dark"]  .request-edit-form select
-{
+body[data-theme="dark"]  .request-edit-form select {
     background: var(--dropdown-bg-dark);
     color: var(--text-light);
     border-color: #444;

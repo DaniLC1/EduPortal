@@ -17,7 +17,7 @@ require_once __DIR__ . '/../PHP_Header/s_studies.php';
                 <div class="dropdown">
                     <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
                     <div id="dropdownMenuL" class="dropdown-menu left">
-                        <a href="finances.php">Pénzügyek</a>
+                        <a href="message.php" >Üzenetek</a>
                         <a href="enrolled_courses.php">Felvett kurzusok</a>
                         <a href="#" id="active">Tanulmányok</a>
                     </div>
@@ -92,7 +92,7 @@ require_once __DIR__ . '/../PHP_Header/s_studies.php';
                     <?php foreach ($subjects as $subject): ?>
                         <div class="ss_subject-card"
                              data-name="<?= strtolower($subject['subject_name']) ?>"
-                             data-status="<?= $subject['completed'] ? 'completed' : 'not-completed' ?>"
+                             data-completed="<?= $subject['completed'] ? 'completed' : 'not-completed' ?>"
                              data-type="<?=
                              $subject['subject_type'] === 'kötelező' ? 'kot' :
                                  ($subject['subject_type'] === 'kv' ? 'kotval' : 'szabval')

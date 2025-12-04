@@ -16,6 +16,7 @@ require_once __DIR__ . '/../PHP_Header/t_assignment_result.php';
         <div class="dropdown">
             <button id="dropdownToggleL" class="dropbtn">☰ Menü </button>
             <div id="dropdownMenuL" class="dropdown-menu left">
+                <a href="message.php" >Üzenetek</a>
                 <a href="#" id="active">Eredmények</a>
                 <a href="student_complete.php">Lezárások</a>
             </div>
@@ -85,7 +86,7 @@ require_once __DIR__ . '/../PHP_Header/t_assignment_result.php';
             <?php foreach ($enrollments as $en): ?>
                 <div class="tar_course-card"
                      data-semester="<?= htmlspecialchars($en['semester_label']) ?>"
-                     data-offering="<?= htmlspecialchars($en['offering_id']) ?>"
+                     data-code="<?= htmlspecialchars($en['offering_id']) ?>"
                      data-name="<?= strtolower(htmlspecialchars($en['student_name'])) ?>">
 
                     <div class="card-header">

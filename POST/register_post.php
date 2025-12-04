@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['role'] === 'admin') {
         }
 
         if ($role == 'hallgato' && $course_code == '' ) {
-            throw new Exception('Hallgatóho kötelező rendelni kurzust!');
+            throw new Exception('Hallgatóhoz kötelező rendelni kurzust!');
         }
 
         if (!preg_match('/^EDU[0-9]{6}$/', $eduportal_id)) {

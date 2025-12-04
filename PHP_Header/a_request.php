@@ -20,6 +20,7 @@ SELECT
     name 
 FROM users 
 WHERE eduportal_id = ?";
+
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
 $user_stmt->execute();
@@ -38,8 +39,9 @@ SELECT rt.id,
        rt.description,
        rt.to_who
 FROM request_templates rt
-ORDER BY rt.created_at DESC
-";
+LEFT JOIN request_templates rt2 ON rt2.previous_version_id = rt.id
+WHERE rt2.id IS NULL AND rt.is_active = 1
+ORDER BY rt.created_at DESC";
 
 $request_result = $conn->query($request_sql);
 
@@ -58,8 +60,8 @@ $fields_sql = "
            f.field_type,
            f.is_required
     FROM request_template_fields f
-    ORDER BY f.template_id, f.id
-";
+    ORDER BY f.template_id, f.id";
+
 $fields_result = $conn->query($fields_sql);
 
 $template_fields = [];

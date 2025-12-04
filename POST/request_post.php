@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /* ================================================================
        🔹 HALLGATÓ / TANÁR kérelmek beküldése
        ================================================================= */
-    if ($role === 'hallagato'  || $role === 'tanar') {
+    if ($role === 'hallgato'  || $role === 'tanar') {
 
         try {
             $conn->begin_transaction();
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             /* ============================================================
               🔹 Adatok inicializálása
             ============================================================ */
-            $template_id = $_POST['template_id'] ?? null;
+            $template_id = intval($_POST['template_id'] ?? NULL);
             if (!$template_id) {
                 throw new Exception('Nem lett kiválasztva kérelemsablon.');
             }
@@ -38,14 +38,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Kitöltött mezők összegyűjtése
             $field_values = [];
             foreach ($_POST as $key => $value) {
-                if (ctype_digit($key)) {
-                    $field_id = intval($key);
-                    $field_values[$field_id] = trim($value);
-                } else{
-                    throw new Exception('Nem megfelelő típusú kulcs.');
-                }
+                // Kihagyjuk a sablon ID-t és minden nem szám kulcsot
+                if ($key === 'template_id') continue;
+
+                $field_id = intval($key); // automatikusan 0 lesz, ha nem szám
+                if ($field_id <= 0) continue; // csak a pozitív szám ID-ket vegyük
+
+                $field_values[$field_id] = trim($value);
             }
 
+            // Ha nincs kitöltött mező, dobunk Exception-t
             if (empty($field_values)) {
                 throw new Exception('Nincsenek kitöltött mezők.');
             }
@@ -86,9 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               🔹 Visszairányításszerepkör alapján
             ============================================================ */
             if ($role === 'tanar') {
-                header('Location: teacher/request.php?success=1');
-            } elseif ($role === 'hallagato') {
-                header('Location: student/request.php?success=1');
+                header('Location: ../teacher/request.php?success=1');
+            } elseif ($role === 'hallgato') {
+                header('Location: ../student/request.php?success=1');
             } else {
                 header("Location: ../index.php?error=Ismeretlen role.");
             }
@@ -126,57 +128,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $to_who = $_POST['to_who'] ?? 'hallgato';
             $fields = $_POST['fields'] ?? [];
 
+            if (empty($title)) {
+                throw new Exception("A kérelem címe kötelező.");
+            }
+
             /* ============================================================
-              🔹 Törlés
+              🔹 Törlés és deaktiválás
             ============================================================ */
             if (isset($_POST['delete'])) {
+
                 if ($template_id <= 0) {
                     throw new Exception("Hibás sablon azonosító.");
                 }
-                // 🔹 Először a mezők törlése
-                $delete_request_templates_fields_sql = "
+
+                // 🔹 Ellenőrizzük, hogy van-e beadott kérelem
+                $check_sql = "
+                SELECT COUNT(*) AS cnt
+                FROM student_requests
+                WHERE template_id = ?";
+
+                $stmt = $conn->prepare($check_sql);
+                $stmt->bind_param("i", $template_id);
+                $stmt->execute();
+                $res = $stmt->get_result()->fetch_assoc();
+                $stmt->close();
+
+                $has_submissions = $res['cnt'] > 0;
+
+                if ($has_submissions) {
+                    // 🔹 Inaktiváljuk a sablont
+                    $inactive_sql = "
+                    UPDATE request_templates
+                    SET is_active = 0
+                    WHERE id = ?";
+
+                    $stmt = $conn->prepare($inactive_sql);
+                    $stmt->bind_param("i", $template_id);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Nem sikerült inaktiválni a sablont: " . $stmt->error);
+                    }
+                    $stmt->close();
+
+                    $conn->commit();
+                    header("Location: ../admin/request.php?success=deactivated");
+                    exit;
+                }
+
+                // 🔹 Ha nincs beadott kérelem → törlés
+                $delete_fields_sql = "
                 DELETE FROM request_template_fields 
                 WHERE template_id = ?";
 
-                $stmt = $conn->prepare($delete_request_templates_fields_sql);
+                $stmt = $conn->prepare($delete_fields_sql);
                 $stmt->bind_param("i", $template_id);
                 if (!$stmt->execute()) {
-                    throw new Exception("Hiba a meglévő kérelem mezőinek törlésekor: " . $stmt->error);
+                    throw new Exception("Hiba a kérelem mezőinek törlésekor: " . $stmt->error);
                 }
                 $stmt->close();
 
-                // 🔹 Majd a sablon törlése
-                $delete_request_templates_sql = "
+                $delete_template_sql = "
                 DELETE FROM request_templates 
                 WHERE id = ?";
 
-                $stmt2 = $conn->prepare($delete_request_templates_sql);
-                $stmt2->bind_param("i", $template_id);
-                if (!$stmt2->execute()) {
-                    throw new Exception("Hiba a meglévő kérelem törlésekor: " . $stmt2->error);
+                $stmt = $conn->prepare($delete_template_sql);
+                $stmt->bind_param("i", $template_id);
+                if (!$stmt->execute()) {
+                    throw new Exception("Hiba a kérelem törlésekor: " . $stmt->error);
                 }
-                $stmt2->close();
-
+                $stmt->close();
 
                 $conn->commit();
                 header("Location: ../admin/request.php?success=deleted");
                 exit;
-
-            }
-
-            if (empty($title)) {
-                throw new Exception("A kérelem címe kötelező.");
             }
 
             /* ============================================================
                🔹 Új kérelem INSERT
             ============================================================ */
             if ($template_id === 0) {
-                $insert_request_templates_sql = "
-                INSERT INTO request_templates (title, description, to_who)
-                VALUES (?, ?, ?)";
 
-                $stmt = $conn->prepare($insert_request_templates_sql);
+                $insert_sql = "
+                INSERT INTO request_templates (title, description, to_who, version, is_active)
+                VALUES (?, ?, ?, 1, 1)";
+
+                $stmt = $conn->prepare($insert_sql);
                 $stmt->bind_param("sss", $title, $description, $to_who);
                 if (!$stmt->execute()) {
                     throw new Exception("Hiba az új kérelem beszúrásakor: " . $stmt->error);
@@ -186,54 +221,139 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->close();
             }
             /* ============================================================
-               🔹 Meglévő kérelem UPDATE
-           ============================================================ */
+               🔹 Meglévő kérelem szerkesztése → verziózás ellenőrzés
+            ============================================================ */
             else {
-                $update_request_templates_sql = "
-                UPDATE request_templates
-                SET title = ?, description = ?, to_who = ?
-                WHERE id = ?";
 
-                $stmt = $conn->prepare($update_request_templates_sql);
-                $stmt->bind_param("sssi", $title, $description, $to_who, $template_id);
-                if (!$stmt->execute()) {
-                    throw new Exception("Hiba a meglévő kérelem frissítésekor: " . $stmt->error);
-                }
-                $stmt->close();
-
-                // mezők törlése
-                $delete_request_templates_fields_sql = "
-                DELETE FROM request_template_fields 
+                // 1) Ellenőrizzük, hogy ez a sablon használatban van-e
+                $check_sql = "
+                SELECT COUNT(*) AS cnt
+                FROM student_requests
                 WHERE template_id = ?";
 
-                $stmt2 = $conn->prepare($delete_request_templates_fields_sql);
-                $stmt2->bind_param("i", $template_id);
-                if (!$stmt2->execute()) {
-                    throw new Exception("Hiba a meglévő kérelem mezőinek törlésekor: " . $stmt2->error);
+                $stmt = $conn->prepare($check_sql);
+                $stmt->bind_param("i", $template_id);
+                $stmt->execute();
+                $used = $stmt->get_result()->fetch_assoc()['cnt'];
+                $stmt->close();
+
+                /* ============================================================
+                   🔹 Ha használatban van → ÚJ verzió létrehozása
+                ============================================================ */
+                if ($used > 0) {
+                    // régi verzió adatainak lekérése a verziószám növeléséhez
+                    $version_sql = "
+                    SELECT version
+                    FROM request_templates
+                    WHERE id = ?";
+
+                    $stmt = $conn->prepare($version_sql);
+                    $stmt->bind_param("i", $template_id);
+                    $stmt->execute();
+                    $old_version = $stmt->get_result()->fetch_assoc()['version'];
+                    $stmt->close();
+
+                    $new_version = $old_version + 1;
+
+                    // 🔹 Új sablon beszúrása
+                    $insert_new_sql = "
+                    INSERT INTO request_templates (title, description, to_who, version, previous_version_id, is_active)
+                    VALUES (?, ?, ?, ?, ?, 1)";
+
+                    $stmt = $conn->prepare($insert_new_sql);
+                    $stmt->bind_param("sssii", $title, $description, $to_who, $new_version, $template_id);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Hiba az új verzió beszúrásakor: " . $stmt->error);
+                    }
+
+                    $new_template_id = $stmt->insert_id;
+                    $stmt->close();
+
+                    // 🔹 Régi sablon inaktiválása
+                    $deactivate_old_sql = "
+                    UPDATE request_templates
+                    SET is_active = 0
+                    WHERE id = ?";
+
+                    $stmt = $conn->prepare($deactivate_old_sql);
+                    $stmt->bind_param("i", $template_id);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Nem sikerült inaktiválni a régi sablont: " . $stmt->error);
+                    }
+                    $stmt->close();
+
+                    // 🔹 Új mezők beszúrása az új sablonhoz
+                    if (!empty($fields)) {
+                        $insert_field_sql = "
+                        INSERT INTO request_template_fields (template_id, label, field_type, is_required) 
+                        VALUES (?, ?, ?, ?)";
+
+                        $stmt = $conn->prepare($insert_field_sql);
+                        foreach ($fields as $f) {
+                            $label = trim($f['label'] ?? '');
+                            $type = $f['field_type'] ?? 'text';
+                            $req = isset($f['is_required']) ? 1 : 0;
+                            if ($label === '') continue;
+                            $stmt->bind_param("issi", $new_template_id, $label, $type, $req);
+                            if (!$stmt->execute()) {
+                                throw new Exception("Hiba az új verzió mezőinek beszúrásakor: " . $stmt->error);
+                            }
+                        }
+                        $stmt->close();
+                    }
+
+                    $conn->commit();
+                    header("Location: ../admin/request.php?success=versioned");
+                    exit;
                 }
-                $stmt2->close();
+                /* ============================================================
+                   🔹 Ha nincs használatban → hagyományos UPDATE
+                ============================================================ */
+                else {
+
+                    $update_sql = "
+                    UPDATE request_templates
+                    SET title = ?, description = ?, to_who = ?
+                    WHERE id = ?";
+
+                    $stmt = $conn->prepare($update_sql);
+                    $stmt->bind_param("sssi", $title, $description, $to_who, $template_id);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Hiba a kérelem szerkesztésekor: " . $stmt->error);
+                    }
+                    $stmt->close();
+
+                    // mezők törlése
+                    $delete_fields_sql = "
+                    DELETE FROM request_template_fields 
+                    WHERE template_id = ?";
+
+                    $stmt = $conn->prepare($delete_fields_sql);
+                    $stmt->bind_param("i", $template_id);
+                    if (!$stmt->execute()) {
+                        throw new Exception("Hiba a mezők törlésekor: " . $stmt->error);
+                    }
+                    $stmt->close();
+                }
             }
 
             /* ============================================================
                🔹 Új mezők INSERT
             ============================================================ */
             if (!empty($fields)) {
-                $insert_request_fields_sql = "
-                INSERT INTO request_template_fields (template_id, label, field_type, is_required)
+                $insert_field_sql = "
+                INSERT INTO request_template_fields (template_id, label, field_type, is_required) 
                 VALUES (?, ?, ?, ?)";
 
-                $stmt = $conn->prepare($insert_request_fields_sql);
-
+                $stmt = $conn->prepare($insert_field_sql);
                 foreach ($fields as $f) {
                     $label = trim($f['label'] ?? '');
                     $type = $f['field_type'] ?? 'text';
                     $req = isset($f['is_required']) ? 1 : 0;
-
                     if ($label === '') continue;
-
                     $stmt->bind_param("issi", $template_id, $label, $type, $req);
                     if (!$stmt->execute()) {
-                        throw new Exception("Hiba az új kérelem mezőinek beszúrásakor: " . $stmt->error);
+                        throw new Exception("Hiba az új mezők beszúrásakor: " . $stmt->error);
                     }
                 }
                 $stmt->close();

@@ -79,7 +79,7 @@ JOIN course_offerings co ON tc.kurzus_kod = co.kurzus_kod
 JOIN courses c ON c.kurzus_kod = co.kurzus_kod
 JOIN semesters s ON s.id = co.semester_id
 WHERE tc.teacher_id = ?
-ORDER BY c.name ASC, s.start_date DESC
+ORDER BY s.label DESC, c.name ASC, s.start_date DESC
 ";
 $filter_courses_stmt = $conn->prepare($filter_courses_sql);
 $filter_courses_stmt->bind_param("s", $eduportal_id);
