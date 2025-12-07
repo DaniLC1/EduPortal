@@ -52,3 +52,13 @@ Legyen több dolgozat típus(ha belefér az időbe) -> nem lesz kész.
 ---------------------
 index.php-ra ASZF és azt még át is kell nézni!!! -> kész (elvileg)
 
+
+----------------------
+doi ->ez a szám kell az elektronikus dokumentum
+1 könyvet mindenképp bele kell tenni
+
+funkcionális leírás -> fő metódusok ismertetése 
+
+halott kódok, md fájl, nagy post.php-k /hosszú függvények szétszedése
+
+readme.txt->laragonhoz
