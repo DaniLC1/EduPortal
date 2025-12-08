@@ -160,7 +160,7 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
 
                                     <ul class="hirdetmeny-list">
                                         <?php foreach ($hirds as $index => $h): ?>
-                                            <?php if ($index === 0) continue; ?>
+                                            <?php if ($index === 0) {continue;} ?>
                                             <li class="hirdetmeny-item">
                                                 <div class="forum-message">
                                                     📢 <?= nl2br(htmlspecialchars($h['message'])) ?>
@@ -211,7 +211,7 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
 
                                     <ul class="forum-list">
                                         <?php foreach ($forums as $index => $f): ?>
-                                            <?php if ($index === 0) continue; ?>
+                                            <?php if ($index === 0) {continue;} ?>
                                             <li class="forum-item">
                                                 <div class="forum-message">
                                                     💬 <?= nl2br(htmlspecialchars($f['message'])) ?>

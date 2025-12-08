@@ -39,10 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $field_values = [];
             foreach ($_POST as $key => $value) {
                 // Kihagyjuk a sablon ID-t és minden nem szám kulcsot
-                if ($key === 'template_id') continue;
+                if ($key === 'template_id') {
+                    continue;
+                }
 
                 $field_id = intval($key); // automatikusan 0 lesz, ha nem szám
-                if ($field_id <= 0) continue; // csak a pozitív szám ID-ket vegyük
+                if ($field_id <= 0) { // csak a pozitív szám ID-ket vegyük
+                    continue;
+                }
 
                 $field_values[$field_id] = trim($value);
             }
@@ -293,7 +297,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $label = trim($f['label'] ?? '');
                             $type = $f['field_type'] ?? 'text';
                             $req = isset($f['is_required']) ? 1 : 0;
-                            if ($label === '') continue;
+                            if ($label === '') {
+                                continue;
+                            }
                             $stmt->bind_param("issi", $new_template_id, $label, $type, $req);
                             if (!$stmt->execute()) {
                                 throw new Exception("Hiba az új verzió mezőinek beszúrásakor: " . $stmt->error);
@@ -350,7 +356,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $label = trim($f['label'] ?? '');
                     $type = $f['field_type'] ?? 'text';
                     $req = isset($f['is_required']) ? 1 : 0;
-                    if ($label === '') continue;
+                    if ($label === '') {
+                        continue;
+                    }
                     $stmt->bind_param("issi", $template_id, $label, $type, $req);
                     if (!$stmt->execute()) {
                         throw new Exception("Hiba az új mezők beszúrásakor: " . $stmt->error);

@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="readme.txt elkészítése. / Make readme.txt">
+    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="-">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/s_course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_course_offering.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PHP_Header/s_course_offering2.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/course_offering.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DB/users_insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB/users_insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/a_message.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/a_message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/assignment_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/assignment_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/POST/request_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/request_post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/message.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/courses.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teacher/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/courses.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +69,8 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;PHP Script.index.php.executor&quot;: &quot;Run&quot;,
+    &quot;PHPUnit.EduPortal.executor&quot;: &quot;Run&quot;,
+    &quot;PHPUnit.admin.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -75,7 +82,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.webide.settings.project.settings.php&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -97,6 +104,22 @@
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal\student" />
       <recent name="E:\Programok\XAMPP\htdocs\EduPortal" />
     </key>
+  </component>
+  <component name="RunManager" selected="PHPUnit.admin">
+    <configuration name="EduPortal" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner directory="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="admin" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner directory="$PROJECT_DIR$/admin" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="PHPUnit.admin" />
+        <item itemvalue="PHPUnit.EduPortal" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -164,7 +187,8 @@
       <workItem from="1763639730689" duration="13285000" />
       <workItem from="1763718237733" duration="7602000" />
       <workItem from="1763741615046" duration="270867000" />
-      <workItem from="1765138223379" duration="14648000" />
+      <workItem from="1765138223379" duration="17435000" />
+      <workItem from="1765219991768" duration="893000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
@@ -406,7 +430,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765208693204</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="-">
+      <option name="closed" value="true" />
+      <created>1765214791682</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1765214791682</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,7 +456,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Index befejezés és a többi oldal Header részének szerkesztése" />
     <MESSAGE value="Kurzusok oldal szerkesztés finomhangolása és adatbázis kapcsolódás" />
     <MESSAGE value="Elkészült Diák oldal (kis esztétikai javítások még hátra vannak illetve bug keresés)" />
     <MESSAGE value="Elkészült Diák oldal 2.0 javítás szépítés és bg keresés" />
@@ -449,7 +480,8 @@
     <MESSAGE value="TODO update / TODO update" />
     <MESSAGE value="Háttérművelet visszajelzések átalakítása és bugok javítása. / Background operation feedback transformation and bug fixes." />
     <MESSAGE value="readme.txt elkészítése. / Make readme.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="readme.txt elkészítése. / Make readme.txt" />
+    <MESSAGE value="-" />
+    <option name="LAST_COMMIT_MESSAGE" value="-" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

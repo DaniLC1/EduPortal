@@ -16,9 +16,9 @@ global $conn;
    🔹 Admin alapadatok lekérése (név)
 ============================================================ */
 $user_sql = "
-SELECT 
-    name 
-FROM users 
+SELECT
+    name
+FROM users
 WHERE eduportal_id = ?";
 
 $user_stmt = $conn->prepare($user_sql);
@@ -41,9 +41,9 @@ $selected_user = $_GET['to'] ?? null;
 $users_sql = "
 SELECT 
     eduportal_id,
-    name, 
-    role 
-FROM users 
+    name,
+    role
+FROM users
 WHERE eduportal_id != ?
 ORDER BY name ASC";
 

@@ -322,14 +322,6 @@ INSERT INTO notifications (message, course_code, course_offering_id, semester, n
   ('Melyik teremben lesz a vizsga?', NULL, 13, '2024/25 2. félév', 'forum', 'EDU100009'),
   ('Kérdés: az első zh anyaga tartalmazza az SQL JOIN-okat?', NULL, 6, '2024/25 2. félév', 'forum', 'EDU111111');
 
--- notification_reads tábla töltés: X
-INSERT INTO notification_reads (users_eduportal_ID, notification_id, read_at) VALUES
-  ('EDU111111', 1, NULL),
-  ('EDU111111', 3, NULL),
-  ('EDU111111', 5, NULL),
-  ('EDU100009', 2, NULL),
-  ('EDU100009', 4, NULL);
-
 -- request_templates tábla töltés:
 INSERT INTO request_templates (title, description, to_who) VALUES
   ('Passzív félév kérelme', 'Kérelem a félév passzív státuszba helyezéséhez.', 'hallgato'),

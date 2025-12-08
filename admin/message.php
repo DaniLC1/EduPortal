@@ -24,7 +24,7 @@ require_once __DIR__ . '/../PHP_Header/a_message.php';
 
     <!-- NAVIGÁCIÓ -->
     <nav class="main-nav">
-        <a href="#" id="active" ><span class="icon">📘</span> Regisztrálás </a>
+        <a href="#" ><span class="icon">📘</span> Regisztrálás </a>
         <a href="submitted_request.php" ><span class="icon">🧑‍🏫</span> Beadott kérelmek</a>
         <a href="request.php"><span class="icon">📄</span> Kérelmek szerkesztése</a>
     </nav>

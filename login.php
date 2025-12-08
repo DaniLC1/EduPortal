@@ -21,7 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ============================================================ */
         $sql = "SELECT * FROM users WHERE eduportal_id = ?";
         $stmt = $conn->prepare($sql);
-        if (!$stmt) throw new Exception("Hiba a lekérdezés előkészítésekor.");
+        if (!$stmt) {
+            throw new Exception("Hiba a lekérdezés előkészítésekor.");
+        }
 
         $stmt->bind_param("s", $eduportal_id);
         $stmt->execute();

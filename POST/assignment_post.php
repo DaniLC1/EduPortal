@@ -350,7 +350,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // 🔹 Válaszok beszúrása is_correct kezeléssel
                 foreach ($answers as $ans) {
                     $answer_text = trim($ans['text'] ?? '');
-                    if ($answer_text === '') continue;
+                    if ($answer_text === '') {
+                        continue;
+                    }
 
                     $is_correct = isset($ans['is_correct']) ? 1 : 0;
 
