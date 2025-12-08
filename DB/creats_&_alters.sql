@@ -2,10 +2,10 @@
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
-    eduportal_id VARCHAR(20) NOT NULL UNIQUE, -- ez lesz az egyedi azonosító
+    eduportal_id VARCHAR(20) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL,
     phone VARCHAR(20),
-    password_hash VARCHAR(255) NOT NULL, -- mindig titkosított formában tároljuk!
+    password_hash VARCHAR(255) NOT NULL,
     postal_code VARCHAR(10),
     city VARCHAR(100),
     address VARCHAR(255),
@@ -31,7 +31,7 @@ CREATE TABLE programs (
 -- Kurzusok:
 CREATE TABLE courses (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    kurzus_kod VARCHAR(20) UNIQUE NOT NULL, -- üzleti kulcs
+    kurzus_kod VARCHAR(20) UNIQUE NOT NULL,
     name VARCHAR(255) NOT NULL,
     credit INTEGER NOT NULL,
     leiras TEXT,
@@ -52,7 +52,7 @@ CREATE TABLE program_courses (
 -- Szemeszterek:
 CREATE TABLE semesters (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    label VARCHAR(50) NOT NULL UNIQUE,         -- pl. '2024/25 1. félév'
+    label VARCHAR(50) NOT NULL UNIQUE,    
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -63,11 +63,11 @@ CREATE TABLE semesters (
 CREATE TABLE course_offerings (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     
-    kurzus_kod VARCHAR(20) NOT NULL,                    -- hivatkozás a courses-ra
-    semester_id INTEGER,                                -- NULL is lehet
-    teacher_id VARCHAR(20) NOT NULL,                    -- hivatkozás a users-re
+    kurzus_kod VARCHAR(20) NOT NULL,                    
+    semester_id INTEGER,                               
+    teacher_id VARCHAR(20) NOT NULL,
     
-    course_type ENUM('eloadas', 'gyakorlat') DEFAULT 'eloadas',-- kurzus típusa
+    course_type ENUM('eloadas', 'gyakorlat') DEFAULT 'eloadas',
     day_of_week ENUM('H', 'K', 'Sz', 'Cs', 'P', 'Szo', 'V'),
     start_time TIME,
     room VARCHAR(50),
@@ -81,7 +81,6 @@ CREATE TABLE course_offerings (
     FOREIGN KEY (semester_id) REFERENCES semesters(id),
     FOREIGN KEY (teacher_id) REFERENCES users(eduportal_id)
 );
-
 
 -- NOTIFICATIONS Tábla:
 CREATE TABLE notifications (
@@ -108,16 +107,6 @@ CREATE TABLE notification_reads (
   FOREIGN KEY (users_eduportal_ID) REFERENCES users(eduportal_id),
   FOREIGN KEY (notification_id) REFERENCES notifications(id)
 );
-/*
--- Tábla módosítások:
--- Sor hozzáadás:
-ALTER TABLE notifications ADD COLUMN eduportal_id VARCHAR(20);
-ALTER TABLE notification_reads ADD COLUMN eduportal_id VARCHAR(20);
-
--- Ezután az idegen kulcsokat is módosíthatod:
-ALTER TABLE notifications ADD CONSTRAINT fk_notifications_users FOREIGN KEY (eduportal_id) REFERENCES users(eduportal_id);
-ALTER TABLE notification_reads ADD CONSTRAINT fk_notification_reads_users FOREIGN KEY (eduportal_id) REFERENCES users(eduportal_id);
-*/
 
 -- Kurzusra jelentkezettek:
 CREATE TABLE enrollments (
@@ -126,7 +115,7 @@ CREATE TABLE enrollments (
     enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     completed_at TIMESTAMP NULL,
     status VARCHAR(20) CHECK (status IN ('enrolled', 'completed', 'failed')),
-    grade VARCHAR(10),                          -- lehet A, B, C, vagy % vagy 5-ös skála
+    grade VARCHAR(10),
 	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (users_eduportal_ID, offering_id),
@@ -149,8 +138,8 @@ CREATE TABLE assignments (
     offering_id INTEGER NOT NULL,
     title VARCHAR(100) NOT NULL,
     description TEXT,
-    available_from DATETIME,              -- mikortól lehet kitölteni
-    due_date DATETIME,                    -- határidő
+    available_from DATETIME,             
+    due_date DATETIME,                    
     max_attempts INTEGER DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -199,7 +188,7 @@ CREATE TABLE submission_answers (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     submission_id INTEGER NOT NULL,
     question_id INTEGER NOT NULL,
-    selected_answer_id INTEGER,              -- választott opció
+    selected_answer_id INTEGER,
     FOREIGN KEY (submission_id) REFERENCES assignment_submissions(id) ON DELETE CASCADE,
     FOREIGN KEY (question_id) REFERENCES assignment_questions(id) ON DELETE CASCADE,
     FOREIGN KEY (selected_answer_id) REFERENCES question_answers(id) ON DELETE CASCADE

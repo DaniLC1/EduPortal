@@ -216,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 $conn->commit();
-                header("Location: ../student/course_offering.php?success=1");
+                header("Location: ../student/course_offering.php?success=3");
                 exit;
             }
 
@@ -253,7 +253,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute();
 
             $conn->commit();
-            header("Location: ../student/course_offering.php?success=2");
+            header("Location: ../student/course_offering.php?success=4");
             exit;
 
         } catch (Exception $e) {

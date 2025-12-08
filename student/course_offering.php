@@ -53,24 +53,7 @@ require_once __DIR__ . '/../PHP_Header/s_course_offering2.php';
         </header>
         <main>
             <h1>Elérhető kurzusok</h1>
-            <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-                <div class="success-message">
-                    ✅ Sikeresen leadott kurzus.
-                </div>
-                <hr>
-            <?php endif; ?>
-            <?php if (isset($_GET['success']) && $_GET['success'] == 2): ?>
-                <div class="success-message">
-                    ✅ Sikeresen felvett kurzus.
-                </div>
-                <hr>
-            <?php endif; ?>
-            <?php if (isset($_GET['error'])): ?>
-                <div class="error-message">
-                    ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-                </div>
-                <hr>
-            <?php endif; ?>
+            <?php include __DIR__ . '/../feedback.php'; ?>
 
             <!--Szűrők-->
             <section class="filters">

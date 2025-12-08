@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['role'] === 'admin') {
         $stmt->close();
         $conn->commit();
 
-        header("Location: ../admin/register.php?success=1");
+        header("Location: ../admin/register.php?success=12");
         exit;
 
     }catch (Exception $e) {

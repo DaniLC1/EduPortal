@@ -46,9 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         🔹 Visszairányítás szerepkör alapján
         ============================================================ */
         if (isset($_SESSION['role']) && $_SESSION['role'] === 'tanar') {
-            header("Location: ../teacher/courses.php?success=1");
+            header("Location: ../teacher/courses.php");
         } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'hallgato') {
-            header("Location: ../student/courses.php?success=1");
+            header("Location: ../student/courses.php");
         } else {
             throw new Exception("Nem lehet visszairányítani.");
         }

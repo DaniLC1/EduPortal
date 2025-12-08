@@ -63,18 +63,7 @@ require_once __DIR__ . '/../PHP_Header/t_profile.php';
 
                 <hr class="double-line">
 
-                <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-                    <div class="success-message">
-                        ✅ A(z) adat(ok) sikeresen mentve/módosítva!
-                    </div>
-                    <hr>
-                <?php endif; ?>
-                <?php if (isset($_GET['error'])): ?>
-                    <div class="error-message">
-                        ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-                    </div>
-                    <hr>
-                <?php endif; ?>
+                <?php include __DIR__ . '/../feedback.php'; ?>
 
                 <h3 class="section-title">Adatok</h3>
 

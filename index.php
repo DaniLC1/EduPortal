@@ -15,12 +15,7 @@
         </div>
     </header>
     <main>
-        <?php if (isset($_GET['error'])): ?>
-            <div class="error-message">
-                ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-            </div>
-            <hr>
-        <?php endif; ?>
+        <?php include __DIR__ . '/feedback.php'; ?>
         <div class="main-container">
             <!-- BAL OLDAL: Képek -->
             <div class="image-slider">
@@ -40,10 +35,7 @@
                         <input type="checkbox" id="accept_terms" name="accept_terms" required>
                         <label for="accept_terms"> Elolvastam az </label>
                         <a href="ASZF/adatvedelem.md" target="_blank"> ÁSZF-et</a>
-
                     </div>
-
-
                     <button type="submit">Belépés</button>
                 </form>
             </section>

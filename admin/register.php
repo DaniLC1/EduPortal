@@ -51,18 +51,8 @@ require __DIR__. '/../PHP_Header/a_register.php'
 <main>
 
     <h1>Új felhasználó rögzítése</h1>
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <div class="success-message">
-            ✅ Felhasználó sikeresen rögzítve!
-        </div>
-        <hr>
-    <?php endif; ?>
-    <?php if (isset($_GET['error'])): ?>
-        <div class="error-message">
-            ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-        </div>
-        <hr>
-    <?php endif; ?>
+    <?php include __DIR__ . '/../feedback.php'; ?>
+
     <!-- 🔹 Új felhasználó regisztrálása -->
     <section class="create-user">
         <div class="user-card">

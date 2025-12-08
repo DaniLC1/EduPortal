@@ -55,12 +55,6 @@ require_once __DIR__ . '/../PHP_Header/t_courses.php';
         <main class="layout">
             <!-- BAL OLDALI SÁV -->
             <aside class="sidebar">
-                <div class="card calendar">
-                    <h3>📅 Naptár</h3>
-                    <?php // TODO: naptár  ?>
-                    <p>[Naptár ide]</p>
-                </div>
-
                 <div class="card notifications">
                     <h3>🔔 Értesítések</h3>
                     <ul>
@@ -108,18 +102,7 @@ require_once __DIR__ . '/../PHP_Header/t_courses.php';
             <!-- FŐ TARTALOM -->
             <section class="main-content">
                 <h1>Kurzusok(Tanároknak)</h1>
-                <?php if (isset($_GET['success']) && $_GET['success'] == 10): ?>
-                    <div class="success-message">
-                        ✅ Dolgozat beadása sikeres!
-                    </div>
-                    <hr>
-                <?php endif; ?>
-                <?php if (isset($_GET['error'])): ?>
-                    <div class="error-message">
-                        ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-                    </div>
-                    <hr>
-                <?php endif; ?>
+                <?php include __DIR__ . '/../feedback.php'; ?>
 
                 <!-- 🔹 Szűrők -->
                 <form method="get" class="filters">
@@ -268,8 +251,7 @@ require_once __DIR__ . '/../PHP_Header/t_courses.php';
                                         <div class="teacher_action-buttons">
                                             <?php if ($latest['users_eduportal_id'] === $eduportal_id): ?>
                                                 <!-- Szerkesztés form -->
-                                                <form method="POST" action="../POST/forum_post.php"
-                                                      class="edit-form hidden"
+                                                <form method="POST" action="../POST/forum_post.php" class="edit-form hidden"
                                                       onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
                                                     <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($latest['message']) ?></textarea>
                                                     <input type="hidden" name="edit_message_id" value="<?= $latest['id'] ?>">

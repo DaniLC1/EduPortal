@@ -1,4 +1,4 @@
-# Adatkezelési Tájékoztató
+﻿# Adatkezelési Tájékoztató
 
 ## Bevezetés 
 

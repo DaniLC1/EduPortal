@@ -1,24 +1,9 @@
-courses.php -TODO naptár
-profile.php -TODO: Egységes (hiba) üzenetek
 
 css-ek átnézése, hogy egységes parancsokat használjak
----------------------
-hiba és egyéb figyelmeztető üzenetek egységesítése->
--és ezeket kiszervezni egy külön fájlba és azt meghívni
-
----------------------
-JS fájl egyszerűsítése
-
----------------------
-Minden POST fájl  (és amúgy a többi php fájl is) egyszerűsítése (nincs-e benne felesleges kód)
-
 ---------------------
 A gombokat átnevezni egyedi class-úra!!! Jó példa admin/request.php és ide tartozó js fájl:
 cancel-btn átnevezve -> ar-cancel-btn mert névütközés volt!!! a=admin r=request.php
 Ezt mindenhol meg kell csinálni!!!
-
-----------------------
-JS kód átnézése
 
 ---------------------
 studies.php lekérdezés logikát hozzá igazítani a tárgyfelvételhez
@@ -26,39 +11,20 @@ studies.php lekérdezés logikát hozzá igazítani a tárgyfelvételhez
 /************************************************
 Tanári (Dr.Tóth László) javaslatok
 ************************************************/
-Az oldalak Select-jei legyenek külön fájlokba és csak a fájlok legyenek meghívva ->elvileg kész!
-
----------------------
 Unyt tesztet csinálni!!!
 Statikus elemzés (pl Sonar Cook)
 
 ---------------------
-Jelszó hash legyen!!! ->Kész
-
----------------------
 HTTPS-t megnézni mennyire bonyolult hogy így legyen, HA bonyolult akkor doksiba meginokolni! ->egyeztetni a Laragonról
-
----------------------
-A tantárgyak leírásai, ahol nem így van, ott külön <div>ben legyenek -> course_offering.php-knál megvalósítva/kész
-course_offeringekben ne középen legyenek az órák hanem balra igazítva. ->kész
-
----------------------
-Üzenetküldés megvalósítása!!
-Userek rögzítése legyen lehetséges adminnál! ->kész DE tanárhoz még nem lehet tárgyakat rendelni!
-
----------------------
-Legyen több dolgozat típus(ha belefér az időbe) -> nem lesz kész.
-
----------------------
-index.php-ra ASZF és azt még át is kell nézni!!! -> kész (elvileg)
-
+--> kell egy readme.txt!!!
 
 ----------------------
+halott kódok,
+
+/********************************
+PDF-hez infó!!!!
+********************************/
 doi ->ez a szám kell az elektronikus dokumentum
 1 könyvet mindenképp bele kell tenni
 
-funkcionális leírás -> fő metódusok ismertetése 
-
-halott kódok, md fájl, nagy post.php-k /hosszú függvények szétszedése
-
-readme.txt->laragonhoz
+funkcionális leírás -> fő metódusok ismertetése

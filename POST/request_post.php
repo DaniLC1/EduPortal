@@ -88,9 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               🔹 Visszairányításszerepkör alapján
             ============================================================ */
             if ($role === 'tanar') {
-                header('Location: ../teacher/request.php?success=1');
+                header('Location: ../teacher/request.php?success=13');
             } elseif ($role === 'hallgato') {
-                header('Location: ../student/request.php?success=1');
+                header('Location: ../student/request.php?success=13');
             } else {
                 header("Location: ../index.php?error=Ismeretlen role.");
             }
@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->close();
 
                     $conn->commit();
-                    header("Location: ../admin/request.php?success=deactivated");
+                    header("Location: ../admin/request.php?success=14");
                     exit;
                 }
 
@@ -198,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->close();
 
                 $conn->commit();
-                header("Location: ../admin/request.php?success=deleted");
+                header("Location: ../admin/request.php?success=15");
                 exit;
             }
 
@@ -303,7 +303,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
 
                     $conn->commit();
-                    header("Location: ../admin/request.php?success=versioned");
+                    header("Location: ../admin/request.php?success=16");
                     exit;
                 }
                 /* ============================================================
@@ -360,7 +360,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $conn->commit();
-            header("Location: ../admin/request.php?success=1");
+            header("Location: ../admin/request.php?success=17");
             exit;
 
         } catch (Exception $e) {
@@ -435,7 +435,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $conn->commit();
-            header("Location: ../admin/submitted_request.php?success=1");
+            header("Location: ../admin/submitted_request.php?success=18");
             exit();
 
         } catch (Exception $e) {

@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($grade === 'Jó') {
             $status = 'completed';
             $grade_value = $grade;
-        } elseif ($grade === 'Kiválló') {
+        } elseif ($grade === 'Kiváló') {
             $status = 'completed';
             $grade_value = $grade;
         } else{
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         🔹 Visszairányítás szerepkör alapján
         ============================================================ */
         if (isset($_SESSION['role']) && $_SESSION['role'] === 'tanar') {
-            header("Location: ../teacher/student_complete.php?success=1");
+            header("Location: ../teacher/student_complete.php?success=10");
         } else {
             throw new Exception("Nem lehet visszairányítani.");
         }

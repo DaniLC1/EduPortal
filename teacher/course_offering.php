@@ -47,16 +47,7 @@ require_once __DIR__ . '/../PHP_Header/t_course_offering.php';
 
 <main>
     <h1>Kurzus meghirdetések kezelése</h1>
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <div class="success-message">
-            ✅ A tárgy sikeresen mentve/módosítva!
-        </div>
-    <?php endif; ?>
-    <?php if (isset($_GET['error'])): ?>
-        <div class="error-message">
-            ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-        </div>
-    <?php endif; ?>
+    <?php include __DIR__ . '/../feedback.php'; ?>
 
     <!-- 🔹 Új offering létrehozása -->
     <section class="create-offering">

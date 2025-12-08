@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggleBtn = document.getElementById('theme-toggle') || document.getElementById('themeToggleBtn');
     const savedTheme = localStorage.getItem('theme') || 'light';
     document.body.dataset.theme = savedTheme;
-    updateThemeVariables(savedTheme);
 
     if (themeToggleBtn) {
         themeToggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
@@ -16,15 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
             updateThemeVariables(newTheme);
         });
-    }
-
-    // Függvény, ami frissíti a CSS változókat
-    function updateThemeVariables(theme) {
-        if (theme === 'dark') {
-            document.documentElement.style.setProperty('--card-background', 'black');
-        } else {
-            document.documentElement.style.setProperty('--card-background', 'white');
-        }
     }
 
     // Slider
@@ -93,6 +83,7 @@ function toggleDescription(button) {
     }
 }
 
+//Autómatikusan bővülő textarea ahol nagyobb szöveget kell/lehet beírni
 document.addEventListener('input', function (e) {
     if (e.target.classList.contains('auto-resize-textarea')) {
         e.target.style.height = 'auto';
@@ -100,7 +91,7 @@ document.addEventListener('input', function (e) {
     }
 });
 
-// Szerkesztés űrlap megjelenítése (hirdetmény és fórum hozzászólásnál)
+// Szöveg szerkesztése (hirdetmény és fórum hozzászólásnál)
 function toggleEditForm(button) {
     const li = button.closest('li');
     const form = li.querySelector('.edit-form');

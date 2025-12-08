@@ -52,21 +52,9 @@ require_once __DIR__ . '/../PHP_Header/t_sutdent_cpmplete.php';
 
 <main class="layout">
     <h1>Diákok jegyeinek lezárása</h1>
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <div class="success-message">
-            ✅ A jegy sikeresen módosítva!
-        </div>
-        <hr>
-    <?php endif; ?>
-    <?php if (isset($_GET['error'])): ?>
-        <div class="error-message">
-            ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-        </div>
-    <?php endif; ?>
-
+    <?php include __DIR__ . '/../feedback.php'; ?>
 
     <section class="filters">
-
         <label for="tsc_semesterFilter">Félév:</label>
         <select id="tsc_semesterFilter">
             <option value="all">Összes</option>

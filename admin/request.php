@@ -51,24 +51,7 @@ require __DIR__. '/../PHP_Header/a_request.php'
 
 <main class="layout">
     <h1>📄 Kérelmek kezelése</h1>
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <div class="success-message">
-            ✅ A kérelem sikeresen mentve/módosítva!
-        </div>
-        <hr>
-    <?php endif; ?>
-    <?php if (isset($_GET['success']) && $_GET['success'] == 'deleted'): ?>
-        <div class="success-message">
-            ✅ A kérelem sikeresen törölve!
-        </div>
-        <hr>
-    <?php endif; ?>
-    <?php if (isset($_GET['error'])): ?>
-        <div class="error-message">
-            ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-        </div>
-        <hr>
-    <?php endif; ?>
+    <?php include __DIR__ . '/../feedback.php'; ?>
 
     <button id="new-request-btn" class="ar_fill-btn">➕ Új kérelem</button>
 

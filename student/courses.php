@@ -55,12 +55,6 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
         <main class="layout">
             <!-- BAL OLDALI SÁV -->
             <aside class="sidebar">
-                <div class="card calendar">
-                    <h3>📅 Naptár</h3>
-                    <?php // TODO: naptár  ?>
-                    <p>[Naptár ide]</p>
-                </div>
-
                 <div class="card notifications">
                     <h3>🔔 Értesítések</h3>
                     <ul>
@@ -108,18 +102,7 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
             <!-- FŐ TARTALOM -->
             <section class="main-content">
                 <h1>Kurzusok</h1>
-                <?php if (isset($_GET['success']) && $_GET['success'] == 10): ?>
-                    <div class="success-message">
-                        ✅ Dolgozat beadása sikeres!
-                    </div>
-                    <hr>
-                <?php endif; ?>
-                <?php if (isset($_GET['error'])): ?>
-                    <div class="error-message">
-                        ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-                    </div>
-                    <hr>
-                <?php endif; ?>
+                <?php include __DIR__ . '/../feedback.php'; ?>
 
                 <!-- 🔹 Félévválasztó -->
                 <form method="get" class="filters">
@@ -211,6 +194,19 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
                                             Írta: <?= htmlspecialchars($latest['user_name']) ?> &middot;
                                             <?= date('Y. m. d. H:i', strtotime($latest['updated_at'])) ?>
                                         </small>
+
+                                        <div class="student_action-buttons">
+                                            <?php if ($latest['users_eduportal_id'] === $eduportal_id): ?>
+                                                <!-- Szerkesztés form -->
+                                                <form method="POST" action="../POST/forum_post.php" class="edit-form hidden"
+                                                      onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
+                                                    <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($latest['message']) ?></textarea>
+                                                    <input type="hidden" name="edit_message_id" value="<?= $latest['id'] ?>">
+                                                    <button type="submit" name="submit_edit_message" class="send-btn">💾 Mentés</button>
+                                                </form>
+                                                <button class="edit-btn" onclick="toggleEditForm(this)">✏️ Szerkesztés</button>
+                                            <?php endif; ?>
+                                        </div>
                                     </summary>
 
                                     <ul class="forum-list">
@@ -223,6 +219,19 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
                                                 <div class="forum-meta">
                                                     Írta: <?= htmlspecialchars($f['user_name']) ?> &middot;
                                                     <?= date('Y. m. d. H:i', strtotime($f['updated_at'])) ?>
+                                                </div>
+                                                <div class="student_action-buttons">
+                                                    <?php if ($latest['users_eduportal_id'] === $eduportal_id): ?>
+                                                        <!-- Szerkesztés form -->
+                                                        <form method="POST" action="../POST/forum_post.php"
+                                                              class="edit-form hidden"
+                                                              onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
+                                                            <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($latest['message']) ?></textarea>
+                                                            <input type="hidden" name="edit_message_id" value="<?= $latest['id'] ?>">
+                                                            <button type="submit" name="submit_edit_message" class="send-btn">💾 Mentés</button>
+                                                        </form>
+                                                        <button class="edit-btn" onclick="toggleEditForm(this)">✏️ Szerkesztés</button>
+                                                    <?php endif; ?>
                                                 </div>
                                             </li>
                                         <?php endforeach; ?>

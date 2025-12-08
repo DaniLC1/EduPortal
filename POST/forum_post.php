@@ -93,9 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             🔹 Visszairányítás szerepkör alapján
             ============================================================ */
             if (isset($_SESSION['role']) && $_SESSION['role'] === 'tanar') {
-                header("Location: ../teacher/courses.php?success=1");
+                header("Location: ../teacher/courses.php?success=7");
             } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'hallgato') {
-                header("Location: ../student/courses.php?success=1");
+                header("Location: ../student/courses.php?success=7");
             } else {
                 throw new Exception("Nem lehet visszairányítani.");
             }
@@ -156,9 +156,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             🔹 Visszairányítás szerepkör alapján
             ============================================================ */
             if (isset($_SESSION['role']) && $_SESSION['role'] === 'tanar') {
-                header("Location: ../teacher/courses.php?success=1");
+                header("Location: ../teacher/courses.php?success=8");
             } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'hallgato') {
-                header("Location: ../student/courses.php?success=1");
+                header("Location: ../student/courses.php?success=8");
             } else {
                 throw new Exception("Nem lehet visszairányítani.");
             }
@@ -184,7 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     /* ============================================================
-      🔹 3) ÜZENET VISSZAVONÁSA (NEM TÖRLÉS!)
+      🔹 3) ÜZENET VISSZAVONÁSA
    ============================================================ */
     if (isset($_POST['submit_delete_message']) && $_SESSION['role'] === 'tanar') {
 
@@ -240,9 +240,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $conn->commit();
 
             /* ============================================================
-             🔹 Visszairányítás szerepkör alapján
+             🔹 Visszairányítás
              ============================================================ */
-            header("Location: ../teacher/courses.php?success=1");
+            header("Location: ../teacher/courses.php?success=9");
             exit;
 
         /* ============================================================

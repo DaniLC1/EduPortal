@@ -54,18 +54,7 @@ require_once __DIR__ . '/../PHP_Header/t_request.php';
 <!-- IDE JÖN A FŐ TARTALOM -->
 <main class="layout">
     <h1>📄 Kérelmek</h1>
-    <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-        <div class="success-message">
-            ✅ A kérelem sikeresen beadva!
-        </div>
-        <hr>
-    <?php endif; ?>
-    <?php if (isset($_GET['error'])): ?>
-        <div class="error-message">
-            ⚠️ <?= htmlspecialchars($_GET['error']) ?>
-        </div>
-        <hr>
-    <?php endif; ?>
+    <?php include __DIR__ . '/../feedback.php'; ?>
 
     <!-- Kereső -->
     <div class="search-form">

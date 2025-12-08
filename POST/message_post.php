@@ -76,11 +76,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         🔹 Visszairányítás szerepkör alapján
         ============================================================ */
         if (isset($_SESSION['role']) && $_SESSION['role'] === 'hallgato') {
-            header("Location: ../student/message.php?to={$to_id}&success=1");
+            header("Location: ../student/message.php?to={$to_id}");
         } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'tanar') {
-            header("Location: ../teacher/message.php?to={$to_id}&success=1");
+            header("Location: ../teacher/message.php?to={$to_id}");
         } elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-            header("Location: ../admin/message.php?to={$to_id}&success=1");
+            header("Location: ../admin/message.php?to={$to_id}");
         } else {
             throw new Exception("Nem lehet visszairányítani.");
         }

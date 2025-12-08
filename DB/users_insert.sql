@@ -1,4 +1,4 @@
--- Users tábla insert: X
+-- Users tábla insert:
 INSERT INTO users (name, eduportal_id, email, phone, password_hash, postal_code, city, address, birth_date, mothers_name, role, course_code) VALUES
 ('Török Ágnes', 'EDU100000', 'henriettakiss@hegedus.info', '+36 86 455-6466', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '3913', 'Keresztharaszti', 'Bakonytapolcai utca 110.', '1977-05-30', ' Kovács Mária', 'hallgato', 'SZ001'),
 ('Balogh Anna', 'EDU100001', 'molnartimea@kovacs.com.hu', '06-6/425 2624', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '7257', 'Fürdőváros', 'Soproni út 20.', '1970-08-26', ' Szabó Erzsébet', 'hallgato', 'SZ004'),
@@ -24,7 +24,7 @@ INSERT INTO users (name, eduportal_id, email, phone, password_hash, postal_code,
 ('Keresztes Dóra', 'EDU100018', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', ''),
 ('Kiss Dóra', 'EDU100019', 'krisztianvarga@szabo.org', '+36 30 648 5836', '$2y$10$XywASlxl0RjT5YF6eVqSMeqi1w3mv2W4tNzgk3nq5eyW0AOImrbGe', '9700', 'Szombathely', 'Béke út 18., H-3300 Eger', '1998-12-05', 'Katalin Balogh', 'admin', '');
 
--- courses tábla töltés: X
+-- courses tábla töltés:
 INSERT INTO courses (kurzus_kod, name, credit, leiras, tematika) VALUES 
 ('PROG101EA', 'Programozás alapjai EA', 3, 'Bevezetés a programozásba.', 'Változók, ciklusok, feltételek'),
 ('PROG101GY', 'Programozás alapjai GY', 2, 'Bevezetés a programozásba.', 'Változók, ciklusok, feltételek'),
@@ -43,7 +43,7 @@ INSERT INTO courses (kurzus_kod, name, credit, leiras, tematika) VALUES
 ('MOLBI105EA', 'Molekuláris biológia 1 EA', 3, 'Bevezetés a Molekuláris biológia rejtelmeibe.', 'Változók, ciklusok, feltételek'),
 ('MOLBI105GY', 'Molekuláris biológia 1 GY', 1, 'Bevezetés a Molekuláris biológia rejtelmeibe.', 'Változók, ciklusok, feltételek');
 
--- semesters tábla töltés: X
+-- semesters tábla töltés:
 INSERT INTO semesters (label, start_date, end_date) VALUES 
 ('2024/25 1. félév', '2024-09-01', '2025-01-31'),
 ('2024/25 2. félév', '2025-02-01', '2025-06-30'),
@@ -54,7 +54,7 @@ INSERT INTO semesters (label, start_date, end_date) VALUES
 ('2022/23 1. félév', '2022-09-01', '2023-01-31'),
 ('2022/23 2. félév', '2023-02-01', '2023-06-30');
 
--- course_offerings tábla töltés: X
+-- course_offerings tábla töltés:
 INSERT INTO course_offerings (kurzus_kod, semester_id, teacher_id, course_type, day_of_week, start_time, room, end_date, max_students) VALUES 
 ('PROG101EA', 2, 'EDU100010', 'eloadas', 'H', '08:00:00', 'IB204', '2025-09-30 00:00:00', 300),
 ('PROG101GY', 2, 'EDU100010', 'gyakorlat', 'K', '08:00:00', 'IB204', '2025-09-30 00:00:00', 100),
@@ -216,40 +216,22 @@ INSERT INTO question_answers (question_id, answer_text, is_correct) VALUES
 (24, 'C. A → B = ¬A ∨ B, TRUE)', FALSE),
 (24, 'D. A ∧ (B ∨ C) = (A ∧ B) ∨ C', FALSE);
 
--- assignment_submissions tábla töltés:
-/*
-INSERT INTO assignment_submissions (assignment_id, users_eduportal_ID, submitted_at, score, graded_at) VALUES
-(1, 'H12345', '2024-10-05 19:30:00', 3, '2024-10-06 10:00:00');
-*/
--- submission_answers tábla töltés:
-/*
-INSERT INTO submission_answers (submission_id, question_id, selected_answer_id) VALUES
-(1, 1, 1), -- helyes
-(1, 2, 3), -- helyes (for)
-(1, 2, 5); -- helyes (while)
-*/
-
 -- enrollments tábla töltés:  X
 INSERT INTO enrollments (users_eduportal_ID, offering_id, enrolled_at, completed_at, status, grade) VALUES
-  -- Kiszel Dani felvette kurzusai (ahol van jegy az teljesítet):
   ('EDU111111', 1, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
   ('EDU111111', 2, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
   ('EDU111111', 5, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
   ('EDU111111', 6, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
   ('EDU111111', 17, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
   ('EDU111111', 18, '2025-02-28 10:00:00', NULL, 'enrolled', NULL),
-  -- Korábbi felvett kurzusok:
   ('EDU111111', 21, '2024-09-28 10:00:00', NULL, 'failed', 'Elégtelen'),
   ('EDU111111', 22, '2024-09-28 10:00:00', NULL, 'failed', 'Elégtelen'),
   ('EDU111111', 29, '2024-09-28 10:00:00', '2025-01-18 10:00:00', 'completed', 'Elégséges'),
   ('EDU111111', 30, '2024-09-28 10:00:00', '2024-12-10 14:00:00', 'completed', 'Kiválló'),
-  
-  -- Fekete Dóra felvett kurzusai (ahol van jegy az teljesítet):
   ('EDU100009', 13, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
   ('EDU100009', 14, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
   ('EDU100009', 10, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
   ('EDU100009', 11, '2025-02-09 14:00:00', NULL, 'enrolled', NULL),
-  -- Korábbi felvett kurzusok:
   ('EDU100009', 23, '2024-09-18 10:00:00', NULL, 'failed', 'Elégtelen'),
   ('EDU100009', 24, '2024-09-18 10:00:00', NULL, 'failed', 'Elégtelen'),
   ('EDU100009', 25, '2024-09-18 10:00:00', '2025-01-05 12:00:00', 'completed', 'Közepes'),
@@ -257,24 +239,20 @@ INSERT INTO enrollments (users_eduportal_ID, offering_id, enrolled_at, completed
  
 -- teacher_courses tábla töltés: X
 INSERT INTO teacher_courses (teacher_id, kurzus_kod) VALUES
-  -- Fehér Dóra taníthatja a programozás alapjai tárgyat
   ('EDU100010', 'PROG101EA'),
   ('EDU100010', 'PROG101GY'),
   ('EDU100010', 'ADAT102EA'),
   ('EDU100010', 'ADAT102GY'),
-  -- Zöld Dóra taníthatja az adatbázisok 1 tárgyat
   ('EDU100011', 'ADAT102EA'),
   ('EDU100011', 'ADAT102GY'),
   ('EDU100011', 'DIMA104EA'),
   ('EDU100011', 'DIMA104GY'),
   ('EDU100011', 'KALK105EA'),
   ('EDU100011', 'KALK105GY'),
-  -- Kék Dóra taníthatja a bilógia 1 & kémia tárgyat 
   ('EDU100012', 'BIO103EA'),
   ('EDU100012', 'BIO103GY'),
   ('EDU100012', 'KEM104EA'),
   ('EDU100012', 'KEM104GY'),
-  -- Rózsa Dóra taníthatja a bilógia 1 & molekuláris biológia tárgyat 
   ('EDU100013', 'BIO103EA'),
   ('EDU100013', 'BIO103GY'),
   ('EDU100013', 'MOLBI105EA'),
@@ -351,34 +329,6 @@ INSERT INTO notification_reads (users_eduportal_ID, notification_id, read_at) VA
   ('EDU111111', 5, NULL),
   ('EDU100009', 2, NULL),
   ('EDU100009', 4, NULL);
-
--- student_financing tábla töltés:
-INSERT INTO student_financing (users_eduportal_ID, semester_id, amount_due, due_date) VALUES
-  ('EDU111111', 1, 100000, '2024-10-01'),
-  ('EDU111111', 1, 100000, '2024-11-01'),
-  ('EDU111111', 1, 100000, '2024-12-01'),
-  ('EDU111111', 2, 100000, '2025-03-01'),
-  ('EDU111111', 2, 100000, '2025-04-01'),
-  ('EDU111111', 2, 100000, '2025-05-01'),
-  ('EDU111111', 3, 100000, '2025-10-01'),
-  ('EDU111111', 3, 100000, '2025-11-01'),
-  ('EDU111111', 3, 100000, '2025-12-01'),
-  
-  ('EDU100009', 1, 0, ''),
-  ('EDU100009', 2, 0, ''),
-  ('EDU100009', 3, 0, '');
-
--- payment_installments tábla töltés:
-INSERT INTO payment_installments (financing_id, amount_paid, paid_at) VALUES
-  (1, 100000, '2024-09-15'),
-  (2, 50000, '2024-09-30'),
-  (2, 50000, '2024-10-15'),
-  (3, 100000, '2024-11-15'),
-  (4, 100000, '2025-02-11'),
-  (5, 100000, '2025-03-10'),
-  (6, 20000, '2025-03-10'),
-  (6, 80000, '2025-04-15'),
-  (7, 30000, '2025-05-20');
 
 -- request_templates tábla töltés:
 INSERT INTO request_templates (title, description, to_who) VALUES
