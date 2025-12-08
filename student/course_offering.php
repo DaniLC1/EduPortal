@@ -1,6 +1,5 @@
 <?php
-//require_once __DIR__ . '/../PHP_Header/s_course_offering.php';
-require_once __DIR__ . '/../PHP_Header/s_course_offering2.php';
+require_once __DIR__ . '/../PHP_Header/s_course_offering.php';
 ?>
 <!DOCTYPE html>
 <html lang="hu">

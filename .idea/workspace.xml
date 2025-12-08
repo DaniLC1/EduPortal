@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Háttérművelet visszajelzések átalakítása és bugok javítása. / Background operation feedback transformation and bug fixes.">
-      <change afterPath="$PROJECT_DIR$/readme_https.txt" afterDir="false" />
+    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="readme.txt elkészítése. / Make readme.txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/s_course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/PHP_Header/s_course_offering.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PHP_Header/s_course_offering2.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/course_offering.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +164,7 @@
       <workItem from="1763639730689" duration="13285000" />
       <workItem from="1763718237733" duration="7602000" />
       <workItem from="1763741615046" duration="270867000" />
-      <workItem from="1765138223379" duration="13948000" />
+      <workItem from="1765138223379" duration="14648000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
@@ -397,7 +398,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765188975201</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="readme.txt elkészítése. / Make readme.txt">
+      <option name="closed" value="true" />
+      <created>1765208693204</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1765208693204</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,7 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Git tesztelés" />
     <MESSAGE value="Index befejezés és a többi oldal Header részének szerkesztése" />
     <MESSAGE value="Kurzusok oldal szerkesztés finomhangolása és adatbázis kapcsolódás" />
     <MESSAGE value="Elkészült Diák oldal (kis esztétikai javítások még hátra vannak illetve bug keresés)" />
@@ -440,7 +448,8 @@
     <MESSAGE value="Egységesíés és üzenetek megvalósítása. / Unification and implementation of messages." />
     <MESSAGE value="TODO update / TODO update" />
     <MESSAGE value="Háttérművelet visszajelzések átalakítása és bugok javítása. / Background operation feedback transformation and bug fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Háttérművelet visszajelzések átalakítása és bugok javítása. / Background operation feedback transformation and bug fixes." />
+    <MESSAGE value="readme.txt elkészítése. / Make readme.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme.txt elkészítése. / Make readme.txt" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

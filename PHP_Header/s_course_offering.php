@@ -18,11 +18,11 @@ global $conn;
 $user_sql = "
 SELECT
     u.name,
+    u.course_code,
     p.name AS szak_nev
 FROM users u
 LEFT JOIN programs p ON p.szak_szam = u.course_code
-WHERE u.eduportal_id = ?
-";
+WHERE u.eduportal_id = ?";
 
 $user_stmt = $conn->prepare($user_sql);
 $user_stmt->bind_param("s", $eduportal_id);
@@ -65,107 +65,133 @@ ORDER BY start_date DESC";
 $semesters = $conn->query($semesters_sql)->fetch_all(MYSQLI_ASSOC);
 
 /* ============================================================
-   🔹 Meghirdetett kurzusok lekérdezése
+   🔹 1️⃣ Hallgató kurzusai és tanárok
 ============================================================ */
-$course_offering_sql = "
+$kurzusok_sql = "
+SELECT 
+    c.kurzus_kod,
+    c.name AS course_name,
+    c.leiras,
+    c.credit,
+    pc.tipus AS course_required_type,
+    GROUP_CONCAT(DISTINCT t.name SEPARATOR ', ') AS teachers
+FROM courses c
+LEFT JOIN program_courses pc ON pc.kurzus_kod = c.kurzus_kod AND pc.szak_szam = ?
+LEFT JOIN teacher_courses tc ON tc.kurzus_kod = c.kurzus_kod
+LEFT JOIN users t ON t.eduportal_id = tc.teacher_id
+WHERE c.kurzus_kod IN (
+    SELECT co.kurzus_kod
+    FROM course_offerings co
+    WHERE co.semester_id = ?
+)
+GROUP BY c.kurzus_kod
+ORDER BY c.name ASC;";
+
+$kurzus_stmt = $conn->prepare($kurzusok_sql);
+$kurzus_stmt->bind_param("si", $user['course_code'], $selected_semester_id);
+$kurzus_stmt->execute();
+$kurzusok_raw = $kurzus_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+/* ============================================================
+   🔹 2️⃣ Meghirdetett offeringek
+============================================================ */
+$offerings_sql = "
 SELECT 
     co.id AS offering_id,
     co.kurzus_kod,
     co.semester_id,
     co.end_date,
-    c.name AS course_name,
-    c.leiras,
-    c.credit,
-    co.course_type,
     co.day_of_week,
     co.start_time,
     co.room,
     co.max_students,
-    COUNT(DISTINCT e.users_eduportal_ID) AS enrolled_count,
-    GROUP_CONCAT(DISTINCT t.name SEPARATOR ', ') AS teachers,
-
-    /* szakhoz tartozás → kötelező / választható / szabadon választható */
-    COALESCE(pc.tipus, 'szv') AS course_required_type,
-
-    /* jelentkezett-e erre az offeringre */
-    EXISTS (
-        SELECT 1 
-        FROM enrollments e2 
-        WHERE e2.users_eduportal_ID = ? 
-        AND e2.offering_id = co.id
-    ) AS already_enrolled,
-
-    /* teljesítette-e a kurzuskódot */
-    EXISTS (
-        SELECT 1 
-        FROM enrollments e3 
-        JOIN course_offerings co3 ON e3.offering_id = co3.id
-        WHERE e3.users_eduportal_ID = ?
-        AND co3.kurzus_kod = c.kurzus_kod
-        AND e3.status = 'completed'
-    ) AS already_completed
-
+    co.course_type,
+    (SELECT COUNT(*) FROM enrollments e WHERE e.offering_id = co.id AND co.semester_id = ?) AS enrolled_count
 FROM course_offerings co
-JOIN courses c ON c.kurzus_kod = co.kurzus_kod
-LEFT JOIN teacher_courses tc ON tc.kurzus_kod = c.kurzus_kod
-LEFT JOIN users t ON t.eduportal_id = tc.teacher_id
-LEFT JOIN enrollments e ON e.offering_id = co.id
-
-JOIN users u ON u.eduportal_id = ?
-JOIN programs p ON p.szak_szam = u.course_code
-
-LEFT JOIN program_courses pc 
-    ON pc.kurzus_kod = c.kurzus_kod 
-    AND pc.szak_szam = p.szak_szam
-
 WHERE co.semester_id = ?
+ORDER BY co.kurzus_kod, co.course_type";
 
-GROUP BY co.id
-ORDER BY c.name ASC, co.course_type ASC
-";
-
-$course_stmt = $conn->prepare($course_offering_sql);
-$course_stmt->bind_param("ssss", $eduportal_id, $eduportal_id, $eduportal_id, $selected_semester_id);
-$course_stmt->execute();
-$raw_courses = $course_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$offerings_stmt = $conn->prepare($offerings_sql);
+$offerings_stmt->bind_param("ii", $selected_semester_id,$selected_semester_id);
+$offerings_stmt->execute();
+$offerings_raw = $offerings_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
 /* ============================================================
-   🔹 OFFERINGEK CSOPORTOSÍTÁSA KURZUS SZINTRE
+   🔹 3️⃣ Jelentkezések és teljesítések
+============================================================ */
+$enrolled_sql = "
+SELECT offering_id
+FROM enrollments 
+WHERE users_eduportal_ID = ?";
+
+$enrolled_stmt = $conn->prepare($enrolled_sql);
+$enrolled_stmt->bind_param("s", $eduportal_id);
+$enrolled_stmt->execute();
+$already_enrolled_offerings = $enrolled_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$already_enrolled_offerings = array_column($already_enrolled_offerings, 'offering_id');
+
+$completed_sql = "
+SELECT co.kurzus_kod
+FROM enrollments e
+JOIN course_offerings co ON e.offering_id = co.id
+WHERE e.users_eduportal_ID = ? AND e.status = 'completed'";
+
+$completed_stmt = $conn->prepare($completed_sql);
+$completed_stmt->bind_param("s", $eduportal_id);
+$completed_stmt->execute();
+$completed_courses = $completed_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$completed_courses = array_column($completed_courses, 'kurzus_kod');
+
+/* ============================================================
+   🔹 4️⃣ Szabadon választható logika
+============================================================ */
+// lekérdezzük a többi szak kötelezően választható kurzusait
+$other_pc_sql = "
+SELECT kurzus_kod
+FROM program_courses 
+WHERE tipus = 'valaszthato' AND szak_szam != ?";
+
+$other_pc_stmt = $conn->prepare($other_pc_sql);
+$other_pc_stmt->bind_param("s", $user['course_code']);
+$other_pc_stmt->execute();
+$other_valaszthato = $other_pc_stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$other_valaszthato = array_column($other_valaszthato, 'kurzus_kod');
+
+/* ============================================================
+   🔹 5️⃣ PHP-ben összeállítjuk a kurzus–offering struktúrát
 ============================================================ */
 $courses = [];
 
-foreach ($raw_courses as $row) {
+foreach ($kurzusok_raw as $row) {
+    $kurzus_kod = $row['kurzus_kod'];
 
-    $key = $row['kurzus_kod'];
-
-    if (!isset($courses[$key])) {
-        $courses[$key] = [
-            'kurzus_kod' => $row['kurzus_kod'],
-            'course_name' => $row['course_name'],
-            'leiras' => $row['leiras'],
-            'credit' => $row['credit'],
-            'teachers' => $row['teachers'],
-            'course_required_type' => $row['course_required_type'],
-            'already_completed' => $row['already_completed'],
-            'offerings' => []
-        ];
+    // Szabadon választható logika
+    $type = $row['course_required_type'];
+    if (empty($type)) {
+        $type = 'szv';
     }
 
-    $type = $row['course_type'] ?: 'egyéb';
-
-    if (!isset($courses[$key]['offerings'][$type])) {
-        $courses[$key]['offerings'][$type] = [];
-    }
-
-    $courses[$key]['offerings'][$type][] = [
-        'offering_id' => $row['offering_id'],
-        'semester_id' => $row['semester_id'],
-        'end_date' => $row['end_date'],
-        'day_of_week' => $row['day_of_week'],
-        'start_time' => $row['start_time'],
-        'room' => $row['room'],
-        'max_students' => $row['max_students'],
-        'enrolled_count' => $row['enrolled_count'],
-        'already_enrolled' => $row['already_enrolled']
+    $courses[$kurzus_kod] = [
+        'kurzus_kod' => $kurzus_kod,
+        'course_name' => $row['course_name'],
+        'leiras' => $row['leiras'],
+        'credit' => $row['credit'],
+        'teachers' => $row['teachers'],
+        'course_required_type' => $type,
+        'already_completed' => in_array($kurzus_kod, $completed_courses),
+        'offerings' => []
     ];
 }
+
+// Offeringek hozzárendelése
+foreach ($offerings_raw as $offering) {
+    $type = $offering['course_type'] ?: 'egyéb';
+    $offering['already_enrolled'] = in_array($offering['offering_id'], $already_enrolled_offerings);
+
+    if (!isset($courses[$offering['kurzus_kod']]['offerings'][$type])) {
+        $courses[$offering['kurzus_kod']]['offerings'][$type] = [];
+    }
+
+    $courses[$offering['kurzus_kod']]['offerings'][$type][] = $offering;
+}
+
