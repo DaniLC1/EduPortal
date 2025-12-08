@@ -4,38 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="TODO update / TODO update">
-      <change afterPath="$PROJECT_DIR$/feedback.php" afterDir="false" />
+    <list default="true" id="4a305678-c601-4969-9c19-e5809e004cf4" name="Changes" comment="Háttérművelet visszajelzések átalakítása és bugok javítása. / Background operation feedback transformation and bug fixes.">
       <change afterPath="$PROJECT_DIR$/readme_https.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ASZF/adatvedelem.md" beforeDir="false" afterPath="$PROJECT_DIR$/ASZF/adatvedelem.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/creats_&amp;_alters.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB/creats_&amp;_alters.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB/users_insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB/users_insert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/assignment_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/assignment_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/complete_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/complete_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/enrole_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/enrole_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/forum_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/forum_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/message_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/message_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/noti_mark_read.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/noti_mark_read.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/profile_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/profile_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/register_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/register_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/POST/request_post.php" beforeDir="false" afterPath="$PROJECT_DIR$/POST/request_post.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/Scripts/scripts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TODO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TODO.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/submitted_request.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/submitted_request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/course_offering.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/courses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/student/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/student/request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/course_offering.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/course_offering.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/courses.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/courses.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/request.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teacher/student_complete.php" beforeDir="false" afterPath="$PROJECT_DIR$/teacher/student_complete.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +163,7 @@
       <workItem from="1763639730689" duration="13285000" />
       <workItem from="1763718237733" duration="7602000" />
       <workItem from="1763741615046" duration="270867000" />
-      <workItem from="1765138223379" duration="5648000" />
+      <workItem from="1765138223379" duration="13948000" />
     </task>
     <task id="LOCAL-00001" summary="0">
       <option name="closed" value="true" />
@@ -417,7 +389,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764888619584</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Háttérművelet visszajelzések átalakítása és bugok javítása. / Background operation feedback transformation and bug fixes.">
+      <option name="closed" value="true" />
+      <created>1765188975201</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1765188975201</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -435,7 +415,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="0" />
     <MESSAGE value="Git tesztelés" />
     <MESSAGE value="Index befejezés és a többi oldal Header részének szerkesztése" />
     <MESSAGE value="Kurzusok oldal szerkesztés finomhangolása és adatbázis kapcsolódás" />
@@ -460,7 +439,8 @@
     <MESSAGE value="Regisztráció megvalósítása. / Making registration." />
     <MESSAGE value="Egységesíés és üzenetek megvalósítása. / Unification and implementation of messages." />
     <MESSAGE value="TODO update / TODO update" />
-    <option name="LAST_COMMIT_MESSAGE" value="TODO update / TODO update" />
+    <MESSAGE value="Háttérművelet visszajelzések átalakítása és bugok javítása. / Background operation feedback transformation and bug fixes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Háttérművelet visszajelzések átalakítása és bugok javítása. / Background operation feedback transformation and bug fixes." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

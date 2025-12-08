@@ -1,11 +1,6 @@
 
 css-ek átnézése, hogy egységes parancsokat használjak
 ---------------------
-A gombokat átnevezni egyedi class-úra!!! Jó példa admin/request.php és ide tartozó js fájl:
-cancel-btn átnevezve -> ar-cancel-btn mert névütközés volt!!! a=admin r=request.php
-Ezt mindenhol meg kell csinálni!!!
-
----------------------
 studies.php lekérdezés logikát hozzá igazítani a tárgyfelvételhez
 
 /************************************************
@@ -13,10 +8,6 @@ Tanári (Dr.Tóth László) javaslatok
 ************************************************/
 Unyt tesztet csinálni!!!
 Statikus elemzés (pl Sonar Cook)
-
----------------------
-HTTPS-t megnézni mennyire bonyolult hogy így legyen, HA bonyolult akkor doksiba meginokolni! ->egyeztetni a Laragonról
---> kell egy readme.txt!!!
 
 ----------------------
 halott kódok,
@@ -28,3 +19,7 @@ doi ->ez a szám kell az elektronikus dokumentum
 1 könyvet mindenképp bele kell tenni
 
 funkcionális leírás -> fő metódusok ismertetése
+
+hiányosságokat bele kell írni a pdf-be:
+- A gombokat átnevezni egyedi class-úra elmarad idő hiányában
+-adatbázisan benn maradt a finances -> későbbi fejlesztéshez tovább gondolva
