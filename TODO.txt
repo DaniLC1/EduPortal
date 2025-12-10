@@ -6,8 +6,8 @@ studies.php lekérdezés logikát hozzá igazítani a tárgyfelvételhez
 /************************************************
 Tanári (Dr.Tóth László) javaslatok
 ************************************************/
-Unyt tesztet csinálni!!!
-Statikus elemzés (pl Sonar Cook)
+Unyt tesztet csinálni!!! -> nem megy sajnos
+Statikus elemzés (pl SonarQube) ->megvan, lefuttatva->ki kell importálni + képek
 
 ----------------------
 halott kódok,
