@@ -1,0 +1,24 @@
+HIbák:
+---------
+
+Verziózás szempontjából nem jól van megvalósítva a tárgyak leírásának 
+és a tematika leírás változtatása!
+MERT: most ugye a courses táblában levő adatot módosítja! És tegyük fel valaki a
+tavalyi évben vett fel 1 tárgyat majd ezt ugyan úgy meghirdetik ebben az évben
+DE változik a leírás akkor a tavalyit is módosítja pedig az már "lezárt"
+Érintett adatbázis: courses
+Érintett php olda: teacher/course_offering.php
+-----------
+
+Nem lehet létrehozni új kurzust és új szakot sem!
+Érintett adatbázis: courses és programs
+Érintett php olda: teacher/course_offering.php vagy admin oldalon kell ÚJ oldal
+----------
+
+Szabadon válaszható tárgyaknál hibás a logika, rosszul működik:
+A szabadon választható kurzusok mögött a logika az az, hogy van egy felhasználó aki tartozik 1 szakhoz és 
+minden olyan kurzus ami nem tartozik a tanuló szakjához szabadon válaszhatónak minősül 
+HA van olyan másik szak ahol az a tárgy kötelezően választható.
+Ezen a logikán javítani kell majd a későbbi fejlsztések során!
+Érintett adatbázis: courses és programs és program_courses
+Érintett php olda: student/course_offering.php

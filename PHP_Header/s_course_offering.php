@@ -168,7 +168,13 @@ foreach ($kurzusok_raw as $row) {
     // Szabadon választható logika
     $type = $row['course_required_type'];
     if (empty($type)) {
+        // csak akkor lesz szv, ha MÁS szakon valaszthato
+        if (in_array($kurzus_kod, $other_valaszthato)) {
         $type = 'szv';
+    } else {
+        // ha máshol sem valaszthato → NEM kell megjeleníteni
+        continue;
+    }
     }
 
     $courses[$kurzus_kod] = [
