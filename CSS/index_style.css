@@ -95,7 +95,7 @@ main {
 }
 
 .login-box button:hover {
-    background-color: var(--secondary-hover);
+    background-color: var(--primary-hover);
 }
 
 /* Dark mode */
