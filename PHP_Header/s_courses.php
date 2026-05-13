@@ -118,7 +118,10 @@ JOIN course_offerings co ON n.course_offering_id = co.id
 JOIN enrollments e ON co.id = e.offering_id
 JOIN courses c ON co.kurzus_kod = c.kurzus_kod
 JOIN users u on n.users_eduportal_id = u.eduportal_id
-WHERE e.users_eduportal_ID = ? AND noti_type = 'hirdetmeny' AND co.semester_id = ?
+WHERE e.users_eduportal_ID = ? 
+    AND n.noti_type = 'hirdetmeny' 
+    AND n.message NOT LIKE 'Visszavont hirdetmény:%'
+    AND co.semester_id = ?
 ORDER BY created_at DESC ";
 
 $hirdetmeny_stmt = $conn->prepare($hirdetmeny_sql);
@@ -150,7 +153,10 @@ JOIN course_offerings co ON n.course_offering_id = co.id
 JOIN enrollments e ON co.id = e.offering_id
 JOIN courses c ON co.kurzus_kod = c.kurzus_kod
 JOIN users u on n.users_eduportal_id = u.eduportal_id
-WHERE e.users_eduportal_ID = ? AND noti_type = 'forum' AND co.semester_id = ?
+WHERE e.users_eduportal_ID = ? 
+    AND n.noti_type = 'forum' 
+    AND n.message NOT LIKE 'Törölt fórum poszt:%'
+    AND co.semester_id = ?
 ORDER BY created_at DESC ";
 
 $forum_stmt = $conn->prepare($forum_sql);
