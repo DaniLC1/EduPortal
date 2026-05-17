@@ -1,3 +1,11 @@
+Az utolsó 2 pont az Érdemi résznél az a tesztelések Unit test, SQL injection stb és a Hibák / Hiányosságok felsorolása
+Tesztelések:
+-SQL injection
+-Unit test
+-Integration Test
+-
+
+
 HIbák:
 ---------
 
@@ -11,8 +19,19 @@ DE változik a leírás akkor a tavalyit is módosítja pedig az már "lezárt"
 -----------
 
 Nem lehet létrehozni új kurzust és új szakot sem!
+Adminok nem tudnak új szemesztert beiktatni a tantervbe, ezzel is nehezebb az új kurzusok létrehozása
 Érintett adatbázis: courses és programs
 Érintett php olda: teacher/course_offering.php vagy admin oldalon kell ÚJ oldal
+----------
+
+Az adminok nem tudják az új tanárokat hozzárendelni meglévő tantárgyakhoz!
+Érintett adatbázis: courses és programs és teacher_courses
+Érintett php olda: admin oldalon kell ÚJ oldal
+----------
+
+Az adminok nem tudják a meglévő felhasználókat szerkeszteni.
+Érintett adatbázis: users tábla
+Érintett php olda: admin oldalon kell ÚJ oldal
 ----------
 
 Szabadon válaszható tárgyaknál hibás a logika, rosszul működik:
@@ -29,8 +48,32 @@ A fizetés nincs megvalósítva, csak az adatbázisnak a táblája van meg hozz�
 Érintett php olda: NINCS
 ----------
 
-Az adminok nem tudják az új tanárokat hozzárendelni meglévő tantárgyakhoz!
-Érintett adatbázis: courses és programs és teacher_courses
-Érintett php olda: admin oldalon kell ÚJ oldal
+Az üzenetküldésnél az olvasatlan üzenetről nem kap a felhasnáló értesítést + 
+Nincs visszajelzés a küldőnek ha az olvasó/fogadó fél elolvasta
+Érintett adatbázis: notifications és messages
+Érintett php olda: message.php és courses.php
+----------
+
+Verziókezelést több helyen is meg lehetne valósítani, sőt jobb lenne mindenhol!
+Érintett adatbázis: majdnem mind!
+Érinett php oldal: majdnem mind!
+----------
+
+A kurzusokhoz egyedileg is hozzá lehetne rendelni, hogy hány db hirdetmény és fórum legyen. 
+Illetve minden ilyen közeghez akár egyesével is lehetne jogosultságokat adni hogy ki írhat bele és ki nem!
+Érintett adatbázis: notifications
+Érinett php oldal: mcourses.php
+----------
+
+Dolgozatoknál nincs részpont ott ahol több jó válasz is lehetséges csak akkor van pont ha minden helyes válasz ki van jelölve.
+Lehessen visszanézni vagy sem diáknak is.
+Legutlsó eredmény számítson vagy legjobb ha többször lehet kitölteni?
+Érintett adatbázis: assignment
+Érinett php oldal: assignment.php
+-----------
+
+A kurzus létrehozásnál/módosításnál a leírás módosítás nincs verziózva, szóval ha új kurzusnál változik a leírás a régit is átírja
+Érintett adatbázis: course_offerings
+Érinett php oldal: course_offering.php
 ----------
 
