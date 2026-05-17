@@ -93,9 +93,12 @@ document.addEventListener('input', function (e) {
 
 // Szöveg szerkesztése (hirdetmény és fórum hozzászólásnál)
 function toggleEditForm(button) {
-    const li = button.closest('li');
-    const form = li.querySelector('.edit-form');
-    form.classList.toggle('hidden');
+    const container = button.closest('.student_action-buttons') || button.closest('.teacher_action-buttons');
+    const form = container.querySelector('.edit-form');
+
+    if (form) {
+        form.classList.toggle('hidden');
+    }
 }
 
 // Kredit diagram

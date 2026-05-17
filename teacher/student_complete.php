@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../PHP_Header/t_sutdent_cpmplete.php';
+require_once __DIR__ . '/../PHP_Header/t_sutdent_complete.php';
 ?>
 <!DOCTYPE html>
 <html lang="hu">

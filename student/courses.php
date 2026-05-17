@@ -221,13 +221,13 @@ require_once __DIR__ . '/../PHP_Header/s_courses.php';
                                                     <?= date('Y. m. d. H:i', strtotime($f['updated_at'])) ?>
                                                 </div>
                                                 <div class="student_action-buttons">
-                                                    <?php if ($latest['users_eduportal_id'] === $eduportal_id): ?>
+                                                    <?php if ($f['users_eduportal_id'] === $eduportal_id): ?>
                                                         <!-- Szerkesztés form -->
                                                         <form method="POST" action="../POST/forum_post.php"
                                                               class="edit-form hidden"
                                                               onsubmit="return confirm('Biztosan menteni szeretnéd a módosítást?')">
-                                                            <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($latest['message']) ?></textarea>
-                                                            <input type="hidden" name="edit_message_id" value="<?= $latest['id'] ?>">
+                                                            <textarea name="edited_message" class="auto-resize-textarea"><?= htmlspecialchars($f['message']) ?></textarea>
+                                                            <input type="hidden" name="edit_message_id" value="<?= $f['id'] ?>">
                                                             <button type="submit" name="submit_edit_message" class="send-btn">💾 Mentés</button>
                                                         </form>
                                                         <button class="edit-btn" onclick="toggleEditForm(this)">✏️ Szerkesztés</button>
