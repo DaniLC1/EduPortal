@@ -297,14 +297,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (statusFilter) statusFilter.addEventListener('change', filterCourses);
 });
 
-function toggleDetails(id) {
-    const element = document.getElementById('details-' + id);
-    if (element.style.display === 'none') {
-        element.style.display = 'block';
-    } else {
-        element.style.display = 'none';
-    }
-}
 
 // --- Dolgozat kérdéskezelő (teacher/assignment.php rész) ---
 document.addEventListener("DOMContentLoaded", () => {
